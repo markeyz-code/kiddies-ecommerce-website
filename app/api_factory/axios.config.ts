@@ -55,13 +55,23 @@ const getCookie = (name: string): string | null => {
     if (typeof document === 'undefined') return null;
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
-    return null;
+    if (parts.length === 2) {
+      const cookieVal = parts.pop()?.split(';').shift() || null;
+      if (cookieVal) return cookieVal;
+    }
+    try {
+      return localStorage.getItem(name) || null;
+    } catch {
+      return null;
+    }
 };
 
 const setCookie = (name: string, value: string, maxAgeDays: number) => {
     if (typeof document === 'undefined') return;
     document.cookie = `${name}=${value}; path=/; max-age=${maxAgeDays * 86400}; SameSite=Lax`;
+    try {
+      localStorage.setItem(name, value);
+    } catch {}
 };
 
 const AUTH_FLOW_PATTERN = /\/auth\/(login|verify-otp|register|resend-otp|forgot-password|reset-password|refresh)/;
