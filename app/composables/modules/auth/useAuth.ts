@@ -126,13 +126,20 @@ export const useAuth = () => {
     };
 
     const fetchProfile = async () => {
+        // Prevent unnecessary API call if tokens don't exist
+        const hasToken = typeof document !== 'undefined' && (document.cookie.includes('accessToken') || document.cookie.includes('refreshToken'));
+        if (!hasToken) return;
+
         loading.value = true;
         try {
             const { data } = await authApi.getProfile();
             user.value = data;
             return data;
         } catch (error: any) {
-            console.error('Error fetching profile:', error);
+            // Suppress the console error for 401s since it's expected if token expired/invalid
+            if (error?.response?.status !== 401) {
+               console.error('Error fetching profile:', error);
+            }
         } finally {
             loading.value = false;
         }
