@@ -1,9 +1,35 @@
-export const useCustomToast = () => {
-    const showToast = (options: { title: string; message: string; toastType: 'success' | 'error' | 'info' }) => {
-        // Mock toast implementation since we removed UI components like UToast here
-        // We can replace this with a native Vue toast later or integrate Sonner
-        console.log(`[Toast ${options.toastType.toUpperCase()}] ${options.title}: ${options.message}`);
-    };
+import { ref, type Ref } from 'vue';
+import { useState } from '#app';
 
-    return { showToast };
+interface ToastOptions {
+  title: string;
+  message: string;
+  toastType: 'success' | 'error' | 'info';
+}
+
+interface Toast extends ToastOptions {
+  id: number;
+}
+
+let toastId = 0;
+
+export const useCustomToast = () => {
+  const toasts = useState<Toast[]>('global_toasts', () => []);
+
+  const showToast = (options: ToastOptions) => {
+    const id = ++toastId;
+    const toast: Toast = { ...options, id };
+    toasts.value = [...toasts.value, toast];
+
+    // Auto-dismiss after 3.5 seconds
+    setTimeout(() => {
+      toasts.value = toasts.value.filter(t => t.id !== id);
+    }, 3500);
+  };
+
+  const removeToast = (id: number) => {
+    toasts.value = toasts.value.filter(t => t.id !== id);
+  };
+
+  return { toasts, showToast, removeToast };
 };

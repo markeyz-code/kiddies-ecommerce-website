@@ -1,183 +1,415 @@
 <template>
-  <div class="bg-amber-50/30 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="flex flex-col md:flex-row md:items-end justify-between border-b-4 border-white pb-6 mb-10 gap-4">
-        <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
-          <h1 class="text-2xl md:text-3xl font-serif font-black text-stone-800 tracking-tight drop-shadow-sm">Shop All ✨</h1>
-          <div v-if="route.query.search" class="bg-white text-stone-600 px-4 py-2 rounded-full text-sm font-bold flex items-center shadow-sm w-fit border-2 border-rose-100">
-            Search: "{{ route.query.search }}"
-            <button @click="router.push('/products')" class="ml-3 text-rose-400 hover:text-rose-600 hover:scale-125 transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-            </button>
-          </div>
-        </div>
-        <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm border-2 border-sky-100">
-          <select v-model="sortBy" class="border-none bg-transparent text-sm font-bold text-stone-700 focus:ring-0 cursor-pointer w-full focus:outline-none">
-            <option value="featured">Sort by: Featured</option>
-            <option value="newest">Sort by: Newest</option>
-            <option value="price_asc">Sort by: Price (Low to High)</option>
-            <option value="price_desc">Sort by: Price (High to Low)</option>
-          </select>
-        </div>
-      </div>
+  <div class="min-h-screen bg-white font-sans text-gray-900 pb-24">
 
-      <div class="flex flex-col md:flex-row gap-8">
+    <!-- Breadcrumbs -->
+    <div class="max-w-[1400px] mx-auto px-4 md:px-8 py-4 text-[10px] font-bold text-gray-800 uppercase tracking-widest flex space-x-2">
+      <NuxtLink to="/" class="hover:underline underline-offset-2 text-gray-600">Home</NuxtLink>
+      <span>&gt;</span>
+      <span>Shop All</span>
+      <span v-if="route.query.search">&gt; Search: "{{ route.query.search }}"</span>
+    </div>
+
+    <!-- Header -->
+    <div class="max-w-[1400px] mx-auto px-4 md:px-8 mb-4 flex justify-between items-end border-b pb-4 md:border-none md:pb-0">
+      <div class="flex flex-col gap-2">
+        <h1 class="text-xl font-bold text-gray-900 capitalize">Shop All ✨</h1>
+        <button v-if="route.query.search" @click="clearSearch" class="text-xs text-gray-500 underline font-bold w-fit text-left">Clear Search</button>
+      </div>
+      
+      <div class="flex items-center text-xs font-bold w-auto">
+        <span class="mr-2 hidden md:inline">Sort By:</span>
+        <select v-model="sortBy" @change="reloadProducts" class="border-b-2 border-black bg-transparent font-bold text-xs py-2 focus:outline-none">
+          <option value="">Recommended</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="newest">New Arrivals</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+      <div class="flex flex-col md:flex-row gap-8 mt-6">
         <!-- Sidebar Filters -->
         <aside class="w-full md:w-64 flex-shrink-0">
-          <div class="bg-white p-6 rounded-[2rem] shadow-sm border-2 border-rose-50 space-y-8 sticky top-24">
-            <div>
-              <h3 class="font-black text-stone-800 mb-4 text-lg border-b-2 border-rose-50 pb-2">Category</h3>
-              <ul class="space-y-3 text-sm font-medium text-stone-600">
-                <li><label class="flex items-center cursor-pointer group"><input type="checkbox" v-model="selectedCategories" value="New Arrivals" class="mr-3 w-5 h-5 rounded-lg border-2 border-stone-200 text-sky-400 focus:ring-sky-200 transition-all cursor-pointer" /> <span class="group-hover:text-sky-500 transition-colors">New Arrivals (24)</span></label></li>
-                <li><label class="flex items-center cursor-pointer group"><input type="checkbox" v-model="selectedCategories" value="Toddler" class="mr-3 w-5 h-5 rounded-lg border-2 border-stone-200 text-amber-400 focus:ring-amber-200 transition-all cursor-pointer" /> <span class="group-hover:text-amber-500 transition-colors">Toddler (1-3 yrs) (56)</span></label></li>
-                <li><label class="flex items-center cursor-pointer group"><input type="checkbox" v-model="selectedCategories" value="Baby" class="mr-3 w-5 h-5 rounded-lg border-2 border-stone-200 text-emerald-400 focus:ring-emerald-200 transition-all cursor-pointer" /> <span class="group-hover:text-emerald-500 transition-colors">Baby (0-12 m) (42)</span></label></li>
-                <li><label class="flex items-center cursor-pointer group"><input type="checkbox" v-model="selectedCategories" value="Accessories" class="mr-3 w-5 h-5 rounded-lg border-2 border-stone-200 text-rose-400 focus:ring-rose-200 transition-all cursor-pointer" /> <span class="group-hover:text-rose-500 transition-colors">Accessories (18)</span></label></li>
+          <div class="bg-white pr-4 space-y-6 sticky top-24 max-h-[85vh] overflow-y-auto custom-scrollbar">
+            
+            <div class="text-xs font-bold text-gray-500 mb-6 border-b pb-4">
+              Showing <span class="text-black font-black">{{ products?.length || 0 }}</span> items
+            </div>
+
+            <!-- Category / Collections -->
+            <details class="group" name="sidebar-filters" open>
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                Category
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <ul class="space-y-2 text-xs font-medium text-gray-700 mb-2 pl-1">
+                <li v-for="cat in categoryFilters" :key="cat.value">
+                  <label class="flex items-center cursor-pointer group/label">
+                    <input type="checkbox" v-model="selectedCategories" :value="cat.value" @change="reloadProducts" class="mr-3 w-4 h-4 rounded-sm border border-gray-300 text-black focus:ring-black transition-all cursor-pointer" />
+                    <span class="group-hover/label:text-black transition-colors">{{ cat.label }}</span>
+                  </label>
+                </li>
               </ul>
-            </div>
-            
-            <div>
-              <h3 class="font-black text-stone-800 mb-4 text-lg border-b-2 border-rose-50 pb-2">Price</h3>
-              <input type="range" v-model="maxPrice" class="w-full accent-rose-400 h-2 bg-stone-100 rounded-lg appearance-none cursor-pointer" min="0" max="50000" step="1000" />
-              <div class="flex justify-between text-sm font-bold text-stone-500 mt-3 bg-stone-50 px-3 py-1 rounded-full">
-                <span>₦0</span>
-                <span class="text-rose-500">₦{{ maxPrice }}+</span>
+            </details>
+
+            <!-- Color -->
+            <details class="group" name="sidebar-filters">
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                Color
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="flex flex-wrap gap-2 pl-1 pb-2">
+                <label v-for="color in colorFilters" :key="color.value" class="cursor-pointer group/color relative">
+                  <input type="checkbox" v-model="selectedColors" :value="color.value" @change="reloadProducts" class="peer sr-only" />
+                  <div class="w-7 h-7 rounded-full border border-gray-300 transition-all flex items-center justify-center peer-checked:ring-2 peer-checked:ring-offset-1 peer-checked:ring-black" :style="{ backgroundColor: color.hex }">
+                     <svg v-if="selectedColors.includes(color.value)" class="w-3 h-3 text-white drop-shadow-md" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                     </svg>
+                  </div>
+                  <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[9px] font-bold text-gray-500 opacity-0 group-hover/color:opacity-100 transition-opacity pointer-events-none">{{ color.label }}</span>
+                </label>
               </div>
-            </div>
-            
-            <div class="bg-sky-50 p-4 rounded-2xl border-2 border-sky-100">
-              <h3 class="font-black text-stone-800 mb-3 flex items-center text-sm">
-                <span class="mr-2 text-rose-500 text-xl">🔥</span> Exclusive Deals
-              </h3>
-              <label class="flex items-center cursor-pointer group">
-                <div class="relative">
-                  <input type="checkbox" v-model="onSaleOnly" class="sr-only" />
-                  <div class="block bg-white border-2 border-stone-200 w-12 h-7 rounded-full transition-colors duration-300" :class="{'bg-rose-400 border-rose-400': onSaleOnly}"></div>
-                  <div class="dot absolute left-1 top-1 bg-stone-300 w-5 h-5 rounded-full transition-transform duration-300 shadow-sm" :class="{'transform translate-x-5 bg-white': onSaleOnly}"></div>
+            </details>
+
+            <!-- Size -->
+            <details class="group" name="sidebar-filters">
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                Clothing Size
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <ul class="space-y-2 text-xs font-medium text-gray-700 pl-1 pb-2 h-40 overflow-y-auto custom-scrollbar">
+                <li v-for="size in sizeFilters" :key="size">
+                  <label class="flex items-center cursor-pointer group/label">
+                    <input type="checkbox" v-model="selectedSizes" :value="size" @change="reloadProducts" class="mr-3 w-4 h-4 rounded-sm border border-gray-300 text-black focus:ring-black transition-all cursor-pointer" />
+                    <span class="group-hover/label:text-black transition-colors">{{ size }}</span>
+                  </label>
+                </li>
+              </ul>
+            </details>
+
+            <!-- Price -->
+            <details class="group" name="sidebar-filters">
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                Price
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="px-1 pb-2">
+                <div class="flex items-center justify-between gap-2 mb-3 text-xs font-bold text-gray-600">
+                  <div class="flex flex-col w-[45%]">
+                    <label class="text-[9px] text-gray-400">Min ($)</label>
+                    <input type="number" v-model.number="minPrice" @change="reloadProducts" min="0" class="w-full px-2 py-1 rounded-sm border border-gray-300 focus:border-black focus:ring-0" />
+                  </div>
+                  <span class="mt-4">-</span>
+                  <div class="flex flex-col w-[45%]">
+                     <label class="text-[9px] text-gray-400">Max ($)</label>
+                     <input type="number" v-model.number="maxPrice" @change="reloadProducts" min="0" class="w-full px-2 py-1 rounded-sm border border-gray-300 focus:border-black focus:ring-0" />
+                  </div>
                 </div>
-                <span class="ml-3 text-sm font-bold text-stone-600 group-hover:text-stone-800 transition-colors">On Sale Only</span>
-              </label>
-            </div>
+              </div>
+            </details>
+
+            <!-- Gender -->
+            <details class="group" name="sidebar-filters">
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                Gender
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <ul class="space-y-2 text-xs font-medium text-gray-700 pl-1 pb-2">
+                <li v-for="gender in ['boy', 'girl', 'unisex']" :key="gender">
+                  <label class="flex items-center cursor-pointer group/label">
+                    <input type="checkbox" v-model="selectedGenders" :value="gender" @change="reloadProducts" class="mr-3 w-4 h-4 rounded-sm border border-gray-300 text-black focus:ring-black transition-all cursor-pointer" />
+                    <span class="group-hover/label:text-black transition-colors capitalize">{{ gender }}</span>
+                  </label>
+                </li>
+              </ul>
+            </details>
+
+            <!-- Product Type -->
+            <details class="group" name="sidebar-filters">
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                Product Type
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <ul class="space-y-2 text-xs font-medium text-gray-700 pl-1 pb-2 h-40 overflow-y-auto custom-scrollbar">
+                <li v-for="type in typeFilters" :key="type.value">
+                  <label class="flex items-center cursor-pointer group/label">
+                    <input type="checkbox" v-model="selectedTypes" :value="type.value" @change="reloadProducts" class="mr-3 w-4 h-4 rounded-sm border border-gray-300 text-black focus:ring-black transition-all cursor-pointer" />
+                    <span class="group-hover/label:text-black transition-colors">{{ type.label }}</span>
+                  </label>
+                </li>
+              </ul>
+            </details>
+
+            <!-- Age Group -->
+            <details class="group" name="sidebar-filters">
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                Age Group
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <ul class="space-y-2 text-xs font-medium text-gray-700 pl-1 pb-2">
+                <li v-for="age in ageFilters" :key="age.value">
+                  <label class="flex items-center cursor-pointer group/label">
+                    <input type="checkbox" v-model="selectedAgeGroups" :value="age.value" @change="reloadProducts" class="mr-3 w-4 h-4 rounded-sm border border-gray-300 text-black focus:ring-black transition-all cursor-pointer" />
+                    <span class="group-hover/label:text-black transition-colors">{{ age.label }}</span>
+                  </label>
+                </li>
+              </ul>
+            </details>
+
+            <!-- Customer Rating -->
+            <details class="group" name="sidebar-filters">
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                Customer Rating
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="space-y-2 pl-1 pb-2">
+                <label class="flex items-center cursor-pointer group/label">
+                  <input type="radio" v-model="minRating" :value="5" @change="reloadProducts" class="mr-3 w-4 h-4 text-black focus:ring-black" />
+                  <div class="flex text-gray-800">
+                    <svg v-for="i in 5" :key="i" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                  <span class="ml-2 text-[10px] text-gray-500 font-bold">& Up</span>
+                </label>
+                <label class="flex items-center cursor-pointer group/label">
+                  <input type="radio" v-model="minRating" :value="4" @change="reloadProducts" class="mr-3 w-4 h-4 text-black focus:ring-black" />
+                  <div class="flex text-gray-800">
+                    <svg v-for="i in 4" :key="i" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="h-3 w-3 text-gray-200" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  </div>
+                  <span class="ml-2 text-[10px] text-gray-500 font-bold">& Up</span>
+                </label>
+                <button v-if="minRating" @click="minRating = null; reloadProducts()" class="text-[10px] text-black underline font-bold pl-1 mt-2">Clear Rating</button>
+              </div>
+            </details>
+
+            <!-- Sustainability -->
+            <details class="group" name="sidebar-filters">
+              <summary class="flex justify-between items-center font-bold text-sm border-b border-gray-200 pb-2 mb-4 cursor-pointer list-none uppercase">
+                More Sustainable
+                <span class="transition group-open:rotate-180">
+                  <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <ul class="space-y-2 text-xs font-medium text-gray-700 pl-1 pb-2">
+                <li>
+                  <label class="flex items-center cursor-pointer group/label">
+                    <input type="checkbox" v-model="selectedSustainability" value="recycled" @change="reloadProducts" class="mr-3 w-4 h-4 rounded-sm border border-gray-300 text-black focus:ring-black transition-all cursor-pointer" />
+                    <span class="group-hover/label:text-black transition-colors">Contains Recycled Materials</span>
+                  </label>
+                </li>
+              </ul>
+            </details>
           </div>
         </aside>
 
-          <!-- SVG Loading Animation -->
-          <div v-if="loading" class="flex flex-col items-center justify-center py-24">
-            <img src="@/assets/Loading animation.svg" alt="Loading..." class="w-32 h-32" />
-            <p class="text-rose-400 font-black text-xl mt-4 animate-pulse">Loading cute collection... 🎈</p>
+        <!-- Main Product Grid -->
+        <main class="flex-1">
+          <div v-if="loading" class="text-center py-24">
+            <p class="text-black font-black text-xl animate-pulse">Loading collection...</p>
           </div>
-          <div v-else-if="!products?.length" class="text-center py-24 bg-white rounded-[3rem] border-4 border-white shadow-sm">
-            <span class="text-4xl mb-4 block">🔍</span>
-            <p class="text-stone-500 font-bold">No products found for this search.</p>
+          <div v-else-if="products && products.length === 0" class="text-center py-24 flex flex-col items-center justify-center bg-gray-50 rounded-lg border border-dashed border-gray-300">
+            <span class="text-6xl mb-4">📦</span>
+            <h3 class="text-lg font-bold text-gray-900 mb-2 font-serif">No Products Found</h3>
+            <p class="text-sm text-gray-500 max-w-sm mb-6 font-medium">We couldn't find any products matching these filters. Try adjusting them!</p>
+            <button @click="clearAllFilters" class="border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 font-bold text-xs uppercase tracking-widest px-6 py-2 transition-colors">
+              Clear All Filters
+            </button>
           </div>
-          <div v-else>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div v-for="product in filteredProducts" :key="product._id" class="group relative bg-white rounded-3xl overflow-hidden transition-all duration-300 border border-stone-200 hover:border-rose-300 flex flex-col p-3">
-                <NuxtLink :to="`/products/${product._id}`" class="block relative aspect-[4/5] overflow-hidden bg-amber-50 rounded-2xl">
-                  <img :src="product.imageUrls?.medium || product.imageUrls?.large || product.imageUrls?.original || product.imageUrls?.main || product.images?.[0]?.url || 'https://images.unsplash.com/photo-1519278409-1f56fc0e0db7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'" :alt="product.name" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-500 ease-in-out" />
-                  
-                  <div class="absolute top-3 left-3 flex flex-col gap-2">
-                    <span v-if="product.isNew" class="bg-sky-400 text-white text-xs font-black px-2.5 py-1 rounded-full">NEW</span>
-                    <span v-if="onSaleOnly" class="bg-rose-400 text-white text-xs font-black px-2.5 py-1 rounded-full">SALE</span>
-                  </div>
-
-                  <!-- Playful Quick Add overlay -->
-                  <div class="absolute inset-0 bg-white/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                    <button @click.stop.prevent="router.push(`/products/${product._id}`)" class="w-10 h-10 bg-white text-sky-500 rounded-full border border-stone-200 flex items-center justify-center hover:bg-sky-50 hover:scale-105 transition-all">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                    </button>
-                    <button @click.stop.prevent="handleAddToCart(product)" class="w-10 h-10 bg-rose-400 text-white rounded-full flex items-center justify-center hover:bg-rose-500 hover:scale-105 transition-all">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                    </button>
-                  </div>
-                </NuxtLink>
-  
-                <div class="pt-4 pb-2 px-2 flex-1 flex flex-col text-center">
-                  <h3 class="font-bold text-stone-800 group-hover:text-rose-500 transition-colors text-lg truncate mb-1">{{ product.name }}</h3>
-                  <div class="flex items-center justify-center gap-2 mb-3 mt-auto">
-                    <span class="text-[10px] font-black text-amber-500 bg-amber-50 px-2.5 py-1 rounded-full uppercase tracking-widest">{{ product.categoryId?.name || product.category || 'Outfits' }}</span>
-                  </div>
-                  <div class="font-black text-xl text-stone-900">₦{{ product.basePrice?.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) }}</div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Pagination -->
-            <div class="mt-16 flex justify-center">
-              <nav class="flex items-center space-x-3 bg-white p-2 rounded-full shadow-sm border-2 border-stone-50">
-                <button class="w-12 h-12 flex items-center justify-center rounded-full text-stone-400 hover:bg-rose-50 hover:text-rose-500 transition-colors font-bold">&larr;</button>
-                <button class="w-12 h-12 flex items-center justify-center rounded-full bg-rose-400 text-white font-black shadow-md">1</button>
-                <button class="w-12 h-12 flex items-center justify-center rounded-full text-stone-600 font-bold hover:bg-stone-50 transition-colors">2</button>
-                <button class="w-12 h-12 flex items-center justify-center rounded-full text-stone-600 font-bold hover:bg-stone-50 transition-colors">3</button>
-                <button class="w-12 h-12 flex items-center justify-center rounded-full text-stone-400 hover:bg-rose-50 hover:text-rose-500 transition-colors font-bold">&rarr;</button>
-              </nav>
-            </div>
+          <div v-else class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            <ProductCard 
+              v-for="product in products" 
+              :key="product._id || product.id" 
+              :product="product"
+              @quick-view="openQuickView"
+            />
           </div>
-        </div>
+        </main>
       </div>
     </div>
+
+    <!-- QuickView Modal -->
+    <QuickViewModal 
+      :is-open="isQuickViewOpen" 
+      :product="selectedProduct" 
+      @close="closeQuickView" 
+    />
+  </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useFetchProducts } from '@/composables/modules/products/useFetchProducts';
-import { useCart } from '@/composables/core/useCart';
-import { useCustomToast } from '@/composables/core/useCustomToast';
 
 const router = useRouter();
 const route = useRoute();
 const { loading, products, fetchProducts } = useFetchProducts();
-const { addToCart } = useCart();
-const { showToast } = useCustomToast();
 
-const sortBy = ref('featured');
+// --- Filter States ---
+const sortBy = ref('');
 const selectedCategories = ref([]);
-const maxPrice = ref(50000);
-const onSaleOnly = ref(false);
+const selectedColors = ref([]);
+const selectedSizes = ref([]);
+const selectedGenders = ref([]);
+const selectedTypes = ref([]);
+const selectedAgeGroups = ref([]);
+const selectedSustainability = ref([]);
+const minRating = ref(null);
+const minPrice = ref(0);
+const maxPrice = ref(100);
 
-const filteredProducts = computed(() => {
-  if (!products.value) return [];
-  
-  let result = [...products.value];
-  
-  const searchQ = route.query.search;
-  if (searchQ) {
-    const q = searchQ.toLowerCase();
-    result = result.filter(p => p.name?.toLowerCase().includes(q) || p.description?.toLowerCase().includes(q));
-  }
-  
-  if (selectedCategories.value.length > 0) {
-    result = result.filter(p => selectedCategories.value.includes(p.category));
-  }
-  
-  result = result.filter(p => p.basePrice <= maxPrice.value);
-  
-  // Fake sale filter since we don't have isSale yet
-  if (onSaleOnly.value) {
-    result = result.filter(p => p.basePrice < 15000); // Items under 15k are on "sale"
-  }
-  
-  if (sortBy.value === 'price_asc') {
-    result.sort((a, b) => a.basePrice - b.basePrice);
-  } else if (sortBy.value === 'price_desc') {
-    result.sort((a, b) => b.basePrice - a.basePrice);
-  } else if (sortBy.value === 'newest') {
-    result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  }
-  
-  return result;
-});
+// --- Filter Options ---
+const categoryFilters = [
+  { label: 'Countryside Manor', value: 'countryside' },
+  { label: 'Blue Sky Mountain', value: 'blue-sky' },
+  { label: 'Trick or Treat', value: 'trick-or-treat' },
+  { label: 'The Harvest Edit', value: 'harvest' },
+  { label: 'New Arrivals', value: 'new' },
+  { label: 'Sale', value: 'sale' },
+];
 
-const handleAddToCart = (product) => {
-  addToCart(product, 1);
-  showToast({
-    title: '🎉 Yay! Added to Cart! 🎈',
-    message: `Woohoo! ${product.name} is now in your cart! 🛍️✨`,
-    toastType: 'success'
-  });
+const colorFilters = [
+  { label: 'Red', value: 'red', hex: '#8B0000' },
+  { label: 'Blue', value: 'blue', hex: '#4169E1' },
+  { label: 'Navy', value: 'navy', hex: '#000080' },
+  { label: 'Pink', value: 'pink', hex: '#FFC0CB' },
+  { label: 'Yellow', value: 'yellow', hex: '#FFD700' },
+  { label: 'Green', value: 'green', hex: '#228B22' },
+  { label: 'Brown', value: 'brown', hex: '#8B4513' },
+  { label: 'Black', value: 'black', hex: '#000000' },
+  { label: 'White', value: 'white', hex: '#FFFFFF' },
+  { label: 'Gray', value: 'gray', hex: '#808080' },
+];
+
+const sizeFilters = [
+  '0-3 M', '3-6 M', '6-9 M', '9-12 M', '12-18 M', '18-24 M',
+  '2T', '3T', '4T', '5T',
+  'XS (4)', 'S (5-6)', 'M (7-8)', 'L (10-12)', 'XL (14-16)'
+];
+
+const typeFilters = [
+  { label: 'Tops', value: 'tops' },
+  { label: 'Bottoms', value: 'bottoms' },
+  { label: 'Dresses', value: 'dresses' },
+  { label: 'Sets', value: 'sets' },
+  { label: 'Pajamas', value: 'pajamas' },
+  { label: 'Shoes', value: 'shoes' },
+  { label: 'Boots', value: 'boots' },
+  { label: 'Denim Jackets', value: 'denim-jackets' },
+  { label: 'Accessories', value: 'accessories' },
+];
+
+const ageFilters = [
+  { label: 'Girls (12M-12)', value: 'girls-12m-12' },
+  { label: 'Boys (12M-12)', value: 'boys-12m-12' },
+  { label: 'Baby Girls (0-24M)', value: 'baby-girls-0-24m' },
+  { label: 'Baby Boys (0-24M)', value: 'baby-boys-0-24m' },
+  { label: 'Toddler', value: 'toddler' },
+];
+
+// --- Methods ---
+const reloadProducts = () => {
+  const params = {};
+  
+  // Basic
+  if (route.query.search) params.search = route.query.search;
+  if (sortBy.value) params.sort = sortBy.value;
+  
+  // Arrays mapped to comma-separated strings for the backend
+  if (selectedCategories.value.length > 0) params.category = selectedCategories.value.join(',');
+  if (selectedColors.value.length > 0) params.color = selectedColors.value.join(',');
+  if (selectedSizes.value.length > 0) params.size = selectedSizes.value.join(',');
+  if (selectedGenders.value.length > 0) params.gender = selectedGenders.value.join(',');
+  if (selectedTypes.value.length > 0) params.productType = selectedTypes.value.join(',');
+  if (selectedAgeGroups.value.length > 0) params.ageGroup = selectedAgeGroups.value.join(',');
+  if (selectedSustainability.value.length > 0) params.sustainability = selectedSustainability.value.join(',');
+  
+  // Ranges / Numerics
+  if (minPrice.value > 0) params.minPrice = minPrice.value;
+  if (maxPrice.value < 100) params.maxPrice = maxPrice.value;
+  if (minRating.value) params.minRating = minRating.value;
+
+  fetchProducts(params);
+};
+
+const clearSearch = () => {
+  router.push('/products');
+};
+
+const clearAllFilters = () => {
+  selectedCategories.value = [];
+  selectedColors.value = [];
+  selectedSizes.value = [];
+  selectedGenders.value = [];
+  selectedTypes.value = [];
+  selectedAgeGroups.value = [];
+  selectedSustainability.value = [];
+  minRating.value = null;
+  minPrice.value = 0;
+  maxPrice.value = 100;
+  reloadProducts();
 };
 
 onMounted(() => {
-  fetchProducts();
+  reloadProducts();
 });
+
+// Re-fetch when search query changes
+watch(() => route.query.search, () => {
+  reloadProducts();
+});
+
+// QuickView
+const isQuickViewOpen = ref(false);
+const selectedProduct = ref(null);
+
+const openQuickView = (product) => {
+  selectedProduct.value = product;
+  isQuickViewOpen.value = true;
+};
+
+const closeQuickView = () => {
+  isQuickViewOpen.value = false;
+  setTimeout(() => { selectedProduct.value = null; }, 300);
+};
 </script>
+
+<style scoped>
+/* Custom scrollbar for sidebar filter lists */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Hide default marker for details/summary */
+details > summary::-webkit-details-marker {
+  display: none;
+}
+</style>

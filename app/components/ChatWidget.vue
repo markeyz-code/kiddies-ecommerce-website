@@ -27,7 +27,7 @@
         <button @click="isFullScreen = !isFullScreen" class="text-emerald-100 hover:text-white group relative">
           <Maximize v-if="!isFullScreen" class="w-5 h-5" />
           <Minimize v-else class="w-5 h-5" />
-          <span class="absolute -bottom-8 right-0 bg-stone-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none transition-opacity">
+          <span class="absolute -bottom-8 right-0 bg-[#1a365d] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none transition-opacity">
             {{ isFullScreen ? 'Exit full screen' : 'Switch to full screen mode for better chatting' }}
           </span>
         </button>
@@ -45,7 +45,7 @@
             @keyup.enter="joinChat"
             type="text" 
             placeholder="John Doe"
-            class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1a365d] focus:border-emerald-500"
           />
         </div>
         <div>
@@ -55,13 +55,13 @@
             @keyup.enter="joinChat"
             type="email" 
             placeholder="john@example.com"
-            class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1a365d] focus:border-emerald-500"
           />
         </div>
         <button 
           @click="joinChat"
           :disabled="!customerName.trim() || !customerEmail.trim()"
-          class="w-full bg-stone-900 text-white py-2 px-4 rounded-lg hover:bg-stone-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full bg-stone-900 text-white py-2 px-4 rounded-lg hover:bg-[#1a365d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Start Chat
         </button>
@@ -110,7 +110,7 @@
             v-model="newMessage"
             type="text" 
             placeholder="Type your message..."
-            class="flex-1 px-4 py-2 border border-stone-300 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm"
+            class="flex-1 px-4 py-2 border border-stone-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1a365d] focus:border-emerald-500 text-sm"
           />
           <button 
             type="submit"

@@ -1,61 +1,113 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-stone-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-stone-100">
-      <div class="text-center">
-        <NuxtLink to="/" class="inline-block mb-6 text-3xl font-serif font-bold text-emerald-600 tracking-tight">JasmarKids</NuxtLink>
-        <h2 class="text-3xl font-serif font-bold text-stone-900 tracking-tight">Reset password</h2>
-        <p class="mt-2 text-sm text-stone-500">
-          Enter your reset token and new password.
-        </p>
+  <div class="min-h-screen bg-stone-50 flex">
+    <!-- Left: Form Section -->
+    <div class="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-12 lg:px-24 xl:px-32 relative z-10 bg-white shadow-2xl py-12 lg:py-0 overflow-y-auto">
+      <div class="absolute top-8 left-8 sm:left-12 lg:left-24">
+        <NuxtLink to="/login" class="text-[#1a365d] hover:opacity-75 transition-opacity flex items-center font-bold text-sm tracking-widest uppercase">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+          Back to Login
+        </NuxtLink>
       </div>
-      <form class="mt-8 space-y-6" @submit.prevent="handleResetPassword">
-        <div class="space-y-5">
-          <div>
-            <label for="token" class="block text-sm font-medium text-stone-700 mb-1">Reset Token</label>
-            <input id="token" v-model="token" name="token" type="text" required class="block w-full px-4 py-3 border border-stone-300 placeholder-stone-400 text-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm" placeholder="Paste your token here" />
+      
+      <div class="w-full max-w-md mx-auto mt-16 lg:mt-0">
+        <h1 class="text-4xl font-serif font-black text-stone-900 mb-2">Create New Password 🔒</h1>
+        <p class="text-stone-500 font-medium mb-10 text-sm">Please enter your new password below.</p>
+        
+        <form @submit.prevent="handleResetPassword" class="space-y-6">
+          <div class="space-y-1 relative">
+            <label class="text-xs font-black uppercase tracking-widest text-stone-700 ml-1">New Password</label>
+            <input 
+              v-model="password" 
+              :type="showPassword ? 'text' : 'password'"
+              required
+              placeholder="••••••••"
+              class="w-full px-5 py-3.5 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+            >
+            <button type="button" @click="showPassword = !showPassword" class="absolute right-4 bottom-3.5 text-stone-400 hover:text-stone-600">
+              <svg v-if="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.29 3.29m0 0l3.29 3.29m0 0l3.29 3.29m0 0l3.29 3.29m0 0l3.29 3.29" /></svg>
+            </button>
           </div>
-          <div>
-            <label for="password" class="block text-sm font-medium text-stone-700 mb-1">New Password</label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
-              </div>
-              <input id="password" v-model="password" :type="showPassword ? 'text' : 'password'" autocomplete="new-password" required class="block w-full pl-10 pr-10 py-3 border border-stone-300 placeholder-stone-400 text-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm" placeholder="••••••••" />
-              <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                <button type="button" @click="showPassword = !showPassword" class="text-stone-400 hover:text-stone-600 focus:outline-none transition-colors">
-                  <svg v-if="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" /></svg>
-                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" /><path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" /></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div>
-          <button type="submit" :disabled="loading" class="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors shadow-md disabled:opacity-70 disabled:cursor-not-allowed">
-            <svg v-if="loading" class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-            {{ loading ? 'Resetting...' : 'Reset Password' }}
+          <div class="space-y-1 relative">
+            <label class="text-xs font-black uppercase tracking-widest text-stone-700 ml-1">Confirm New Password</label>
+            <input 
+              v-model="confirmPassword" 
+              :type="showPassword ? 'text' : 'password'"
+              required
+              placeholder="••••••••"
+              class="w-full px-5 py-3.5 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+            >
+          </div>
+          
+          <button 
+            type="submit" 
+            :disabled="loading"
+            class="w-full bg-[#1a365d] text-white font-black py-4 rounded-2xl hover:bg-[#112a4a] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 tracking-wide text-sm flex items-center justify-center"
+          >
+            <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            {{ loading ? 'Saving...' : 'Reset Password' }}
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Right: Visual Section -->
+    <div class="hidden lg:block lg:w-[55%] relative overflow-hidden bg-teal-100">
+      <div class="absolute inset-0 bg-gradient-to-br from-teal-900/40 to-transparent z-10 mix-blend-multiply"></div>
+      <img src="https://images.unsplash.com/photo-1542385151-efd9000785a0?w=1200&h=1600&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-[10s] ease-out" alt="Secure account" />
+      
+      <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-white text-center p-12">
+        <h2 class="text-6xl font-serif italic font-light drop-shadow-xl mb-4 text-white">Safe & Secure</h2>
+        <p class="text-xl font-medium max-w-md drop-shadow-lg opacity-90 text-white">Your privacy is our priority.</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useAuth } from '@/composables/modules/auth/useAuth';
+definePageMeta({ layout: 'auth' });
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useAuth } from '~/composables/modules/auth/useAuth';
+import { useCustomToast } from '~/composables/core/useCustomToast';
 
-definePageMeta({
-  layout: false
+const route = useRoute();
+const router = useRouter();
+const { resetPassword, loading } = useAuth();
+const { showToast } = useCustomToast();
+
+const password = ref('');
+const confirmPassword = ref('');
+const showPassword = ref(false);
+const token = ref('');
+
+onMounted(() => {
+  if (route.query.token) {
+    token.value = route.query.token;
+  } else {
+    showToast({
+      title: 'Invalid Request',
+      message: 'Password reset token is missing.',
+      toastType: 'error'
+    });
+    router.push('/login');
+  }
 });
 
-const { resetPassword, loading } = useAuth();
-const token = ref('');
-const password = ref('');
-const showPassword = ref(false);
+const handleResetPassword = async () => {
+  if (password.value !== confirmPassword.value) {
+    showToast({
+      title: 'Passwords do not match',
+      message: 'Please ensure both passwords are exactly the same.',
+      toastType: 'error'
+    });
+    return;
+  }
 
-const handleResetPassword = () => {
-  resetPassword({ token: token.value, newPassword: password.value });
+  const success = await resetPassword(token.value, password.value);
+  if (success) {
+    router.push('/login');
+  }
 };
 </script>

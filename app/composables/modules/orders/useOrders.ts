@@ -17,11 +17,11 @@ export const useOrders = () => {
                 customer: customerData,
                 paymentMethod,
                 items: cart.items.map(item => ({
-                    productId: item.product._id,
+                    productId: item.product._id || item.product.id,
                     name: item.product.name,
-                    price: item.product.basePrice,
+                    price: item.product.basePrice || item.product.price || 0,
                     quantity: item.quantity,
-                    sku: item.product.sku,
+                    sku: item.product.sku || 'N/A',
                 })),
                 subtotal: cart.subtotal,
                 shippingFee: 10, // flat rate for demo
@@ -32,9 +32,14 @@ export const useOrders = () => {
 
             const { data } = await ordersApi.createOrder(payload);
             
-            if (paymentMethod === 'paystack' && data?.paystack?.access_code) {
-                // Return access code to be handled by checkout.vue
+            // Paystack redirect
+            if (paymentMethod === 'paystack' && data?.paystack?.authorization_url) {
                 return { success: true, paystack: data.paystack, order: data.order };
+            }
+            // Stripe redirect
+            if (paymentMethod === 'stripe' && (data?.stripe?.url || data?.paystack?.authorization_url)) {
+                const stripeUrl = data?.stripe?.url || data?.paystack?.authorization_url;
+                return { success: true, stripe: { url: stripeUrl }, order: data.order };
             }
 
             cart.clearCart();

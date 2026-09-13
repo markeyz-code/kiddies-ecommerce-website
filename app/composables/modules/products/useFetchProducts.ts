@@ -12,8 +12,9 @@ export const useFetchProducts = () => {
         loading.value = true;
         try {
             const { data } = await productsApi.getProducts(params);
-            products.value = data;
-            return data;
+            // Handle both array response and paginated response
+            products.value = Array.isArray(data) ? data : (data.products || data.data || []);
+            return products.value;
         } catch (error: any) {
             console.error('Error fetching products:', error);
             showToast({
@@ -44,11 +45,25 @@ export const useFetchProducts = () => {
         }
     };
 
+    const relatedProducts = ref<any[]>([]);
+    
+    const fetchRelatedProducts = async (id: string) => {
+        try {
+            const { data } = await productsApi.getRelatedProducts(id);
+            relatedProducts.value = data || [];
+            return relatedProducts.value;
+        } catch (error: any) {
+            console.error('Error fetching related products:', error);
+        }
+    };
+
     return {
         loading,
         products,
         singleProduct,
+        relatedProducts,
         fetchProducts,
-        fetchProductById
+        fetchProductById,
+        fetchRelatedProducts
     };
 };

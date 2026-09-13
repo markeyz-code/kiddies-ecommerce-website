@@ -1,52 +1,74 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-stone-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-stone-100">
-      <div class="text-center">
-        <NuxtLink to="/" class="inline-block mb-6 text-3xl font-serif font-bold text-emerald-600 tracking-tight">JasmarKids</NuxtLink>
-        <h2 class="text-3xl font-serif font-bold text-stone-900 tracking-tight">Forgot password</h2>
-        <p class="mt-2 text-sm text-stone-500">
-          Remembered it?
-          <NuxtLink to="/login" class="font-medium text-emerald-600 hover:text-emerald-500 transition-colors">
-            Sign in
-          </NuxtLink>
-        </p>
+  <div class="min-h-screen bg-stone-50 flex">
+    <!-- Left: Form Section -->
+    <div class="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-12 lg:px-24 xl:px-32 relative z-10 bg-white shadow-2xl py-12 lg:py-0 overflow-y-auto">
+      <div class="absolute top-8 left-8 sm:left-12 lg:left-24">
+        <NuxtLink to="/login" class="text-[#1a365d] hover:opacity-75 transition-opacity flex items-center font-bold text-sm tracking-widest uppercase">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+          Back to Login
+        </NuxtLink>
       </div>
-      <form class="mt-8 space-y-6" @submit.prevent="handleForgotPassword">
-        <div class="space-y-5">
-          <div>
-            <label for="email-address" class="block text-sm font-medium text-stone-700 mb-1">Email address</label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
-              </div>
-              <input id="email-address" v-model="email" name="email" type="email" autocomplete="email" required class="block w-full pl-10 pr-3 py-3 border border-stone-300 placeholder-stone-400 text-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all sm:text-sm" placeholder="you@example.com" />
-            </div>
+      
+      <div class="w-full max-w-md mx-auto mt-16 lg:mt-0">
+        <h1 class="text-4xl font-serif font-black text-stone-900 mb-2">Reset Password 🔑</h1>
+        <p class="text-stone-500 font-medium mb-10 text-sm">Forgot your password? No worries. Just enter the email address you signed up with and we'll send you a reset link.</p>
+        
+        <form @submit.prevent="handleForgotPassword" class="space-y-6">
+          <div class="space-y-1">
+            <label class="text-xs font-black uppercase tracking-widest text-stone-700 ml-1">Email Address</label>
+            <input 
+              v-model="email" 
+              type="email" 
+              required
+              placeholder="hello@example.com"
+              class="w-full px-5 py-3.5 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+            >
           </div>
-        </div>
-
-        <div>
-          <button type="submit" :disabled="loading" class="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors shadow-md disabled:opacity-70 disabled:cursor-not-allowed">
-            <svg v-if="loading" class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-            {{ loading ? 'Sending...' : 'Send reset link' }}
+          
+          <button 
+            type="submit" 
+            :disabled="loading"
+            class="w-full bg-[#1a365d] text-white font-black py-4 rounded-2xl hover:bg-[#112a4a] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 tracking-wide text-sm flex items-center justify-center"
+          >
+            <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            {{ loading ? 'Sending reset link...' : 'Send Reset Link' }}
           </button>
+        </form>
+
+        <div v-if="message" class="mt-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-bold flex items-start gap-3">
+          <span class="text-xl">✅</span>
+          {{ message }}
         </div>
-      </form>
+      </div>
+    </div>
+    
+    <!-- Right: Visual Section -->
+    <div class="hidden lg:block lg:w-[55%] relative overflow-hidden bg-sky-100">
+      <div class="absolute inset-0 bg-gradient-to-br from-sky-900/40 to-transparent z-10 mix-blend-multiply"></div>
+      <img src="https://images.unsplash.com/photo-1601662528567-526cd06f6582?w=1200&h=1600&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-[10s] ease-out" alt="Cute toddler in overalls" />
+      
+      <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-white text-center p-12">
+        <h2 class="text-6xl font-serif italic font-light drop-shadow-xl mb-4 text-white">We've got you</h2>
+        <p class="text-xl font-medium max-w-md drop-shadow-lg opacity-90 text-white">Get back to shopping in no time.</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+definePageMeta({ layout: 'auth' });
 import { ref } from 'vue';
-import { useAuth } from '@/composables/modules/auth/useAuth';
-
-definePageMeta({
-  layout: false
-});
+import { useAuth } from '~/composables/modules/auth/useAuth';
 
 const { forgotPassword, loading } = useAuth();
 const email = ref('');
+const message = ref('');
 
-const handleForgotPassword = () => {
-  forgotPassword({ email: email.value });
+const handleForgotPassword = async () => {
+  const success = await forgotPassword(email.value);
+  if (success) {
+    message.value = 'Password reset instructions have been sent to your email address.';
+    email.value = ''; // clear input
+  }
 };
 </script>

@@ -24,7 +24,9 @@ export default defineNuxtConfig({
         { src: 'https://js.paystack.co/v1/inline.js' }
       ],
       link: [
-        { rel: 'stylesheet', href: 'https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&f[]=clash-display@200,400,700,500,600,300&display=swap' }
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap' }
       ]
     }
   },
@@ -33,8 +35,8 @@ export default defineNuxtConfig({
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Satoshi', 'sans-serif'],
-            serif: ['Clash Display', 'sans-serif'],
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['Outfit', 'sans-serif'],
           }
         }
       }

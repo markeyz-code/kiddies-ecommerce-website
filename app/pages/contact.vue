@@ -45,22 +45,22 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm font-medium text-stone-700">First name</label>
-              <input v-model="firstName" type="text" required class="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 py-2 px-3 border" placeholder="First name">
+              <input v-model="firstName" type="text" required class="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-[#1a365d] py-2 px-3 border" placeholder="First name">
             </div>
             <div>
               <label class="block text-sm font-medium text-stone-700">Last name</label>
-              <input v-model="lastName" type="text" required class="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 py-2 px-3 border" placeholder="Last name">
+              <input v-model="lastName" type="text" required class="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-[#1a365d] py-2 px-3 border" placeholder="Last name">
             </div>
           </div>
           
           <div>
             <label class="block text-sm font-medium text-stone-700">Email</label>
-            <input v-model="email" type="email" required class="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 py-2 px-3 border" placeholder="you@company.com">
+            <input v-model="email" type="email" required class="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-[#1a365d] py-2 px-3 border" placeholder="you@company.com">
           </div>
           
           <div>
             <label class="block text-sm font-medium text-stone-700">Message</label>
-            <textarea v-model="message" rows="4" required class="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 py-2 px-3 border" placeholder="Leave us a message..."></textarea>
+            <textarea v-model="message" rows="4" required class="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-[#1a365d] py-2 px-3 border" placeholder="Leave us a message..."></textarea>
           </div>
           
           <button type="submit" :disabled="loading" class="w-full bg-emerald-600 text-white font-medium py-3 rounded-md shadow-lg hover:bg-emerald-700 transition-colors disabled:opacity-70">

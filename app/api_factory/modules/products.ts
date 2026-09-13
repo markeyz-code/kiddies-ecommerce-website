@@ -6,5 +6,8 @@ export const productsApi = {
     },
     getProductById(id: string) {
         return GATEWAY_ENDPOINT.get(`/products/${id}`);
+    },
+    getRelatedProducts(id: string) {
+        return GATEWAY_ENDPOINT.get(`/products/${id}/related`);
     }
 };
