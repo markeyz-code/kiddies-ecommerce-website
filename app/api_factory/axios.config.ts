@@ -1,6 +1,6 @@
 import axios, { type AxiosResponse } from 'axios';
 
-export const rawBaseUrl = 'http://localhost:3005';
+export const rawBaseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:3005';
 const $GATEWAY_ENDPOINT = rawBaseUrl;
 const $IMAGE_UPLOAD_ENDPOINT = `${rawBaseUrl}/upload`;
 
