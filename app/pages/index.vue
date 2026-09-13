@@ -193,14 +193,14 @@
 <script setup>
 import { onMounted, computed, ref } from 'vue';
 import { useFetchProducts } from '~/composables/modules/products/useFetchProducts';
-import axios from 'axios';
+import { GATEWAY_ENDPOINT } from '~/api_factory/axios.config';
 
 const { fetchProducts, products } = useFetchProducts();
 
 const promotions = ref([]);
 const fetchPromotions = async () => {
   try {
-    const res = await axios.get('http://localhost:3005/promotions?isActive=true');
+    const res = await GATEWAY_ENDPOINT.get('/promotions?isActive=true');
     promotions.value = res.data;
   } catch (err) {
     console.error('Failed to fetch promotions on home', err);

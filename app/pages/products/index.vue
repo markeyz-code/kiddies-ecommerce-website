@@ -367,14 +367,30 @@ const clearAllFilters = () => {
   reloadProducts();
 };
 
+const initFiltersFromQuery = () => {
+  if (route.query.category) selectedCategories.value = route.query.category.split(',');
+  if (route.query.color) selectedColors.value = route.query.color.split(',');
+  if (route.query.size) selectedSizes.value = route.query.size.split(',');
+  if (route.query.gender) selectedGenders.value = route.query.gender.split(',');
+  if (route.query.productType) selectedTypes.value = route.query.productType.split(',');
+  if (route.query.ageGroup) selectedAgeGroups.value = route.query.ageGroup.split(',');
+  if (route.query.sort) sortBy.value = route.query.sort;
+  if (route.query.sale === 'true') {
+    if (!selectedCategories.value.includes('sale')) {
+      selectedCategories.value.push('sale');
+    }
+  }
+};
+
 onMounted(() => {
+  initFiltersFromQuery();
   reloadProducts();
 });
 
-// Re-fetch when search query changes
-watch(() => route.query.search, () => {
+watch(() => route.query, () => {
+  initFiltersFromQuery();
   reloadProducts();
-});
+}, { deep: true });
 
 // QuickView
 const isQuickViewOpen = ref(false);

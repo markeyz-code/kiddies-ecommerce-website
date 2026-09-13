@@ -310,7 +310,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useCart } from '~/composables/core/useCart';
 import { useAuth } from '~/composables/modules/auth/useAuth';
 import { useCustomToast } from '~/composables/core/useCustomToast';
-import axios from 'axios';
+import { GATEWAY_ENDPOINT } from '@/api_factory/axios.config';
 import { SearchIcon, MapPinIcon, HeartIcon, UserIcon, ShoppingBagIcon, MenuIcon, XIcon, ChevronDownIcon, PackageIcon, RefreshCwIcon, CreditCardIcon, StarIcon, GiftIcon } from 'lucide-vue-next';
 
 const cart = useCart();
@@ -343,7 +343,7 @@ const searchStores = async () => {
   isSearchingStores.value = true;
   hasSearched.value = true;
   try {
-    const res = await axios.get(`http://localhost:3005/stores/search`, {
+    const res = await GATEWAY_ENDPOINT.get(`/stores/search`, {
       params: { q: storeSearchQuery.value, distance: storeSearchDistance.value }
     });
     storeSearchResults.value = res.data;
@@ -361,7 +361,7 @@ const useCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(async (position) => {
       try {
         const { latitude, longitude } = position.coords;
-        const res = await axios.get(`http://localhost:3005/stores/search`, {
+        const res = await GATEWAY_ENDPOINT.get(`/stores/search`, {
           params: { lat: latitude, lng: longitude, distance: storeSearchDistance.value }
         });
         storeSearchResults.value = res.data;
@@ -399,7 +399,7 @@ const activeMegaMenu = ref(null);
 
 const fetchPromotions = async () => {
   try {
-    const res = await axios.get('http://localhost:3005/promotions?type=megamenu_ad&isActive=true');
+    const res = await GATEWAY_ENDPOINT.get('/promotions?type=megamenu_ad&isActive=true');
     megaMenuAds.value = res.data;
   } catch (err) {
     console.error('Error fetching megamenu ads', err);

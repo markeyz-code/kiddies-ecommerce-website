@@ -124,7 +124,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios';
+import { GATEWAY_ENDPOINT } from '~/api_factory/axios.config';
 
 const email = ref('');
 const orderNumber = ref('');
@@ -145,7 +145,7 @@ const handleTrackOrder = async () => {
 
   loading.value = true;
   try {
-    const res = await axios.post('http://localhost:3005/orders/track', {
+    const res = await GATEWAY_ENDPOINT.post('/orders/track', {
       email: email.value,
       orderNumber: orderNumber.value
     });
