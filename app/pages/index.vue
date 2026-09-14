@@ -29,30 +29,56 @@
     <section v-else class="w-full relative">
       <div class="w-full relative group">
         <div class="w-full h-[60vh] md:h-[80vh] shadow-lg relative overflow-hidden bg-stone-900">
-          <transition-group name="fade" tag="div">
-            <div v-for="(img, idx) in heroImages" :key="img" v-show="currentHeroIndex === idx" class="absolute inset-0 w-full h-full">
-              <img :src="img" class="absolute inset-0 w-full h-full object-cover" alt="Autumn Collection" />
-              <div class="absolute inset-0 bg-black/50"></div>
-            </div>
-          </transition-group>
+          <template v-if="heroItems.length > 0">
+            <transition-group name="fade" tag="div">
+              <div v-for="(item, idx) in heroItems" :key="item.imageUrl" v-show="currentHeroIndex === idx" class="absolute inset-0 w-full h-full">
+                <img :src="item.imageUrl" class="absolute inset-0 w-full h-full object-cover" alt="Hero Banner" />
+                <div class="absolute inset-0 bg-black/50"></div>
+              </div>
+            </transition-group>
 
-          <div class="relative z-10 flex flex-col justify-center items-center text-center p-12 text-white font-serif h-full">
-            <h1 class="text-6xl md:text-8xl font-light leading-tight drop-shadow-md">
-              ICONIC<br/>FOR<br/>AUTUMN
-            </h1>
-            <p class="font-sans text-lg md:text-2xl mt-4 max-w-md drop-shadow font-medium">
-              Charming outfits for the season's best moments.
-            </p>
-            <div class="flex space-x-6 mt-8 font-sans text-sm font-bold tracking-widest uppercase drop-shadow">
-              <NuxtLink to="/category/boy" class="bg-white text-[#1a365d] px-8 py-3.5 rounded-full hover:bg-gray-100 hover:scale-105 transition-all duration-300">Shop Boys</NuxtLink>
-              <NuxtLink to="/category/girl" class="bg-[#1a365d] text-white border border-[#1a365d] px-8 py-3.5 rounded-full hover:bg-[#112a4a] hover:scale-105 transition-all duration-300">Shop Girls</NuxtLink>
+            <div v-for="(item, idx) in heroItems" :key="'text-'+idx" v-show="currentHeroIndex === idx" class="relative z-10 flex flex-col justify-center items-center text-center p-12 text-white font-serif h-full">
+              <h1 class="text-6xl md:text-8xl font-light leading-tight drop-shadow-md" style="white-space: pre-wrap;" v-html="item.title"></h1>
+              <p class="font-sans text-lg md:text-2xl mt-4 max-w-md drop-shadow font-medium">
+                {{ item.subtitle }}
+              </p>
+              <div class="flex space-x-6 mt-8 font-sans text-sm font-bold tracking-widest uppercase drop-shadow">
+                <NuxtLink :to="item.ctaLink" class="bg-white text-[#1a365d] px-8 py-3.5 rounded-full hover:bg-gray-100 hover:scale-105 transition-all duration-300">{{ item.ctaText }}</NuxtLink>
+              </div>
             </div>
-          </div>
+            
+            <!-- Carousel Indicators -->
+            <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-3 z-20">
+              <button v-for="(_, idx) in heroItems" :key="'ind-'+idx" @click="currentHeroIndex = idx" class="w-3 h-3 rounded-full transition-colors" :class="currentHeroIndex === idx ? 'bg-white' : 'bg-white/50 hover:bg-white/75'"></button>
+            </div>
+          </template>
           
-          <!-- Carousel Indicators -->
-          <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-3 z-20">
-            <button v-for="(_, idx) in heroImages" :key="idx" @click="currentHeroIndex = idx" class="w-3 h-3 rounded-full transition-colors" :class="currentHeroIndex === idx ? 'bg-white' : 'bg-white/50 hover:bg-white/75'"></button>
-          </div>
+          <template v-else>
+            <transition-group name="fade" tag="div">
+              <div v-for="(img, idx) in defaultHeroImages" :key="img" v-show="currentHeroIndex === idx" class="absolute inset-0 w-full h-full">
+                <img :src="img" class="absolute inset-0 w-full h-full object-cover" alt="Autumn Collection" />
+                <div class="absolute inset-0 bg-black/50"></div>
+              </div>
+            </transition-group>
+
+            <div class="relative z-10 flex flex-col justify-center items-center text-center p-12 text-white font-serif h-full">
+              <h1 class="text-6xl md:text-8xl font-light leading-tight drop-shadow-md">
+                ICONIC<br/>FOR<br/>AUTUMN
+              </h1>
+              <p class="font-sans text-lg md:text-2xl mt-4 max-w-md drop-shadow font-medium">
+                Charming outfits for the season's best moments.
+              </p>
+              <div class="flex space-x-6 mt-8 font-sans text-sm font-bold tracking-widest uppercase drop-shadow">
+                <NuxtLink to="/category/boy" class="bg-white text-[#1a365d] px-8 py-3.5 rounded-full hover:bg-gray-100 hover:scale-105 transition-all duration-300">Shop Boys</NuxtLink>
+                <NuxtLink to="/category/girl" class="bg-[#1a365d] text-white border border-[#1a365d] px-8 py-3.5 rounded-full hover:bg-[#112a4a] hover:scale-105 transition-all duration-300">Shop Girls</NuxtLink>
+              </div>
+            </div>
+            
+            <!-- Carousel Indicators -->
+            <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-3 z-20">
+              <button v-for="(_, idx) in defaultHeroImages" :key="idx" @click="currentHeroIndex = idx" class="w-3 h-3 rounded-full transition-colors" :class="currentHeroIndex === idx ? 'bg-white' : 'bg-white/50 hover:bg-white/75'"></button>
+            </div>
+          </template>
         </div>
       </div>
     </section>
@@ -63,8 +89,16 @@
         <h2 class="text-4xl font-serif text-gray-800 text-center tracking-wide">Fall-Inspired Looks</h2>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Boy -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" v-if="storefrontSettings?.featuredCategories?.length > 0">
+        <NuxtLink v-for="(cat, idx) in storefrontSettings.featuredCategories" :key="idx" :to="cat.link" class="flex flex-col items-center group cursor-pointer">
+          <div class="w-full aspect-[3/4] overflow-hidden mb-4 rounded-lg flex items-center justify-center">
+            <img :src="cat.imageUrl" :alt="cat.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <span class="text-sm font-bold uppercase tracking-widest underline underline-offset-4 text-gray-800 hover:text-orange-600 transition-colors">{{ cat.title }}</span>
+        </NuxtLink>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" v-else>
+        <!-- Fallback Boy -->
         <NuxtLink to="/category/boy" class="flex flex-col items-center group cursor-pointer">
           <div class="w-full aspect-[3/4] overflow-hidden mb-4 rounded-lg flex items-center justify-center">
             <img src="/img/category_boy_1789165301016.jpg" alt="Shop Boy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -72,7 +106,7 @@
           <span class="text-sm font-bold uppercase tracking-widest underline underline-offset-4 text-gray-800 hover:text-orange-600 transition-colors">Shop Boy</span>
         </NuxtLink>
         
-        <!-- Baby -->
+        <!-- Fallback Baby -->
         <NuxtLink to="/category/baby" class="flex flex-col items-center group cursor-pointer">
           <div class="w-full aspect-[3/4] overflow-hidden mb-4 rounded-lg flex items-center justify-center">
             <img src="/img/category_baby_1789165311089.jpg" alt="Shop Baby" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -80,7 +114,7 @@
           <span class="text-sm font-bold uppercase tracking-widest underline underline-offset-4 text-gray-800 hover:text-orange-600 transition-colors">Shop Baby</span>
         </NuxtLink>
         
-        <!-- Girl -->
+        <!-- Fallback Girl -->
         <NuxtLink to="/category/girl" class="flex flex-col items-center group cursor-pointer">
           <div class="w-full aspect-[3/4] overflow-hidden mb-4 rounded-lg flex items-center justify-center">
             <img src="/img/category_girl_1789165322757.jpg" alt="Shop Girl" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -154,29 +188,45 @@
     <!-- Brand Story & Categories (SEO) -->
     <section class="w-full bg-gray-50 border-t border-gray-100 mt-12 py-16">
       <div class="max-w-[1400px] mx-auto px-4 md:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
-          
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left" v-if="storefrontSettings?.brandStory">
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-4 tracking-wide uppercase">{{ storefrontSettings.brandStory.section1Title }}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed font-medium">
+              {{ storefrontSettings.brandStory.section1Text }}
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-4 tracking-wide uppercase">{{ storefrontSettings.brandStory.section2Title }}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed font-medium">
+              {{ storefrontSettings.brandStory.section2Text }}
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-4 tracking-wide uppercase">{{ storefrontSettings.brandStory.section3Title }}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed font-medium">
+              {{ storefrontSettings.brandStory.section3Text }}
+            </p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left" v-else>
           <div>
             <h3 class="text-lg font-bold text-gray-900 mb-4 tracking-wide uppercase">Kids Clothes</h3>
             <p class="text-sm text-gray-600 leading-relaxed font-medium">
-              Hold onto childhood with kids clothes from JasmarKids, where every style is made to celebrate the magic of being a kid. Discover beautifully detailed baby, toddler and kids clothing in playful prints, sweet patterns and bow-to-toe themes from our latest <NuxtLink to="/products" class="underline hover:text-[#1a365d]">collections</NuxtLink>. From dresses, skirts, jeans and shorts to tops, button up shirts, polos, sweaters and more, JasmarKids makes it easy to create picture-perfect outfits for every day, special occasions and all the little moments in between.
+              Hold onto childhood with kids clothes from JasmarKids, where every style is made to celebrate the magic of being a kid.
             </p>
           </div>
-          
           <div>
             <h3 class="text-lg font-bold text-gray-900 mb-4 tracking-wide uppercase">Girls & Boys Clothes</h3>
             <p class="text-sm text-gray-600 leading-relaxed font-medium">
-              Discover the sweetest <NuxtLink to="/category/girl" class="underline hover:text-[#1a365d]">girls clothes</NuxtLink> and coolest <NuxtLink to="/category/boy" class="underline hover:text-[#1a365d]">boys clothes</NuxtLink> made for every adventure, celebration and memory-making moment. For girls, shop bright colors, soft pastels, cute print dresses, twirl-worthy skirts, leggings, coordinating tops and cardigans designed with charming details she'll love.
+              Discover the sweetest girls clothes and coolest boys clothes made for every adventure, celebration and memory-making moment.
             </p>
           </div>
-          
           <div>
             <h3 class="text-lg font-bold text-gray-900 mb-4 tracking-wide uppercase">Baby Clothes</h3>
             <p class="text-sm text-gray-600 leading-relaxed font-medium">
-              Celebrate their earliest moments with <NuxtLink to="/category/baby" class="underline hover:text-[#1a365d]">baby clothes</NuxtLink> from JasmarKids, designed with soft fabrics, thoughtful details and the sweetest prints for your littlest one.
+              Celebrate their earliest moments with baby clothes from JasmarKids, designed with soft fabrics, thoughtful details and the sweetest prints for your littlest one.
             </p>
           </div>
-
         </div>
       </div>
     </section>
@@ -207,24 +257,43 @@ const fetchPromotions = async () => {
   }
 };
 
+const storefrontSettings = ref(null);
+const fetchStorefrontSettings = async () => {
+  try {
+    const res = await GATEWAY_ENDPOINT.get('/settings/storefront');
+    storefrontSettings.value = res.data;
+  } catch (err) {
+    console.error('Failed to fetch storefront settings', err);
+  }
+};
+
 const activeBanners = computed(() => {
   return promotions.value.filter(p => p.type === 'hero' || p.type === 'banner');
 });
 
-const heroImages = [
+const defaultHeroImages = [
   '/img/hero_fall_1_1789165261484.jpg',
   '/img/hero_fall_2_1789165271669.jpg',
   '/img/hero_fall_3_1789165291107.jpg'
 ];
+const heroItems = computed(() => {
+  if (storefrontSettings.value?.heroCarousel?.length > 0) {
+    return storefrontSettings.value.heroCarousel;
+  }
+  return []; // Fallback to be handled in template
+});
+
 const currentHeroIndex = ref(0);
 let heroInterval;
 
 onMounted(() => {
   fetchProducts();
   fetchPromotions();
+  fetchStorefrontSettings();
   
   heroInterval = setInterval(() => {
-    currentHeroIndex.value = (currentHeroIndex.value + 1) % heroImages.length;
+    const length = heroItems.value.length > 0 ? heroItems.value.length : defaultHeroImages.length;
+    currentHeroIndex.value = (currentHeroIndex.value + 1) % length;
   }, 5000);
 });
 
