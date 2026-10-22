@@ -1,27 +1,24 @@
 <template>
   <div class="min-h-screen bg-cream-50 pb-20">
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-      <div class="mb-6">
-        <p class="eyebrow mb-2">Step 2 of 3</p>
-        <h1 class="section-title">Checkout</h1>
+      <div class="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="eyebrow mb-2">Step 2 of 3</p>
+          <h1 class="section-title">Checkout</h1>
+        </div>
+        <CheckoutSteps :step="2" />
       </div>
-
-      <div class="mb-8"><CheckoutSteps :step="2" /></div>
 
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Checkout Form -->
         <div class="flex-1">
-          <div v-if="!user" class="mb-6 bg-brand-50 p-4 md:p-5 rounded-2xl border border-brand-200 flex items-center gap-3">
-            <span class="text-2xl">👋</span>
-            <p class="text-stone-700 font-medium text-sm">
+          <div v-if="!user" class="mb-6 flex items-center gap-3 rounded-2xl border border-brand-200 bg-brand-50 p-4 md:p-5">
+            <p class="text-sm font-medium text-brand-600">
               Already have an account? <NuxtLink to="/login?redirect=/checkout" class="font-black text-brand-900 hover:text-[#112543] hover:underline">Log in</NuxtLink> for faster checkout.
             </p>
           </div>
           
           <div class="card-surface relative overflow-hidden p-5 sm:p-8">
-            <!-- Decor -->
-            <div class="absolute -top-10 -right-10 text-8xl opacity-10 transform rotate-12">🏠</div>
-
             <h2 class="relative z-10 mb-6 font-display text-xl font-semibold text-brand-900">Shipping details</h2>
             <form @submit.prevent="handleCheckout" class="space-y-5 relative z-10">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -66,21 +63,21 @@
                 <div class="space-y-3">
                   <label class="flex cursor-pointer items-center rounded-2xl border border-cream-200 bg-white p-4 transition-all duration-200 hover:border-brand-300" :class="paymentMethod === 'paystack' ? 'border-brand-900 bg-brand-50' : 'border-cream-200 hover:border-brand-300'">
                     <input v-model="paymentMethod" value="paystack" type="radio" class="w-5 h-5 text-brand-900 border-stone-300 focus:ring-brand-300 focus:ring-2" />
-                    <span class="ml-3 font-bold text-stone-800 text-sm">Pay with Card / Bank Transfer (Paystack) 💳</span>
+                    <span class="ml-3 font-bold text-stone-800 text-sm">Pay with card or bank transfer (Paystack)</span>
                   </label>
                   <label class="flex cursor-pointer items-center rounded-2xl border border-cream-200 bg-white p-4 transition-all duration-200 hover:border-brand-300" :class="paymentMethod === 'stripe' ? 'border-[#635BFF] bg-[#635BFF]/5' : 'border-cream-200 hover:border-[#635BFF]'">
                     <input v-model="paymentMethod" value="stripe" type="radio" class="w-5 h-5 text-[#635BFF] border-stone-300 focus:ring-[#635BFF] focus:ring-2" />
-                    <span class="ml-3 font-bold text-stone-800 text-sm">Pay with Stripe 💳</span>
+                    <span class="ml-3 font-bold text-stone-800 text-sm">Pay with Stripe</span>
                   </label>
                   <label class="flex cursor-pointer items-center rounded-2xl border border-cream-200 bg-white p-4 transition-all duration-200 hover:border-brand-300" :class="paymentMethod === 'cash_on_delivery' ? 'border-emerald-400 bg-emerald-50' : 'border-cream-200 hover:border-emerald-300'">
                     <input v-model="paymentMethod" value="cash_on_delivery" type="radio" class="w-5 h-5 text-emerald-500 border-stone-300 focus:ring-brand-300 focus:ring-2" />
-                    <span class="ml-3 font-bold text-stone-800 text-sm">Cash on delivery 💵</span>
+                    <span class="ml-3 font-bold text-stone-800 text-sm">Cash on delivery</span>
                   </label>
                 </div>
               </div>
 
               <button type="submit" :disabled="loading" class="btn-primary mt-8 w-full">
-                {{ loading ? 'Processing...' : 'Place Order ✨' }}
+                {{ loading ? 'Processing…' : 'Place order' }}
               </button>
             </form>
           </div>
@@ -119,7 +116,7 @@
                 </button>
               </div>
               <div v-else class="flex gap-2">
-                <input v-model="couponCode" type="text" placeholder="Coupon code 🎟️" class="flex-1 rounded-full border border-stone-200 focus:border-brand-900 focus:ring-4 focus:ring-sky-100 py-2.5 px-4 bg-white text-xs font-medium transition-all uppercase placeholder:normal-case" />
+                <input v-model="couponCode" type="text" placeholder="Coupon code" class="flex-1 rounded-full border border-stone-200 focus:border-brand-900 focus:ring-4 focus:ring-sky-100 py-2.5 px-4 bg-white text-xs font-medium transition-all uppercase placeholder:normal-case" />
                 <button @click="applyCoupon" :disabled="!couponCode || applyingCoupon" type="button" class="bg-brand-900 text-white px-4 py-2.5 rounded-full text-xs font-black hover:bg-brand-800 transition-all disabled:opacity-50 tracking-wide">
                   {{ applyingCoupon ? '...' : 'Apply' }}
                 </button>
@@ -151,7 +148,7 @@
             </div>
             <div class="mt-8 flex items-center justify-center gap-3 text-stone-400">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-              <span class="text-sm font-bold">Encrypted & Secure</span>
+              <span class="text-sm font-bold">Encrypted & secure</span>
             </div>
           </div>
         </div>

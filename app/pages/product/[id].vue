@@ -64,9 +64,7 @@
         </div>
 
         <div :class="{ 'opacity-0': isZooming }">
-          <div class="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-400">
-            JasmarKids | <NuxtLink to="/products" class="underline pointer-events-auto">Shop All</NuxtLink>
-          </div>
+          <p class="eyebrow mb-3">JasmarKids · <NuxtLink to="/products" class="pointer-events-auto underline underline-offset-4">Shop all</NuxtLink></p>
           
           <h1 class="font-display text-2xl font-semibold leading-tight text-brand-900 mb-4 sm:text-3xl">{{ product.name }}</h1>
           
@@ -110,7 +108,7 @@
                 {{ size }}
               </button>
             </div>
-            <p v-if="sizeError" class="text-red-500 text-xs font-bold mt-2 animate-pulse">⚠️ Please select a size</p>
+            <p v-if="sizeError" class="text-red-500 text-xs font-bold mt-2 animate-pulse">Please select a size</p>
           </div>
 
           <!-- Add to Bag -->
@@ -153,7 +151,7 @@
         <button @click="showSizeGuide = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
-        <h3 class="text-2xl font-black text-brand-900 mb-6">Size Guide 📏</h3>
+        <h3 class="mb-6 font-display text-2xl font-semibold text-brand-900">Size guide</h3>
         
         <div class="overflow-x-auto border border-gray-200 rounded-xl">
           <table class="w-full text-sm text-left text-gray-500">
@@ -211,7 +209,7 @@
         </button>
         
         <div class="mb-6 border-b pb-4">
-          <h3 class="text-2xl font-black text-brand-900">Customer Reviews 🌟</h3>
+          <h3 class="font-display text-2xl font-semibold text-brand-900">Customer reviews</h3>
           <div class="flex items-center gap-3 mt-2">
             <div class="flex items-center text-coral-400">
               <svg v-for="i in 5" :key="i" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -516,7 +514,7 @@ const addToBag = () => {
   cart.addToCart(cartProduct, quantity.value, { size: selectedSize.value });
   
   showToast({
-    title: 'Added to Bag! 🛍️',
+    title: 'Added to bag',
     message: `${product.value.name} (Size: ${selectedSize.value}, Qty: ${quantity.value}) added to your bag.`,
     toastType: 'success'
   });

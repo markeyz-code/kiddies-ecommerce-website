@@ -1,17 +1,16 @@
 <template>
   <div class="min-h-[60vh] bg-cream-50 pb-16 md:pb-24">
     <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+      <div class="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div>
-        <p class="eyebrow mb-2">Step 1 of 3</p>
-        <h1 class="section-title">Your bag</h1>
+          <p class="eyebrow mb-2">Step 1 of 3</p>
+          <div class="flex items-center gap-3">
+            <h1 class="section-title">Your bag</h1>
+            <span v-if="cart.totalItems > 0" class="rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">
+              {{ cart.totalItems }} item{{ cart.totalItems > 1 ? 's' : '' }}
+            </span>
+          </div>
         </div>
-        <span v-if="cart.totalItems > 0" class="rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">
-          {{ cart.totalItems }} Item{{ cart.totalItems > 1 ? 's' : '' }}
-        </span>
-      </div>
-
-      <div class="mb-8">
         <CheckoutSteps :step="1" />
       </div>
 
@@ -35,26 +34,26 @@
                 <div class="flex-1 flex flex-col justify-between">
                   <div class="flex justify-between items-start">
                     <div>
-                      <NuxtLink :to="`/product/${item?.product?._id || item?.product?.id}`" class="text-base md:text-lg font-bold text-stone-800 mb-1 group-hover:text-brand-900 transition-colors line-clamp-1 hover:underline block">
+                      <NuxtLink :to="`/product/${item?.product?._id || item?.product?.id}`" class="mb-1 block text-base font-semibold text-brand-900 transition-colors line-clamp-1 hover:text-coral-600 md:text-lg">
                         {{ item?.product?.name || 'Unknown Product' }}
                       </NuxtLink>
                       <p v-if="item?.options?.size" class="text-xs font-semibold text-gray-600 mb-1">Size: {{ item.options.size }}</p>
-                      <p class="text-[10px] font-black text-amber-500 bg-amber-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider w-fit border border-amber-200">
-                        {{ item?.product?.categoryId?.name || 'Outfit' }}
+                      <p v-if="item?.product?.categoryId?.name" class="w-fit rounded-full bg-cream-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-500">
+                        {{ item.product.categoryId.name }}
                       </p>
                     </div>
-                    <button class="w-8 h-8 flex items-center justify-center rounded-full bg-stone-50 text-stone-400 hover:bg-red-50 hover:text-red-500 transition-all border border-stone-200 ml-2" @click="cart.removeFromCart(item.id)" title="Remove item">
+                    <button aria-label="Remove item" class="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-cream-200 bg-white text-brand-400 transition-all hover:bg-red-50 hover:text-red-500" @click="cart.removeFromCart(item.id)">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                     </button>
                   </div>
                   
                   <div class="flex justify-between items-center mt-3">
                     <div class="h-10 border border-brand-200 rounded-full flex items-center justify-between px-2 bg-brand-50/50 w-28">
-                      <button class="w-7 h-7 rounded-full flex items-center justify-center text-brand-900 hover:bg-white transition-all font-bold text-base" @click="cart.updateQuantity(item.id, item.quantity - 1)">-</button>
+                      <button aria-label="Decrease quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-brand-900 transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity - 1)">−</button>
                       <span class="font-black text-sm text-stone-800">{{ item.quantity }}</span>
-                      <button class="w-7 h-7 rounded-full flex items-center justify-center text-brand-900 hover:bg-white transition-all font-bold text-base" @click="cart.updateQuantity(item.id, item.quantity + 1)">+</button>
+                      <button aria-label="Increase quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-brand-900 transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity + 1)">+</button>
                     </div>
-                    <span class="font-black text-lg md:text-xl text-stone-800">${{ getItemTotal(item).toFixed(2) }}</span>
+                    <span class="font-display text-lg font-semibold text-brand-900 md:text-xl">${{ getItemTotal(item).toFixed(2) }}</span>
                   </div>
                 </div>
               </div>
@@ -77,24 +76,24 @@
               </div>
             </div>
 
-            <div class="space-y-3 text-stone-600 font-medium mb-6 border-b border-brand-200 pb-6 text-sm">
+            <div class="mb-6 space-y-3 border-b border-cream-200 pb-6 text-sm font-medium text-brand-500">
               <div class="flex justify-between items-center">
                  <span>Subtotal</span>
-                <span class="text-stone-900 font-bold text-base">${{ (cart.subtotal || 0).toFixed(2) }}</span>
+                <span class="text-base font-bold text-brand-900">${{ (cart.subtotal || 0).toFixed(2) }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Shipping</span>
-                <span class="text-sky-600 font-bold bg-brand-50 px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wide border border-brand-200">Calculated next</span>
+                <span class="font-bold text-brand-900">{{ estimatedShipping === 0 ? 'Free' : `$${estimatedShipping.toFixed(2)}` }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Tax</span>
-                <span class="text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wide border border-amber-100">Calculated next</span>
+                <span class="font-bold text-brand-900">${{ estimatedTax.toFixed(2) }}</span>
               </div>
             </div>
             
             <div class="flex justify-between items-end mb-5">
               <span class="font-bold text-brand-900 text-sm">Estimated total</span>
-              <span class="font-black text-xl text-stone-900 text-right">${{ (cart.subtotal || 0).toFixed(2) }}</span>
+              <span class="text-right font-display text-2xl font-semibold text-brand-900">${{ estimatedTotal.toFixed(2) }}</span>
             </div>
             
             <NuxtLink to="/checkout" class="btn-primary w-full">
@@ -126,6 +125,15 @@ const shippingProgress = computed(() => {
   if (!freeShippingThreshold.value) return 100
   return Math.min(100, ((cart.subtotal || 0) / freeShippingThreshold.value) * 100)
 })
+const estimatedShipping = computed(() => {
+  if (!freeShippingThreshold.value || (cart.subtotal || 0) >= freeShippingThreshold.value) return 0
+  return Number(storeSettings.value.shippingFee) || 0
+})
+const estimatedTax = computed(() => {
+  const rate = Number(storeSettings.value.taxRate) || 0
+  return Math.round((cart.subtotal || 0) * (rate / 100) * 100) / 100
+})
+const estimatedTotal = computed(() => Math.round(((cart.subtotal || 0) + estimatedShipping.value + estimatedTax.value) * 100) / 100)
 
 onMounted(() => { fetchStoreSettings() })
 

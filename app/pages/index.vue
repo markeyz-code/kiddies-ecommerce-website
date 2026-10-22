@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen bg-cream-50 font-sans text-brand-900">
+  <div class="min-h-screen bg-cream-50 font-sans text-brand-900 w-full max-w-full overflow-x-hidden">
 
     <!-- Hero carousel (managed in Admin → Storefront) -->
-    <section class="w-full relative">
+    <section class="w-full relative overflow-hidden">
       <div class="w-full relative group">
         <div class="w-full h-[64vh] min-h-[480px] md:h-[82vh] relative overflow-hidden bg-brand-950">
           <template v-if="heroItems.length > 0">
@@ -21,6 +21,7 @@
               </p>
               <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 mt-6 sm:mt-8 font-sans text-xs sm:text-sm font-bold tracking-widest uppercase drop-shadow">
                 <NuxtLink :to="item.ctaLink" class="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-cream-100">{{ item.ctaText }}</NuxtLink>
+                <NuxtLink to="/products" class="rounded-full border border-white/70 px-8 py-3.5 text-sm font-bold text-white transition hover:bg-white/10">Shop all</NuxtLink>
               </div>
             </div>
             

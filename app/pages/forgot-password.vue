@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-stone-50 flex">
+  <div class="min-h-screen bg-cream-50 flex">
     <!-- Left: Form Section -->
     <div class="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-12 lg:px-24 xl:px-32 relative z-10 bg-white shadow-2xl py-12 lg:py-0 overflow-y-auto">
       <div class="absolute top-8 left-8 sm:left-12 lg:left-24">
@@ -10,7 +10,7 @@
       </div>
       
       <div class="w-full max-w-md mx-auto mt-16 lg:mt-0">
-        <h1 class="text-4xl font-serif font-black text-stone-900 mb-2">Reset Password 🔑</h1>
+        <h1 class="mb-2 font-display text-4xl font-semibold text-brand-900">Reset your password</h1>
         <p class="text-stone-500 font-medium mb-10 text-sm">Forgot your password? No worries. Just enter the email address you signed up with and we'll send you a reset link.</p>
         
         <form @submit.prevent="handleForgotPassword" class="space-y-6">

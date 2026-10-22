@@ -34,8 +34,8 @@
                 <option value="overview">Account Overview</option>
                 <option value="orders">Orders</option>
               </optgroup>
-              <optgroup label="My Place">
-                <option value="rewards">My Place Rewards</option>
+              <optgroup label="Rewards">
+                <option value="rewards">JasmarKids Rewards</option>
                 <option value="discounts">Discount & Offers</option>
                 <option value="earn-points">Earn Extra Points</option>
                 <option value="points-history">Points History</option>
@@ -62,12 +62,12 @@
             <button @click="activeTab = 'orders'" :class="navClass('orders')" class="w-full text-left px-3 py-2 rounded font-medium transition-colors">Orders</button>
             
             <div class="pt-2">
-              <p class="px-3 py-1 text-xs font-black uppercase tracking-widest text-brand-400">My Place</p>
-              <button @click="activeTab = 'rewards'" :class="navClass('rewards')" class="w-full text-left px-3 py-2 rounded font-medium transition-colors">My Place Rewards</button>
+              <p class="px-3 py-1 text-xs font-black uppercase tracking-widest text-brand-400">Rewards</p>
+              <button @click="activeTab = 'rewards'" :class="navClass('rewards')" class="w-full text-left px-3 py-2 rounded font-medium transition-colors">JasmarKids Rewards</button>
               <button @click="activeTab = 'discounts'" :class="navClass('discounts')" class="w-full text-left px-3 py-2 rounded font-medium transition-colors">Discount & Offers</button>
               <button @click="activeTab = 'earn-points'" :class="navClass('earn-points')" class="w-full text-left px-3 py-2 rounded font-medium transition-colors">Earn Extra Points</button>
               <button @click="activeTab = 'points-history'" :class="navClass('points-history')" class="w-full text-left px-3 py-2 rounded font-medium transition-colors">Points History</button>
-              <button @click="activeTab = 'credit-card'" :class="navClass('credit-card')" class="w-full text-left px-3 py-2 rounded font-medium transition-colors">My Place Rewards Credit Card</button>
+              <button @click="activeTab = 'credit-card'" :class="navClass('credit-card')" class="w-full text-left px-3 py-2 rounded font-medium transition-colors">Rewards Credit Card</button>
             </div>
 
             <div class="pt-2">
@@ -100,7 +100,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <StarIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-black text-lg uppercase tracking-wider">Earn Extra Points</h3>
+              <h3 class="font-display text-xl font-semibold text-brand-900">Earn Extra Points</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline">View all</span>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -121,7 +121,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <PackageIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-black text-lg uppercase tracking-wider">Orders</h3>
+              <h3 class="font-display text-xl font-semibold text-brand-900">Orders</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline" @click="activeTab = 'orders'">View all</span>
             </div>
             <div v-if="orders.length === 0" class="bg-white border border-cream-200 rounded-xl p-8">
@@ -147,7 +147,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <TagIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-black text-lg uppercase tracking-wider">Discounts and Offers</h3>
+              <h3 class="font-display text-xl font-semibold text-brand-900">Discounts and Offers</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline" @click="activeTab = 'discounts'">View all</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -159,7 +159,7 @@
                   <p class="text-xs text-brand-500">Valid thru {{ new Date(disc.validUntil).toLocaleDateString() }}</p>
                   <div class="flex items-center justify-between mt-4">
                     <span class="text-xs text-coral-600 font-bold cursor-pointer hover:underline">Details</span>
-                  <button @click="handleApplyDiscount(disc.code)" class="border border-gray-900 text-brand-900 font-bold text-xs px-4 py-2 rounded hover:bg-gray-900 hover:text-white transition-colors">APPLY NOW</button>
+                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-brand-900 transition-colors hover:bg-brand-900 hover:text-white">APPLY NOW</button>
                   </div>
                 </div>
               </div>
@@ -170,7 +170,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <UserIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-black text-lg uppercase tracking-wider">Profile Information</h3>
+              <h3 class="font-display text-xl font-semibold text-brand-900">Profile Information</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline" @click="activeTab = 'profile'">View all</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -198,7 +198,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <CreditCardIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-black text-lg uppercase tracking-wider">Payments & Gift Cards</h3>
+              <h3 class="font-display text-xl font-semibold text-brand-900">Payments & Gift Cards</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline" @click="activeTab = 'payments'">View all</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -219,7 +219,7 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <PackageIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-black text-lg uppercase tracking-wider">Orders</h3>
+              <h3 class="font-display text-xl font-semibold text-brand-900">Orders</h3>
             </div>
             <select class="border border-cream-300 rounded px-3 py-1 text-sm font-medium bg-white">
               <option>Last 6 Months</option>
@@ -274,7 +274,7 @@
         <!-- ============= MY PLACE REWARDS ============= -->
         <div v-else-if="activeTab === 'rewards'" class="space-y-8">
           <div class="text-center">
-            <h2 class="text-3xl font-black italic text-brand-900">My Place <span class="border border-brand-200 rounded px-2 py-0.5 text-sm not-italic uppercase tracking-widest">Rewards</span></h2>
+            <h2 class="text-3xl font-black italic text-brand-900">Rewards <span class="border border-brand-200 rounded px-2 py-0.5 text-sm not-italic uppercase tracking-widest">Rewards</span></h2>
             <p class="text-sm text-brand-500 mt-2">Check your points, discover new rewards, and make the most of every purchase.</p>
           </div>
 
@@ -308,7 +308,7 @@
 
           <!-- Your Perks -->
           <div class="text-center">
-            <h3 class="font-black text-lg">Your Perks</h3>
+            <h3 class="font-display text-xl font-semibold text-brand-900">Your Perks</h3>
             <p class="text-sm text-brand-500">Make the most of your tier—here's what you can still enjoy</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -331,7 +331,7 @@
 
           <!-- Boost Your Points -->
           <div class="text-center">
-            <h3 class="font-black text-lg">Boost Your Points</h3>
+            <h3 class="font-display text-xl font-semibold text-brand-900">Boost Your Points</h3>
             <p class="text-sm text-brand-500">More points mean more rewards – don't miss your chance</p>
           </div>
           <div class="flex overflow-x-auto gap-3 pb-2 -mx-4 px-4">
@@ -349,7 +349,7 @@
         <div v-else-if="activeTab === 'discounts'" class="space-y-6">
           <div class="flex items-center gap-2">
             <TagIcon class="h-5 w-5 text-brand-700" />
-            <h3 class="font-black text-lg uppercase tracking-wider">Discounts and Offers</h3>
+            <h3 class="font-display text-xl font-semibold text-brand-900">Discounts and Offers</h3>
           </div>
           <p class="text-sm text-brand-500">Available Discounts and offers ({{ dashboard?.discounts?.length || 0 }})</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -361,7 +361,7 @@
                 <p class="text-xs text-brand-500">Valid thru {{ new Date(disc.validUntil).toLocaleDateString() }}</p>
                 <div class="flex items-center justify-between mt-4">
                   <span class="text-xs text-coral-600 font-bold cursor-pointer hover:underline">Details</span>
-                  <button @click="handleApplyDiscount(disc.code)" class="border border-gray-900 text-brand-900 font-bold text-xs px-4 py-2 rounded hover:bg-gray-900 hover:text-white transition-colors">APPLY NOW</button>
+                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-brand-900 transition-colors hover:bg-brand-900 hover:text-white">APPLY NOW</button>
                 </div>
               </div>
             </div>
@@ -374,7 +374,7 @@
 
         <!-- ============= PROFILE INFORMATION ============= -->
         <div v-else-if="activeTab === 'profile'" class="space-y-8">
-          <h3 class="font-black text-lg uppercase tracking-wider">PROFILE INFORMATION</h3>
+          <h3 class="font-display text-xl font-semibold text-brand-900">PROFILE INFORMATION</h3>
           
           <div class="border-t-2 border-black pt-6 flex flex-col md:flex-row gap-12">
             <!-- Left Side: Complete Your Profile -->
@@ -425,7 +425,7 @@
                   <p>{{ user?.firstName }} {{ user?.lastName }}</p>
                   <p>{{ user?.email }}</p>
                   <p v-if="user?.phoneNumber">{{ user?.phoneNumber }}</p>
-                  <p class="mt-4">My Place Rewards # B31788247691406</p>
+                  <p class="mt-4">JasmarKids Rewards # B31788247691406</p>
                 </div>
                 <div v-else class="space-y-4">
                   <div><label class="text-xs font-bold text-brand-500 block mb-1">First Name</label><input v-model="profileForm.firstName" class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
@@ -497,7 +497,7 @@
 
         <!-- ============= ADDRESS BOOK ============= -->
         <div v-else-if="activeTab === 'addresses'" class="space-y-6">
-          <h3 class="font-black text-lg uppercase tracking-wider">Address Book</h3>
+          <h3 class="font-display text-xl font-semibold text-brand-900">Address Book</h3>
           <div v-if="user?.addresses?.length" class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div v-for="(addr, i) in user.addresses" :key="i" class="bg-white border rounded-xl p-5 relative">
               <span v-if="addr.isDefault" class="absolute top-3 right-3 bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded">Default</span>
@@ -532,7 +532,7 @@
         <!-- ============= PAYMENTS & GIFT CARDS ============= -->
         <div v-else-if="activeTab === 'payments'" class="space-y-10">
           <div>
-            <h3 class="font-black text-sm uppercase tracking-wider border-b pb-2 mb-6">CREDIT & DEBIT CARDS</h3>
+            <h3 class="font-display text-lg font-semibold text-brand-900 border-b border-cream-200 pb-2 mb-6">CREDIT & DEBIT CARDS</h3>
             
             <div v-if="user?.paymentMethods?.length" class="mb-6 space-y-4">
               <div v-for="(pm, i) in user.paymentMethods" :key="i" class="border p-4 rounded-xl flex items-center justify-between">
@@ -551,7 +551,7 @@
               <CreditCardIcon class="h-10 w-10 text-brand-500 shrink-0" />
               <div>
                 <p class="font-bold text-sm text-brand-900 mb-1">Add a credit or debit card to check out faster!</p>
-                <p class="text-xs text-brand-500 mb-4">Securely save your credit card, and/or My Place Rewards Card information so you can check out even faster!</p>
+                <p class="text-xs text-brand-500 mb-4">Securely save your credit card, and/or JasmarKids Rewards Card information so you can check out even faster!</p>
                 <button @click="showPaymentForm = true" class="bg-brand-900 text-white text-xs font-bold px-8 py-3 rounded-sm hover:bg-black uppercase tracking-widest transition-colors w-[300px]">ADD A CREDIT OR DEBIT CARD</button>
               </div>
             </div>
@@ -573,7 +573,7 @@
 
         <!-- ============= MY PREFERENCES ============= -->
         <div v-else-if="activeTab === 'preferences'" class="space-y-6">
-          <h3 class="font-black text-lg uppercase tracking-wider">My Preferences</h3>
+          <h3 class="font-display text-xl font-semibold text-brand-900">My Preferences</h3>
           <div class="bg-white border rounded-xl p-6 space-y-5 max-w-xl">
             <label class="flex items-center justify-between">
               <span class="text-sm font-medium text-brand-700">Email Offers & Promotions</span>
@@ -590,7 +590,7 @@
         <!-- ============= WISHLISTS ============= -->
         <div v-else-if="activeTab === 'wishlists'" class="space-y-6">
           <div>
-            <h3 class="font-black text-lg uppercase tracking-wider inline-block mr-2">Wishlists</h3>
+            <h3 class="font-display text-xl font-semibold text-brand-900 inline-block mr-2">Wishlists</h3>
             <span class="text-xs text-brand-500 font-bold">1/5 Lists</span>
             <p class="text-xs text-brand-900 font-bold mt-1">Create, edit, and share up to 5 wishlists.</p>
           </div>
@@ -628,7 +628,7 @@
         <!-- ============= BUY IT AGAIN ============= -->
         <div v-else-if="activeTab === 'buy-again'" class="space-y-6">
           <div class="border-b pb-4">
-            <h3 class="font-black text-lg uppercase tracking-wider">BUY IT AGAIN</h3>
+            <h3 class="font-display text-xl font-semibold text-brand-900">BUY IT AGAIN</h3>
             <p class="text-xs text-brand-900 font-bold mt-1">Save time & shop your previously-purchased styles.</p>
           </div>
           
@@ -649,7 +649,7 @@
 
         <!-- ============= RATE & REVIEW ============= -->
         <div v-else-if="activeTab === 'reviews'" class="space-y-6">
-          <h3 class="font-black text-lg uppercase tracking-wider border-b pb-4">Rate & Review</h3>
+          <h3 class="font-display text-xl font-semibold text-brand-900 border-b border-cream-200 pb-4">Rate & Review</h3>
           <div class="text-center py-16">
             <p class="text-sm font-bold text-brand-900 mb-6">Add a review with details and ratings on items you've purchased when they start to appear.</p>
             <NuxtLink to="/products" class="inline-block bg-brand-900 text-white text-xs font-bold px-12 py-3 rounded-sm hover:bg-black tracking-widest uppercase transition-colors">SHOP NOW</NuxtLink>
@@ -658,7 +658,7 @@
 
         <!-- ============= GENERIC PLACEHOLDER TABS ============= -->
         <div v-else class="space-y-6">
-          <h3 class="font-black text-lg uppercase tracking-wider border-b pb-4">{{ activeTab.replace(/-/g, ' ') }}</h3>
+          <h3 class="font-display text-xl font-semibold text-brand-900 border-b border-cream-200 pb-4">{{ activeTab.replace(/-/g, ' ') }}</h3>
           <div class="bg-white border rounded-xl p-12 text-center">
             <SparklesIcon class="h-12 w-12 mx-auto text-gray-300 mb-4" />
             <p class="text-brand-500 font-medium">Coming soon! This feature is under development.</p>

@@ -2,12 +2,6 @@
   <div class="min-h-[80vh] bg-cream-50 px-4 py-10 sm:py-14">
     <div class="mx-auto mb-8 max-w-2xl"><CheckoutSteps :step="3" /></div>
     <div class="relative mx-auto w-full max-w-2xl overflow-hidden rounded-3xl border border-cream-200 bg-white p-6 text-center shadow-[0_12px_40px_rgba(26,54,93,0.08)] sm:p-10 md:p-12">
-      <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-        <span class="absolute top-8 left-10 text-3xl animate-pulse">🎊</span>
-        <span class="absolute top-20 right-14 text-2xl animate-pulse">🎉</span>
-        <span class="absolute bottom-16 left-16 text-2xl animate-pulse">✨</span>
-        <span class="absolute bottom-24 right-10 text-3xl animate-pulse">🎈</span>
-      </div>
 
       <div class="relative z-10">
         <div class="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-full bg-cream-100 text-4xl shadow-inner">

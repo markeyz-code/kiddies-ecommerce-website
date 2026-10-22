@@ -7,6 +7,18 @@
     scroll-behavior: smooth;
   }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #__nuxt {
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+  }
+
   body {
     @apply bg-cream-50 text-brand-900 font-sans antialiased;
     text-rendering: optimizeLegibility;

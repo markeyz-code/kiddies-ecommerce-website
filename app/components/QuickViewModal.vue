@@ -1,13 +1,15 @@
 <template>
-  <div v-if="isOpen && normalizedProduct" class="fixed inset-0 z-50 flex items-center justify-center font-sans">
-    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="close"></div>
-    
-    <!-- Modal Content -->
-    <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl flex flex-col md:flex-row rounded-lg">
-      <!-- Close Button -->
-      <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-20 bg-white/80 rounded-full p-1" @click="close">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
-      </button>
+  <ClientOnly>
+    <Teleport to="body">
+      <div v-if="isOpen && normalizedProduct" class="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 font-sans pointer-events-auto">
+        <div class="fixed inset-0 bg-brand-950/60 backdrop-blur-sm" @click="close"></div>
+        
+        <!-- Modal Content -->
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl flex flex-col md:flex-row rounded-3xl border border-cream-200/90 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <!-- Close Button -->
+          <button class="absolute top-4 right-4 text-brand-500 hover:text-brand-900 z-20 bg-cream-100 hover:bg-cream-200 rounded-full h-8 w-8 flex items-center justify-center transition-colors" @click="close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
 
       <!-- Mobile Title (Hidden on desktop) -->
       <div class="md:hidden border-b p-4 text-center text-sm font-bold truncate">
@@ -73,7 +75,7 @@
                 {{ size }}
               </button>
             </div>
-            <p class="text-red-500 text-xs font-bold animate-pulse">⚠️ Please select a size</p>
+            <p class="text-red-500 text-xs font-bold animate-pulse">Please select a size</p>
           </div>
         </div>
 
@@ -92,9 +94,11 @@
             Add To Bag
           </button>
         </div>
+        </div>
       </div>
-    </div>
-  </div>
+      </div>
+    </Teleport>
+  </ClientOnly>
 </template>
 
 <script setup>
@@ -215,7 +219,7 @@ const addToBag = () => {
   cart.addToCart(cartProduct, quantity.value, { size: selectedSize.value });
 
   showToast({
-    title: 'Added to Bag! 🛍️',
+    title: 'Added to bag',
     message: `${normalizedProduct.value.name} (Size: ${selectedSize.value}, Qty: ${quantity.value}) added to your bag.`,
     toastType: 'success'
   });

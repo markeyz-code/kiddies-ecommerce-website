@@ -1,18 +1,19 @@
 <template>
   <ClientOnly>
-    <div v-if="isVisible" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <!-- Backdrop -->
-      <div 
-        class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm transition-opacity duration-300" 
-        @click="closeModal"
-      ></div>
+    <Teleport to="body">
+      <div v-if="isVisible" class="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 pointer-events-auto">
+        <!-- Backdrop -->
+        <div 
+          class="fixed inset-0 bg-brand-950/60 backdrop-blur-sm transition-opacity duration-300" 
+          @click="closeModal"
+        ></div>
 
-      <!-- Modal Content -->
-      <div 
-        class="relative bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[92vh] overflow-y-auto flex flex-col md:flex-row transform transition-all duration-500"
-        role="dialog" 
-        aria-modal="true"
-      >
+        <!-- Modal Content -->
+        <div 
+          class="relative bg-white rounded-3xl border border-cream-200/90 shadow-2xl w-full max-w-4xl max-h-[92vh] overflow-hidden flex flex-col md:flex-row transform transition-all duration-300"
+          role="dialog" 
+          aria-modal="true"
+        >
         <!-- Close Button (Mobile & Desktop) -->
         <button 
           @click="closeModal" 
@@ -88,7 +89,8 @@
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </Teleport>
   </ClientOnly>
 </template>
 

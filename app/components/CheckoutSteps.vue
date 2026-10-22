@@ -1,10 +1,10 @@
 <template>
-  <ol class="flex items-center justify-center gap-2 sm:gap-4" aria-label="Checkout progress">
-    <li v-for="(item, index) in steps" :key="item.label" class="flex items-center gap-2 sm:gap-3">
+  <ol class="flex w-full items-center justify-between gap-1 sm:w-auto sm:justify-center sm:gap-4" aria-label="Checkout progress">
+    <li v-for="(item, index) in steps" :key="item.label" class="flex items-center gap-1.5 sm:gap-3">
       <component
         :is="item.to && step > item.number ? 'NuxtLink' : 'div'"
         :to="item.to && step > item.number ? item.to : undefined"
-        class="flex items-center gap-2"
+        class="flex items-center gap-1.5 sm:gap-2"
       >
         <span
           class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-[11px] font-bold transition-colors"
@@ -18,13 +18,13 @@
           <span v-else>{{ item.number }}</span>
         </span>
         <span
-          class="text-[11px] font-bold uppercase tracking-[0.12em]"
+          class="text-[10px] font-bold uppercase tracking-[0.06em] sm:text-[11px] sm:tracking-[0.12em]"
           :class="step >= item.number ? 'text-brand-900' : 'text-brand-300'"
         >
           {{ item.label }}
         </span>
       </component>
-      <span v-if="index < steps.length - 1" class="mx-1 h-px w-6 bg-cream-300 sm:w-12" aria-hidden="true"></span>
+      <span v-if="index < steps.length - 1" class="mx-0.5 h-px w-3 bg-cream-300 sm:mx-1 sm:w-12" aria-hidden="true"></span>
     </li>
   </ol>
 </template>

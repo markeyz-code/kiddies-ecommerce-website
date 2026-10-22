@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-stone-50 flex">
+  <div class="min-h-screen bg-cream-50 flex">
     <!-- Left: Form Section -->
     <div class="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-12 lg:px-24 xl:px-32 relative z-10 bg-white shadow-2xl py-12 lg:py-0 overflow-y-auto">
       <div class="absolute top-8 left-8 sm:left-12 lg:left-24">
@@ -10,7 +10,7 @@
       </div>
       
       <div class="w-full max-w-md mx-auto mt-16 lg:mt-0">
-        <h1 class="text-4xl font-serif font-black text-stone-900 mb-2">Create Account ✨</h1>
+        <h1 class="mb-2 font-display text-4xl font-semibold text-brand-900">Create your account</h1>
         <p class="text-stone-500 font-medium mb-8 text-sm">Join the club for faster checkout and exclusive styles.</p>
         
         <form @submit.prevent="handleRegister" class="space-y-5">
@@ -91,7 +91,7 @@
           <div class="flex items-start gap-3 mt-4">
             <input id="terms" v-model="registerData.terms" type="checkbox" required class="mt-1 w-4 h-4 rounded border-stone-300 text-brand-900 focus:ring-brand-300">
             <label for="terms" class="text-[9px] leading-tight text-stone-500 font-medium text-left">
-              I agree to the My Place Rewards <NuxtLink to="/terms" class="underline">Terms & Conditions</NuxtLink>, <NuxtLink to="/privacy-policy" class="underline">Privacy Policy</NuxtLink> and <NuxtLink to="/terms" class="underline">Notice of Financial Incentive and Loyalty Program</NuxtLink>. I agree to receive marketing communications...
+              I agree to the JasmarKids Rewards <NuxtLink to="/terms" class="underline">Terms & Conditions</NuxtLink>, <NuxtLink to="/privacy-policy" class="underline">Privacy Policy</NuxtLink> and <NuxtLink to="/terms" class="underline">Notice of Financial Incentive and Loyalty Program</NuxtLink>. I agree to receive marketing communications...
             </label>
           </div>
 
@@ -117,7 +117,7 @@
         </div>
 
         <div class="flex items-center gap-4 mt-6">
-          <button @click="handleSocialLogin('google')" type="button" class="w-full flex items-center justify-center gap-2 py-3.5 border-2 border-stone-200 rounded-2xl hover:bg-stone-50 hover:border-stone-300 transition-all">
+          <button @click="handleSocialLogin('google')" type="button" class="w-full flex items-center justify-center gap-2 py-3.5 border-2 border-stone-200 rounded-2xl hover:bg-cream-50 hover:border-stone-300 transition-all">
             <svg class="h-5 w-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/><path fill="none" d="M1 1h22v22H1z"/></svg>
             <span class="font-bold text-sm text-stone-700">Continue with Google</span>
           </button>

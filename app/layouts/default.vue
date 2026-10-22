@@ -1,9 +1,9 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-cream-50 font-sans text-brand-900 transition-colors duration-300">
+  <div class="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden bg-cream-50 font-sans text-brand-900 transition-colors duration-300">
     <Header />
 
     <!-- Main Content -->
-    <main class="flex-grow">
+    <main class="flex-grow w-full max-w-full overflow-x-hidden">
       <slot />
     </main>
 

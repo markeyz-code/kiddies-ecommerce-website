@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!hideOnCheckoutRoutes">
     <!-- Chat Button -->
     <button 
       @click="toggleChat"
@@ -128,7 +128,8 @@
 
 <script setup>
 import { rawBaseUrl, GATEWAY_ENDPOINT } from '~/api_factory/axios.config';
-import { ref, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router';
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { io } from 'socket.io-client'
 import { MessageSquare, X, Maximize, Minimize, Smile, Paperclip, Send } from 'lucide-vue-next'
 import EmojiPicker from 'vue3-emoji-picker'
@@ -158,6 +159,9 @@ const toggleChat = () => {
     }
   }
 }
+
+const route = useRoute();
+const hideOnCheckoutRoutes = computed(() => ['/cart', '/checkout', '/checkout-success', '/account'].includes(route.path));
 
 const generateSessionId = () => {
   return 'sess_' + Math.random().toString(36).substr(2, 9)
