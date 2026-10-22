@@ -10,52 +10,59 @@ export const useOrders = () => {
     const loading = ref(false);
     const cart = useCart();
 
-    const checkout = async (customerData: any, paymentMethod: string) => {
+    const checkout = async (customerData: any, paymentMethod: string, totals: any = {}) => {
         loading.value = true;
         try {
             const payload = {
                 customer: customerData,
                 paymentMethod,
-                items: cart.items.map(item => ({
+                couponCode: cart.appliedCoupon?.code || undefined,
+                items: cart.items.map((item: any) => ({
                     productId: item.product._id || item.product.id,
                     name: item.product.name,
                     price: item.product.basePrice || item.product.price || 0,
                     quantity: item.quantity,
                     sku: item.product.sku || 'N/A',
+                    size: item.options?.size || '',
+                    color: item.options?.color || '',
+                    image: item.product.image || item.product.imageUrls?.thumbnail || ''
                 })),
-                subtotal: cart.subtotal,
-                shippingFee: 10, // flat rate for demo
-                tax: cart.subtotal * 0.08, // 8% tax
-                totalAmount: cart.subtotal * 1.08 + 10,
+                subtotal: totals.subtotal ?? cart.subtotal,
+                shippingFee: totals.shippingFee,
+                tax: totals.tax,
+                totalAmount: totals.totalAmount,
                 callback_url: `${window.location.origin}/checkout-success`,
             };
 
             const { data } = await ordersApi.createOrder(payload);
-            
-            // Paystack redirect
-            if (paymentMethod === 'paystack' && data?.paystack?.authorization_url) {
-                return { success: true, paystack: data.paystack, order: data.order };
-            }
-            // Stripe redirect
-            if (paymentMethod === 'stripe' && (data?.stripe?.url || data?.paystack?.authorization_url)) {
-                const stripeUrl = data?.stripe?.url || data?.paystack?.authorization_url;
-                return { success: true, stripe: { url: stripeUrl }, order: data.order };
+            const order = data?.order || data;
+
+            if (typeof sessionStorage !== 'undefined') {
+                sessionStorage.setItem('last_order_number', order.orderNumber);
+                sessionStorage.setItem('last_order_email', customerData.email || '');
             }
 
+            if (paymentMethod === 'paystack' && data?.paystack?.authorization_url) {
+                return { success: true, paystack: data.paystack, order, redirect: true };
+            }
+            if (paymentMethod === 'stripe' && data?.stripe?.url) {
+                return { success: true, stripe: data.stripe, order, redirect: true };
+            }
+
+            // Cash on delivery / offline payment: the order is complete immediately
             cart.clearCart();
-            
+            cart.removeCoupon();
             showToast({
                 title: 'Order Placed!',
-                message: `Order ${data?.order?.orderNumber || data.orderNumber} placed successfully.`,
+                message: `Order ${order?.orderNumber} placed successfully.`,
                 toastType: 'success'
             });
-            
-            router.push(`/checkout-success?orderNumber=${data?.order?.orderNumber || data.orderNumber}`);
-            return { success: true, order: data.order || data };
+            router.push(`/checkout-success?orderNumber=${order.orderNumber}`);
+            return { success: true, order, redirect: false };
         } catch (error: any) {
             showToast({
                 title: 'Checkout Failed',
-                message: error?.response?.data?.message || 'Could not process order',
+                message: error?.response?.data?.message || 'Could not process your order',
                 toastType: 'error'
             });
             return null;

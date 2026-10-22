@@ -3,7 +3,8 @@
     <!-- Chat Button -->
     <button 
       @click="toggleChat"
-      class="fixed bottom-6 right-6 w-14 h-14 bg-emerald-600 text-white rounded-full shadow-xl flex items-center justify-center hover:bg-emerald-700 transition-colors z-50 focus:outline-none"
+      aria-label="Open customer support chat"
+      class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 w-12 h-12 sm:w-14 sm:h-14 bg-emerald-600 text-white rounded-full shadow-xl flex items-center justify-center hover:bg-emerald-700 transition-colors z-50 focus:outline-none"
     >
       <MessageSquare v-if="!isOpen" class="w-6 h-6" />
       <X v-else class="w-6 h-6" />
@@ -14,7 +15,7 @@
       v-if="isOpen"
       :class="[
         'fixed bg-white rounded-2xl shadow-2xl overflow-hidden z-50 flex flex-col border border-stone-200 transition-all duration-300',
-        isFullScreen ? 'inset-0 w-full h-full rounded-none' : 'bottom-24 right-6 w-80 sm:w-96'
+        isFullScreen ? 'inset-0 w-full h-full rounded-none' : 'bottom-20 left-3 right-3 w-auto sm:left-auto sm:right-6 sm:w-96'
       ]"
       :style="isFullScreen ? '' : 'height: 500px; max-height: 80vh;'"
     >
@@ -27,7 +28,7 @@
         <button @click="isFullScreen = !isFullScreen" class="text-emerald-100 hover:text-white group relative">
           <Maximize v-if="!isFullScreen" class="w-5 h-5" />
           <Minimize v-else class="w-5 h-5" />
-          <span class="absolute -bottom-8 right-0 bg-[#1a365d] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none transition-opacity">
+          <span class="absolute -bottom-8 right-0 bg-brand-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none transition-opacity">
             {{ isFullScreen ? 'Exit full screen' : 'Switch to full screen mode for better chatting' }}
           </span>
         </button>
@@ -45,7 +46,7 @@
             @keyup.enter="joinChat"
             type="text" 
             placeholder="John Doe"
-            class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1a365d] focus:border-emerald-500"
+            class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-emerald-500"
           />
         </div>
         <div>
@@ -55,13 +56,13 @@
             @keyup.enter="joinChat"
             type="email" 
             placeholder="john@example.com"
-            class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1a365d] focus:border-emerald-500"
+            class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-emerald-500"
           />
         </div>
         <button 
           @click="joinChat"
           :disabled="!customerName.trim() || !customerEmail.trim()"
-          class="w-full bg-stone-900 text-white py-2 px-4 rounded-lg hover:bg-[#1a365d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full bg-stone-900 text-white py-2 px-4 rounded-lg hover:bg-brand-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Start Chat
         </button>
@@ -110,7 +111,7 @@
             v-model="newMessage"
             type="text" 
             placeholder="Type your message..."
-            class="flex-1 px-4 py-2 border border-stone-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1a365d] focus:border-emerald-500 text-sm"
+            class="flex-1 px-4 py-2 border border-stone-300 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-emerald-500 text-sm"
           />
           <button 
             type="submit"
@@ -126,6 +127,7 @@
 </template>
 
 <script setup>
+import { rawBaseUrl, GATEWAY_ENDPOINT } from '~/api_factory/axios.config';
 import { ref, onMounted, onUnmounted } from 'vue'
 import { io } from 'socket.io-client'
 import { MessageSquare, X, Maximize, Minimize, Smile, Paperclip, Send } from 'lucide-vue-next'
@@ -164,7 +166,7 @@ const generateSessionId = () => {
 const joinChat = () => {
   if (!customerName.value.trim() || !customerEmail.value.trim()) return
   
-  socket = io('http://localhost:3002')
+  socket = io(rawBaseUrl, { transports: ['websocket', 'polling'] })
   
   const storedSession = localStorage.getItem('chatSessionId')
   if (storedSession) {
@@ -179,9 +181,8 @@ const joinChat = () => {
 
   socket.emit('join_room', sessionId.value)
   
-  fetch(`http://localhost:3002/chat/session/${sessionId.value}`)
-    .then(res => res.json())
-    .then(data => {
+  GATEWAY_ENDPOINT.get(`/chat/session/${sessionId.value}`)
+    .then(({ data }) => {
       if (Array.isArray(data)) {
         messages.value = data
       }

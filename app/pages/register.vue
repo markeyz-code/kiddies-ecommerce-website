@@ -3,7 +3,7 @@
     <!-- Left: Form Section -->
     <div class="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-12 lg:px-24 xl:px-32 relative z-10 bg-white shadow-2xl py-12 lg:py-0 overflow-y-auto">
       <div class="absolute top-8 left-8 sm:left-12 lg:left-24">
-        <NuxtLink to="/" class="text-[#1a365d] hover:opacity-75 transition-opacity flex items-center font-bold text-sm tracking-widest uppercase">
+        <NuxtLink to="/" class="text-brand-900 hover:opacity-75 transition-opacity flex items-center font-bold text-sm tracking-widest uppercase">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
           Back to Store
         </NuxtLink>
@@ -22,7 +22,7 @@
                 type="text" 
                 required
                 placeholder="Jane"
-                class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+                class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
               >
             </div>
             <div class="space-y-1">
@@ -32,7 +32,7 @@
                 type="text" 
                 required
                 placeholder="Doe"
-                class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+                class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
               >
             </div>
           </div>
@@ -44,7 +44,7 @@
               type="email" 
               required
               placeholder="hello@example.com"
-              class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+              class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
             >
           </div>
           
@@ -55,7 +55,7 @@
               :type="showPassword ? 'text' : 'password'"
               required
               placeholder="••••••••"
-              class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+              class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
             >
             <button type="button" @click="showPassword = !showPassword" class="absolute right-4 bottom-3.5 text-stone-400 hover:text-stone-600">
               <svg v-if="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
@@ -72,7 +72,7 @@
                 type="tel" 
                 required
                 placeholder="(555) 000-0000"
-                class="w-full px-5 py-3 rounded-r-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+                class="w-full px-5 py-3 rounded-r-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
               >
             </div>
           </div>
@@ -84,26 +84,26 @@
               type="text" 
               required
               placeholder="10001"
-              class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+              class="w-full px-5 py-3 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
             >
           </div>
 
           <div class="flex items-start gap-3 mt-4">
-            <input id="terms" v-model="registerData.terms" type="checkbox" required class="mt-1 w-4 h-4 rounded border-stone-300 text-[#1a365d] focus:ring-[#1a365d]">
+            <input id="terms" v-model="registerData.terms" type="checkbox" required class="mt-1 w-4 h-4 rounded border-stone-300 text-brand-900 focus:ring-brand-300">
             <label for="terms" class="text-[9px] leading-tight text-stone-500 font-medium text-left">
-              I agree to the My Place Rewards <a href="#" class="underline">Terms & Conditions</a>, <a href="#" class="underline">Privacy Policy</a> and <a href="#" class="underline">Notice of Financial Incentive and Loyalty Program</a>. I agree to receive marketing communications...
+              I agree to the My Place Rewards <NuxtLink to="/terms" class="underline">Terms & Conditions</NuxtLink>, <NuxtLink to="/privacy-policy" class="underline">Privacy Policy</NuxtLink> and <NuxtLink to="/terms" class="underline">Notice of Financial Incentive and Loyalty Program</NuxtLink>. I agree to receive marketing communications...
             </label>
           </div>
 
           <div class="flex items-center gap-3">
-            <input id="remember" v-model="registerData.rememberMe" type="checkbox" class="w-4 h-4 rounded border-stone-300 text-[#1a365d] focus:ring-[#1a365d]">
+            <input id="remember" v-model="registerData.rememberMe" type="checkbox" class="w-4 h-4 rounded border-stone-300 text-brand-900 focus:ring-brand-300">
             <label for="remember" class="text-xs font-bold text-stone-700">Remember me <span class="text-[10px] font-normal text-stone-500 block">(Not recommended on shared devices)</span></label>
           </div>
 
           <button 
             type="submit" 
             :disabled="loading"
-            class="w-full bg-[#1a365d] text-white font-black py-4 rounded-2xl hover:bg-[#112a4a] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 tracking-wide text-sm flex items-center justify-center mt-2"
+            class="w-full bg-brand-900 text-white font-black py-4 rounded-2xl hover:bg-brand-800 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 tracking-wide text-sm flex items-center justify-center mt-2"
           >
             <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
             {{ loading ? 'Creating account...' : 'Create Account' }}
@@ -125,7 +125,7 @@
 
         <div class="mt-8 text-center text-sm font-medium text-stone-500">
           Already have an account? 
-          <NuxtLink to="/login" class="font-black text-[#1a365d] hover:underline underline-offset-2 ml-1">Sign In</NuxtLink>
+          <NuxtLink to="/login" class="font-black text-brand-900 hover:underline underline-offset-2 ml-1">Sign In</NuxtLink>
         </div>
       </div>
     </div>
@@ -174,9 +174,9 @@ onMounted(async () => {
 });
 
 const handleRegister = async () => {
-  const success = await register(registerData.value);
-  if (success) {
-    router.push('/');
+  const result = await register(registerData.value);
+  if (result && !result.requiresOtp) {
+    router.push('/login');
   }
 };
 

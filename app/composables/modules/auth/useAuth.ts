@@ -102,7 +102,18 @@ export const useAuth = () => {
     const register = async (payload: any) => {
         loading.value = true;
         try {
-            const { data } = await authApi.register(payload);
+            const body = {
+                firstName: payload.firstName,
+                lastName: payload.lastName,
+                email: payload.email,
+                password: payload.password,
+                phoneNumber: payload.phoneNumber,
+                zipCode: payload.zipCode
+            };
+            const { data } = await authApi.register(body);
+            if (data?.demoOtp && typeof sessionStorage !== 'undefined') {
+                sessionStorage.setItem(`demo_otp_${data.email}`, data.demoOtp);
+            }
             showToast({
                 title: 'Check Your Email',
                 message: data.message || 'Account created. Please verify your email.',
@@ -128,7 +139,10 @@ export const useAuth = () => {
     const fetchProfile = async () => {
         // Prevent unnecessary API call if tokens don't exist
         const hasToken = typeof document !== 'undefined' && (document.cookie.includes('accessToken') || document.cookie.includes('refreshToken'));
-        if (!hasToken) return;
+        if (!hasToken) {
+            user.value = null;
+            return null;
+        }
 
         loading.value = true;
         try {
@@ -145,18 +159,26 @@ export const useAuth = () => {
         }
     };
 
-    const forgotPassword = async (payload: any) => {
+    const forgotPassword = async (emailOrPayload: any) => {
         loading.value = true;
         try {
+            const payload = typeof emailOrPayload === 'string'
+                ? { email: emailOrPayload }
+                : emailOrPayload;
             const { data } = await authApi.forgotPassword(payload);
-            alert(data.message);
-            // In a real app, this wouldn't alert the token, but for this demo:
-            if (data.resetToken) {
-                alert(`DEMO ONLY: Your reset token is: ${data.resetToken}`);
-            }
+            showToast({
+                title: 'Check Your Email',
+                message: data.message || 'Password reset instructions have been sent.',
+                toastType: 'success'
+            });
             return data;
         } catch (error: any) {
-            alert(error?.response?.data?.message || 'Error requesting password reset');
+            showToast({
+                title: 'Error',
+                message: error?.response?.data?.message || 'Error requesting password reset',
+                toastType: 'error'
+            });
+            return null;
         } finally {
             loading.value = false;
         }
@@ -166,11 +188,20 @@ export const useAuth = () => {
         loading.value = true;
         try {
             const { data } = await authApi.resetPassword(payload);
-            alert(data.message);
+            showToast({
+                title: 'Password Updated',
+                message: data.message || 'Your password has been reset. Please sign in.',
+                toastType: 'success'
+            });
             router.push('/login');
             return data;
         } catch (error: any) {
-            alert(error?.response?.data?.message || 'Error resetting password');
+            showToast({
+                title: 'Reset Failed',
+                message: error?.response?.data?.message || 'Error resetting password',
+                toastType: 'error'
+            });
+            return null;
         } finally {
             loading.value = false;
         }
@@ -212,6 +243,9 @@ export const useAuth = () => {
         loading.value = true;
         try {
             const { data } = await authApi.resendOtp({ email });
+            if (data?.demoOtp && typeof sessionStorage !== 'undefined') {
+                sessionStorage.setItem(`demo_otp_${email}`, data.demoOtp);
+            }
             showToast({
                 title: 'Code Sent',
                 message: data.message || 'A new code has been sent.',
@@ -230,9 +264,15 @@ export const useAuth = () => {
         }
     };
 
-    const logout = () => {
-        document.cookie = 'accessToken=; Max-Age=0; path=/';
-        document.cookie = 'refreshToken=; Max-Age=0; path=/';
+    const logout = async () => {
+        try {
+            await authApi.logout();
+        } catch {}
+        if (typeof document !== 'undefined') {
+            document.cookie = 'accessToken=; Max-Age=0; path=/';
+            document.cookie = 'refreshToken=; Max-Age=0; path=/';
+        }
+        user.value = null;
         router.push('/login');
     };
 

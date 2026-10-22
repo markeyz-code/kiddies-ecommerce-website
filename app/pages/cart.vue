@@ -1,36 +1,41 @@
 <template>
-  <div class="bg-white min-h-screen pb-24">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div class="flex items-center gap-3 mb-8">
-        <h1 class="text-2xl md:text-3xl font-serif font-black text-stone-800">Your Cart 🛒</h1>
-        <span v-if="cart.totalItems > 0" class="bg-[#d5e6ff] text-[#1a365d] font-black text-xs px-3 py-1 rounded-full border border-[#2a4a7f]">
+  <div class="min-h-[60vh] bg-cream-50 pb-16 md:pb-24">
+    <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+        <p class="eyebrow mb-2">Step 1 of 3</p>
+        <h1 class="section-title">Your bag</h1>
+        </div>
+        <span v-if="cart.totalItems > 0" class="rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">
           {{ cart.totalItems }} Item{{ cart.totalItems > 1 ? 's' : '' }}
         </span>
       </div>
 
-      <div v-if="cart.items.length === 0" class="text-center py-20 bg-white rounded-[2.5rem] border-2 border-stone-100 flex flex-col items-center justify-center">
-        <span class="text-8xl mb-4">🛒</span>
-        <h2 class="text-2xl font-serif font-black text-stone-800 mb-3">Your cart is empty! 🥺</h2>
-        <p class="text-stone-500 font-medium text-sm mb-6">Looks like you haven't picked out any cute outfits yet.</p>
-        <NuxtLink to="/products" class="bg-[#1a365d] text-white font-black py-3.5 px-8 rounded-full hover:bg-[#112a4a] transition-all duration-300 text-sm">
-          Let's Go Shopping! ✨
-        </NuxtLink>
+      <div class="mb-8">
+        <CheckoutSteps :step="1" />
+      </div>
+
+      <div v-if="cart.items.length === 0" class="flex flex-col items-center justify-center rounded-3xl border border-cream-200 bg-white py-16 text-center sm:py-20">
+        <span class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-cream-100 text-4xl">🛍️</span>
+        <h2 class="font-display text-2xl font-semibold text-brand-900 mb-2">Your bag is empty</h2>
+        <p class="mb-6 max-w-sm text-sm font-medium text-brand-500">Discover soft, playful pieces made for everyday adventures.</p>
+        <NuxtLink to="/products" class="btn-primary">Start shopping</NuxtLink>
       </div>
 
       <div v-else class="flex flex-col lg:flex-row gap-8">
         <!-- Cart Items -->
         <div class="flex-1">
-          <div class="bg-white rounded-[2rem] border border-stone-200 p-4 md:p-5">
+          <div class="card-surface p-4 md:p-6">
             <div class="space-y-3">
               <div v-for="item in cart.items" :key="item.id" class="flex gap-4 md:gap-5 py-3 border-b border-stone-100 last:border-0 relative group items-center">
-                <div class="w-16 md:w-20 h-20 md:h-24 bg-amber-50 rounded-xl overflow-hidden flex-shrink-0 border border-stone-100">
+                <div class="h-20 w-16 flex-shrink-0 overflow-hidden rounded-2xl border border-cream-200 bg-cream-100 md:h-24 md:w-20">
                   <img :src="getItemImage(item)" :alt="item?.product?.name" class="w-full h-full object-cover" />
                 </div>
                 
                 <div class="flex-1 flex flex-col justify-between">
                   <div class="flex justify-between items-start">
                     <div>
-                      <NuxtLink :to="`/product/${item?.product?._id || item?.product?.id}`" class="text-base md:text-lg font-bold text-stone-800 mb-1 group-hover:text-[#1a365d] transition-colors line-clamp-1 hover:underline block">
+                      <NuxtLink :to="`/product/${item?.product?._id || item?.product?.id}`" class="text-base md:text-lg font-bold text-stone-800 mb-1 group-hover:text-brand-900 transition-colors line-clamp-1 hover:underline block">
                         {{ item?.product?.name || 'Unknown Product' }}
                       </NuxtLink>
                       <p v-if="item?.options?.size" class="text-xs font-semibold text-gray-600 mb-1">Size: {{ item.options.size }}</p>
@@ -44,10 +49,10 @@
                   </div>
                   
                   <div class="flex justify-between items-center mt-3">
-                    <div class="h-10 border border-[#2a4a7f] rounded-full flex items-center justify-between px-2 bg-[#e6f0ff]/50 w-28">
-                      <button class="w-7 h-7 rounded-full flex items-center justify-center text-[#1a365d] hover:bg-white transition-all font-bold text-base" @click="cart.updateQuantity(item.id, item.quantity - 1)">-</button>
+                    <div class="h-10 border border-brand-200 rounded-full flex items-center justify-between px-2 bg-brand-50/50 w-28">
+                      <button class="w-7 h-7 rounded-full flex items-center justify-center text-brand-900 hover:bg-white transition-all font-bold text-base" @click="cart.updateQuantity(item.id, item.quantity - 1)">-</button>
                       <span class="font-black text-sm text-stone-800">{{ item.quantity }}</span>
-                      <button class="w-7 h-7 rounded-full flex items-center justify-center text-[#1a365d] hover:bg-white transition-all font-bold text-base" @click="cart.updateQuantity(item.id, item.quantity + 1)">+</button>
+                      <button class="w-7 h-7 rounded-full flex items-center justify-center text-brand-900 hover:bg-white transition-all font-bold text-base" @click="cart.updateQuantity(item.id, item.quantity + 1)">+</button>
                     </div>
                     <span class="font-black text-lg md:text-xl text-stone-800">${{ getItemTotal(item).toFixed(2) }}</span>
                   </div>
@@ -59,19 +64,27 @@
 
         <!-- Order Summary -->
         <div class="w-full lg:w-72 flex-shrink-0">
-          <div class="bg-[#e6f0ff]/50 p-5 rounded-[1.5rem] border border-[#2a4a7f] sticky top-24">
-            <h2 class="text-lg font-black text-stone-800 mb-4 flex items-center gap-2">
-              Order Summary 🧾
-            </h2>
+          <div class="card-surface sticky top-24 p-5">
+            <h2 class="mb-4 font-display text-xl font-semibold text-brand-900">Order summary</h2>
             
-            <div class="space-y-3 text-stone-600 font-medium mb-6 border-b border-[#2a4a7f] pb-6 text-sm">
+            <div class="mb-5 rounded-2xl border border-cream-200 bg-cream-50 p-3.5">
+              <p v-if="remainingForFreeShipping > 0" class="text-xs font-semibold text-brand-600">
+                You're <span class="font-bold text-coral-600">${{ remainingForFreeShipping.toFixed(2) }}</span> away from free shipping
+              </p>
+              <p v-else class="text-xs font-bold text-emerald-700">You've unlocked free shipping ✓</p>
+              <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-cream-200">
+                <div class="h-full rounded-full bg-coral-400 transition-all" :style="{ width: shippingProgress + '%' }"></div>
+              </div>
+            </div>
+
+            <div class="space-y-3 text-stone-600 font-medium mb-6 border-b border-brand-200 pb-6 text-sm">
               <div class="flex justify-between items-center">
                  <span>Subtotal</span>
                 <span class="text-stone-900 font-bold text-base">${{ (cart.subtotal || 0).toFixed(2) }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Shipping</span>
-                <span class="text-sky-600 font-bold bg-[#e6f0ff] px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wide border border-[#2a4a7f]">Calculated next</span>
+                <span class="text-sky-600 font-bold bg-brand-50 px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wide border border-brand-200">Calculated next</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Tax</span>
@@ -80,12 +93,12 @@
             </div>
             
             <div class="flex justify-between items-end mb-5">
-              <span class="font-bold text-stone-800 text-sm">Estimated Total</span>
+              <span class="font-bold text-brand-900 text-sm">Estimated total</span>
               <span class="font-black text-xl text-stone-900 text-right">${{ (cart.subtotal || 0).toFixed(2) }}</span>
             </div>
             
-            <NuxtLink to="/checkout" class="w-full block text-center bg-[#1a365d] text-white font-black py-3.5 rounded-full hover:bg-[#112a4a] transition-all duration-300 text-sm tracking-wide">
-              Proceed to Checkout 🚀
+            <NuxtLink to="/checkout" class="btn-primary w-full">
+              Continue to checkout
             </NuxtLink>
             
             <div class="mt-5 flex items-center justify-center gap-3 text-stone-400">
@@ -100,9 +113,21 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useCart } from '@/composables/core/useCart'
+import { useStoreSettings } from '@/composables/core/useStoreSettings'
 
 const cart = useCart()
+const { settings: storeSettings, fetchStoreSettings } = useStoreSettings()
+
+const freeShippingThreshold = computed(() => Number(storeSettings.value.freeShippingThreshold) || 0)
+const remainingForFreeShipping = computed(() => Math.max(0, freeShippingThreshold.value - (cart.subtotal || 0)))
+const shippingProgress = computed(() => {
+  if (!freeShippingThreshold.value) return 100
+  return Math.min(100, ((cart.subtotal || 0) / freeShippingThreshold.value) * 100)
+})
+
+onMounted(() => { fetchStoreSettings() })
 
 const getItemImage = (item) => {
   return item?.product?.image 

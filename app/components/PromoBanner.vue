@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-[#1a365d] text-white py-8 px-6 text-center font-serif flex flex-col items-center justify-center">
+  <div class="w-full bg-brand-900 text-white py-8 px-6 text-center font-serif flex flex-col items-center justify-center">
     <div class="flex items-center space-x-6 justify-center flex-wrap">
       <span class="text-sm font-sans font-bold tracking-widest uppercase">Labor Day Event</span>
       <h2 class="text-5xl font-normal tracking-wide">Extra 40% Off* Sale</h2>

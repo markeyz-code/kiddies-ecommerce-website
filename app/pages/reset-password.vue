@@ -3,7 +3,7 @@
     <!-- Left: Form Section -->
     <div class="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-12 lg:px-24 xl:px-32 relative z-10 bg-white shadow-2xl py-12 lg:py-0 overflow-y-auto">
       <div class="absolute top-8 left-8 sm:left-12 lg:left-24">
-        <NuxtLink to="/login" class="text-[#1a365d] hover:opacity-75 transition-opacity flex items-center font-bold text-sm tracking-widest uppercase">
+        <NuxtLink to="/login" class="text-brand-900 hover:opacity-75 transition-opacity flex items-center font-bold text-sm tracking-widest uppercase">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
           Back to Login
         </NuxtLink>
@@ -21,7 +21,7 @@
               :type="showPassword ? 'text' : 'password'"
               required
               placeholder="••••••••"
-              class="w-full px-5 py-3.5 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+              class="w-full px-5 py-3.5 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
             >
             <button type="button" @click="showPassword = !showPassword" class="absolute right-4 bottom-3.5 text-stone-400 hover:text-stone-600">
               <svg v-if="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
@@ -36,14 +36,14 @@
               :type="showPassword ? 'text' : 'password'"
               required
               placeholder="••••••••"
-              class="w-full px-5 py-3.5 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-[#1a365d] focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
+              class="w-full px-5 py-3.5 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400"
             >
           </div>
           
           <button 
             type="submit" 
             :disabled="loading"
-            class="w-full bg-[#1a365d] text-white font-black py-4 rounded-2xl hover:bg-[#112a4a] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 tracking-wide text-sm flex items-center justify-center"
+            class="w-full bg-brand-900 text-white font-black py-4 rounded-2xl hover:bg-brand-800 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 tracking-wide text-sm flex items-center justify-center"
           >
             <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
             {{ loading ? 'Saving...' : 'Reset Password' }}
@@ -105,7 +105,7 @@ const handleResetPassword = async () => {
     return;
   }
 
-  const success = await resetPassword(token.value, password.value);
+  const success = await resetPassword({ token: token.value, newPassword: password.value });
   if (success) {
     router.push('/login');
   }

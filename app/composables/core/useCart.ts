@@ -54,9 +54,26 @@ export const useCart = () => {
         if (existingItemIndex > -1) {
             currentItems[existingItemIndex].quantity += quantity;
         } else {
+            // Store a compact snapshot so the cart cookie stays well under the
+            // browser's 4KB cookie limit even with several items.
+            const compact = {
+                _id: product._id || product.id,
+                id: product._id || product.id,
+                name: product.name,
+                basePrice: product.basePrice ?? product.price ?? 0,
+                price: product.price ?? product.basePrice ?? 0,
+                sku: product.sku || '',
+                image: product.image || product.imageUrls?.medium || product.imageUrls?.thumbnail || '',
+                imageUrls: product.imageUrls
+                    ? { thumbnail: product.imageUrls.thumbnail, medium: product.imageUrls.medium }
+                    : undefined,
+                categoryId: product.categoryId && typeof product.categoryId === 'object'
+                    ? { name: product.categoryId.name }
+                    : undefined
+            };
             currentItems.push({
                 id: Math.random().toString(36).substr(2, 9),
-                product,
+                product: compact,
                 quantity,
                 options
             });
@@ -91,7 +108,7 @@ export const useCart = () => {
     
     const applyCoupon = async (code: string) => {
         try {
-            const { data } = await couponsApi.validateCoupon(code);
+            const { data } = await couponsApi.validateCoupon(code, originalSubtotal.value);
             appliedCoupon.value = data;
             syncCookies();
             showToast({

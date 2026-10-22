@@ -15,10 +15,10 @@
       </div>
 
       <!-- Left: Image Area -->
-      <div class="w-full md:w-1/2 bg-[#efebe4] p-8 flex items-center justify-center relative">
+      <div class="w-full md:w-1/2 bg-cream-100 p-8 flex items-center justify-center relative">
         <img :src="normalizedProduct.image" class="max-w-full max-h-[60vh] object-contain mix-blend-multiply" :alt="normalizedProduct.name" />
         
-        <div v-if="normalizedProduct.pack" class="absolute bottom-6 left-6 bg-[#1a365d] text-white text-sm font-bold w-16 h-16 rounded-full flex flex-col items-center justify-center leading-tight shadow-md border-2 border-white">
+        <div v-if="normalizedProduct.pack" class="absolute bottom-6 left-6 bg-brand-900 text-white text-sm font-bold w-16 h-16 rounded-full flex flex-col items-center justify-center leading-tight shadow-md border-2 border-white">
           <span class="text-xl">{{ normalizedProduct.pack.split(' ')[0] }}</span>
           <span class="text-[10px] uppercase">{{ normalizedProduct.pack.split(' ')[1] }}</span>
         </div>
@@ -39,7 +39,7 @@
             </div>
           </div>
           
-          <div v-if="normalizedProduct.rating" class="flex items-center text-[#f1a415]">
+          <div v-if="normalizedProduct.rating" class="flex items-center text-coral-400">
             <svg v-for="i in 5" :key="i" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" :fill="i <= Math.round(normalizedProduct.rating) ? 'currentColor' : 'none'" :stroke="i <= Math.round(normalizedProduct.rating) ? 'none' : 'currentColor'">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
@@ -88,7 +88,7 @@
             <input type="text" class="w-full text-center text-sm font-bold border-x border-gray-300 h-full" v-model="quantity" readonly>
             <button class="px-2 text-gray-500 hover:bg-gray-100 h-full" @click="quantity++">+</button>
           </div>
-          <button @click="addToBag" class="flex-1 bg-[#1a365d] text-white h-10 text-xs font-bold uppercase tracking-widest hover:bg-[#112a4a] transition-colors rounded-sm">
+          <button @click="addToBag" class="flex-1 bg-brand-900 text-white h-10 text-xs font-bold uppercase tracking-widest hover:bg-brand-800 transition-colors rounded-sm">
             Add To Bag
           </button>
         </div>
@@ -137,7 +137,7 @@ const normalizedProduct = computed(() => {
   else if (p.images && p.images.length > 0) image = p.images[0].url || image;
 
   const price = p.basePrice || 0;
-  const originalPrice = p.costPrice || 0;
+  const originalPrice = p.compareAtPrice || p.originalPrice || 0;
 
   let discount = '';
   if (originalPrice > price && originalPrice > 0) {

@@ -1,36 +1,57 @@
 <template>
-  <div class="min-h-screen bg-white font-sans text-gray-900 pb-24">
+  <div class="min-h-screen bg-cream-50 font-sans text-brand-900 pb-20">
 
     <!-- Breadcrumbs -->
-    <div class="max-w-[1400px] mx-auto px-4 md:px-8 py-4 text-[10px] font-bold text-gray-800 uppercase tracking-widest flex space-x-2">
-      <NuxtLink to="/" class="hover:underline underline-offset-2 text-gray-600">Home</NuxtLink>
+    <div class="container-site flex items-center gap-2 py-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-400">
+      <NuxtLink to="/" class="text-brand-500 transition-colors hover:text-brand-900">Home</NuxtLink>
       <span>&gt;</span>
       <span>{{ categoryName }}</span>
     </div>
 
     <!-- Category Header -->
-    <div class="max-w-[1400px] mx-auto px-4 md:px-8 mb-4 flex justify-between items-end border-b pb-4 md:border-none md:pb-0">
-      <h1 class="text-xl font-bold text-gray-900 capitalize">{{ categoryName }} Clothing</h1>
-      
-      <div class="flex items-center text-xs font-bold w-auto">
-        <span class="mr-2 hidden md:inline">Sort By:</span>
-        <select v-model="sortBy" @change="reloadProducts" class="border-b-2 border-black bg-transparent font-bold text-xs py-2 focus:outline-none">
-          <option value="">Recommended</option>
-          <option value="price_asc">Price: Low to High</option>
-          <option value="price_desc">Price: High to Low</option>
-          <option value="newest">New Arrivals</option>
-        </select>
+    <div class="container-site">
+      <div class="flex flex-col gap-5 border-b border-cream-200 pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="eyebrow mb-2">Collection</p>
+          <h1 class="section-title capitalize">{{ categoryName }}</h1>
+          <p class="mt-2 text-sm font-medium text-brand-500">{{ products?.length || 0 }} pieces selected for little ones</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button
+            @click="showMobileFilters = !showMobileFilters"
+            class="md:hidden inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-2.5 text-xs font-bold text-brand-800"
+            :aria-expanded="showMobileFilters"
+          >
+            <SlidersHorizontal class="w-4 h-4" />
+            Filters
+            <span v-if="filtersActiveCount" class="flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-900 px-1 text-[10px] text-white">{{ filtersActiveCount }}</span>
+          </button>
+          <label class="flex items-center gap-2">
+            <span class="hidden text-[11px] font-bold uppercase tracking-wider text-brand-400 md:inline">Sort</span>
+            <select v-model="sortBy" @change="reloadProducts" class="max-w-[140px] rounded-full border border-cream-300 bg-white px-4 py-2.5 text-xs font-semibold text-brand-700 focus:border-brand-500 focus:outline-none sm:max-w-none">
+              <option value="">Recommended</option>
+              <option value="price_asc">Price: Low to High</option>
+              <option value="price_desc">Price: High to Low</option>
+              <option value="newest">New Arrivals</option>
+            </select>
+          </label>
+        </div>
       </div>
     </div>
 
-    <div class="max-w-[1400px] mx-auto px-4 md:px-8">
-      <div class="flex flex-col md:flex-row gap-8 mt-6">
+    <div class="container-site">
+      <div class="flex flex-col md:flex-row gap-6 md:gap-8 mt-6">
         <!-- Sidebar Filters -->
-        <aside class="w-full md:w-64 flex-shrink-0">
-          <div class="bg-white pr-4 space-y-6 sticky top-24 max-h-[85vh] overflow-y-auto custom-scrollbar">
+        <aside :class="showMobileFilters ? 'block' : 'hidden md:block'" class="w-full md:w-64 flex-shrink-0">
+          <div class="card-surface space-y-4 p-5 md:sticky md:top-24 md:max-h-[85vh] md:space-y-5 md:overflow-y-auto custom-scrollbar">
+            <div class="flex items-center justify-between md:hidden border-b border-gray-200 pb-3">
+              <h2 class="font-black text-sm uppercase tracking-wider">Filter {{ categoryName }}</h2>
+              <button @click="showMobileFilters = false" class="text-xs font-bold text-gray-500 underline">Close</button>
+            </div>
             
             <div class="text-xs font-bold text-gray-500 mb-6 border-b pb-4">
-              Showing <span class="text-black font-black">{{ products?.length || 0 }}</span> items
+              <span class="text-black font-black">{{ products?.length || 0 }}</span> products
             </div>
 
             <!-- Color -->
@@ -194,11 +215,18 @@
                 </li>
               </ul>
             </details>
+
+            <div class="md:hidden sticky bottom-0 bg-white pt-3 pb-2 border-t border-gray-200">
+              <div class="flex gap-2">
+                <button @click="clearAllFilters" class="flex-1 border border-gray-300 text-gray-800 font-bold text-xs py-3 rounded-full">Clear all</button>
+                <button @click="applyMobileFilters" class="flex-[2] bg-brand-900 text-white font-bold text-xs py-3 rounded-full">View {{ products?.length || 0 }} results</button>
+              </div>
+            </div>
           </div>
         </aside>
 
         <!-- Main Product Grid -->
-        <main class="flex-1">
+        <main id="category-grid" class="flex-1 scroll-mt-24">
           <div v-if="loading" class="text-center py-24">
             <p class="text-black font-black text-xl animate-pulse">Loading {{ categoryName }} collection...</p>
           </div>
@@ -212,11 +240,18 @@
           </div>
           <div v-else class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             <ProductCard 
-              v-for="product in products" 
+              v-for="product in visibleProducts" 
               :key="product._id || product.id" 
               :product="product"
               @quick-view="openQuickView"
             />
+          </div>
+
+          <div v-if="products && products.length > visibleProducts.length" class="flex flex-col items-center gap-3 py-10">
+            <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">Showing {{ visibleProducts.length }} of {{ products.length }} products</p>
+            <button @click="visibleCount += 24" class="btn-secondary w-full sm:w-auto">
+              Load more products
+            </button>
           </div>
         </main>
       </div>
@@ -232,6 +267,7 @@
 
 <script setup>
 import { onMounted, ref, computed, watch } from 'vue';
+import { SlidersHorizontal } from 'lucide-vue-next';
 import { useRoute } from 'vue-router';
 import { useFetchProducts } from '~/composables/modules/products/useFetchProducts';
 
@@ -248,7 +284,29 @@ const selectedAgeGroups = ref([]);
 const selectedSustainability = ref([]);
 const minRating = ref(null);
 const minPrice = ref(0);
-const maxPrice = ref(100);
+const maxPrice = ref(1000);
+const showMobileFilters = ref(false);
+const visibleCount = ref(24);
+const visibleProducts = computed(() => (products.value || []).slice(0, visibleCount.value));
+
+const filtersActiveCount = computed(() => {
+  return [
+    selectedColors.value.length,
+    selectedSizes.value.length,
+    selectedGenders.value.length,
+    selectedTypes.value.length,
+    selectedAgeGroups.value.length,
+    selectedSustainability.value.length,
+    minRating.value ? 1 : 0,
+    minPrice.value > 0 ? 1 : 0,
+    maxPrice.value < 1000 ? 1 : 0
+  ].reduce((a, b) => a + b, 0);
+});
+
+const applyMobileFilters = () => {
+  showMobileFilters.value = false;
+  document.getElementById('category-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 // --- Filter Options ---
 const colorFilters = [
@@ -300,6 +358,7 @@ const categorySlug = computed(() => {
 
 // --- Methods ---
 const reloadProducts = () => {
+  visibleCount.value = 24;
   const params = { category: categorySlug.value }; // Fix category strictly to the route parameter
   
   if (sortBy.value) params.sort = sortBy.value;
@@ -314,7 +373,7 @@ const reloadProducts = () => {
   
   // Ranges / Numerics
   if (minPrice.value > 0) params.minPrice = minPrice.value;
-  if (maxPrice.value < 100) params.maxPrice = maxPrice.value;
+  if (maxPrice.value < 1000) params.maxPrice = maxPrice.value;
   if (minRating.value) params.minRating = minRating.value;
 
   fetchProducts(params);
@@ -329,7 +388,7 @@ const clearAllFilters = () => {
   selectedSustainability.value = [];
   minRating.value = null;
   minPrice.value = 0;
-  maxPrice.value = 100;
+  maxPrice.value = 1000;
   reloadProducts();
 };
 
@@ -340,6 +399,7 @@ onMounted(() => {
 // Re-fetch when route changes (different category)
 watch(() => route.params.id, () => {
   clearAllFilters(); // Reset filters when navigating to a new category
+  showMobileFilters.value = false;
 });
 
 const isQuickViewOpen = ref(false);
