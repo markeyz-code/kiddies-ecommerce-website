@@ -27,33 +27,14 @@
           </div>
 
           <!-- Mobile account menu -->
-          <div class="lg:hidden bg-white border border-cream-200 rounded-xl p-3">
-            <label for="account-section" class="block text-[10px] font-black uppercase tracking-widest text-brand-400 mb-1">Account Menu</label>
-            <select id="account-section" v-model="activeTab" class="w-full border border-cream-300 rounded-lg px-3 py-2.5 text-sm font-bold text-brand-800 bg-white focus:outline-none focus:border-brand-900">
-              <optgroup label="Account">
-                <option value="overview">Account Overview</option>
-                <option value="orders">Orders</option>
-              </optgroup>
-              <optgroup label="Rewards">
-                <option value="rewards">JasmarKids Rewards</option>
-                <option value="discounts">Discount & Offers</option>
-                <option value="earn-points">Earn Extra Points</option>
-                <option value="points-history">Points History</option>
-                <option value="credit-card">Rewards Credit Card</option>
-              </optgroup>
-              <optgroup label="Shopping">
-                <option value="reviews">Rate & Review</option>
-                <option value="buy-again">Buy it Again</option>
-                <option value="wishlists">My Wishlists</option>
-              </optgroup>
-              <optgroup label="Account Settings">
-                <option value="profile">Profile Information</option>
-                <option value="addresses">Address Book</option>
-                <option value="payments">Payments & Gift Cards</option>
-                <option value="preferences">My Preferences</option>
-              </optgroup>
-            </select>
-            <button @click="handleLogout" class="mt-2 w-full text-center px-3 py-2 rounded-lg text-sm font-bold text-red-600 bg-red-50 hover:bg-red-100 transition-colors">Sign Out</button>
+          <div class="lg:hidden bg-white border border-cream-200 rounded-2xl p-3">
+            <CustomSelect
+              id="account-section"
+              v-model="activeTab"
+              label="Account Menu"
+              :options="accountMenuOptions"
+            />
+            <button @click="handleLogout" class="mt-2.5 w-full text-center px-3 py-2 rounded-xl text-sm font-bold text-red-600 bg-red-50 hover:bg-red-100 transition-colors">Sign Out</button>
           </div>
 
           <!-- Navigation -->
@@ -221,11 +202,13 @@
               <PackageIcon class="h-5 w-5 text-brand-700" />
               <h3 class="font-display text-xl font-semibold text-brand-900">Orders</h3>
             </div>
-            <select class="border border-cream-300 rounded px-3 py-1 text-sm font-medium bg-white">
-              <option>Last 6 Months</option>
-              <option>Last Year</option>
-              <option>All Time</option>
-            </select>
+            <div class="min-w-[150px]">
+              <CustomSelect
+                id="orders-filter"
+                v-model="orderFilter"
+                :options="orderFilterOptions"
+              />
+            </div>
           </div>
           <p class="text-sm text-brand-500 -mt-2">ORDER HISTORY</p>
           <div v-if="orders.length === 0" class="bg-white border rounded-xl p-8 text-center">
@@ -562,7 +545,12 @@
                 <div><label class="text-xs font-bold text-brand-500 block mb-1">Expiry Month</label><input type="number" min="1" max="12" v-model="paymentForm.expiryMonth" required class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" placeholder="12" /></div>
                 <div><label class="text-xs font-bold text-brand-500 block mb-1">Expiry Year</label><input type="number" min="2024" v-model="paymentForm.expiryYear" required class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" placeholder="2026" /></div>
               </div>
-              <div><label class="text-xs font-bold text-brand-500 block mb-1">Brand</label><select v-model="paymentForm.brand" class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200"><option value="Visa">Visa</option><option value="Mastercard">Mastercard</option><option value="Amex">Amex</option></select></div>
+              <CustomSelect
+                id="payment-brand"
+                v-model="paymentForm.brand"
+                label="Card Brand"
+                :options="['Visa', 'Mastercard', 'Amex']"
+              />
               <div class="flex gap-2">
                 <button type="submit" class="bg-brand-900 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Card</button>
                 <button type="button" @click="showPaymentForm = false" class="bg-cream-200 text-brand-800 font-bold px-8 py-3 rounded hover:bg-gray-300 transition-colors text-sm">Cancel</button>
@@ -677,6 +665,8 @@
 </template>
 
 <script setup>
+useSeoMeta({ robots: 'noindex, nofollow' });
+
 import { ref, onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAuth } from '@/composables/modules/auth/useAuth';
@@ -700,6 +690,29 @@ const cart = useCart();
 const { settings: storeSettings, fetchStoreSettings } = useStoreSettings();
 
 const activeTab = ref('overview');
+const orderFilter = ref('Last 6 Months');
+const orderFilterOptions = [
+  { value: 'Last 6 Months', label: 'Last 6 Months' },
+  { value: 'Last Year', label: 'Last Year' },
+  { value: 'All Time', label: 'All Time' }
+];
+
+const accountMenuOptions = [
+  { value: 'overview', label: 'Account Overview' },
+  { value: 'orders', label: 'Orders & Tracking' },
+  { value: 'rewards', label: 'JasmarKids Rewards' },
+  { value: 'discounts', label: 'Discounts & Offers' },
+  { value: 'earn-points', label: 'Earn Extra Points' },
+  { value: 'points-history', label: 'Points History' },
+  { value: 'credit-card', label: 'Rewards Credit Card' },
+  { value: 'reviews', label: 'Rate & Review' },
+  { value: 'buy-again', label: 'Buy it Again' },
+  { value: 'wishlists', label: 'My Wishlists' },
+  { value: 'profile', label: 'Profile Information' },
+  { value: 'addresses', label: 'Address Book' },
+  { value: 'payments', label: 'Payments & Cards' },
+  { value: 'preferences', label: 'My Preferences' }
+];
 const dashboard = ref(null);
 const orders = ref([]);
 const wishlistProducts = ref([]);

@@ -51,7 +51,7 @@
     
     <!-- Right: Visual Section -->
     <div class="hidden lg:block lg:w-[55%] relative overflow-hidden bg-indigo-100">
-      <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/40 to-transparent z-10 mix-blend-multiply"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-brand-900/45 to-transparent z-10 mix-blend-multiply"></div>
       <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=1200&h=1600&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-[10s] ease-out" alt="Kids playing" />
       
       <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-white text-center p-12">

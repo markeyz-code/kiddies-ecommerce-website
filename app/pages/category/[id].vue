@@ -13,8 +13,8 @@
       <div class="flex flex-col gap-5 border-b border-cream-200 pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p class="eyebrow mb-2">Collection</p>
-          <h1 class="section-title capitalize">{{ categoryName }}</h1>
-          <p class="mt-2 text-sm font-medium text-brand-500">{{ products?.length || 0 }} pieces selected for little ones</p>
+          <h1 class="section-title">{{ categoryTitle }}</h1>
+          <p class="mt-2 text-sm font-medium text-brand-500">{{ categorySubtitle }}</p>
         </div>
 
         <div class="flex items-center gap-3">
@@ -27,21 +27,55 @@
             Filters
             <span v-if="filtersActiveCount" class="flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-900 px-1 text-[10px] text-white">{{ filtersActiveCount }}</span>
           </button>
-          <label class="flex items-center gap-2">
-            <span class="hidden text-[11px] font-bold uppercase tracking-wider text-brand-400 md:inline">Sort</span>
-            <select v-model="sortBy" @change="reloadProducts" class="max-w-[140px] rounded-full border border-cream-300 bg-white px-4 py-2.5 text-xs font-semibold text-brand-700 focus:border-brand-500 focus:outline-none sm:max-w-none">
-              <option value="">Recommended</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-              <option value="newest">New Arrivals</option>
-            </select>
-          </label>
+          <div class="flex items-center gap-2 min-w-[170px]">
+            <CustomSelect
+              id="sort-category-products"
+              v-model="sortBy"
+              :options="sortOptions"
+              placeholder="Sort by"
+              @change="reloadProducts"
+            />
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Quick Category & Sub-section Selector Bar -->
+    <div class="container-site mt-4 mb-2">
+      <!-- Main Selection Chips (Dresses, Tops, T-Shirts, Shorts, Bottoms, Socks, Shoes, Costumes) -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar">
+        <button
+          v-for="cat in quickCategories"
+          :key="cat.id"
+          @click="selectQuickCategory(cat.id)"
+          class="flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+          :class="isQuickCategoryActive(cat.id) ? 'bg-brand-900 text-white shadow-sm' : 'bg-white border border-cream-200 text-brand-700 hover:bg-cream-100'"
+        >
+          <span>{{ cat.icon }}</span>
+          <span>{{ cat.label }}</span>
+        </button>
+      </div>
+
+      <!-- Sub-Sections & Sub-Collections Pills -->
+      <div v-if="activeSubsections.length > 0" class="flex items-center gap-2 overflow-x-auto py-2 hide-scrollbar bg-cream-100/70 rounded-2xl px-3 border border-cream-200 mt-2">
+        <span class="text-[10px] font-black uppercase tracking-wider text-brand-400 shrink-0">Sub-Collections:</span>
+        <button
+          v-for="sub in activeSubsections"
+          :key="sub.id"
+          @click="selectSubsection(sub.id)"
+          class="flex-shrink-0 px-3 py-1 rounded-full text-[11px] font-bold transition-all cursor-pointer"
+          :class="selectedSubsection === sub.id ? 'bg-coral-500 text-white shadow-xs' : 'bg-white text-brand-600 hover:text-brand-900 border border-cream-200'"
+        >
+          {{ sub.label }}
+        </button>
+        <button v-if="selectedSubsection" @click="selectedSubsection = null; reloadProducts()" class="text-[10px] text-brand-500 hover:text-brand-900 underline font-bold ml-1 shrink-0 cursor-pointer">
+          Clear
+        </button>
+      </div>
+    </div>
+
     <div class="container-site">
-      <div class="flex flex-col md:flex-row gap-6 md:gap-8 mt-6">
+      <div class="flex flex-col md:flex-row gap-6 md:gap-8 mt-4">
         <!-- Sidebar Filters -->
         <aside :class="showMobileFilters ? 'block' : 'hidden md:block'" class="w-full md:w-64 flex-shrink-0">
           <div class="card-surface space-y-4 p-5 md:sticky md:top-24 md:max-h-[85vh] md:space-y-5 md:overflow-y-auto custom-scrollbar">
@@ -276,6 +310,12 @@ const { products, fetchProducts, loading } = useFetchProducts();
 
 // --- Filter States ---
 const sortBy = ref('');
+const sortOptions = [
+  { value: '', label: 'Recommended' },
+  { value: 'price_asc', label: 'Price: Low to High' },
+  { value: 'price_desc', label: 'Price: High to Low' },
+  { value: 'newest', label: 'New Arrivals' }
+];
 const selectedColors = ref([]);
 const selectedSizes = ref([]);
 const selectedGenders = ref([]);
@@ -288,6 +328,131 @@ const maxPrice = ref(1000);
 const showMobileFilters = ref(false);
 const visibleCount = ref(24);
 const visibleProducts = computed(() => (products.value || []).slice(0, visibleCount.value));
+
+const selectedQuickCat = ref('all');
+const selectedSubsection = ref(null);
+
+const quickCategories = [
+  { id: 'all', label: 'All Items', icon: '✨' },
+  { id: 'dresses', label: 'Dresses', icon: '👗' },
+  { id: 'tops', label: 'Tops', icon: '👚' },
+  { id: 't-shirts', label: 'T-Shirts', icon: '👕' },
+  { id: 'shorts', label: 'Shorts', icon: '🩳' },
+  { id: 'bottoms', label: 'Bottoms', icon: '👖' },
+  { id: 'socks', label: 'Socks', icon: '🧦' },
+  { id: 'shoes', label: 'Shoes', icon: '👟' },
+  { id: 'costumes', label: 'Kids Costumes', icon: '🦸' },
+  { id: 'pajamas', label: 'Pajamas', icon: '🌙' },
+  { id: 'sets', label: 'Sets', icon: '🎁' },
+];
+
+const subSectionsMap = {
+  'dresses': [
+    { id: 'casual', label: 'Casual Day Dresses' },
+    { id: 'party', label: 'Party & Festive Gowns' },
+    { id: 'sundresses', label: 'Summer Sundresses' },
+    { id: 'floral', label: 'Floral & Printed Dresses' },
+  ],
+  'tops': [
+    { id: 'graphic-tees', label: 'Graphic Tees' },
+    { id: 'plain-tees', label: 'Basic Tees' },
+    { id: 'polo', label: 'Polo Shirts' },
+    { id: 'blouse', label: 'Shirts & Blouses' },
+    { id: 'hoodie', label: 'Hoodies & Sweaters' },
+  ],
+  't-shirts': [
+    { id: 'graphic-tee', label: 'Graphic Tees' },
+    { id: 'plain-tee', label: 'Plain Solid Tees' },
+    { id: 'pocket-tee', label: 'Pocket T-Shirts' },
+    { id: 'long-sleeve', label: 'Long Sleeve Tees' },
+  ],
+  'shorts': [
+    { id: 'denim-shorts', label: 'Denim Jean Shorts' },
+    { id: 'cotton-shorts', label: 'Cotton Chino Shorts' },
+    { id: 'sports-shorts', label: 'Sports & Active Shorts' },
+  ],
+  'bottoms': [
+    { id: 'jeans', label: 'Jeans & Denim' },
+    { id: 'joggers', label: 'Joggers & Sweatpants' },
+    { id: 'trousers', label: 'Trousers & Chinos' },
+    { id: 'leggings', label: 'Leggings' },
+    { id: 'skirts', label: 'Skirts' },
+  ],
+  'socks': [
+    { id: 'crew-socks', label: 'Crew Socks' },
+    { id: 'ankle-socks', label: 'Ankle Socks' },
+    { id: 'pattern-socks', label: 'Patterned Socks' },
+    { id: 'tights', label: 'Tights' },
+  ],
+  'shoes': [
+    { id: 'sneakers', label: 'Sneakers' },
+    { id: 'slip-ons', label: 'Casual Shoes' },
+    { id: 'sandals', label: 'Sandals & Slides' },
+    { id: 'dress-shoes', label: 'Party Shoes' },
+    { id: 'boots', label: 'Boots' },
+  ],
+  'costumes': [
+    { id: 'superhero', label: 'Superhero Outfits' },
+    { id: 'fairytale', label: 'Fairytale Princess' },
+    { id: 'dressup', label: 'Party Dress-Up' },
+  ],
+};
+
+const activeSubsections = computed(() => {
+  if (selectedQuickCat.value && subSectionsMap[selectedQuickCat.value]) {
+    return subSectionsMap[selectedQuickCat.value];
+  }
+  const slug = categorySlug.value.toLowerCase();
+  if (slug === 'girl' || slug === 'girls' || selectedGenders.value.includes('girl')) {
+    return [
+      { id: 'dresses', label: 'Dresses' },
+      { id: 'tops', label: 'Tops & Blouses' },
+      { id: 't-shirts', label: 'T-Shirts' },
+      { id: 'shorts', label: 'Shorts' },
+      { id: 'bottoms', label: 'Bottoms & Skirts' },
+      { id: 'socks', label: 'Socks & Tights' },
+      { id: 'shoes', label: 'Shoes' },
+      { id: 'costumes', label: 'Kids Costumes' },
+    ];
+  }
+  if (slug === 'boy' || slug === 'boys' || selectedGenders.value.includes('boy')) {
+    return [
+      { id: 't-shirts', label: 'T-Shirts' },
+      { id: 'tops', label: 'Polo & Shirts' },
+      { id: 'shorts', label: 'Shorts' },
+      { id: 'bottoms', label: 'Joggers & Jeans' },
+      { id: 'socks', label: 'Socks' },
+      { id: 'shoes', label: 'Sneakers & Shoes' },
+      { id: 'costumes', label: 'Kids Costumes' },
+    ];
+  }
+  return [];
+});
+
+const isQuickCategoryActive = (id) => {
+  if (id === 'all') return selectedQuickCat.value === 'all' && selectedTypes.value.length === 0;
+  return selectedQuickCat.value === id || selectedTypes.value.includes(id);
+};
+
+const selectQuickCategory = (id) => {
+  selectedQuickCat.value = id;
+  selectedSubsection.value = null;
+  if (id === 'all') {
+    selectedTypes.value = [];
+  } else {
+    selectedTypes.value = [id];
+  }
+  reloadProducts();
+};
+
+const selectSubsection = (subId) => {
+  if (selectedSubsection.value === subId) {
+    selectedSubsection.value = null;
+  } else {
+    selectedSubsection.value = subId;
+  }
+  reloadProducts();
+};
 
 const filtersActiveCount = computed(() => {
   return [
@@ -323,32 +488,41 @@ const colorFilters = [
 ];
 
 const sizeFilters = [
-  '0-3 M', '3-6 M', '6-9 M', '9-12 M', '12-18 M', '18-24 M',
+  '0-3 M', '3-6 M', '6-9 M', '9-12 M', '12-18 M',
   '2T', '3T', '4T', '5T',
-  'XS (4)', 'S (5-6)', 'M (7-8)', 'L (10-12)', 'XL (14-16)'
+  '6Y', '7-8Y', '9-10Y', '11-12Y', '13-14Y', '15-16Y'
 ];
 
 const typeFilters = [
-  { label: 'Tops', value: 'tops' },
-  { label: 'Bottoms', value: 'bottoms' },
   { label: 'Dresses', value: 'dresses' },
-  { label: 'Sets', value: 'sets' },
-  { label: 'Pajamas', value: 'pajamas' },
+  { label: 'Tops', value: 'tops' },
+  { label: 'T-Shirts', value: 't-shirts' },
+  { label: 'Shorts', value: 'shorts' },
+  { label: 'Bottoms', value: 'bottoms' },
+  { label: 'Socks', value: 'socks' },
   { label: 'Shoes', value: 'shoes' },
-  { label: 'Boots', value: 'boots' },
-  { label: 'Denim Jackets', value: 'denim-jackets' },
-  { label: 'Accessories', value: 'accessories' },
+  { label: 'Kids Costumes', value: 'costumes' },
+  { label: 'Pajamas', value: 'pajamas' },
+  { label: 'Sets', value: 'sets' },
 ];
 
 const ageFilters = [
-  { label: 'Girls (12M-12)', value: 'girls-12m-12' },
-  { label: 'Boys (12M-12)', value: 'boys-12m-12' },
-  { label: 'Baby Girls (0-24M)', value: 'baby-girls-0-24m' },
-  { label: 'Baby Boys (0-24M)', value: 'baby-boys-0-24m' },
-  { label: 'Toddler', value: 'toddler' },
+  { label: 'Girls (Age 6–16)', value: 'girls-6-16' },
+  { label: 'Boys (Age 6–16)', value: 'boys-6-16' },
+  { label: 'Toddler Girls (Age 2–5)', value: 'toddler-girls-2-5' },
+  { label: 'Toddler Boys (Age 2–5)', value: 'toddler-boys-2-5' },
+  { label: 'Baby (0–18 Months)', value: 'baby-0-18m' },
 ];
 
 const categoryName = computed(() => {
+  const slug = (route.params.id || '').toLowerCase();
+  if (slug === 'costumes' || slug === 'uniforms' || slug === 'kids-costumes') return 'Kids Costumes';
+  if (slug === 'girl' || slug === 'girls') return 'Girls';
+  if (slug === 'boy' || slug === 'boys') return 'Boys';
+  if (slug === 'toddler-girl' || slug === 'toddler-girls') return 'Toddler Girls';
+  if (slug === 'toddler-boy' || slug === 'toddler-boys') return 'Toddler Boys';
+  if (slug === 'toddler' || slug === 'toddlers') return 'Toddlers';
+  if (slug === 'baby' || slug === 'babies') return 'Baby';
   return (route.params.id || 'Category').replace(/-/g, ' ');
 });
 
@@ -356,10 +530,58 @@ const categorySlug = computed(() => {
   return route.params.id || '';
 });
 
+const categoryTitle = computed(() => {
+  const slug = categorySlug.value.toLowerCase();
+  if (slug === 'girl' || slug === 'girls') return 'Girls Collection (Ages 6–16)';
+  if (slug === 'boy' || slug === 'boys') return 'Boys Collection (Ages 6–16)';
+  if (slug === 'toddler-girl' || slug === 'toddler-girls') return 'Toddler Girls (Ages 2–5)';
+  if (slug === 'toddler-boy' || slug === 'toddler-boys') return 'Toddler Boys (Ages 2–5)';
+  if (slug === 'toddler' || slug === 'toddlers') return 'Toddlers (Ages 2–5)';
+  if (slug === 'baby' || slug === 'babies') return 'Baby Collection (0–18 Months)';
+  if (slug === 'costumes' || slug === 'uniforms' || slug === 'kids-costumes') return 'Kids Costumes & Dress-Up';
+  return (route.params.id || 'Category').replace(/-/g, ' ');
+});
+
+const categorySubtitle = computed(() => {
+  const slug = categorySlug.value.toLowerCase();
+  if (slug === 'girl' || slug === 'girls') return 'Vibrant dresses, tops, t-shirts, shorts, bottoms, socks and shoes tailored for girls ages 6 to 16.';
+  if (slug === 'boy' || slug === 'boys') return 'Everyday t-shirts, polo tops, shorts, bottoms, socks and shoes made for boys ages 6 to 16.';
+  if (slug === 'toddler-girl' || slug === 'toddler-girls') return 'Charming and comfy playwear for toddler girls ages 2 to 5.';
+  if (slug === 'toddler-boy' || slug === 'toddler-boys') return 'Durable, soft and colorful play outfits for toddler boys ages 2 to 5.';
+  if (slug === 'toddler' || slug === 'toddlers') return 'Playful, breathable outfits built for adventurous toddlers ages 2 to 5.';
+  if (slug === 'baby' || slug === 'babies') return 'Ultra-soft, pure cotton everyday essentials and sets for babies aged 0 to 18 months.';
+  if (slug === 'costumes' || slug === 'uniforms' || slug === 'kids-costumes') return 'Exciting superhero, fairytale, career and celebratory dress-up outfits for kids.';
+  return 'Explore our curated kids fashion collection with nationwide delivery across Nigeria.';
+});
+
+useSeoMeta({
+  title: computed(() => `${categoryTitle.value} | JasmarKids`),
+  description: computed(() => categorySubtitle.value)
+});
+
 // --- Methods ---
 const reloadProducts = () => {
   visibleCount.value = 24;
-  const params = { category: categorySlug.value }; // Fix category strictly to the route parameter
+  const slug = categorySlug.value.toLowerCase();
+  const params = {};
+  
+  if (slug === 'girl' || slug === 'girls') {
+    params.gender = 'girl';
+  } else if (slug === 'boy' || slug === 'boys') {
+    params.gender = 'boy';
+  } else if (slug === 'toddler-girl' || slug === 'toddler-girls') {
+    params.gender = 'girl';
+    params.ageGroup = 'toddler-girls-2-5';
+  } else if (slug === 'toddler-boy' || slug === 'toddler-boys') {
+    params.gender = 'boy';
+    params.ageGroup = 'toddler-boys-2-5';
+  } else if (slug === 'baby' || slug === 'babies') {
+    params.ageGroup = 'baby-0-18m';
+  } else if (slug === 'costumes' || slug === 'kids-costumes' || slug === 'uniforms') {
+    params.productType = 'costumes';
+  } else {
+    params.category = slug;
+  }
   
   if (sortBy.value) params.sort = sortBy.value;
   
@@ -370,6 +592,10 @@ const reloadProducts = () => {
   if (selectedTypes.value.length > 0) params.productType = selectedTypes.value.join(',');
   if (selectedAgeGroups.value.length > 0) params.ageGroup = selectedAgeGroups.value.join(',');
   if (selectedSustainability.value.length > 0) params.sustainability = selectedSustainability.value.join(',');
+  
+  if (selectedSubsection.value) {
+    params.search = selectedSubsection.value.replace(/-/g, ' ');
+  }
   
   // Ranges / Numerics
   if (minPrice.value > 0) params.minPrice = minPrice.value;
@@ -386,6 +612,8 @@ const clearAllFilters = () => {
   selectedTypes.value = [];
   selectedAgeGroups.value = [];
   selectedSustainability.value = [];
+  selectedQuickCat.value = 'all';
+  selectedSubsection.value = null;
   minRating.value = null;
   minPrice.value = 0;
   maxPrice.value = 1000;

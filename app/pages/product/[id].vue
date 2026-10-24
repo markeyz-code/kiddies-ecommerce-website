@@ -138,6 +138,42 @@
               <span>Secure Payment<br/><span class="font-normal text-[8px]">Worry-free checkout</span></span>
             </div>
           </div>
+
+          <!-- Product information -->
+          <div class="divide-y divide-cream-200 rounded-2xl border border-cream-200 bg-white">
+            <details class="group p-4" open>
+              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-brand-900">
+                Product details
+                <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-brand-500">{{ product.description }}</p>
+              <ul v-if="singleProduct?.keyFeatures?.length" class="mt-3 space-y-1.5">
+                <li v-for="feature in singleProduct.keyFeatures" :key="feature" class="flex items-start gap-2 text-sm text-brand-500">
+                  <span class="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-coral-400"></span>{{ feature }}
+                </li>
+              </ul>
+            </details>
+            <details class="group p-4">
+              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-brand-900">
+                Shipping &amp; returns
+                <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="mt-3 space-y-2 text-sm leading-relaxed text-brand-500">
+                <p>Free standard shipping on orders over ${{ storeSettings.freeShippingThreshold || 30 }}. Orders are dispatched within 1–2 business days.</p>
+                <p>Not quite right? Return unworn items with tags within 30 days for a refund or exchange.</p>
+              </div>
+            </details>
+            <details class="group p-4">
+              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-brand-900">
+                Care &amp; sizing
+                <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="mt-3 space-y-2 text-sm leading-relaxed text-brand-500">
+                <p>Designed for comfortable everyday wear with room to move. If your little one is between sizes, we recommend sizing up.</p>
+                <button type="button" @click="showSizeGuide = true" class="font-bold text-coral-600 underline underline-offset-4">Open the size guide</button>
+              </div>
+            </details>
+          </div>
         </div>
       </div>
     </div>
@@ -147,15 +183,15 @@
 
     <!-- Size Guide Modal -->
     <div v-if="showSizeGuide" class="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4 transition-all duration-300" @click="showSizeGuide = false">
-      <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-lg w-full relative" @click.stop>
+      <div class="relative w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl sm:p-8" @click.stop>
         <button @click="showSizeGuide = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <h3 class="mb-6 font-display text-2xl font-semibold text-brand-900">Size guide</h3>
         
-        <div class="overflow-x-auto border border-gray-200 rounded-xl">
-          <table class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b border-gray-200">
+        <div class="overflow-x-auto rounded-2xl border border-cream-200">
+          <table class="w-full text-left text-sm text-brand-500">
+            <thead class="border-b border-cream-200 bg-cream-50 text-[11px] uppercase tracking-wider text-brand-600">
               <tr>
                 <th scope="col" class="px-6 py-4 font-bold">Size</th>
                 <th scope="col" class="px-6 py-4 font-bold">Age</th>
@@ -164,32 +200,32 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4 font-bold text-gray-900">XS (4)</td>
+              <tr class="border-b border-cream-100 bg-white hover:bg-cream-50">
+                <td class="px-6 py-4 font-bold text-brand-900">XS (4)</td>
                 <td class="px-6 py-4">3-4 yrs</td>
                 <td class="px-6 py-4">39-42</td>
                 <td class="px-6 py-4">33-39</td>
               </tr>
-              <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4 font-bold text-gray-900">S (5-6)</td>
+              <tr class="border-b border-cream-100 bg-white hover:bg-cream-50">
+                <td class="px-6 py-4 font-bold text-brand-900">S (5-6)</td>
                 <td class="px-6 py-4">5-6 yrs</td>
                 <td class="px-6 py-4">43-48</td>
                 <td class="px-6 py-4">40-50</td>
               </tr>
-              <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4 font-bold text-gray-900">M (7-8)</td>
+              <tr class="border-b border-cream-100 bg-white hover:bg-cream-50">
+                <td class="px-6 py-4 font-bold text-brand-900">M (7-8)</td>
                 <td class="px-6 py-4">7-8 yrs</td>
                 <td class="px-6 py-4">49-54</td>
                 <td class="px-6 py-4">51-65</td>
               </tr>
-              <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4 font-bold text-gray-900">L (10-12)</td>
+              <tr class="border-b border-cream-100 bg-white hover:bg-cream-50">
+                <td class="px-6 py-4 font-bold text-brand-900">L (10-12)</td>
                 <td class="px-6 py-4">9-10 yrs</td>
                 <td class="px-6 py-4">55-60</td>
                 <td class="px-6 py-4">66-87</td>
               </tr>
-              <tr class="bg-white hover:bg-gray-50">
-                <td class="px-6 py-4 font-bold text-gray-900">XL (14-16)</td>
+              <tr class="bg-white hover:bg-cream-50">
+                <td class="px-6 py-4 font-bold text-brand-900">XL (14-16)</td>
                 <td class="px-6 py-4">11-12 yrs</td>
                 <td class="px-6 py-4">61-63</td>
                 <td class="px-6 py-4">88-115</td>
@@ -197,7 +233,8 @@
             </tbody>
           </table>
         </div>
-        <p class="mt-4 text-xs text-gray-500 italic">* Measurements are approximate and may vary slightly by style.</p>
+        <p class="mt-4 text-xs italic text-brand-400">* Measurements are approximate and may vary slightly by style.</p>
+        <NuxtLink to="/size-guide" @click="showSizeGuide = false" class="btn-secondary mt-5 w-full">Open the full size guide</NuxtLink>
       </div>
     </div>
 
@@ -299,13 +336,30 @@ import { useCustomToast } from '~/composables/core/useCustomToast';
 import { useCart } from '~/composables/core/useCart';
 import { useAuth } from '~/composables/modules/auth/useAuth';
 import { useReviews } from '~/composables/modules/reviews/useReviews';
+import { useStoreSettings } from '~/composables/core/useStoreSettings';
+import { rawBaseUrl } from '~/api_factory/axios.config';
 
 const route = useRoute();
 const { fetchProductById, fetchRelatedProducts, singleProduct, relatedProducts, loading } = useFetchProducts();
+
+// Fetch the product during SSR so the page renders with real content and
+// search engines receive the correct title, description and structured data.
+const { data: initialProduct } = await useAsyncData(
+  () => `product-${route.params.id}`,
+  () => $fetch(`${rawBaseUrl}/products/${route.params.id}`).catch(() => null),
+  { watch: [() => route.params.id] }
+);
+watch(initialProduct, (value) => {
+  if (value) {
+    singleProduct.value = value;
+    loading.value = false;
+  }
+}, { immediate: true });
 const { showToast } = useCustomToast();
 const cart = useCart();
 const { user, toggleWishlist } = useAuth();
 const { reviews, loading: reviewsLoading, fetchReviews, submitReview } = useReviews();
+const { settings: storeSettings, fetchStoreSettings } = useStoreSettings();
 
 const reviewRating = ref(5);
 const reviewComment = ref('');
@@ -324,6 +378,7 @@ const toggleFavorite = async () => {
 onMounted(() => {
   fetchProductById(route.params.id);
   fetchRelatedProducts(route.params.id);
+  fetchStoreSettings();
 });
 
 watch(() => route.params.id, (id, previous) => {
@@ -519,4 +574,48 @@ const addToBag = () => {
     toastType: 'success'
   });
 };
+
+const seoTitle = computed(() => product.value?.name || 'Product');
+const seoDescription = computed(() =>
+  product.value?.description
+    ? String(product.value.description).slice(0, 155)
+    : 'Shop thoughtfully designed kids clothing at JasmarKids.'
+);
+useSeoMeta({
+  title: seoTitle,
+  description: seoDescription,
+  ogTitle: computed(() => `${seoTitle.value} | JasmarKids`),
+  ogDescription: seoDescription,
+  ogImage: computed(() => activeImage.value || product.value?.image || ''),
+  ogType: 'product'
+});
+useHead(() => {
+  if (!product.value) return {};
+  const p = singleProduct.value || {};
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: p.name,
+    description: p.description,
+    sku: p.sku,
+    image: [p.imageUrls?.original, p.imageUrls?.large, p.imageUrls?.medium].filter(Boolean),
+    brand: { '@type': 'Brand', name: 'JasmarKids' },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: storeSettings.value.currency || 'USD',
+      price: Number(p.basePrice || 0).toFixed(2),
+      availability: 'https://schema.org/InStock'
+    }
+  };
+  if (p.averageRating && p.reviewCount) {
+    schema.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: p.averageRating,
+      reviewCount: p.reviewCount
+    };
+  }
+  return {
+    script: [{ type: 'application/ld+json', innerHTML: JSON.stringify(schema) }]
+  };
+});
 </script>

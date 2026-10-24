@@ -21,6 +21,15 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: 'JasmarKids | Premium Kids Fashion',
+      titleTemplate: '%s · JasmarKids',
+      meta: [
+        { name: 'description', content: 'Thoughtfully designed kids clothing and accessories — soft fabrics, playful details and everyday comfort for babies, toddlers and children.' },
+        { name: 'theme-color', content: '#1A365D' },
+        { property: 'og:site_name', content: 'JasmarKids' },
+        { property: 'og:type', content: 'website' },
+        { name: 'twitter:card', content: 'summary_large_image' }
+      ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },

@@ -47,13 +47,17 @@
         </button>
         
         <div class="flex items-center space-x-1 sm:space-x-2">
-          <!-- Find a Store -->
-          <button @click="isStoreModalOpen = true" class="hidden sm:flex bg-brand-50 text-brand-700 rounded-full p-2.5 hover:bg-brand-100 transition-colors">
-            <MapPinIcon class="h-5 w-5" />
-          </button>
+          <!-- Instagram Link (Online Store) -->
+          <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="hidden sm:flex bg-brand-50 text-brand-700 hover:text-pink-600 rounded-full p-2.5 hover:bg-pink-50 transition-colors" title="Instagram @jasmarkids">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </a>
           
           <!-- Favorites -->
-          <button @click="handleFavoritesClick" class="hidden sm:flex bg-brand-50 text-brand-700 rounded-full p-2.5 hover:bg-brand-100 transition-colors">
+          <button aria-label="Open wishlist" @click="handleFavoritesClick" class="hidden sm:flex bg-brand-50 text-brand-700 rounded-full p-2.5 hover:bg-brand-100 transition-colors">
             <HeartIcon class="h-5 w-5" />
           </button>
           
@@ -68,7 +72,7 @@
           </button>
 
           <!-- Cart -->
-          <NuxtLink to="/cart" class="bg-brand-50 text-brand-700 rounded-full p-2.5 hover:bg-brand-100 transition-colors relative">
+          <NuxtLink to="/cart" aria-label="Shopping bag" class="bg-brand-50 text-brand-700 rounded-full p-2.5 hover:bg-brand-100 transition-colors relative">
             <ShoppingBagIcon class="h-5 w-5" />
             <span v-if="cart.totalItems > 0" class="absolute -top-1 -right-1 bg-coral-500 text-white text-[10px] font-black h-5 w-5 rounded-full flex items-center justify-center shadow-sm border-2 border-white">{{ cart.totalItems }}</span>
           </NuxtLink>
@@ -104,16 +108,16 @@
       </div>
 
       <!-- Mega Menu Dropdown -->
-      <div v-if="activeMegaMenu && activeMegaMenuData" class="absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+      <div v-if="activeMegaMenu && activeMegaMenuData" class="absolute top-full left-0 w-full bg-white border-t border-cream-200 shadow-xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
         <div class="max-w-7xl mx-auto px-8 py-8 flex gap-8">
           
           <!-- Menu Columns -->
           <div class="flex-1 grid grid-cols-3 gap-8">
             <div v-for="(section, sectionName) in activeMegaMenuData.sections" :key="sectionName">
-              <h4 class="font-bold text-xs uppercase tracking-wider mb-4 border-b pb-2 text-gray-900">{{ sectionName }}</h4>
+              <h4 class="font-bold text-xs uppercase tracking-wider mb-4 border-b pb-2 text-brand-900">{{ sectionName }}</h4>
               <ul class="space-y-3">
                 <li v-for="item in section" :key="item.name">
-                  <NuxtLink :to="item.href" class="text-xs text-gray-600 hover:text-blue-900 hover:underline font-medium">{{ item.name }}</NuxtLink>
+                  <NuxtLink :to="item.href" class="text-xs text-brand-500 hover:text-brand-900 hover:underline font-medium">{{ item.name }}</NuxtLink>
                 </li>
               </ul>
             </div>
@@ -126,7 +130,7 @@
                <div class="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/60 to-transparent">
                   <h3 class="text-white font-black text-xl mb-1 leading-tight">{{ getMegaMenuAd(activeMegaMenu).title }}</h3>
                   <p class="text-white text-sm font-medium mb-3">{{ getMegaMenuAd(activeMegaMenu).subtitle }}</p>
-                  <NuxtLink :to="getMegaMenuAd(activeMegaMenu).ctaLink || '/products'" class="bg-white text-black text-xs font-bold px-6 py-2 rounded-full text-center uppercase tracking-widest hover:bg-gray-100">
+                  <NuxtLink :to="getMegaMenuAd(activeMegaMenu).ctaLink || '/products'" class="bg-white text-black text-xs font-bold px-6 py-2 rounded-full text-center uppercase tracking-widest hover:bg-cream-100">
                     {{ getMegaMenuAd(activeMegaMenu).ctaText || 'SHOP NOW' }}
                   </NuxtLink>
                </div>
@@ -182,6 +186,19 @@
                 </NuxtLink>
               </li>
             </ul>
+
+            <div class="mt-5 border-t border-white/10 pt-4">
+              <p class="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">More from JasmarKids</p>
+              <NuxtLink to="/about" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10">
+                Our Story <span class="text-xs text-white/30">→</span>
+              </NuxtLink>
+              <NuxtLink to="/size-guide" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10">
+                Size Guide <span class="text-xs text-white/30">→</span>
+              </NuxtLink>
+              <NuxtLink to="/track" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10">
+                Track an Order <span class="text-xs text-white/30">→</span>
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -315,26 +332,29 @@
           <p class="text-center text-xs font-medium text-brand-500 mb-6">Change your delivery destination &amp; preferences</p>
 
           <div class="space-y-4">
-            <div class="space-y-1.5">
-              <label class="text-[11px] font-bold uppercase tracking-wider text-brand-400">Country / Region</label>
-              <select v-model="activeLocale" class="input-base">
-                <option v-for="(loc, key) in currentLocales" :key="key" :value="key">{{ loc.flag }} {{ loc.name }}</option>
-              </select>
-            </div>
+            <CustomSelect
+              id="ship-country"
+              v-model="activeLocale"
+              label="Country / Region"
+              :options="localeOptions"
+              placeholder="Select Country"
+            />
             
-            <div class="space-y-1.5">
-              <label class="text-[11px] font-bold uppercase tracking-wider text-brand-400">Language</label>
-              <select v-model="activeLanguage" class="input-base">
-                <option v-for="(lang, key) in currentLanguages" :key="key" :value="key">{{ lang }}</option>
-              </select>
-            </div>
+            <CustomSelect
+              id="ship-language"
+              v-model="activeLanguage"
+              label="Language"
+              :options="languageOptions"
+              placeholder="Select Language"
+            />
 
-            <div class="space-y-1.5">
-              <label class="text-[11px] font-bold uppercase tracking-wider text-brand-400">Currency</label>
-              <select v-model="activeCurrency" class="input-base">
-                <option v-for="(curr, key) in currentCurrencies" :key="key" :value="key">{{ curr.name }}</option>
-              </select>
-            </div>
+            <CustomSelect
+              id="ship-currency"
+              v-model="activeCurrency"
+              label="Currency"
+              :options="currencyOptions"
+              placeholder="Select Currency"
+            />
 
             <button 
               @click="isShipToModalOpen = false" 
@@ -350,74 +370,7 @@
         </div>
       </div>
 
-      <!-- FIND A STORE DRAWER (Right Side, Floating & Rounded) -->
-      <div 
-        v-if="isStoreModalOpen" 
-        class="fixed inset-0 z-[9999] flex justify-end p-3 sm:p-5 pointer-events-auto"
-      >
-        <div 
-          class="fixed inset-0 bg-brand-950/45 backdrop-blur-sm transition-opacity duration-300" 
-          @click="isStoreModalOpen = false"
-        ></div>
-        <div class="relative z-10 w-full max-w-sm sm:max-w-md h-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)] my-auto bg-white rounded-3xl shadow-2xl border border-cream-200/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-right-4 duration-300">
-          <div class="px-6 py-4 border-b border-cream-200 flex justify-between items-center bg-cream-50/50">
-            <div>
-              <p class="text-[11px] font-bold uppercase tracking-widest text-brand-400">Store locator</p>
-              <h3 class="font-display text-lg font-semibold text-brand-900">Find a store near you</h3>
-            </div>
-            <button 
-              @click="isStoreModalOpen = false" 
-              aria-label="Close"
-              class="h-9 w-9 rounded-full bg-cream-100 hover:bg-cream-200 text-brand-700 flex items-center justify-center transition-colors"
-            >
-              <XIcon class="h-5 w-5" />
-            </button>
-          </div>
-          
-          <div class="p-6 flex flex-col h-full overflow-hidden custom-scrollbar">
-            <button @click="useCurrentLocation" class="inline-flex items-center text-xs font-bold text-brand-700 hover:text-brand-950 mb-5 underline underline-offset-4">
-              <MapPinIcon class="h-4 w-4 mr-1.5 text-coral-500" />
-              Use my current location
-            </button>
-
-            <div class="flex flex-col gap-3 shrink-0">
-              <div>
-                <label class="text-[10px] font-bold text-brand-400 block mb-1 uppercase tracking-wider">Location</label>
-                <input v-model="storeSearchQuery" type="text" placeholder="Zip code or city, state" class="input-base text-xs py-2.5" @keyup.enter="searchStores">
-              </div>
-              <div>
-                <label class="text-[10px] font-bold text-brand-400 block mb-1 uppercase tracking-wider">Distance</label>
-                <select v-model="storeSearchDistance" class="input-base text-xs py-2.5">
-                  <option value="25">Within 25 miles</option>
-                  <option value="50">Within 50 miles</option>
-                  <option value="100">Within 100 miles</option>
-                </select>
-              </div>
-              <button @click="searchStores" class="btn-primary py-3 text-xs uppercase tracking-widest mt-1">
-                <span v-if="isSearchingStores" class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
-                Search Stores
-              </button>
-            </div>
-
-            <!-- Store Results -->
-            <div class="mt-6 flex-1 overflow-y-auto custom-scrollbar">
-              <div v-if="storeSearchResults.length > 0" class="flex flex-col gap-3">
-                <div v-for="store in storeSearchResults" :key="store._id" class="p-4 border border-cream-200 rounded-2xl bg-cream-50/50 hover:border-brand-300 transition-colors">
-                  <h4 class="font-bold text-sm text-brand-900">{{ store.name }}</h4>
-                  <p class="text-xs text-brand-600 mt-1">{{ store.address }}</p>
-                  <p class="text-xs text-brand-600">{{ store.city }}, {{ store.state }} {{ store.zip }}</p>
-                  <p v-if="store.phone" class="text-xs font-semibold text-brand-800 mt-2 flex items-center">
-                    📞 {{ store.phone }}
-                  </p>
-                </div>
-              </div>
-              <div v-else-if="hasSearched && !isSearchingStores" class="text-center text-xs font-medium text-brand-400 py-8">
-                No stores found matching your search.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- End Modals -->
     </Teleport>
   </ClientOnly>
 
@@ -442,64 +395,6 @@ const { showToast } = useCustomToast();
 const isMenuOpen = ref(false);
 const isSearchOpen = ref(false);
 const isCountryModalOpen = ref(false);
-const isStoreModalOpen = ref(false);
-
-const handleFavoritesClick = () => {
-  if (!user.value) {
-    isAuthModalOpen.value = true;
-  } else {
-    router.push('/account?tab=wishlists');
-  }
-};
-
-const storeSearchQuery = ref('');
-const storeSearchDistance = ref('25');
-const storeSearchResults = ref([]);
-const isSearchingStores = ref(false);
-const hasSearched = ref(false);
-
-const searchStores = async () => {
-  if (!storeSearchQuery.value) return;
-  isSearchingStores.value = true;
-  hasSearched.value = true;
-  try {
-    const res = await GATEWAY_ENDPOINT.get(`/stores/search`, {
-      params: { q: storeSearchQuery.value, distance: storeSearchDistance.value }
-    });
-    storeSearchResults.value = res.data;
-  } catch(e) {
-    console.error('Error fetching stores', e);
-  } finally {
-    isSearchingStores.value = false;
-  }
-};
-
-const useCurrentLocation = () => {
-  if (navigator.geolocation) {
-    isSearchingStores.value = true;
-    hasSearched.value = true;
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      try {
-        const { latitude, longitude } = position.coords;
-        const res = await GATEWAY_ENDPOINT.get(`/stores/search`, {
-          params: { lat: latitude, lng: longitude, distance: storeSearchDistance.value }
-        });
-        storeSearchResults.value = res.data;
-      } catch (e) {
-        console.error('Error fetching stores', e);
-      } finally {
-        isSearchingStores.value = false;
-      }
-    }, (error) => {
-      console.error(error);
-      isSearchingStores.value = false;
-      showToast({ title: 'Location Error', message: 'Could not access your location.', toastType: 'error' });
-    });
-  } else {
-    showToast({ title: 'Not Supported', message: 'Geolocation is not supported by your browser.', toastType: 'error' });
-  }
-};
-
 const isBannerVisible = ref(true);
 const isMobileMenuOpen = ref(false);
 const isShipToModalOpen = ref(false);
@@ -550,105 +445,123 @@ const handleSearch = () => {
 };
 
 const girlMegaMenuSections = {
-  'Clothing': [
-    { name: 'New Arrivals', href: '/products?category=new&gender=girl' },
-    { name: 'School Uniforms', href: '/products?category=uniforms&gender=girl' },
-    { name: 'Dresses', href: '/products?category=dresses&gender=girl' },
-    { name: 'Jeans', href: '/products?category=jeans&gender=girl' },
-    { name: 'Leggings', href: '/products?category=leggings&gender=girl' },
-    { name: 'Graphic Tees', href: '/products?category=graphic-tees&gender=girl' },
+  'Girls (Age 6–16)': [
+    { name: 'All Girls Clothing', href: '/category/girl' },
+    { name: 'Dresses', href: '/products?gender=girl&productType=dresses' },
+    { name: 'Tops & Blouses', href: '/products?gender=girl&productType=tops' },
+    { name: 'T-Shirts & Tees', href: '/products?gender=girl&productType=t-shirts' },
+    { name: 'Shorts', href: '/products?gender=girl&productType=shorts' },
+    { name: 'Bottoms & Skirts', href: '/products?gender=girl&productType=bottoms' },
+    { name: 'Socks & Tights', href: '/products?gender=girl&productType=socks' },
+    { name: 'Shoes & Sandals', href: '/products?gender=girl&productType=shoes' },
   ],
-  'Shoes & Accessories': [
-    { name: 'Shoes', href: '/products?category=shoes&gender=girl' },
-    { name: 'Hair Accessories', href: '/products?category=accessories&gender=girl' },
-    { name: 'Tights & Underwear', href: '/products?category=socks&gender=girl' },
+  'Collections & Edits': [
+    { name: 'Kids Costumes', href: '/category/costumes' },
+    { name: 'Casual Daily Sets', href: '/products?category=sets&gender=girl' },
+    { name: 'Party & Festive Wear', href: '/products?category=party&gender=girl' },
+    { name: 'Pajamas & Sleepwear', href: '/products?category=pajamas&gender=girl' },
+    { name: 'Back to School', href: '/products?category=back-to-school&gender=girl' },
   ],
   'More Ways to Shop': [
-    { name: 'Clearance', href: '/products?category=sale&gender=girl' },
-    { name: 'Back to School', href: '/products?category=back-to-school&gender=girl' },
-    { name: 'Halloween', href: '/products?category=halloween&gender=girl' },
+    { name: 'New Arrivals', href: '/products?category=new&gender=girl' },
+    { name: 'Sale & Clearance', href: '/products?category=sale&gender=girl' },
+    { name: 'Size Guide (Age 6–16)', href: '/size-guide' },
   ]
 };
 
 const boyMegaMenuSections = {
-  'Clothing': [
-    { name: 'New Arrivals', href: '/products?category=new&gender=boy' },
-    { name: 'School Uniforms', href: '/products?category=uniforms&gender=boy' },
-    { name: 'Jeans', href: '/products?category=jeans&gender=boy' },
-    { name: 'Joggers & Sweatpants', href: '/products?category=bottoms&gender=boy' },
-    { name: 'Graphic Tees', href: '/products?category=graphic-tees&gender=boy' },
+  'Boys (Age 6–16)': [
+    { name: 'All Boys Clothing', href: '/category/boy' },
+    { name: 'T-Shirts & Graphic Tees', href: '/products?gender=boy&productType=t-shirts' },
+    { name: 'Tops & Shirts', href: '/products?gender=boy&productType=tops' },
+    { name: 'Shorts', href: '/products?gender=boy&productType=shorts' },
+    { name: 'Bottoms & Joggers', href: '/products?gender=boy&productType=bottoms' },
+    { name: 'Jeans & Denim', href: '/products?category=jeans&gender=boy' },
+    { name: 'Socks & Underwear', href: '/products?gender=boy&productType=socks' },
+    { name: 'Shoes & Sneakers', href: '/products?gender=boy&productType=shoes' },
   ],
-  'Shoes & Accessories': [
-    { name: 'Sneakers & Shoes', href: '/products?category=shoes&gender=boy' },
-    { name: 'Hats & Accessories', href: '/products?category=accessories&gender=boy' },
-    { name: 'Socks & Underwear', href: '/products?category=socks&gender=boy' },
+  'Collections & Edits': [
+    { name: 'Kids Costumes', href: '/category/costumes' },
+    { name: 'Matching Outfit Sets', href: '/products?category=sets&gender=boy' },
+    { name: 'Active & Sportswear', href: '/products?category=active&gender=boy' },
+    { name: 'Pajamas & Loungewear', href: '/products?category=pajamas&gender=boy' },
+    { name: 'Back to School', href: '/products?category=back-to-school&gender=boy' },
   ],
   'More Ways to Shop': [
-    { name: 'Clearance', href: '/products?category=sale&gender=boy' },
-    { name: 'Game Day Shop', href: '/products?category=game-day&gender=boy' },
-    { name: 'Halloween', href: '/products?category=halloween&gender=boy' },
+    { name: 'New Arrivals', href: '/products?category=new&gender=boy' },
+    { name: 'Sale & Clearance', href: '/products?category=sale&gender=boy' },
+    { name: 'Size Guide (Age 6–16)', href: '/size-guide' },
   ]
 };
 
 const toddlerMegaMenuSections = {
-  'Clothing': [
-    { name: 'New Arrivals', href: '/products?category=new&ageGroup=toddler' },
-    { name: 'Matching Sets', href: '/products?category=sets&ageGroup=toddler' },
-    { name: 'Pajamas', href: '/products?category=pajamas&ageGroup=toddler' },
-    { name: 'Graphic Tees', href: '/products?category=graphic-tees&ageGroup=toddler' },
+  'Toddler (Age 2–5)': [
+    { name: 'All Toddler Outfits', href: '/products?ageGroup=toddler' },
+    { name: 'Toddler Girls (2–5 yrs)', href: '/products?gender=toddler-girl&ageGroup=toddler' },
+    { name: 'Toddler Boys (2–5 yrs)', href: '/products?gender=toddler-boy&ageGroup=toddler' },
+    { name: 'Dresses & Rompers', href: '/products?productType=dresses&ageGroup=toddler' },
+    { name: 'Tops & T-Shirts', href: '/products?productType=tops&ageGroup=toddler' },
+    { name: 'Shorts & Bottoms', href: '/products?productType=shorts&ageGroup=toddler' },
   ],
-  'Essentials': [
-    { name: 'Shoes', href: '/products?category=shoes&ageGroup=toddler' },
-    { name: 'Socks', href: '/products?category=socks&ageGroup=toddler' },
+  'Toddler Essentials': [
+    { name: 'Playtime Sets', href: '/products?category=sets&ageGroup=toddler' },
+    { name: 'Kids Costumes', href: '/category/costumes' },
+    { name: 'Shoes & Slip-ons', href: '/products?productType=shoes&ageGroup=toddler' },
+    { name: 'Socks', href: '/products?productType=socks&ageGroup=toddler' },
+    { name: 'Pajamas', href: '/products?category=pajamas&ageGroup=toddler' },
   ],
   'More Ways to Shop': [
-    { name: 'Clearance', href: '/products?category=sale&ageGroup=toddler' },
-    { name: 'Character Shop', href: '/products?category=character&ageGroup=toddler' },
+    { name: 'New Arrivals', href: '/products?category=new&ageGroup=toddler' },
+    { name: 'Sale', href: '/products?category=sale&ageGroup=toddler' },
+    { name: 'Size Guide (Age 2–5)', href: '/size-guide' },
   ]
 };
 
 const babyMegaMenuSections = {
-  'Clothing': [
-    { name: 'New Arrivals', href: '/products?category=new&ageGroup=baby' },
-    { name: 'Bodysuits & One-Pieces', href: '/products?category=tops&ageGroup=baby' },
-    { name: 'Sleep & Play', href: '/products?category=pajamas&ageGroup=baby' },
-    { name: 'Sets', href: '/products?category=sets&ageGroup=baby' },
+  'Baby (0–18 Months)': [
+    { name: 'All Baby Clothing', href: '/category/baby' },
+    { name: 'Baby Girl (0–18m)', href: '/products?gender=girl&ageGroup=baby' },
+    { name: 'Baby Boy (0–18m)', href: '/products?gender=boy&ageGroup=baby' },
+    { name: 'Bodysuits & One-Pieces', href: '/products?productType=tops&ageGroup=baby' },
+    { name: 'Sleep & Play Onesies', href: '/products?category=pajamas&ageGroup=baby' },
+    { name: 'Baby Sets', href: '/products?category=sets&ageGroup=baby' },
   ],
-  'Essentials': [
-    { name: 'Shoes & Booties', href: '/products?category=shoes&ageGroup=baby' },
-    { name: 'Socks & Tights', href: '/products?category=socks&ageGroup=baby' },
+  'Baby Essentials': [
+    { name: 'Shoes & Booties', href: '/products?productType=shoes&ageGroup=baby' },
+    { name: 'Socks & Tights', href: '/products?productType=socks&ageGroup=baby' },
     { name: 'Bibs & Blankets', href: '/products?category=accessories&ageGroup=baby' },
+    { name: 'Baby Shower Gifts', href: '/products?category=gifts&ageGroup=baby' },
   ],
   'More Ways to Shop': [
-    { name: 'Baby Shower Gifts', href: '/products?category=gifts&ageGroup=baby' },
-    { name: 'Clearance', href: '/products?category=sale&ageGroup=baby' },
+    { name: 'New Arrivals', href: '/products?category=new&ageGroup=baby' },
+    { name: 'Sale', href: '/products?category=sale&ageGroup=baby' },
+    { name: 'Size Guide (0–18m)', href: '/size-guide' },
   ]
 };
 
 const specialtyMegaMenuSections = (tag) => ({
-  'Shop By Category': [
-    { name: 'Girls', href: `/products?category=${tag}&gender=girl` },
-    { name: 'Boys', href: `/products?category=${tag}&gender=boy` },
-    { name: 'Toddler Girls', href: `/products?category=${tag}&gender=toddler-girl` },
-    { name: 'Toddler Boys', href: `/products?category=${tag}&gender=toddler-boy` },
-    { name: 'Baby', href: `/products?category=${tag}&ageGroup=baby` },
+  'Shop By Age & Gender': [
+    { name: 'Girls (Age 6–16)', href: `/products?category=${tag}&gender=girl` },
+    { name: 'Boys (Age 6–16)', href: `/products?category=${tag}&gender=boy` },
+    { name: 'Toddler Girls (Age 2–5)', href: `/products?category=${tag}&gender=toddler-girl` },
+    { name: 'Toddler Boys (Age 2–5)', href: `/products?category=${tag}&gender=toddler-boy` },
+    { name: 'Baby (0–18 Months)', href: `/products?category=${tag}&ageGroup=baby` },
   ],
   'Featured': [
     { name: 'New Additions', href: `/products?category=${tag}&sort=newest` },
     { name: 'Best Sellers', href: `/products?category=${tag}&sort=popular` },
-    { name: 'Clearance', href: `/products?category=${tag}&sale=true` },
+    { name: 'Clearance Deals', href: `/products?category=${tag}&sale=true` },
   ]
 });
 
 const navLinks = [
-  { name: 'Girl', href: '/category/girl', target: 'girl', sections: girlMegaMenuSections },
-  { name: 'Boy', href: '/category/boy', target: 'boy', sections: boyMegaMenuSections },
-  { name: 'Toddler Girl', href: '/category/toddler-girl', target: 'toddler-girl', sections: toddlerMegaMenuSections },
-  { name: 'Toddler Boy', href: '/category/toddler-boy', target: 'toddler-boy', sections: toddlerMegaMenuSections },
-  { name: 'Baby', href: '/category/baby', target: 'baby', sections: babyMegaMenuSections },
-  { name: 'Halloween', href: '/category/halloween', target: 'halloween', sections: specialtyMegaMenuSections('halloween') },
-  { name: 'Uniforms', href: '/category/uniforms', target: 'uniforms', sections: specialtyMegaMenuSections('uniforms') },
-  { name: 'Back To School', href: '/category/back-to-school', target: 'back-to-school', sections: specialtyMegaMenuSections('back-to-school') },
+  { name: 'Girls (6–16)', href: '/category/girl', target: 'girl', sections: girlMegaMenuSections },
+  { name: 'Boys (6–16)', href: '/category/boy', target: 'boy', sections: boyMegaMenuSections },
+  { name: 'Toddler Girls (2–5)', href: '/category/toddler-girl', target: 'toddler-girl', sections: toddlerMegaMenuSections },
+  { name: 'Toddler Boys (2–5)', href: '/category/toddler-boy', target: 'toddler-boy', sections: toddlerMegaMenuSections },
+  { name: 'Baby (0–18m)', href: '/category/baby', target: 'baby', sections: babyMegaMenuSections },
+  { name: 'Kids Costumes', href: '/category/costumes', target: 'costumes', sections: specialtyMegaMenuSections('costumes') },
+  { name: 'Back to School', href: '/category/back-to-school', target: 'back-to-school', sections: specialtyMegaMenuSections('back-to-school') },
   { name: 'Pajamas', href: '/category/pajamas', target: 'pajamas', sections: specialtyMegaMenuSections('pajamas') },
   { name: 'Sale', href: '/category/sale', target: 'sale', isSale: true, sections: specialtyMegaMenuSections('sale') },
 ];
@@ -724,4 +637,26 @@ const currentCurrencies = {
   zar: { code: 'ZAR', name: 'South African Rand', symbol: 'R' },
   ngn: { code: 'NGN', name: 'Nigerian Naira', symbol: '₦' }
 };
+
+const localeOptions = computed(() => Object.entries(currentLocales).map(([key, loc]) => ({
+  value: key,
+  label: `${loc.flag} ${loc.name}`
+})));
+
+const languageOptions = computed(() => Object.entries(currentLanguages).map(([key, lang]) => ({
+  value: key,
+  label: lang
+})));
+
+const currencyOptions = computed(() => Object.entries(currentCurrencies).map(([key, curr]) => ({
+  value: key,
+  label: `${curr.name} (${curr.symbol})`
+})));
+
+const distanceOptions = [
+  { value: '15', label: 'Within 15 miles' },
+  { value: '25', label: 'Within 25 miles' },
+  { value: '50', label: 'Within 50 miles' },
+  { value: '100', label: 'Within 100 miles' }
+];
 </script>

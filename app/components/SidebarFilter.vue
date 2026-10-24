@@ -6,24 +6,21 @@
         <h4 class="font-bold text-sm">Shop by Category</h4>
       </div>
       <ul class="text-sm text-gray-700 space-y-1 mb-4 pl-2">
-        <li class="cursor-pointer hover:underline">Baby Girl</li>
-        <li class="cursor-pointer hover:underline">Baby Boy</li>
-        <li class="cursor-pointer hover:underline">Shop All</li>
+        <li><NuxtLink to="/category/girl" class="cursor-pointer hover:underline">Girls (6–16y)</NuxtLink></li>
+        <li><NuxtLink to="/category/boy" class="cursor-pointer hover:underline">Boys (6–16y)</NuxtLink></li>
+        <li><NuxtLink to="/category/toddler" class="cursor-pointer hover:underline">Toddlers (2–5y)</NuxtLink></li>
+        <li><NuxtLink to="/category/baby" class="cursor-pointer hover:underline">Baby (0–18m)</NuxtLink></li>
+        <li><NuxtLink to="/category/costumes" class="cursor-pointer hover:underline">Kids Costumes</NuxtLink></li>
+        <li><NuxtLink to="/products" class="cursor-pointer hover:underline">Shop All</NuxtLink></li>
       </ul>
       <h4 class="font-bold text-sm mb-2">More Ways to Shop</h4>
     </div>
 
-    <div class="text-xs text-gray-500 mb-4 border-b pb-4">
-      Showing <span class="font-bold text-gray-900">1-57</span> of <span class="font-bold text-gray-900">57</span> Items
-    </div>
-
-    <div class="bg-blue-50/50 p-4 rounded-md mb-6 flex items-start space-x-3">
-      <div class="w-10 h-6 bg-black rounded-full relative cursor-pointer">
-        <div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold">OFF</div>
-      </div>
-      <div class="text-xs">
-        <span class="font-semibold">Select store</span> to see what is available near you<br/>
-        <a href="#" class="underline font-bold mt-1 inline-block">Select store</a>
+    <div class="bg-brand-50 p-3.5 rounded-lg mb-6 flex items-start space-x-3 border border-brand-100">
+      <div class="text-lg">🚚</div>
+      <div class="text-xs text-brand-800">
+        <span class="font-bold">Nationwide Delivery</span> across Nigeria.<br/>
+        <a href="https://instagram.com/jasmarkids" target="_blank" rel="noopener noreferrer" class="underline font-bold text-coral-600 hover:text-coral-700 mt-1 inline-block">DM on Instagram @jasmarkids</a>
       </div>
     </div>
 
@@ -139,14 +136,17 @@ const colors = [
   { name: 'Browns', class: 'bg-amber-800' }
 ];
 
-const sizes = ['UP TO 7LBS', '0-3 M', '3-6 M', '6-9 M'];
+const sizes = [
+  '0-3 M', '3-6 M', '6-9 M', '9-12 M', '12-18 M',
+  '2T', '3T', '4T', '5T',
+  '6Y', '7-8Y', '9-10Y', '11-12Y', '13-14Y', '15-16Y'
+];
 
 const additionalFilters = [
-  { name: 'Accessories Size', options: ['0-6 Months', '6-12 Months', '12-24 Months', 'One Size'] },
-  { name: 'Gender', options: ['Boys', 'Girls', 'Neutral'] },
+  { name: 'Age Group', options: ['Girls (6-16y)', 'Boys (6-16y)', 'Toddler Girls (2-5y)', 'Toddler Boys (2-5y)', 'Baby (0-18m)'] },
+  { name: 'Product Type', options: ['Dresses', 'Tops', 'T-Shirts', 'Shorts', 'Bottoms', 'Socks', 'Shoes', 'Kids Costumes', 'Pajamas', 'Sets'] },
+  { name: 'Gender', options: ['Boys', 'Girls', 'Unisex'] },
   { name: 'More Sustainable', options: ['Organic Cotton', 'Recycled Materials', 'Eco-friendly Dyes'] },
-  { name: 'Product Type', options: ['Tops', 'Bottoms', 'Dresses', 'Outerwear', 'Sets', 'Sleepwear'] },
   { name: 'Customer Rating', options: ['5 Stars', '4 Stars & Up', '3 Stars & Up'] },
-  { name: 'Age Group', options: ['Infant (0-24m)', 'Toddler (2-5T)', 'Kids (4-14)'] }
 ];
 </script>

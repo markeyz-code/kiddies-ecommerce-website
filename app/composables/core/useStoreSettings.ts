@@ -4,16 +4,16 @@ import { settingsApi } from '@/api_factory/modules/settings';
 const DEFAULTS = {
   storeName: 'JasmarKids',
   storeEmail: 'hello@jasmarkids.com',
-  phone: '+1 (555) 010-2030',
-  address: '128 Maple Street, Brooklyn, NY 11201',
-  currency: 'USD',
-  shippingFee: 5.95,
-  freeShippingThreshold: 30,
-  taxRate: 8,
-  instagram: 'https://instagram.com',
-  facebook: 'https://facebook.com',
-  twitter: 'https://twitter.com',
-  announcement: 'Extra 40% Off* Sale With Code EXTRA40'
+  phone: '+234 800 JASMARKIDS',
+  address: '',
+  currency: 'NGN',
+  shippingFee: 2500,
+  freeShippingThreshold: 50000,
+  taxRate: 7.5,
+  instagram: 'https://instagram.com/jasmarkids',
+  facebook: 'https://facebook.com/jasmarkids',
+  twitter: 'https://twitter.com/jasmarkids',
+  announcement: 'Nationwide Delivery Across Nigeria · DM @jasmarkids on Instagram'
 };
 
 export const useStoreSettings = () => {

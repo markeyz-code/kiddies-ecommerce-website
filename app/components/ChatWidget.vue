@@ -2,9 +2,10 @@
   <div v-if="!hideOnCheckoutRoutes">
     <!-- Chat Button -->
     <button 
+      v-show="!footerVisible || isOpen"
       @click="toggleChat"
       aria-label="Open customer support chat"
-      class="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 w-12 h-12 sm:w-14 sm:h-14 bg-emerald-600 text-white rounded-full shadow-xl flex items-center justify-center hover:bg-emerald-700 transition-colors z-50 focus:outline-none"
+      class="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 w-12 h-12 sm:w-14 sm:h-14 bg-emerald-600 text-white rounded-full shadow-xl flex items-center justify-center hover:bg-emerald-700 transition-colors z-50 focus:outline-none"
     >
       <MessageSquare v-if="!isOpen" class="w-6 h-6" />
       <X v-else class="w-6 h-6" />
@@ -162,6 +163,8 @@ const toggleChat = () => {
 
 const route = useRoute();
 const hideOnCheckoutRoutes = computed(() => ['/cart', '/checkout', '/checkout-success', '/account'].includes(route.path));
+const footerVisible = ref(false);
+let footerObserver = null;
 
 const generateSessionId = () => {
   return 'sess_' + Math.random().toString(36).substr(2, 9)
@@ -253,9 +256,23 @@ const scrollToBottom = () => {
   }, 50)
 }
 
+onMounted(() => {
+  const footer = document.querySelector('footer');
+  if (footer && 'IntersectionObserver' in window) {
+    footerObserver = new IntersectionObserver((entries) => {
+      footerVisible.value = entries[0]?.isIntersecting || false;
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    footerObserver.observe(footer);
+  }
+})
+
 onUnmounted(() => {
   if (socket) {
     socket.disconnect()
+  }
+  if (footerObserver) {
+    footerObserver.disconnect()
+    footerObserver = null
   }
 })
 </script>

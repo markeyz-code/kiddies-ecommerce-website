@@ -124,27 +124,34 @@
             </div>
 
             <div class="space-y-3 text-stone-600 font-medium mb-6 border-b border-brand-200 pb-6 text-sm">
+              <div v-if="isNigeria" class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 text-[11px] font-bold text-emerald-800 flex items-center gap-2">
+                <span>🇳🇬</span>
+                <span>Location set to Nigeria — paying in Naira (₦)</span>
+              </div>
               <div class="flex justify-between items-center">
                 <span>Subtotal</span>
-                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ (cart.subtotal || 0).toFixed(2) }}</span>
+                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ formatAmount(subtotalConverted) }}</span>
               </div>
               <div v-if="cart.discountAmount > 0" class="flex justify-between items-center text-emerald-600">
                 <span>Discount</span>
-                <span class="font-bold">-{{ currencySymbol }}{{ cart.discountAmount.toFixed(2) }}</span>
+                <span class="font-bold">-{{ currencySymbol }}{{ formatAmount(discountConverted) }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Shipping</span>
-                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ shippingFee.toFixed(2) }}</span>
+                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ formatAmount(shippingFee) }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Tax ({{ taxRate }}%)</span>
-                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ tax.toFixed(2) }}</span>
+                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ formatAmount(tax) }}</span>
               </div>
             </div>
             
             <div class="flex justify-between items-end">
-              <span class="font-bold text-stone-800 text-lg">Total</span>
-              <span class="font-black text-3xl text-stone-900 text-right drop-shadow-sm">{{ currencySymbol }}{{ orderTotal.toFixed(2) }}</span>
+              <div>
+                <span class="font-bold text-stone-800 text-lg block">Total</span>
+                <span v-if="isNigeria" class="text-[10px] font-bold text-emerald-700 uppercase">NGN (Naira)</span>
+              </div>
+              <span class="font-black text-3xl text-stone-900 text-right drop-shadow-sm">{{ currencySymbol }}{{ formatAmount(orderTotal) }}</span>
             </div>
             <div class="mt-8 flex items-center justify-center gap-3 text-stone-400">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
@@ -178,10 +185,33 @@ const storeSettings = ref<any>({
   taxRate: 8
 });
 
-const currencySymbol = computed(() => {
-  const symbols: Record<string, string> = { USD: '$', NGN: '₦', EUR: '€', GBP: '£', CAD: 'C$' };
-  return symbols[storeSettings.value.currency] || '$';
+const isNigeria = computed(() => {
+  const c = String(customer.value.country || '').toLowerCase();
+  return c.includes('nigeria') || c === 'ng';
 });
+
+const currentCurrency = computed(() => {
+  if (isNigeria.value) return 'NGN';
+  return storeSettings.value.currency || 'USD';
+});
+
+const NGN_RATE = 1500;
+const rateMultiplier = computed(() => {
+  return currentCurrency.value === 'NGN' ? NGN_RATE : 1;
+});
+
+const currencySymbol = computed(() => {
+  if (currentCurrency.value === 'NGN') return '₦';
+  const symbols: Record<string, string> = { USD: '$', NGN: '₦', EUR: '€', GBP: '£', CAD: 'C$' };
+  return symbols[currentCurrency.value] || '$';
+});
+
+const formatAmount = (val: number) => {
+  return Number(val || 0).toLocaleString('en-US', {
+    minimumFractionDigits: isNigeria.value ? 0 : 2,
+    maximumFractionDigits: 2
+  });
+};
 
 const countries = ref(Country.getAllCountries());
 const availableStates = computed(() => {
@@ -212,9 +242,12 @@ const customer = ref({
   phoneNumber: ''
 });
 
-watch(() => customer.value.country, () => {
+watch(() => customer.value.country, (newCountry) => {
   customer.value.state = '';
   customer.value.city = '';
+  if (newCountry && (newCountry.toLowerCase().includes('nigeria') || newCountry.toUpperCase() === 'NG')) {
+    paymentMethod.value = 'paystack';
+  }
 });
 
 watch(() => customer.value.state, () => {
@@ -235,19 +268,25 @@ const applyCoupon = async () => {
 const paymentMethod = ref('paystack');
 const taxRate = computed(() => Number(storeSettings.value.taxRate) || 0);
 
+const subtotalConverted = computed(() => Math.round((cart.subtotal || 0) * rateMultiplier.value * 100) / 100);
+const discountConverted = computed(() => Math.round((cart.discountAmount || 0) * rateMultiplier.value * 100) / 100);
+
 const shippingFee = computed(() => {
   const subtotal = cart.subtotal || 0;
   const threshold = Number(storeSettings.value.freeShippingThreshold) || 0;
   if (threshold > 0 && subtotal >= threshold) return 0;
-  return Number(storeSettings.value.shippingFee) || 0;
+  const baseShipping = Number(storeSettings.value.shippingFee) || 0;
+  return Math.round(baseShipping * rateMultiplier.value * 100) / 100;
 });
 
 const tax = computed(() => {
-  return Math.round((cart.subtotal || 0) * (taxRate.value / 100) * 100) / 100;
+  const discounted = Math.max(0, subtotalConverted.value - discountConverted.value);
+  return Math.round(discounted * (taxRate.value / 100) * 100) / 100;
 });
 
 const orderTotal = computed(() => {
-  return Math.round(((cart.subtotal || 0) + shippingFee.value + tax.value) * 100) / 100;
+  const discounted = Math.max(0, subtotalConverted.value - discountConverted.value);
+  return Math.round((discounted + shippingFee.value + tax.value) * 100) / 100;
 });
 
 const getItemImage = (item: any) => {
@@ -297,7 +336,8 @@ const handleCheckout = async () => {
   }
 
   const result = await checkout(customer.value, paymentMethod.value, {
-    subtotal: cart.subtotal,
+    currency: currentCurrency.value,
+    subtotal: subtotalConverted.value,
     shippingFee: shippingFee.value,
     tax: tax.value,
     totalAmount: orderTotal.value

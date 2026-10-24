@@ -42,6 +42,8 @@
 </template>
 
 <script setup>
+useSeoMeta({ robots: 'noindex, nofollow' });
+
 import { ref, onMounted } from 'vue';
 import { useAuth } from '~/composables/modules/auth/useAuth';
 import { productsApi } from '~/api_factory/modules/products';

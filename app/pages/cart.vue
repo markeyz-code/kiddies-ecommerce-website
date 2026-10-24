@@ -112,6 +112,8 @@
 </template>
 
 <script setup>
+useSeoMeta({ robots: 'noindex, nofollow' });
+
 import { computed } from 'vue'
 import { useCart } from '@/composables/core/useCart'
 import { useStoreSettings } from '@/composables/core/useStoreSettings'

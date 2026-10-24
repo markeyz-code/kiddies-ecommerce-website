@@ -8,20 +8,22 @@
     </main>
 
     <!-- Premium Footer -->
-    <footer class="bg-brand-900 text-cream-100/80 py-12 md:py-16 mt-auto">
+    <footer class="bg-brand-900 text-cream-100/80 pt-12 pb-24 md:py-16 mt-auto">
       <div class="max-w-[1400px] mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
         <div class="col-span-2 md:col-span-1">
           <span class="text-2xl md:text-3xl font-display font-semibold text-white mb-4 md:mb-6 block tracking-tight">{{ storeSettings.storeName || 'JasmarKids' }}</span>
-          <p class="text-sm font-light leading-relaxed text-cream-100/70 pr-0 md:pr-4">Curated elegance for little ones. Premium fashion and accessories designed for comfort and playtime.</p>
-          <div class="mt-5 space-y-1 text-sm font-light text-cream-100/70">
-            <a :href="`mailto:${storeSettings.storeEmail}`" class="block hover:text-white transition-colors">{{ storeSettings.storeEmail }}</a>
-            <a v-if="storeSettings.phone" :href="`tel:${storeSettings.phone}`" class="block hover:text-white transition-colors">{{ storeSettings.phone }}</a>
-            <p v-if="storeSettings.address" class="text-xs text-cream-100/50">{{ storeSettings.address }}</p>
+          <p class="text-sm font-light leading-relaxed text-cream-100/70 pr-0 md:pr-4">Curated elegance for little ones. Modern, vibrant children's fashion made for African kids. Online boutique with nationwide delivery across Nigeria.</p>
+          <div class="mt-5 space-y-1.5 text-sm font-light text-cream-100/70">
+            <a :href="`mailto:${storeSettings.storeEmail || 'hello@jasmarkids.com'}`" class="block hover:text-white transition-colors">✉️ {{ storeSettings.storeEmail || 'hello@jasmarkids.com' }}</a>
+            <a v-if="storeSettings.phone" :href="`tel:${storeSettings.phone}`" class="block hover:text-white transition-colors">📞 {{ storeSettings.phone }}</a>
+            <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-coral-200 hover:text-white font-medium transition-colors">
+              📸 @jasmarkids on Instagram
+            </a>
           </div>
           <div class="flex items-center gap-4 mt-4 text-xs font-bold uppercase tracking-wider">
-            <a v-if="storeSettings.instagram" :href="storeSettings.instagram" target="_blank" rel="noopener" class="text-cream-100/70 hover:text-white">Instagram</a>
-            <a v-if="storeSettings.facebook" :href="storeSettings.facebook" target="_blank" rel="noopener" class="text-cream-100/70 hover:text-white">Facebook</a>
-            <a v-if="storeSettings.twitter" :href="storeSettings.twitter" target="_blank" rel="noopener" class="text-cream-100/70 hover:text-white">X</a>
+            <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener" class="text-coral-300 hover:text-white">Instagram</a>
+            <NuxtLink to="/contact" class="text-cream-100/70 hover:text-white">Contact</NuxtLink>
+            <NuxtLink to="/faq" class="text-cream-100/70 hover:text-white">Help</NuxtLink>
           </div>
         </div>
         
@@ -31,6 +33,7 @@
             <li><NuxtLink to="/products" class="hover:text-white hover:underline underline-offset-4 transition-all">All Products</NuxtLink></li>
             <li><NuxtLink to="/products?category=new" class="hover:text-white hover:underline underline-offset-4 transition-all">New Arrivals</NuxtLink></li>
             <li><NuxtLink to="/products?category=sale" class="text-amber-400 hover:text-amber-300 hover:underline underline-offset-4 transition-all">Sale</NuxtLink></li>
+            <li><NuxtLink to="/size-guide" class="hover:text-white hover:underline underline-offset-4 transition-all">Size Guide</NuxtLink></li>
           </ul>
         </div>
         
@@ -40,6 +43,7 @@
             <li><NuxtLink to="/faq" class="hover:text-white hover:underline underline-offset-4 transition-all">FAQ</NuxtLink></li>
             <li><NuxtLink to="/shipping" class="hover:text-white hover:underline underline-offset-4 transition-all">Shipping & Returns</NuxtLink></li>
             <li><NuxtLink to="/contact" class="hover:text-white hover:underline underline-offset-4 transition-all">Contact Us</NuxtLink></li>
+            <li><NuxtLink to="/about" class="hover:text-white hover:underline underline-offset-4 transition-all">Our Story</NuxtLink></li>
           </ul>
         </div>
         
@@ -73,6 +77,9 @@
         </div>
       </div>
     </footer>
+
+    <!-- Mobile bottom navigation -->
+    <MobileBottomNav />
 
     <!-- Global Chat Widget -->
     <ChatWidget />

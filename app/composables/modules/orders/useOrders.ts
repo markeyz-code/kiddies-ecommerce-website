@@ -31,6 +31,7 @@ export const useOrders = () => {
                 shippingFee: totals.shippingFee,
                 tax: totals.tax,
                 totalAmount: totals.totalAmount,
+                currency: totals.currency,
                 callback_url: `${window.location.origin}/checkout-success`,
             };
 

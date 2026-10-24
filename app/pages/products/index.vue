@@ -29,21 +29,55 @@
             Filters
             <span v-if="filtersActiveCount" class="flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-900 px-1 text-[10px] text-white">{{ filtersActiveCount }}</span>
           </button>
-          <label class="flex items-center gap-2">
-            <span class="hidden text-[11px] font-bold uppercase tracking-wider text-brand-400 md:inline">Sort</span>
-            <select v-model="sortBy" @change="reloadProducts" class="max-w-[140px] rounded-full border border-cream-300 bg-white px-4 py-2.5 text-xs font-semibold text-brand-700 focus:border-brand-500 focus:outline-none sm:max-w-none">
-              <option value="">Recommended</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-              <option value="newest">New Arrivals</option>
-            </select>
-          </label>
+          <div class="flex items-center gap-2 min-w-[170px]">
+            <CustomSelect
+              id="sort-products"
+              v-model="sortBy"
+              :options="sortOptions"
+              placeholder="Sort by"
+              @change="reloadProducts"
+            />
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- Quick Category & Sub-section Selector Bar -->
+    <div class="container-site mt-4 mb-2">
+      <!-- Main Selection Chips (Girls, Boys, Dresses, Tops, Shorts, Bottoms, Socks, Shoes, T-Shirts, Costumes) -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar">
+        <button
+          v-for="cat in quickCategories"
+          :key="cat.id"
+          @click="selectQuickCategory(cat.id)"
+          class="flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+          :class="isQuickCategoryActive(cat.id) ? 'bg-brand-900 text-white shadow-sm' : 'bg-white border border-cream-200 text-brand-700 hover:bg-cream-100'"
+        >
+          <span>{{ cat.icon }}</span>
+          <span>{{ cat.label }}</span>
+        </button>
+      </div>
+
+      <!-- Sub-Sections & Sub-Collections Pills (Dynamic based on selected category or gender) -->
+      <div v-if="activeSubsections.length > 0" class="flex items-center gap-2 overflow-x-auto py-2 hide-scrollbar bg-cream-100/70 rounded-2xl px-3 border border-cream-200 mt-2">
+        <span class="text-[10px] font-black uppercase tracking-wider text-brand-400 shrink-0">Sub-Collections:</span>
+        <button
+          v-for="sub in activeSubsections"
+          :key="sub.id"
+          @click="selectSubsection(sub.id)"
+          class="flex-shrink-0 px-3 py-1 rounded-full text-[11px] font-bold transition-all cursor-pointer"
+          :class="selectedSubsection === sub.id ? 'bg-coral-500 text-white shadow-xs' : 'bg-white text-brand-600 hover:text-brand-900 border border-cream-200'"
+        >
+          {{ sub.label }}
+        </button>
+        <button v-if="selectedSubsection" @click="selectedSubsection = null; reloadProducts()" class="text-[10px] text-brand-500 hover:text-brand-900 underline font-bold ml-1 shrink-0 cursor-pointer">
+          Clear
+        </button>
+      </div>
+    </div>
+
     <div class="container-site">
-      <div class="flex flex-col md:flex-row gap-8 mt-6">
+      <div class="flex flex-col md:flex-row gap-8 mt-4">
         <!-- Sidebar Filters -->
         <aside :class="showMobileFilters ? 'block' : 'hidden md:block'" class="w-full md:w-64 flex-shrink-0">
           <div class="card-surface space-y-4 p-5 md:sticky md:top-24 md:max-h-[85vh] md:space-y-5 md:overflow-y-auto custom-scrollbar">
@@ -247,8 +281,13 @@
 
         <!-- Main Product Grid -->
         <main id="product-grid" class="flex-1 scroll-mt-24">
-          <div v-if="loading" class="text-center py-24">
-            <p class="text-black font-black text-xl animate-pulse">Loading collection...</p>
+          <div v-if="loading" class="grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+            <div v-for="i in 8" :key="i" class="animate-pulse">
+              <div class="aspect-[4/5] rounded-2xl bg-cream-100 border border-cream-200"></div>
+              <div class="mt-3 h-3 w-1/3 rounded-full bg-cream-200"></div>
+              <div class="mt-2 h-4 w-3/4 rounded-full bg-cream-200"></div>
+              <div class="mt-3 h-9 w-full rounded-full bg-cream-100 border border-cream-200"></div>
+            </div>
           </div>
           <div v-else-if="products && products.length === 0" class="flex flex-col items-center justify-center rounded-3xl border border-dashed border-cream-300 bg-white py-20 text-center">
             <span class="text-6xl mb-4">📦</span>
@@ -287,6 +326,13 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: 'Shop All Kids Clothing',
+  description: 'Browse the full JasmarKids collection of soft, durable clothing and accessories for babies, toddlers and children.',
+  ogTitle: 'Shop All | JasmarKids',
+  ogDescription: 'Browse outfits made for play, school and everyday adventures.'
+});
+
 import { ref, computed, onMounted, watch } from 'vue';
 import { SlidersHorizontal } from 'lucide-vue-next';
 import { useRouter, useRoute } from 'vue-router';
@@ -312,6 +358,137 @@ const showMobileFilters = ref(false);
 const visibleCount = ref(24);
 const visibleProducts = computed(() => (products.value || []).slice(0, visibleCount.value));
 
+const selectedQuickCat = ref('all');
+const selectedSubsection = ref(null);
+
+const quickCategories = [
+  { id: 'all', label: 'All Items', icon: '✨' },
+  { id: 'dresses', label: 'Dresses', icon: '👗' },
+  { id: 'tops', label: 'Tops', icon: '👚' },
+  { id: 't-shirts', label: 'T-Shirts', icon: '👕' },
+  { id: 'shorts', label: 'Shorts', icon: '🩳' },
+  { id: 'bottoms', label: 'Bottoms', icon: '👖' },
+  { id: 'socks', label: 'Socks', icon: '🧦' },
+  { id: 'shoes', label: 'Shoes', icon: '👟' },
+  { id: 'costumes', label: 'Kids Costumes', icon: '🦸' },
+  { id: 'pajamas', label: 'Pajamas', icon: '🌙' },
+  { id: 'sets', label: 'Sets', icon: '🎁' },
+];
+
+const subSectionsMap = {
+  'dresses': [
+    { id: 'casual', label: 'Casual Day Dresses' },
+    { id: 'party', label: 'Party & Festive Gowns' },
+    { id: 'sundresses', label: 'Summer Sundresses' },
+    { id: 'floral', label: 'Floral & Printed Dresses' },
+  ],
+  'tops': [
+    { id: 'graphic-tees', label: 'Graphic Tees' },
+    { id: 'plain-tees', label: 'Basic Tees' },
+    { id: 'polo', label: 'Polo Shirts' },
+    { id: 'blouse', label: 'Shirts & Blouses' },
+    { id: 'hoodie', label: 'Hoodies & Sweaters' },
+  ],
+  't-shirts': [
+    { id: 'graphic-tee', label: 'Graphic Tees' },
+    { id: 'plain-tee', label: 'Plain Solid Tees' },
+    { id: 'pocket-tee', label: 'Pocket T-Shirts' },
+    { id: 'long-sleeve', label: 'Long Sleeve Tees' },
+  ],
+  'shorts': [
+    { id: 'denim-shorts', label: 'Denim Jean Shorts' },
+    { id: 'cotton-shorts', label: 'Cotton Chino Shorts' },
+    { id: 'sports-shorts', label: 'Sports & Active Shorts' },
+  ],
+  'bottoms': [
+    { id: 'jeans', label: 'Jeans & Denim' },
+    { id: 'joggers', label: 'Joggers & Sweatpants' },
+    { id: 'trousers', label: 'Trousers & Chinos' },
+    { id: 'leggings', label: 'Leggings' },
+    { id: 'skirts', label: 'Skirts' },
+  ],
+  'socks': [
+    { id: 'crew-socks', label: 'Crew Socks' },
+    { id: 'ankle-socks', label: 'Ankle Socks' },
+    { id: 'pattern-socks', label: 'Patterned Socks' },
+    { id: 'tights', label: 'Tights' },
+  ],
+  'shoes': [
+    { id: 'sneakers', label: 'Sneakers' },
+    { id: 'slip-ons', label: 'Casual Shoes' },
+    { id: 'sandals', label: 'Sandals & Slides' },
+    { id: 'dress-shoes', label: 'Party Shoes' },
+    { id: 'boots', label: 'Boots' },
+  ],
+  'costumes': [
+    { id: 'superhero', label: 'Superhero Outfits' },
+    { id: 'fairytale', label: 'Fairytale Princess' },
+    { id: 'dressup', label: 'Party Dress-Up' },
+  ],
+};
+
+const activeSubsections = computed(() => {
+  if (selectedQuickCat.value && subSectionsMap[selectedQuickCat.value]) {
+    return subSectionsMap[selectedQuickCat.value];
+  }
+  if (selectedGenders.value.includes('girl')) {
+    return [
+      { id: 'dresses', label: 'Dresses' },
+      { id: 'tops', label: 'Tops & Blouses' },
+      { id: 't-shirts', label: 'T-Shirts' },
+      { id: 'shorts', label: 'Shorts' },
+      { id: 'bottoms', label: 'Bottoms & Skirts' },
+      { id: 'socks', label: 'Socks & Tights' },
+      { id: 'shoes', label: 'Shoes' },
+      { id: 'costumes', label: 'Kids Costumes' },
+    ];
+  }
+  if (selectedGenders.value.includes('boy')) {
+    return [
+      { id: 't-shirts', label: 'T-Shirts' },
+      { id: 'tops', label: 'Polo & Shirts' },
+      { id: 'shorts', label: 'Shorts' },
+      { id: 'bottoms', label: 'Joggers & Jeans' },
+      { id: 'socks', label: 'Socks' },
+      { id: 'shoes', label: 'Sneakers & Shoes' },
+      { id: 'costumes', label: 'Kids Costumes' },
+    ];
+  }
+  return [];
+});
+
+const isQuickCategoryActive = (id) => {
+  if (id === 'all') return selectedQuickCat.value === 'all' && selectedTypes.value.length === 0;
+  return selectedQuickCat.value === id || selectedTypes.value.includes(id);
+};
+
+const selectQuickCategory = (id) => {
+  selectedQuickCat.value = id;
+  selectedSubsection.value = null;
+  if (id === 'all') {
+    selectedTypes.value = [];
+  } else {
+    selectedTypes.value = [id];
+  }
+  reloadProducts();
+};
+
+const selectSubsection = (subId) => {
+  if (selectedSubsection.value === subId) {
+    selectedSubsection.value = null;
+  } else {
+    selectedSubsection.value = subId;
+  }
+  reloadProducts();
+};
+
+const sortOptions = [
+  { value: '', label: 'Recommended' },
+  { value: 'price_asc', label: 'Price: Low to High' },
+  { value: 'price_desc', label: 'Price: High to Low' },
+  { value: 'newest', label: 'New Arrivals' }
+];
+
 const filtersActiveCount = computed(() => {
   return [
     selectedCategories.value.length,
@@ -321,6 +498,7 @@ const filtersActiveCount = computed(() => {
     selectedTypes.value.length,
     selectedAgeGroups.value.length,
     selectedSustainability.value.length,
+    selectedSubsection.value ? 1 : 0,
     minRating.value ? 1 : 0,
     minPrice.value > 0 ? 1 : 0,
     maxPrice.value < 1000 ? 1 : 0
@@ -334,10 +512,12 @@ const applyMobileFilters = () => {
 
 // --- Filter Options ---
 const categoryFilters = ref([
-  { label: 'Girls', value: 'girl' },
-  { label: 'Boys', value: 'boy' },
-  { label: 'Baby', value: 'baby' },
-  { label: 'Toddler', value: 'toddler' },
+  { label: 'Girls (6–16)', value: 'girl' },
+  { label: 'Boys (6–16)', value: 'boy' },
+  { label: 'Toddler Girls (2–5)', value: 'toddler-girl' },
+  { label: 'Toddler Boys (2–5)', value: 'toddler-boy' },
+  { label: 'Baby (0–18m)', value: 'baby' },
+  { label: 'Kids Costumes', value: 'costumes' },
   { label: 'New Arrivals', value: 'new' },
   { label: 'Sale', value: 'sale' },
 ]);
@@ -371,29 +551,34 @@ const colorFilters = [
 ];
 
 const sizeFilters = [
-  '0-3 M', '3-6 M', '6-9 M', '9-12 M', '12-18 M', '18-24 M',
+  // Baby 0-18M
+  '0-3 M', '3-6 M', '6-9 M', '9-12 M', '12-18 M',
+  // Toddler 2-5Y
   '2T', '3T', '4T', '5T',
-  'XS (4)', 'S (5-6)', 'M (7-8)', 'L (10-12)', 'XL (14-16)'
+  // Kids 6-16Y
+  '6Y', '7-8Y', '9-10Y', '11-12Y', '13-14Y', '15-16Y'
 ];
 
 const typeFilters = [
-  { label: 'Tops', value: 'tops' },
-  { label: 'Bottoms', value: 'bottoms' },
   { label: 'Dresses', value: 'dresses' },
-  { label: 'Sets', value: 'sets' },
-  { label: 'Pajamas', value: 'pajamas' },
+  { label: 'Tops', value: 'tops' },
+  { label: 'T-Shirts', value: 't-shirts' },
+  { label: 'Shorts', value: 'shorts' },
+  { label: 'Bottoms', value: 'bottoms' },
+  { label: 'Socks', value: 'socks' },
   { label: 'Shoes', value: 'shoes' },
-  { label: 'Boots', value: 'boots' },
-  { label: 'Denim Jackets', value: 'denim-jackets' },
+  { label: 'Kids Costumes', value: 'costumes' },
+  { label: 'Pajamas', value: 'pajamas' },
+  { label: 'Matching Sets', value: 'sets' },
   { label: 'Accessories', value: 'accessories' },
 ];
 
 const ageFilters = [
-  { label: 'Girls (12M-12)', value: 'girls-12m-12' },
-  { label: 'Boys (12M-12)', value: 'boys-12m-12' },
-  { label: 'Baby Girls (0-24M)', value: 'baby-girls-0-24m' },
-  { label: 'Baby Boys (0-24M)', value: 'baby-boys-0-24m' },
-  { label: 'Toddler', value: 'toddler' },
+  { label: 'Girls (Age 6–16)', value: 'girls-6-16' },
+  { label: 'Boys (Age 6–16)', value: 'boys-6-16' },
+  { label: 'Toddler Girls (Age 2–5)', value: 'toddler-girls-2-5' },
+  { label: 'Toddler Boys (Age 2–5)', value: 'toddler-boys-2-5' },
+  { label: 'Baby (0–18 Months)', value: 'baby-0-18m' },
 ];
 
 // --- Methods ---
@@ -419,6 +604,10 @@ const reloadProducts = () => {
   if (maxPrice.value < 1000) params.maxPrice = maxPrice.value;
   if (minRating.value) params.minRating = minRating.value;
 
+  if (selectedSubsection.value) {
+    params.search = (params.search ? params.search + ' ' : '') + selectedSubsection.value.replace(/-/g, ' ');
+  }
+
   fetchProducts(params);
 };
 
@@ -434,6 +623,8 @@ const clearAllFilters = () => {
   selectedTypes.value = [];
   selectedAgeGroups.value = [];
   selectedSustainability.value = [];
+  selectedQuickCat.value = 'all';
+  selectedSubsection.value = null;
   minRating.value = null;
   minPrice.value = 0;
   maxPrice.value = 1000;
@@ -448,11 +639,15 @@ const initFiltersFromQuery = () => {
   selectedTypes.value = [];
   selectedAgeGroups.value = [];
   selectedSustainability.value = [];
+  selectedSubsection.value = null;
   if (route.query.category) selectedCategories.value = String(route.query.category).split(',');
   if (route.query.color) selectedColors.value = route.query.color.split(',');
   if (route.query.size) selectedSizes.value = route.query.size.split(',');
   if (route.query.gender) selectedGenders.value = route.query.gender.split(',');
-  if (route.query.productType) selectedTypes.value = route.query.productType.split(',');
+  if (route.query.productType) {
+    selectedTypes.value = route.query.productType.split(',');
+    selectedQuickCat.value = selectedTypes.value[0] || 'all';
+  }
   if (route.query.ageGroup) selectedAgeGroups.value = route.query.ageGroup.split(',');
   if (route.query.sort) sortBy.value = route.query.sort;
   if (route.query.sale === 'true') {

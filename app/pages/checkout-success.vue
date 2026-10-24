@@ -89,6 +89,8 @@
 </template>
 
 <script setup>
+useSeoMeta({ robots: 'noindex, nofollow' });
+
 import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { ordersApi } from '@/api_factory/modules/orders';

@@ -19,11 +19,15 @@
             </div>
             
             <div class="flex items-start gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-coral-300 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-coral-300 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" stroke-width="2"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke-width="2"></path>
+                <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"></circle>
+              </svg>
               <div>
-                <p class="font-medium">Office</p>
-                <p class="text-cream-100/70 text-sm">Come say hello at our HQ.</p>
-                <p class="text-coral-200 mt-1 font-medium">{{ storeSettings.address }}</p>
+                <p class="font-medium">Instagram</p>
+                <p class="text-cream-100/70 text-sm">Follow &amp; DM us for orders &amp; styling.</p>
+                <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener" class="text-coral-200 mt-1 font-semibold hover:underline block">@jasmarkids</a>
               </div>
             </div>
             

@@ -2,100 +2,192 @@
   <ClientOnly>
     <Teleport to="body">
       <div v-if="isOpen && normalizedProduct" class="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 font-sans pointer-events-auto">
-        <div class="fixed inset-0 bg-brand-950/60 backdrop-blur-sm" @click="close"></div>
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-brand-950/65 backdrop-blur-sm transition-opacity" @click="close"></div>
         
-        <!-- Modal Content -->
-        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl flex flex-col md:flex-row rounded-3xl border border-cream-200/90 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <!-- Modal Card Container -->
+        <div class="bg-white w-full max-w-4xl max-h-[92vh] overflow-y-auto relative z-10 shadow-2xl flex flex-col md:flex-row rounded-3xl border border-cream-200/90 overflow-hidden animate-in fade-in zoom-in-95 duration-200 hide-scrollbar">
           <!-- Close Button -->
-          <button class="absolute top-4 right-4 text-brand-500 hover:text-brand-900 z-20 bg-cream-100 hover:bg-cream-200 rounded-full h-8 w-8 flex items-center justify-center transition-colors" @click="close">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-          </button>
-
-      <!-- Mobile Title (Hidden on desktop) -->
-      <div class="md:hidden border-b p-4 text-center text-sm font-bold truncate">
-        {{ normalizedProduct.name }}
-      </div>
-
-      <!-- Left: Image Area -->
-      <div class="w-full md:w-1/2 bg-cream-100 p-8 flex items-center justify-center relative">
-        <img :src="normalizedProduct.image" class="max-w-full max-h-[60vh] object-contain mix-blend-multiply" :alt="normalizedProduct.name" />
-        
-        <div v-if="normalizedProduct.pack" class="absolute bottom-6 left-6 bg-brand-900 text-white text-sm font-bold w-16 h-16 rounded-full flex flex-col items-center justify-center leading-tight shadow-md border-2 border-white">
-          <span class="text-xl">{{ normalizedProduct.pack.split(' ')[0] }}</span>
-          <span class="text-[10px] uppercase">{{ normalizedProduct.pack.split(' ')[1] }}</span>
-        </div>
-      </div>
-
-      <!-- Right: Details Area -->
-      <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col">
-        <!-- Desktop Title -->
-        <h2 class="hidden md:block text-sm font-bold text-gray-900 mb-4 truncate text-center border-b pb-4">{{ normalizedProduct.name }}</h2>
-        
-        <!-- Price and Rating -->
-        <div class="flex justify-between items-start mb-6 mt-4 md:mt-0">
-          <div>
-            <div class="flex items-center space-x-2 text-sm mb-1">
-              <span class="font-bold text-black text-xl">${{ normalizedProduct.price.toFixed(2) }}</span>
-              <span v-if="normalizedProduct.originalPrice > normalizedProduct.price" class="text-gray-500 line-through">${{ normalizedProduct.originalPrice.toFixed(2) }}</span>
-              <span v-if="normalizedProduct.discount" class="text-red-600 font-bold">{{ normalizedProduct.discount }}</span>
-            </div>
-          </div>
-          
-          <div v-if="normalizedProduct.rating" class="flex items-center text-coral-400">
-            <svg v-for="i in 5" :key="i" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" :fill="i <= Math.round(normalizedProduct.rating) ? 'currentColor' : 'none'" :stroke="i <= Math.round(normalizedProduct.rating) ? 'none' : 'currentColor'">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          <button 
+            class="absolute top-4 right-4 text-stone-500 hover:text-brand-900 z-30 bg-white/90 hover:bg-cream-100 rounded-full h-9 w-9 flex items-center justify-center shadow-sm border border-stone-200/80 transition-all cursor-pointer" 
+            @click="close"
+            aria-label="Close modal"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
             </svg>
-            <span class="text-xs text-gray-800 ml-1 font-bold">{{ normalizedProduct.reviews }}</span>
-          </div>
-        </div>
-
-        <!-- Size Selector -->
-        <div class="mb-6">
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-xs font-bold uppercase tracking-widest">Size</span>
-            <a href="#" class="text-xs text-blue-600 underline flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" /></svg>
-              Size Guide
-            </a>
-          </div>
-          <div v-if="!sizeError" class="flex flex-wrap gap-2">
-            <button v-for="size in availableSizes" :key="size" 
-              class="border border-gray-300 py-1.5 px-3 text-xs font-semibold hover:border-black transition-colors"
-              :class="{'border-black bg-gray-50 ring-1 ring-black': selectedSize === size}"
-              @click="selectedSize = size">
-              {{ size }}
-            </button>
-          </div>
-          <div v-if="sizeError" class="mt-2">
-            <div class="flex flex-wrap gap-2 mb-2">
-              <button v-for="size in availableSizes" :key="size" 
-                class="border py-1.5 px-3 text-xs font-semibold transition-colors"
-                :class="selectedSize === size ? 'border-black bg-gray-50 ring-1 ring-black' : 'border-red-300 text-red-600'"
-                @click="selectedSize = size; sizeError = false">
-                {{ size }}
-              </button>
-            </div>
-            <p class="text-red-500 text-xs font-bold animate-pulse">Please select a size</p>
-          </div>
-        </div>
-
-        <div class="text-center mt-4 mb-auto">
-          <NuxtLink :to="`/product/${normalizedProduct.id}`" @click="close" class="text-xs font-bold text-blue-800 underline hover:opacity-80">View Full Product Details</NuxtLink>
-        </div>
-
-        <!-- Add to Bag -->
-        <div class="flex items-center space-x-4 mt-8 pt-6 border-t border-gray-200">
-          <div class="flex items-center border border-gray-300 rounded overflow-hidden h-10 w-24">
-            <button class="px-2 text-gray-500 hover:bg-gray-100 h-full" @click="quantity > 1 ? quantity-- : null">-</button>
-            <input type="text" class="w-full text-center text-sm font-bold border-x border-gray-300 h-full" v-model="quantity" readonly>
-            <button class="px-2 text-gray-500 hover:bg-gray-100 h-full" @click="quantity++">+</button>
-          </div>
-          <button @click="addToBag" class="flex-1 bg-brand-900 text-white h-10 text-xs font-bold uppercase tracking-widest hover:bg-brand-800 transition-colors rounded-sm">
-            Add To Bag
           </button>
+
+          <!-- Left: Product Image Showcase -->
+          <div class="w-full md:w-1/2 bg-gradient-to-br from-cream-100/90 via-cream-50 to-stone-100/60 p-6 sm:p-8 flex items-center justify-center relative min-h-[320px] md:min-h-[460px] select-none">
+            <div class="relative w-full h-full max-h-[420px] flex items-center justify-center overflow-hidden rounded-2xl group">
+              <img 
+                :src="normalizedProduct.image" 
+                class="max-w-full max-h-[400px] object-contain rounded-xl drop-shadow-md transition-transform duration-500 group-hover:scale-105" 
+                :alt="normalizedProduct.name" 
+              />
+            </div>
+            
+            <!-- Badges -->
+            <div class="absolute top-5 left-5 flex flex-col gap-1.5 z-20">
+              <span v-if="normalizedProduct.discount" class="bg-rose-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                {{ normalizedProduct.discount }}
+              </span>
+              <span class="bg-brand-950/80 backdrop-blur-xs text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-xs">
+                Premium Cotton
+              </span>
+            </div>
+
+            <!-- Pack Badge -->
+            <div v-if="normalizedProduct.pack" class="absolute bottom-5 left-5 bg-brand-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+              <span>🎒</span>
+              <span>{{ normalizedProduct.pack }}</span>
+            </div>
+          </div>
+
+          <!-- Right: Product Details Area -->
+          <div class="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between bg-white">
+            <div>
+              <!-- Eyebrow & Category -->
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black uppercase tracking-widest text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-md border border-amber-200/50">
+                  Kidswear Essential
+                </span>
+                <span class="text-xs font-semibold text-emerald-700 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  In Stock
+                </span>
+              </div>
+
+              <!-- Product Title -->
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-display font-semibold text-brand-900 tracking-tight leading-snug">
+                {{ normalizedProduct.name }}
+              </h2>
+              
+              <!-- Ratings & Review Count -->
+              <div class="flex items-center gap-2 mt-2">
+                <div class="flex items-center text-amber-400">
+                  <svg v-for="i in 5" :key="i" class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+                <span class="text-xs font-bold text-stone-800">
+                  {{ (normalizedProduct.rating || 4.9).toFixed(1) }}
+                </span>
+                <span class="text-xs text-stone-400 font-normal">
+                  ({{ normalizedProduct.reviews || 24 }} verified reviews)
+                </span>
+              </div>
+
+              <!-- Price Header -->
+              <div class="flex items-baseline gap-3 my-4">
+                <span class="font-display text-3xl font-bold text-brand-900 tracking-tight">
+                  ${{ normalizedProduct.price.toFixed(2) }}
+                </span>
+                <span v-if="normalizedProduct.originalPrice > normalizedProduct.price" class="text-stone-400 text-sm line-through font-medium">
+                  ${{ normalizedProduct.originalPrice.toFixed(2) }}
+                </span>
+              </div>
+
+              <!-- Size Selector -->
+              <div class="mb-5">
+                <div class="flex justify-between items-center mb-2.5">
+                  <span class="text-xs font-bold uppercase tracking-wider text-stone-700">Select Size</span>
+                  <button type="button" class="inline-flex items-center text-xs font-semibold text-brand-700 hover:text-brand-900 underline underline-offset-2 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
+                    </svg>
+                    Size Guide
+                  </button>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                  <button 
+                    v-for="size in availableSizes" 
+                    :key="size" 
+                    type="button"
+                    class="rounded-xl border px-3.5 py-2 text-xs font-bold transition-all cursor-pointer select-none"
+                    :class="[
+                      selectedSize === size
+                        ? 'border-brand-900 bg-brand-900 text-white shadow-sm ring-2 ring-brand-900/10'
+                        : 'border-stone-200 bg-stone-50 hover:bg-stone-100 text-stone-700 hover:border-stone-300',
+                      sizeError && !selectedSize ? 'border-rose-400 bg-rose-50 text-rose-700' : ''
+                    ]"
+                    @click="selectedSize = size; sizeError = false"
+                  >
+                    {{ size }}
+                  </button>
+                </div>
+                <p v-if="sizeError" class="text-rose-600 text-xs font-bold mt-2 animate-bounce flex items-center gap-1">
+                  <span>⚠️</span> Please select a size to continue
+                </p>
+              </div>
+
+              <!-- Quality Features Pill -->
+              <div class="grid grid-cols-2 gap-2 text-[11px] text-stone-600 bg-cream-50/70 p-3 rounded-2xl border border-cream-200/80 mb-4">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-sm">🚚</span>
+                  <span>Free shipping on $30+</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-sm">🌿</span>
+                  <span>Soft organic cotton</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer: Quantity Stepper & Add to Bag -->
+            <div class="pt-4 border-t border-stone-100">
+              <div class="flex items-center gap-3">
+                <!-- Quantity Stepper -->
+                <div class="flex h-12 w-28 items-center overflow-hidden rounded-xl border border-stone-200 bg-stone-50 select-none">
+                  <button 
+                    type="button" 
+                    aria-label="Decrease quantity" 
+                    class="h-full px-3 text-stone-600 hover:bg-stone-200 hover:text-stone-900 transition-colors font-bold cursor-pointer" 
+                    @click="quantity > 1 ? quantity-- : null"
+                  >−</button>
+                  <input 
+                    type="text" 
+                    class="h-full w-full bg-transparent text-center text-sm font-black text-stone-800 outline-none" 
+                    :value="quantity" 
+                    readonly
+                  />
+                  <button 
+                    type="button" 
+                    aria-label="Increase quantity" 
+                    class="h-full px-3 text-stone-600 hover:bg-stone-200 hover:text-stone-900 transition-colors font-bold cursor-pointer" 
+                    @click="quantity++"
+                  >+</button>
+                </div>
+
+                <!-- Add To Bag Button -->
+                <button 
+                  type="button" 
+                  @click="addToBag" 
+                  class="flex-1 h-12 bg-brand-900 text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-brand-800 active:scale-[0.99] transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow cursor-pointer"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  <span>Add To Bag</span>
+                </button>
+              </div>
+
+              <!-- View Full Details Link -->
+              <div class="text-center mt-3">
+                <NuxtLink 
+                  :to="`/product/${normalizedProduct.id}`" 
+                  @click="close" 
+                  class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-500 hover:text-brand-900 transition-colors group"
+                >
+                  <span>View full product details</span>
+                  <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
       </div>
     </Teleport>
   </ClientOnly>
@@ -176,7 +268,7 @@ const availableSizes = computed(() => {
   if (p.variants && p.variants.length > 0) {
     return [...new Set(p.variants.map(v => v.size).filter(Boolean))];
   }
-  return ['XS (4)', 'S (5-6)', 'M (7-8)', 'L (10-12)', 'XL (14-16)'];
+  return ['2T', '3T', '4T', '5T', '6'];
 });
 
 watch(() => props.isOpen, (newVal) => {
