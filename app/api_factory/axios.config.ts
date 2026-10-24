@@ -1,6 +1,6 @@
 import axios, { type AxiosResponse } from 'axios';
 
-export const rawBaseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:3005';
+export const rawBaseUrl = import.meta.env.VITE_BASE_URL || (import.meta.env.NUXT_PUBLIC_API_BASE as string) || 'https://kidies-backend-7ald.onrender.com';
 const $GATEWAY_ENDPOINT = rawBaseUrl;
 const $IMAGE_UPLOAD_ENDPOINT = `${rawBaseUrl}/upload`;
 
