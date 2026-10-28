@@ -8,7 +8,7 @@
     </main>
 
     <!-- Premium Footer -->
-    <footer class="bg-brand-900 text-cream-100/80 pt-12 pb-24 md:py-16 mt-auto">
+    <footer class="bg-brand-700 text-cream-100/80 pt-12 pb-24 md:py-16 mt-auto">
       <div class="max-w-[1400px] mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
         <div class="col-span-2 md:col-span-1">
           <span class="text-2xl md:text-3xl font-display font-semibold text-white mb-4 md:mb-6 block tracking-tight">{{ storeSettings.storeName || 'JasmarKids' }}</span>

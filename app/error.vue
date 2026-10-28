@@ -22,7 +22,7 @@
         </div>
       </div>
     </main>
-    <footer class="bg-brand-900 text-gray-300 py-8 text-center text-xs">
+    <footer class="bg-brand-700 text-gray-300 py-8 text-center text-xs">
       &copy; {{ new Date().getFullYear() }} JasmarKids. All rights reserved.
     </footer>
   </div>
