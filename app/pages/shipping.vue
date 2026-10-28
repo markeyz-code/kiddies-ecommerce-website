@@ -17,7 +17,7 @@
       
       <p>Items must be unworn, unwashed, and have all original tags attached. To initiate a return, simply log into your account or contact our support team with your order number.</p>
       
-      <p class="mt-8 text-sm text-stone-500 italic">Please note that final sale items and personalized garments cannot be returned or exchanged.</p>
+      <p class="mt-8 text-sm text-brand-500 italic">Please note that final sale items and personalized garments cannot be returned or exchanged.</p>
     </div>
   </div>
 </template>

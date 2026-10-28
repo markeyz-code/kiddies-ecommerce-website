@@ -16,8 +16,8 @@
             <div v-else-if="toast.toastType === 'error'" class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
               <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </div>
-            <div v-else class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-              <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div v-else class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center">
+              <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
           </div>
 
@@ -49,7 +49,7 @@ const toastClasses = (type) => {
     case 'error':
       return 'bg-white/95 border-red-200';
     default:
-      return 'bg-white/95 border-blue-200';
+      return 'bg-white/95 border-brand-200';
   }
 };
 </script>

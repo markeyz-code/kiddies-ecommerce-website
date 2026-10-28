@@ -27,7 +27,7 @@
           >
             <SlidersHorizontal class="w-4 h-4" />
             Filters
-            <span v-if="filtersActiveCount" class="flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-900 px-1 text-[10px] text-white">{{ filtersActiveCount }}</span>
+            <span v-if="filtersActiveCount" class="flex h-4 min-w-4 items-center justify-center rounded-full bg-brand-700 px-1 text-[10px] text-white">{{ filtersActiveCount }}</span>
           </button>
           <div class="flex items-center gap-2 min-w-[170px]">
             <CustomSelect
@@ -51,7 +51,7 @@
           :key="cat.id"
           @click="selectQuickCategory(cat.id)"
           class="flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
-          :class="isQuickCategoryActive(cat.id) ? 'bg-brand-900 text-white shadow-sm' : 'bg-white border border-cream-200 text-brand-700 hover:bg-cream-100'"
+          :class="isQuickCategoryActive(cat.id) ? 'bg-brand-700 text-white shadow-sm' : 'bg-white border border-cream-200 text-brand-700 hover:bg-cream-100'"
         >
           <span>{{ cat.icon }}</span>
           <span>{{ cat.label }}</span>
@@ -273,7 +273,7 @@
             <div class="md:hidden sticky bottom-0 bg-white pt-3 pb-2 border-t border-gray-200">
               <div class="flex gap-2">
                 <button @click="clearAllFilters" class="flex-1 border border-gray-300 text-gray-800 font-bold text-xs py-3 rounded-full">Clear all</button>
-                <button @click="applyMobileFilters" class="flex-[2] bg-brand-900 text-white font-bold text-xs py-3 rounded-full">View {{ products?.length || 0 }} results</button>
+                <button @click="applyMobileFilters" class="flex-[2] bg-brand-700 text-white font-bold text-xs py-3 rounded-full">View {{ products?.length || 0 }} results</button>
               </div>
             </div>
           </div>

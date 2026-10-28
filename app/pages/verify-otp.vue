@@ -11,7 +11,7 @@
       
       <div class="w-full max-w-md mx-auto mt-16 lg:mt-0">
         <h1 class="mb-2 font-display text-4xl font-semibold text-brand-900">Verify your email</h1>
-        <p class="text-stone-500 font-medium mb-10 text-sm">We've sent a 6-digit code to <span class="font-bold text-stone-800">{{ email }}</span>. Please enter it below.</p>
+        <p class="text-brand-500 font-medium mb-10 text-sm">We've sent a 6-digit code to <span class="font-bold text-brand-800">{{ email }}</span>. Please enter it below.</p>
 
         <div v-if="demoOtp" class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
           Local/demo mode: your verification code is <span class="font-black tracking-widest">{{ demoOtp }}</span> (pre-filled below).
@@ -19,28 +19,28 @@
         
         <form @submit.prevent="handleVerify" class="space-y-6">
           <div class="space-y-1 relative">
-            <label class="text-xs font-black uppercase tracking-widest text-stone-700 ml-1">6-Digit Code</label>
+            <label class="text-xs font-black uppercase tracking-widest text-brand-700 ml-1">6-Digit Code</label>
             <input 
               v-model="code" 
               type="text" 
               required
               maxlength="6"
               placeholder="123456"
-              class="w-full px-5 py-3.5 rounded-2xl bg-stone-100/50 border-2 border-stone-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-stone-800 placeholder:text-stone-400 text-center tracking-[0.5em] text-2xl"
+              class="w-full px-5 py-3.5 rounded-2xl bg-cream-100/50 border-2 border-cream-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-brand-800 placeholder:text-brand-400 text-center tracking-[0.5em] text-2xl"
             >
           </div>
           
           <button 
             type="submit" 
             :disabled="loading || code.length !== 6"
-            class="w-full bg-brand-900 text-white font-black py-4 rounded-2xl hover:bg-brand-800 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 tracking-wide text-sm flex items-center justify-center"
+            class="w-full bg-brand-700 text-white font-black py-4 rounded-2xl hover:bg-brand-800 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 tracking-wide text-sm flex items-center justify-center"
           >
             <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
             {{ loading ? 'Verifying...' : 'Verify Code' }}
           </button>
         </form>
 
-        <div class="mt-8 text-center text-sm font-medium text-stone-500">
+        <div class="mt-8 text-center text-sm font-medium text-brand-500">
           Didn't receive the code? 
           <button @click="handleResend" :disabled="loading" class="font-black text-brand-900 hover:underline underline-offset-2 ml-1 disabled:opacity-50">
             Resend it
@@ -50,7 +50,7 @@
     </div>
     
     <!-- Right: Visual Section -->
-    <div class="hidden lg:block lg:w-[55%] relative overflow-hidden bg-indigo-100">
+    <div class="hidden lg:block lg:w-[55%] relative overflow-hidden bg-brand-100">
       <div class="absolute inset-0 bg-gradient-to-br from-brand-900/45 to-transparent z-10 mix-blend-multiply"></div>
       <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=1200&h=1600&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-[10s] ease-out" alt="Kids playing" />
       

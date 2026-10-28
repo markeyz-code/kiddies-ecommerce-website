@@ -1,15 +1,15 @@
 <template>
   <div class="h-screen max-h-screen w-full overflow-hidden bg-cream-50 flex flex-col lg:flex-row">
     <!-- Left: Form Section (Scrollable independently) -->
-    <div class="w-full lg:w-[48%] xl:w-[42%] h-full overflow-y-auto bg-white flex flex-col justify-between px-6 sm:px-12 lg:px-14 xl:px-16 py-8 lg:py-10 hide-scrollbar z-10 shadow-xl border-r border-stone-100">
+    <div class="w-full lg:w-[48%] xl:w-[42%] h-full overflow-y-auto bg-white flex flex-col justify-between px-6 sm:px-12 lg:px-14 xl:px-16 py-8 lg:py-10 hide-scrollbar z-10 shadow-xl border-r border-cream-100">
       
       <!-- Top: Back Button Navigation (In normal flow, guaranteed never to overlap content) -->
       <div class="w-full max-w-md mx-auto mb-6">
         <NuxtLink 
           to="/" 
-          class="inline-flex items-center gap-2.5 text-stone-500 hover:text-brand-900 transition-colors text-xs font-bold tracking-widest uppercase group py-1"
+          class="inline-flex items-center gap-2.5 text-brand-500 hover:text-brand-900 transition-colors text-xs font-bold tracking-widest uppercase group py-1"
         >
-          <span class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-brand-900 group-hover:text-white transition-all shadow-xs">
+          <span class="w-8 h-8 rounded-full bg-cream-100 flex items-center justify-center text-brand-500 group-hover:bg-brand-700 group-hover:text-white transition-all shadow-xs">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -21,65 +21,65 @@
       <!-- Main Form Area -->
       <div class="w-full max-w-md mx-auto my-auto py-2">
         <div class="mb-6">
-          <span class="inline-block text-[10px] font-black uppercase tracking-widest text-amber-800 bg-amber-50 px-2.5 py-1 rounded-md mb-2.5 border border-amber-200/60">
+          <span class="inline-block text-[10px] font-black uppercase tracking-widest text-amber-800 bg-coral-50 px-2.5 py-1 rounded-md mb-2.5 border border-coral-200/60">
             VIP Membership
           </span>
           <h1 class="font-display text-3xl sm:text-4xl font-semibold text-brand-900 tracking-tight">Create your account</h1>
-          <p class="text-stone-500 font-normal mt-1.5 text-sm">Join the club for faster checkout, order tracking, and exclusive kidswear styles.</p>
+          <p class="text-brand-500 font-normal mt-1.5 text-sm">Join the club for faster checkout, order tracking, and exclusive kidswear styles.</p>
         </div>
         
         <form @submit.prevent="handleRegister" class="space-y-4">
           <!-- First & Last Name -->
           <div class="grid grid-cols-2 gap-3.5">
             <div class="space-y-1.5">
-              <label class="text-[11px] font-bold uppercase tracking-wider text-stone-600 block">First Name</label>
+              <label class="text-[11px] font-bold uppercase tracking-wider text-brand-500 block">First Name</label>
               <input 
                 v-model="registerData.firstName" 
                 type="text" 
                 required
                 placeholder="Jane"
-                class="w-full px-4 py-2.5 rounded-xl bg-stone-50/70 hover:bg-stone-50 focus:bg-white border border-stone-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-stone-800 placeholder:text-stone-400"
+                class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
               >
             </div>
             <div class="space-y-1.5">
-              <label class="text-[11px] font-bold uppercase tracking-wider text-stone-600 block">Last Name</label>
+              <label class="text-[11px] font-bold uppercase tracking-wider text-brand-500 block">Last Name</label>
               <input 
                 v-model="registerData.lastName" 
                 type="text" 
                 required
                 placeholder="Doe"
-                class="w-full px-4 py-2.5 rounded-xl bg-stone-50/70 hover:bg-stone-50 focus:bg-white border border-stone-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-stone-800 placeholder:text-stone-400"
+                class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
               >
             </div>
           </div>
 
           <!-- Email Address -->
           <div class="space-y-1.5">
-            <label class="text-[11px] font-bold uppercase tracking-wider text-stone-600 block">Email Address</label>
+            <label class="text-[11px] font-bold uppercase tracking-wider text-brand-500 block">Email Address</label>
             <input 
               v-model="registerData.email" 
               type="email" 
               required
               placeholder="hello@example.com"
-              class="w-full px-4 py-2.5 rounded-xl bg-stone-50/70 hover:bg-stone-50 focus:bg-white border border-stone-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-stone-800 placeholder:text-stone-400"
+              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
             >
           </div>
           
           <!-- Password -->
           <div class="space-y-1.5">
-            <label class="text-[11px] font-bold uppercase tracking-wider text-stone-600 block">Password</label>
+            <label class="text-[11px] font-bold uppercase tracking-wider text-brand-500 block">Password</label>
             <div class="relative">
               <input 
                 v-model="registerData.password" 
                 :type="showPassword ? 'text' : 'password'"
                 required
                 placeholder="••••••••"
-                class="w-full px-4 py-2.5 pr-11 rounded-xl bg-stone-50/70 hover:bg-stone-50 focus:bg-white border border-stone-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-stone-800 placeholder:text-stone-400"
+                class="w-full px-4 py-2.5 pr-11 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
               >
               <button 
                 type="button" 
                 @click="showPassword = !showPassword" 
-                class="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 p-1"
+                class="absolute right-3.5 top-1/2 -translate-y-1/2 text-brand-400 hover:text-brand-500 p-1"
                 aria-label="Toggle password visibility"
               >
                 <svg v-if="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -95,9 +95,9 @@
 
           <!-- Phone Number -->
           <div class="space-y-1.5">
-            <label class="text-[11px] font-bold uppercase tracking-wider text-stone-600 block">Phone Number</label>
-            <div class="flex rounded-xl border border-stone-200 bg-stone-50/70 hover:bg-stone-50 focus-within:bg-white focus-within:border-brand-900 focus-within:ring-2 focus-within:ring-brand-900/10 transition-all overflow-hidden">
-              <span class="inline-flex items-center gap-1.5 px-3.5 bg-stone-100/70 border-r border-stone-200 text-stone-600 text-xs font-semibold select-none">
+            <label class="text-[11px] font-bold uppercase tracking-wider text-brand-500 block">Phone Number</label>
+            <div class="flex rounded-xl border border-cream-200 bg-cream-50/70 hover:bg-cream-50 focus-within:bg-white focus-within:border-brand-900 focus-within:ring-2 focus-within:ring-brand-900/10 transition-all overflow-hidden">
+              <span class="inline-flex items-center gap-1.5 px-3.5 bg-cream-100/70 border-r border-cream-200 text-brand-500 text-xs font-semibold select-none">
                 <span>🇺🇸</span>
                 <span>+1</span>
               </span>
@@ -106,20 +106,20 @@
                 type="tel" 
                 required
                 placeholder="(555) 000-0000"
-                class="w-full px-3.5 py-2.5 bg-transparent outline-none font-medium text-sm text-stone-800 placeholder:text-stone-400"
+                class="w-full px-3.5 py-2.5 bg-transparent outline-none font-medium text-sm text-brand-800 placeholder:text-brand-400"
               >
             </div>
           </div>
 
           <!-- Zip Code -->
           <div class="space-y-1.5">
-            <label class="text-[11px] font-bold uppercase tracking-wider text-stone-600 block">Zip Code</label>
+            <label class="text-[11px] font-bold uppercase tracking-wider text-brand-500 block">Zip Code</label>
             <input 
               v-model="registerData.zipCode" 
               type="text" 
               required
               placeholder="10001"
-              class="w-full px-4 py-2.5 rounded-xl bg-stone-50/70 hover:bg-stone-50 focus:bg-white border border-stone-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-stone-800 placeholder:text-stone-400"
+              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
             >
           </div>
 
@@ -130,9 +130,9 @@
               v-model="registerData.terms" 
               type="checkbox" 
               required 
-              class="mt-1 w-4 h-4 rounded border-stone-300 text-brand-900 focus:ring-brand-900/20 cursor-pointer"
+              class="mt-1 w-4 h-4 rounded border-brand-300 text-brand-900 focus:ring-brand-900/20 cursor-pointer"
             >
-            <label for="terms" class="text-[11px] leading-relaxed text-stone-500 font-normal cursor-pointer select-none">
+            <label for="terms" class="text-[11px] leading-relaxed text-brand-500 font-normal cursor-pointer select-none">
               I agree to the JasmarKids Rewards <NuxtLink to="/terms" class="text-brand-900 font-semibold underline underline-offset-2">Terms &amp; Conditions</NuxtLink>, <NuxtLink to="/privacy-policy" class="text-brand-900 font-semibold underline underline-offset-2">Privacy Policy</NuxtLink> and <NuxtLink to="/terms" class="text-brand-900 font-semibold underline underline-offset-2">Notice of Financial Incentive</NuxtLink>.
             </label>
           </div>
@@ -143,10 +143,10 @@
               id="remember" 
               v-model="registerData.rememberMe" 
               type="checkbox" 
-              class="w-4 h-4 rounded border-stone-300 text-brand-900 focus:ring-brand-900/20 cursor-pointer"
+              class="w-4 h-4 rounded border-brand-300 text-brand-900 focus:ring-brand-900/20 cursor-pointer"
             >
-            <label for="remember" class="text-xs font-semibold text-stone-700 cursor-pointer select-none">
-              Remember me <span class="font-normal text-stone-400 text-[11px]">(Not recommended on shared devices)</span>
+            <label for="remember" class="text-xs font-semibold text-brand-700 cursor-pointer select-none">
+              Remember me <span class="font-normal text-brand-400 text-[11px]">(Not recommended on shared devices)</span>
             </label>
           </div>
 
@@ -154,7 +154,7 @@
           <button 
             type="submit" 
             :disabled="loading"
-            class="w-full bg-brand-900 text-white font-bold py-3.5 rounded-xl hover:bg-brand-800 active:scale-[0.99] transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-xs hover:shadow-sm tracking-wide text-sm flex items-center justify-center mt-2 cursor-pointer"
+            class="w-full bg-brand-700 text-white font-bold py-3.5 rounded-xl hover:bg-brand-800 active:scale-[0.99] transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-xs hover:shadow-sm tracking-wide text-sm flex items-center justify-center mt-2 cursor-pointer"
           >
             <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -166,9 +166,9 @@
 
         <!-- Divider -->
         <div class="mt-5 flex items-center justify-between">
-          <span class="w-1/4 border-b border-stone-200"></span>
-          <span class="text-[11px] text-stone-400 uppercase font-bold tracking-widest px-2">or sign up with</span>
-          <span class="w-1/4 border-b border-stone-200"></span>
+          <span class="w-1/4 border-b border-cream-200"></span>
+          <span class="text-[11px] text-brand-400 uppercase font-bold tracking-widest px-2">or sign up with</span>
+          <span class="w-1/4 border-b border-cream-200"></span>
         </div>
 
         <!-- Google Auth Button -->
@@ -176,7 +176,7 @@
           <button 
             @click="handleSocialLogin('google')" 
             type="button" 
-            class="w-full flex items-center justify-center gap-2.5 py-2.5 border border-stone-200 rounded-xl bg-white hover:bg-stone-50 active:scale-[0.99] transition-all shadow-xs cursor-pointer"
+            class="w-full flex items-center justify-center gap-2.5 py-2.5 border border-cream-200 rounded-xl bg-white hover:bg-cream-50 active:scale-[0.99] transition-all shadow-xs cursor-pointer"
           >
             <svg class="h-4 w-4" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -185,12 +185,12 @@
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
               <path fill="none" d="M1 1h22v22H1z"/>
             </svg>
-            <span class="font-semibold text-xs text-stone-700">Continue with Google</span>
+            <span class="font-semibold text-xs text-brand-700">Continue with Google</span>
           </button>
         </div>
 
         <!-- Footer Link -->
-        <div class="mt-6 text-center text-xs text-stone-500">
+        <div class="mt-6 text-center text-xs text-brand-500">
           Already have an account? 
           <NuxtLink to="/login" class="font-bold text-brand-900 hover:underline underline-offset-4 ml-1">Sign In</NuxtLink>
         </div>
@@ -198,7 +198,7 @@
 
       <!-- Bottom Footnote -->
       <div class="w-full max-w-md mx-auto pt-4 text-center">
-        <p class="text-[11px] text-stone-400">© {{ new Date().getFullYear() }} JasmarKids Inc. All rights reserved.</p>
+        <p class="text-[11px] text-brand-400">© {{ new Date().getFullYear() }} JasmarKids Inc. All rights reserved.</p>
       </div>
     </div>
     

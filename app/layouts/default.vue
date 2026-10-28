@@ -31,8 +31,9 @@
           <h4 class="text-white font-display text-base font-semibold mb-4 md:mb-6">Shop</h4>
           <ul class="space-y-3 md:space-y-4 text-sm font-light">
             <li><NuxtLink to="/products" class="hover:text-white hover:underline underline-offset-4 transition-all">All Products</NuxtLink></li>
+            <li><NuxtLink to="/category/accessories" class="hover:text-white hover:underline underline-offset-4 transition-all">Accessories</NuxtLink></li>
             <li><NuxtLink to="/products?category=new" class="hover:text-white hover:underline underline-offset-4 transition-all">New Arrivals</NuxtLink></li>
-            <li><NuxtLink to="/products?category=sale" class="text-amber-400 hover:text-amber-300 hover:underline underline-offset-4 transition-all">Sale</NuxtLink></li>
+            <li><NuxtLink to="/products?category=sale" class="text-coral-300 hover:text-coral-300 hover:underline underline-offset-4 transition-all">Sale</NuxtLink></li>
             <li><NuxtLink to="/size-guide" class="hover:text-white hover:underline underline-offset-4 transition-all">Size Guide</NuxtLink></li>
           </ul>
         </div>
@@ -56,7 +57,7 @@
               {{ subscribing ? '…' : subscribed ? 'Subscribed ✓' : 'Subscribe' }}
             </button>
           </form>
-          <p v-if="subscribeError" class="text-xs text-amber-300 mt-2">{{ subscribeError }}</p>
+          <p v-if="subscribeError" class="text-xs text-coral-300 mt-2">{{ subscribeError }}</p>
         </div>
       </div>
       

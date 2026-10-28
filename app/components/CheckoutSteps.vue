@@ -9,7 +9,7 @@
         <span
           class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-[11px] font-bold transition-colors"
           :class="step > item.number
-            ? 'bg-brand-900 text-white'
+            ? 'bg-brand-700 text-white'
             : step === item.number
               ? 'bg-coral-500 text-white ring-4 ring-coral-100'
               : 'bg-cream-200 text-brand-400'"

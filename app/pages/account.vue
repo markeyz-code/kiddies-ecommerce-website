@@ -16,7 +16,7 @@
             </div>
             <div v-if="dashboard?.tierInfo?.nextTier" class="mt-3 bg-cream-100 border border-cream-200 rounded-lg p-3">
               <div class="flex items-center gap-2 text-xs text-brand-500">
-                <div class="w-6 h-6 bg-brand-900 rounded-full flex items-center justify-center text-white text-[8px]">↑</div>
+                <div class="w-6 h-6 bg-brand-700 rounded-full flex items-center justify-center text-white text-[8px]">↑</div>
                 <div>
                   <p class="font-bold text-brand-800">Upgrade to {{ dashboard?.tierInfo?.nextTier }}</p>
                   <p>Spend ${{ dashboard?.tierInfo?.spendToNextTier?.toFixed(2) }} by 08/31/2027</p>
@@ -133,14 +133,14 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div v-for="disc in dashboard?.discounts" :key="disc.code" class="bg-white border border-cream-200 rounded-xl overflow-hidden">
-                <div class="h-2" :class="disc.type === 'savings' ? 'bg-gradient-to-r from-red-500 to-orange-500' : 'bg-gradient-to-r from-blue-500 to-cyan-400'"></div>
+                <div class="h-2" :class="disc.type === 'savings' ? 'bg-gradient-to-r from-red-500 to-orange-500' : 'bg-gradient-to-r from-brand-500 to-cyan-400'"></div>
                 <div class="p-5">
                   <span class="inline-block text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded text-white mb-2" :class="disc.type === 'savings' ? 'bg-red-500' : 'bg-brand-500'">{{ disc.type }}</span>
                   <h4 class="font-bold text-sm text-brand-900 mb-1">{{ disc.description }}</h4>
                   <p class="text-xs text-brand-500">Valid thru {{ new Date(disc.validUntil).toLocaleDateString() }}</p>
                   <div class="flex items-center justify-between mt-4">
                     <span class="text-xs text-coral-600 font-bold cursor-pointer hover:underline">Details</span>
-                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-brand-900 transition-colors hover:bg-brand-900 hover:text-white">APPLY NOW</button>
+                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-brand-900 transition-colors hover:bg-brand-700 hover:text-white">APPLY NOW</button>
                   </div>
                 </div>
               </div>
@@ -248,7 +248,7 @@
               </div>
               <div class="mt-4 pt-4 border-t flex gap-3">
                 <button @click="printInvoice(order)" class="border border-cream-300 rounded px-4 py-2 text-xs font-bold hover:bg-cream-100">View Invoice</button>
-                <button @click="buyAgain(order)" class="bg-brand-900 text-white rounded px-4 py-2 text-xs font-bold hover:bg-black">Buy Again</button>
+                <button @click="buyAgain(order)" class="bg-brand-700 text-white rounded px-4 py-2 text-xs font-bold hover:bg-black">Buy Again</button>
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@
             </div>
             <p class="text-xs text-brand-500 mb-4">Spend ${{ dashboard?.tierInfo?.spendToNextTier?.toFixed(2) || '175.00' }} by 08/31/2027 to reach {{ dashboard?.tierInfo?.nextTier || 'Stylist' }} and unlock more benefits.</p>
             <div class="relative h-2 bg-cream-200 rounded-full overflow-hidden">
-              <div class="absolute left-0 top-0 h-full bg-brand-900 rounded-full transition-all" :style="{ width: tierProgressPercent + '%' }"></div>
+              <div class="absolute left-0 top-0 h-full bg-brand-700 rounded-full transition-all" :style="{ width: tierProgressPercent + '%' }"></div>
             </div>
             <div class="flex justify-between text-[10px] text-brand-500 mt-2 uppercase tracking-wider font-bold">
               <span>Insider $0</span>
@@ -306,7 +306,7 @@
               <p class="text-xs text-brand-500 mt-1">Get early access to VIP events and exclusive offers.</p>
             </div>
             <div class="bg-white border rounded-xl p-6 text-center">
-              <ZapIcon class="h-8 w-8 mx-auto text-amber-500 mb-3" />
+              <ZapIcon class="h-8 w-8 mx-auto text-coral-500 mb-3" />
               <p class="font-bold text-sm">Priority to Early Access Sales</p>
               <p class="text-xs text-brand-500 mt-1">Enjoy first dibs on sales—just for members like you.</p>
             </div>
@@ -318,13 +318,13 @@
             <p class="text-sm text-brand-500">More points mean more rewards – don't miss your chance</p>
           </div>
           <div class="flex overflow-x-auto gap-3 pb-2 -mx-4 px-4">
-            <div v-for="action in dashboard?.earnPointsActions" :key="action.action" class="flex-shrink-0 bg-brand-900 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">
+            <div v-for="action in dashboard?.earnPointsActions" :key="action.action" class="flex-shrink-0 bg-brand-700 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">
               Earn {{ action.points }} Points
             </div>
-            <div class="flex-shrink-0 bg-brand-900 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">Earn 5 Points</div>
-            <div class="flex-shrink-0 bg-brand-900 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">Earn 5 Points</div>
-            <div class="flex-shrink-0 bg-brand-900 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">Earn 5 Points</div>
-            <div class="flex-shrink-0 bg-brand-900 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">Earn 5 Points</div>
+            <div class="flex-shrink-0 bg-brand-700 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">Earn 5 Points</div>
+            <div class="flex-shrink-0 bg-brand-700 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">Earn 5 Points</div>
+            <div class="flex-shrink-0 bg-brand-700 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">Earn 5 Points</div>
+            <div class="flex-shrink-0 bg-brand-700 text-white rounded-lg px-6 py-3 text-sm font-bold cursor-pointer hover:bg-black transition-colors">Earn 5 Points</div>
           </div>
         </div>
 
@@ -337,14 +337,14 @@
           <p class="text-sm text-brand-500">Available Discounts and offers ({{ dashboard?.discounts?.length || 0 }})</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div v-for="disc in dashboard?.discounts" :key="disc.code" class="bg-white border border-cream-200 rounded-xl overflow-hidden">
-              <div class="h-2" :class="disc.type === 'savings' ? 'bg-gradient-to-r from-red-500 to-orange-500' : 'bg-gradient-to-r from-blue-500 to-cyan-400'"></div>
+              <div class="h-2" :class="disc.type === 'savings' ? 'bg-gradient-to-r from-red-500 to-orange-500' : 'bg-gradient-to-r from-brand-500 to-cyan-400'"></div>
               <div class="p-5">
                 <span class="inline-block text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded text-white mb-2" :class="disc.type === 'savings' ? 'bg-red-500' : 'bg-brand-500'">{{ disc.type }}</span>
                 <h4 class="font-bold text-sm text-brand-900 mb-1">{{ disc.code }} – {{ disc.description }}</h4>
                 <p class="text-xs text-brand-500">Valid thru {{ new Date(disc.validUntil).toLocaleDateString() }}</p>
                 <div class="flex items-center justify-between mt-4">
                   <span class="text-xs text-coral-600 font-bold cursor-pointer hover:underline">Details</span>
-                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-brand-900 transition-colors hover:bg-brand-900 hover:text-white">APPLY NOW</button>
+                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-brand-900 transition-colors hover:bg-brand-700 hover:text-white">APPLY NOW</button>
                 </div>
               </div>
             </div>
@@ -417,9 +417,9 @@
                   <div><label class="text-xs font-bold text-brand-500 block mb-1">Zip Code</label><input v-model="profileForm.zipCode" class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
                 </div>
               </div>
-              <button v-if="!isEditingProfile" @click="isEditingProfile = true" class="w-full bg-brand-900 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">EDIT PERSONAL INFO</button>
+              <button v-if="!isEditingProfile" @click="isEditingProfile = true" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">EDIT PERSONAL INFO</button>
               <div v-else class="flex gap-2">
-                <button @click="handleUpdateProfile" class="w-full bg-brand-900 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">SAVE CHANGES</button>
+                <button @click="handleUpdateProfile" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">SAVE CHANGES</button>
                 <button @click="isEditingProfile = false" class="w-full bg-cream-200 text-brand-800 font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
               </div>
             </div>
@@ -432,13 +432,13 @@
               <div v-if="!showPasswordForm">
                 <p class="font-bold text-xs">Need to change your password?</p>
                 <p class="text-xs text-brand-500 leading-relaxed mb-2">Password must contain at least 8 characters, 1 uppercase letter, 1 number and 1 special character. It cannot be your email address or a recently used password.</p>
-                <button @click="showPasswordForm = true" class="w-full bg-brand-900 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors mt-2">CHANGE PASSWORD</button>
+                <button @click="showPasswordForm = true" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors mt-2">CHANGE PASSWORD</button>
               </div>
               <form v-else @submit.prevent="handleChangePassword" class="space-y-4">
                 <div><label class="text-xs font-bold text-brand-500 block mb-1">Current Password</label><input type="password" v-model="passwordForm.currentPassword" required class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
                 <div><label class="text-xs font-bold text-brand-500 block mb-1">New Password</label><input type="password" v-model="passwordForm.newPassword" required class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
                 <div class="flex gap-2">
-                  <button type="submit" class="w-full bg-brand-900 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">UPDATE</button>
+                  <button type="submit" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">UPDATE</button>
                   <button type="button" @click="showPasswordForm = false" class="w-full bg-cream-200 text-brand-800 font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
                 </div>
               </form>
@@ -459,13 +459,13 @@
               
               <div v-if="!showBirthdayForm">
                 <p class="text-xs text-brand-500 leading-relaxed mb-2">Add up to 4 kids' birthdays to your account and receive special savings during their birthday month!</p>
-                <button v-if="(user?.birthdays?.length || 0) < 4" @click="showBirthdayForm = true" class="w-full bg-brand-900 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors mt-2">ADD BIRTHDAY INFO</button>
+                <button v-if="(user?.birthdays?.length || 0) < 4" @click="showBirthdayForm = true" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors mt-2">ADD BIRTHDAY INFO</button>
               </div>
               <form v-else @submit.prevent="handleAddBirthday" class="space-y-4">
                 <div><label class="text-xs font-bold text-brand-500 block mb-1">Child's Name</label><input v-model="birthdayForm.childName" required class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
                 <div><label class="text-xs font-bold text-brand-500 block mb-1">Birth Date</label><input type="date" v-model="birthdayForm.birthDate" required class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
                 <div class="flex gap-2">
-                  <button type="submit" class="w-full bg-brand-900 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">SAVE</button>
+                  <button type="submit" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">SAVE</button>
                   <button type="button" @click="showBirthdayForm = false" class="w-full bg-cream-200 text-brand-800 font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
                 </div>
               </form>
@@ -507,7 +507,7 @@
               <div><label class="text-xs font-bold text-brand-500 block mb-1">Country</label><input v-model="addressForm.country" class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
             </div>
             <label class="flex items-center gap-2 text-sm"><input type="checkbox" v-model="addressForm.isDefault" class="rounded" /> Set as default</label>
-            <button type="submit" class="bg-brand-900 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Address</button>
+            <button type="submit" class="bg-brand-700 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Address</button>
           </form>
         </div>
 
@@ -535,7 +535,7 @@
               <div>
                 <p class="font-bold text-sm text-brand-900 mb-1">Add a credit or debit card to check out faster!</p>
                 <p class="text-xs text-brand-500 mb-4">Securely save your credit card, and/or JasmarKids Rewards Card information so you can check out even faster!</p>
-                <button @click="showPaymentForm = true" class="bg-brand-900 text-white text-xs font-bold px-8 py-3 rounded-sm hover:bg-black uppercase tracking-widest transition-colors w-[300px]">ADD A CREDIT OR DEBIT CARD</button>
+                <button @click="showPaymentForm = true" class="bg-brand-700 text-white text-xs font-bold px-8 py-3 rounded-sm hover:bg-black uppercase tracking-widest transition-colors w-[300px]">ADD A CREDIT OR DEBIT CARD</button>
               </div>
             </div>
             
@@ -552,7 +552,7 @@
                 :options="['Visa', 'Mastercard', 'Amex']"
               />
               <div class="flex gap-2">
-                <button type="submit" class="bg-brand-900 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Card</button>
+                <button type="submit" class="bg-brand-700 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Card</button>
                 <button type="button" @click="showPaymentForm = false" class="bg-cream-200 text-brand-800 font-bold px-8 py-3 rounded hover:bg-gray-300 transition-colors text-sm">Cancel</button>
               </div>
             </form>
@@ -565,13 +565,13 @@
           <div class="bg-white border rounded-xl p-6 space-y-5 max-w-xl">
             <label class="flex items-center justify-between">
               <span class="text-sm font-medium text-brand-700">Email Offers & Promotions</span>
-              <input type="checkbox" v-model="prefsForm.emailOffers" class="rounded text-brand-900 focus:ring-blue-900" />
+              <input type="checkbox" v-model="prefsForm.emailOffers" class="rounded text-brand-900 focus:ring-brand-900" />
             </label>
             <label class="flex items-center justify-between">
               <span class="text-sm font-medium text-brand-700">SMS Text Alerts (Get 30% OFF!)</span>
-              <input type="checkbox" v-model="prefsForm.smsAlerts" class="rounded text-brand-900 focus:ring-blue-900" />
+              <input type="checkbox" v-model="prefsForm.smsAlerts" class="rounded text-brand-900 focus:ring-brand-900" />
             </label>
-            <button @click="handleUpdatePreferences" class="bg-brand-900 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Preferences</button>
+            <button @click="handleUpdatePreferences" class="bg-brand-700 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Preferences</button>
           </div>
         </div>
 
@@ -606,7 +606,7 @@
 
           <div v-if="!user?.wishlist?.length" class="text-center py-16">
             <p class="text-sm font-bold text-brand-900">Your wishlist is empty</p>
-            <NuxtLink to="/products" class="inline-block bg-brand-900 text-white text-xs font-bold px-12 py-3 mt-4 rounded-sm hover:bg-black tracking-widest uppercase transition-colors">Start Shopping</NuxtLink>
+            <NuxtLink to="/products" class="inline-block bg-brand-700 text-white text-xs font-bold px-12 py-3 mt-4 rounded-sm hover:bg-black tracking-widest uppercase transition-colors">Start Shopping</NuxtLink>
           </div>
           <div v-else class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
             <ProductCard v-for="product in wishlistProducts" :key="product._id" :product="product" @quickView="openQuickView" />
@@ -630,7 +630,7 @@
               </div>
               <p class="font-bold text-xs text-brand-900 truncate">{{ item.name }}</p>
               <p class="font-bold text-sm mt-1">${{ item.price?.toFixed(2) }}</p>
-              <button @click="handleAddToCart(item)" class="mt-2 bg-brand-900 text-white text-xs font-bold px-4 py-2 rounded hover:bg-black w-full">Add to Cart</button>
+              <button @click="handleAddToCart(item)" class="mt-2 bg-brand-700 text-white text-xs font-bold px-4 py-2 rounded hover:bg-black w-full">Add to Cart</button>
             </div>
           </div>
         </div>
@@ -640,7 +640,7 @@
           <h3 class="font-display text-xl font-semibold text-brand-900 border-b border-cream-200 pb-4">Rate & Review</h3>
           <div class="text-center py-16">
             <p class="text-sm font-bold text-brand-900 mb-6">Add a review with details and ratings on items you've purchased when they start to appear.</p>
-            <NuxtLink to="/products" class="inline-block bg-brand-900 text-white text-xs font-bold px-12 py-3 rounded-sm hover:bg-black tracking-widest uppercase transition-colors">SHOP NOW</NuxtLink>
+            <NuxtLink to="/products" class="inline-block bg-brand-700 text-white text-xs font-bold px-12 py-3 rounded-sm hover:bg-black tracking-widest uppercase transition-colors">SHOP NOW</NuxtLink>
           </div>
         </div>
 

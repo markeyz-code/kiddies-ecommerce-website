@@ -18,7 +18,7 @@
         <button 
           @click="closeModal" 
           aria-label="Close newsletter popup"
-          class="absolute top-4 right-4 z-10 text-stone-400 hover:text-stone-800 transition-colors p-2 bg-white/80 rounded-full md:bg-transparent"
+          class="absolute top-4 right-4 z-10 text-brand-400 hover:text-brand-800 transition-colors p-2 bg-white/80 rounded-full md:bg-transparent"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -37,8 +37,8 @@
         <div class="w-full md:w-1/2 p-6 sm:p-10 md:p-14 flex flex-col items-center justify-center text-center bg-white">
           <p class="font-serif font-black text-3xl text-brand-900 mb-6 tracking-tight">JasmarKids</p>
           
-          <h2 class="text-3xl sm:text-4xl font-serif font-black text-stone-900 mb-3 sm:mb-4 tracking-tight">30% off*</h2>
-          <p class="text-lg md:text-xl font-bold text-stone-700 mb-8 max-w-[280px]">
+          <h2 class="text-3xl sm:text-4xl font-serif font-black text-brand-900 mb-3 sm:mb-4 tracking-tight">30% off*</h2>
+          <p class="text-lg md:text-xl font-bold text-brand-700 mb-8 max-w-[280px]">
             your next purchase when you sign up for emails
           </p>
 
@@ -49,14 +49,14 @@
                 type="email" 
                 placeholder="email address"
                 required
-                class="w-full px-4 py-3 border-b-2 border-stone-300 focus:border-brand-900 bg-transparent text-center text-stone-800 placeholder-stone-400 focus:outline-none transition-colors"
+                class="w-full px-4 py-3 border-b-2 border-brand-300 focus:border-brand-900 bg-transparent text-center text-brand-800 placeholder-brand-400 focus:outline-none transition-colors"
                 :disabled="isSubmitting"
               />
             </div>
             
             <button 
               type="submit" 
-              class="w-full bg-brand-900 text-white py-4 rounded-full font-black text-sm tracking-widest uppercase hover:bg-[#112543] transition-colors shadow-lg disabled:opacity-50"
+              class="w-full bg-brand-700 text-white py-4 rounded-full font-black text-sm tracking-widest uppercase hover:bg-[#112543] transition-colors shadow-lg disabled:opacity-50"
               :disabled="isSubmitting"
             >
               <span v-if="!isSubmitting">Get 30% Off</span>
@@ -67,16 +67,16 @@
           <div class="mt-6 flex flex-col items-center space-y-4">
             <button 
               @click="closeModal" 
-              class="text-sm font-bold text-stone-600 underline hover:text-stone-900 transition-colors"
+              class="text-sm font-bold text-brand-500 underline hover:text-brand-900 transition-colors"
             >
               Decline Offer
             </button>
-            <p class="text-[10px] text-stone-500 leading-tight">
+            <p class="text-[10px] text-brand-500 leading-tight">
               *Not to exceed $30. New subscribers only. Exclusions apply. See 
               <NuxtLink to="/privacy-policy" class="underline">Privacy Policy</NuxtLink>, including 
               <NuxtLink to="/terms" class="underline">Notice of Financial Incentive</NuxtLink>
             </p>
-            <NuxtLink to="/terms" class="text-[10px] text-stone-500 underline">View Details</NuxtLink>
+            <NuxtLink to="/terms" class="text-[10px] text-brand-500 underline">View Details</NuxtLink>
           </div>
           
           <!-- Success Message Overlay -->
@@ -84,8 +84,8 @@
              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-4">
                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
              </div>
-             <h3 class="text-2xl font-black text-stone-900 mb-2">You're on the list!</h3>
-             <p class="text-stone-600 font-medium">Check your email for your 30% off code.</p>
+             <h3 class="text-2xl font-black text-brand-900 mb-2">You're on the list!</h3>
+             <p class="text-brand-500 font-medium">Check your email for your 30% off code.</p>
           </div>
         </div>
       </div>

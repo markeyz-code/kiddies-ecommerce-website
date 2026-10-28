@@ -25,7 +25,7 @@
             <NuxtLink to="/faq" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Promotions & Payments</NuxtLink>
             <NuxtLink to="/faq" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">JasmarKids Rewards</NuxtLink>
             <div class="pt-2 mt-2 border-t">
-              <NuxtLink to="/privacy-policy" class="block px-3 py-2 text-sm font-bold text-blue-700 bg-blue-50 rounded">Privacy Policy</NuxtLink>
+              <NuxtLink to="/privacy-policy" class="block px-3 py-2 text-sm font-bold text-brand-700 bg-brand-50 rounded">Privacy Policy</NuxtLink>
               <NuxtLink to="#" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Terms & Conditions</NuxtLink>
             </div>
             <NuxtLink to="/contact" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Customer Service</NuxtLink>
@@ -46,19 +46,19 @@
             <div class="bg-cream-100 border border-cream-200 rounded-lg p-5 my-8">
               <h3 class="font-black text-sm uppercase tracking-wider text-brand-900 mb-3">Table of Contents</h3>
               <ul class="space-y-2 text-sm">
-                <li><a href="#info-collect" class="text-blue-700 hover:underline font-medium">Information We Collect</a></li>
-                <li><a href="#info-use" class="text-blue-700 hover:underline font-medium">Information Use</a></li>
-                <li><a href="#info-sharing" class="text-blue-700 hover:underline font-medium">Information Sharing</a></li>
-                <li><a href="#retention" class="text-blue-700 hover:underline font-medium">Retention of Personal Information</a></li>
-                <li><a href="#choices" class="text-blue-700 hover:underline font-medium">Your Choices</a></li>
-                <li><a href="#third-party" class="text-blue-700 hover:underline font-medium">Third-Party Content, Links, and Plug-Ins</a></li>
-                <li><a href="#public-forums" class="text-blue-700 hover:underline font-medium">Public Forums</a></li>
-                <li><a href="#children-info" class="text-blue-700 hover:underline font-medium">Children's Information</a></li>
-                <li><a href="#security" class="text-blue-700 hover:underline font-medium">Security</a></li>
-                <li><a href="#changes" class="text-blue-700 hover:underline font-medium">Changes to This Policy</a></li>
-                <li><a href="#contact-info" class="text-blue-700 hover:underline font-medium">Contact Information</a></li>
-                <li><a href="#ccpa" class="text-blue-700 hover:underline font-medium">California Consumer Privacy Statement</a></li>
-                <li><a href="#colorado" class="text-blue-700 hover:underline font-medium">Colorado Consumer Privacy Notice</a></li>
+                <li><a href="#info-collect" class="text-brand-700 hover:underline font-medium">Information We Collect</a></li>
+                <li><a href="#info-use" class="text-brand-700 hover:underline font-medium">Information Use</a></li>
+                <li><a href="#info-sharing" class="text-brand-700 hover:underline font-medium">Information Sharing</a></li>
+                <li><a href="#retention" class="text-brand-700 hover:underline font-medium">Retention of Personal Information</a></li>
+                <li><a href="#choices" class="text-brand-700 hover:underline font-medium">Your Choices</a></li>
+                <li><a href="#third-party" class="text-brand-700 hover:underline font-medium">Third-Party Content, Links, and Plug-Ins</a></li>
+                <li><a href="#public-forums" class="text-brand-700 hover:underline font-medium">Public Forums</a></li>
+                <li><a href="#children-info" class="text-brand-700 hover:underline font-medium">Children's Information</a></li>
+                <li><a href="#security" class="text-brand-700 hover:underline font-medium">Security</a></li>
+                <li><a href="#changes" class="text-brand-700 hover:underline font-medium">Changes to This Policy</a></li>
+                <li><a href="#contact-info" class="text-brand-700 hover:underline font-medium">Contact Information</a></li>
+                <li><a href="#ccpa" class="text-brand-700 hover:underline font-medium">California Consumer Privacy Statement</a></li>
+                <li><a href="#colorado" class="text-brand-700 hover:underline font-medium">Colorado Consumer Privacy Notice</a></li>
               </ul>
             </div>
 
@@ -72,7 +72,7 @@
               </p>
               <p>For example, you also may provide us with certain information in connection with specific transactions:</p>
 
-              <div class="space-y-4 ml-4 border-l-2 border-blue-200 pl-4 my-4">
+              <div class="space-y-4 ml-4 border-l-2 border-brand-200 pl-4 my-4">
                 <div>
                   <h4 class="font-bold text-brand-900 text-sm">Make a Purchase</h4>
                   <p class="text-sm">If you make a purchase, we collect payment information to process the payment. Depending on the form of payment you choose this may include credit or debit card, PayPal, or Apple Pay applicable details.</p>
@@ -195,7 +195,7 @@
 
               <h3 class="text-base font-bold text-brand-900 mt-6 mb-2">Interest-Based Advertising</h3>
               <p>
-                We may use cookies or other technologies to deliver more relevant advertising and to link data collected across other computers or devices that you may use. To learn more about the use of cookies or other technologies to deliver more relevant advertising, you may visit the Digital Advertising Alliance's (DAA) opt-out page at <a href="https://www.aboutads.info/choices" class="text-blue-700 underline" target="_blank">https://www.aboutads.info/choices</a>.
+                We may use cookies or other technologies to deliver more relevant advertising and to link data collected across other computers or devices that you may use. To learn more about the use of cookies or other technologies to deliver more relevant advertising, you may visit the Digital Advertising Alliance's (DAA) opt-out page at <a href="https://www.aboutads.info/choices" class="text-brand-700 underline" target="_blank">https://www.aboutads.info/choices</a>.
               </p>
 
               <h3 class="text-base font-bold text-brand-900 mt-6 mb-2">Opt-Out Preferences</h3>
@@ -211,9 +211,9 @@
                 Depending on your state of residence, you may have certain rights regarding your personal information. If you are a California, Colorado, Connecticut, Delaware, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Utah or Virginia resident, you may have certain rights regarding your personal information, as described below.
               </p>
               <ul class="list-disc ml-6 space-y-2 text-sm mt-2">
-                <li>You may request access to, or correction or deletion of, your personal information by <NuxtLink to="/contact" class="text-blue-700 underline">contacting us</NuxtLink>, or calling us at 1-877-752-2387.</li>
+                <li>You may request access to, or correction or deletion of, your personal information by <NuxtLink to="/contact" class="text-brand-700 underline">contacting us</NuxtLink>, or calling us at 1-877-752-2387.</li>
                 <li>You may opt out of the processing of your personal information for purposes of targeted advertising, certain profiling or the sale of your personal information.</li>
-                <li>You may also opt out by using the Global Privacy Control signal. For more information, please visit <a href="https://globalprivacycontrol.org/" class="text-blue-700 underline" target="_blank">https://globalprivacycontrol.org/</a>.</li>
+                <li>You may also opt out by using the Global Privacy Control signal. For more information, please visit <a href="https://globalprivacycontrol.org/" class="text-brand-700 underline" target="_blank">https://globalprivacycontrol.org/</a>.</li>
               </ul>
             </section>
 
@@ -261,7 +261,7 @@
             <section id="contact-info">
               <h2 class="text-xl font-black text-brand-900 uppercase tracking-wide border-b-2 border-brand-900 pb-2 mb-4 mt-10">Contact Information</h2>
               <p>
-                If you have any questions regarding this Privacy Policy, please contact our Privacy Officer via phone at <strong>1-877-752-2387</strong> or <NuxtLink to="/contact" class="text-blue-700 underline font-medium">send us an email</NuxtLink>.
+                If you have any questions regarding this Privacy Policy, please contact our Privacy Officer via phone at <strong>1-877-752-2387</strong> or <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink>.
               </p>
             </section>
 
@@ -322,7 +322,7 @@
                 <li><strong>Shine the Light Request:</strong> You may have the right to request a list of certain categories of personal information we have disclosed to third parties for their direct marketing purposes.</li>
               </ul>
               <p class="mt-4">
-                To submit a request, <NuxtLink to="/contact" class="text-blue-700 underline font-medium">send us an email</NuxtLink> or call us at <strong>1-877-752-2387</strong>.
+                To submit a request, <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink> or call us at <strong>1-877-752-2387</strong>.
               </p>
             </section>
 
@@ -387,12 +387,12 @@
 
               <h3 class="text-base font-bold text-brand-900 mt-6 mb-2">How to Submit a Request</h3>
               <p>
-                To request access to, correction of or deletion of your personal data, please <NuxtLink to="/contact" class="text-blue-700 underline font-medium">send us an email</NuxtLink>, or call us at <strong>1-877-752-2387</strong>.
+                To request access to, correction of or deletion of your personal data, please <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink>, or call us at <strong>1-877-752-2387</strong>.
               </p>
 
               <h3 class="text-base font-bold text-brand-900 mt-6 mb-2">How to Submit an Appeal</h3>
               <p>
-                You may appeal our decision with respect to a request you have submitted by <NuxtLink to="/contact" class="text-blue-700 underline font-medium">contacting us</NuxtLink>.
+                You may appeal our decision with respect to a request you have submitted by <NuxtLink to="/contact" class="text-brand-700 underline font-medium">contacting us</NuxtLink>.
               </p>
             </section>
 

@@ -19,7 +19,7 @@
               :key="group.key"
               @click="active = group.key"
               class="flex-shrink-0 rounded-full px-4 py-2 text-xs font-bold transition-colors"
-              :class="active === group.key ? 'bg-brand-900 text-white' : 'bg-cream-100 text-brand-600 hover:bg-cream-200'"
+              :class="active === group.key ? 'bg-brand-700 text-white' : 'bg-cream-100 text-brand-600 hover:bg-cream-200'"
             >
               {{ group.label }}
             </button>

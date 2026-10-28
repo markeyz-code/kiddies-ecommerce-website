@@ -58,20 +58,20 @@
                 </div>
               </div>
 
-              <div class="pt-6 mt-6 border-t-2 border-stone-100">
+              <div class="pt-6 mt-6 border-t-2 border-cream-100">
                 <h3 class="mb-4 font-display text-lg font-semibold text-brand-900">Payment method</h3>
                 <div class="space-y-3">
                   <label class="flex cursor-pointer items-center rounded-2xl border border-cream-200 bg-white p-4 transition-all duration-200 hover:border-brand-300" :class="paymentMethod === 'paystack' ? 'border-brand-900 bg-brand-50' : 'border-cream-200 hover:border-brand-300'">
-                    <input v-model="paymentMethod" value="paystack" type="radio" class="w-5 h-5 text-brand-900 border-stone-300 focus:ring-brand-300 focus:ring-2" />
-                    <span class="ml-3 font-bold text-stone-800 text-sm">Pay with card or bank transfer (Paystack)</span>
+                    <input v-model="paymentMethod" value="paystack" type="radio" class="w-5 h-5 text-brand-900 border-brand-300 focus:ring-brand-300 focus:ring-2" />
+                    <span class="ml-3 font-bold text-brand-800 text-sm">Pay with card or bank transfer (Paystack)</span>
                   </label>
                   <label class="flex cursor-pointer items-center rounded-2xl border border-cream-200 bg-white p-4 transition-all duration-200 hover:border-brand-300" :class="paymentMethod === 'stripe' ? 'border-[#635BFF] bg-[#635BFF]/5' : 'border-cream-200 hover:border-[#635BFF]'">
-                    <input v-model="paymentMethod" value="stripe" type="radio" class="w-5 h-5 text-[#635BFF] border-stone-300 focus:ring-[#635BFF] focus:ring-2" />
-                    <span class="ml-3 font-bold text-stone-800 text-sm">Pay with Stripe</span>
+                    <input v-model="paymentMethod" value="stripe" type="radio" class="w-5 h-5 text-[#635BFF] border-brand-300 focus:ring-[#635BFF] focus:ring-2" />
+                    <span class="ml-3 font-bold text-brand-800 text-sm">Pay with Stripe</span>
                   </label>
                   <label class="flex cursor-pointer items-center rounded-2xl border border-cream-200 bg-white p-4 transition-all duration-200 hover:border-brand-300" :class="paymentMethod === 'cash_on_delivery' ? 'border-emerald-400 bg-emerald-50' : 'border-cream-200 hover:border-emerald-300'">
-                    <input v-model="paymentMethod" value="cash_on_delivery" type="radio" class="w-5 h-5 text-emerald-500 border-stone-300 focus:ring-brand-300 focus:ring-2" />
-                    <span class="ml-3 font-bold text-stone-800 text-sm">Cash on delivery</span>
+                    <input v-model="paymentMethod" value="cash_on_delivery" type="radio" class="w-5 h-5 text-emerald-500 border-brand-300 focus:ring-brand-300 focus:ring-2" />
+                    <span class="ml-3 font-bold text-brand-800 text-sm">Cash on delivery</span>
                   </label>
                 </div>
               </div>
@@ -89,16 +89,16 @@
             <h2 class="mb-5 font-display text-xl font-semibold text-brand-900">Order summary</h2>
             
             <div class="space-y-3 mb-6 border-b border-brand-200 pb-6">
-              <div v-for="item in cart.items" :key="item.id" class="flex items-center gap-3 bg-white p-2.5 rounded-2xl border border-stone-200">
-                <div class="w-14 h-14 bg-amber-50 rounded-xl flex-shrink-0 overflow-hidden border border-stone-100">
+              <div v-for="item in cart.items" :key="item.id" class="flex items-center gap-3 bg-white p-2.5 rounded-2xl border border-cream-200">
+                <div class="w-14 h-14 bg-coral-50 rounded-xl flex-shrink-0 overflow-hidden border border-cream-100">
                   <img :src="getItemImage(item)" class="w-full h-full object-cover" />
                 </div>
                 <div class="flex-1 text-xs min-w-0">
-                  <p class="font-bold text-stone-800 truncate">{{ item.product.name }}</p>
-                  <p class="text-stone-500 font-medium">Qty: {{ item.quantity }}</p>
-                  <p v-if="item.options?.size" class="text-stone-400 text-[10px]">Size: {{ item.options.size }}</p>
+                  <p class="font-bold text-brand-800 truncate">{{ item.product.name }}</p>
+                  <p class="text-brand-500 font-medium">Qty: {{ item.quantity }}</p>
+                  <p v-if="item.options?.size" class="text-brand-400 text-[10px]">Size: {{ item.options.size }}</p>
                 </div>
-                <div class="font-black text-stone-900 text-right text-xs">
+                <div class="font-black text-brand-900 text-right text-xs">
                   {{ currencySymbol }}{{ getItemTotal(item).toFixed(2) }}
                 </div>
               </div>
@@ -116,21 +116,21 @@
                 </button>
               </div>
               <div v-else class="flex gap-2">
-                <input v-model="couponCode" type="text" placeholder="Coupon code" class="flex-1 rounded-full border border-stone-200 focus:border-brand-900 focus:ring-4 focus:ring-sky-100 py-2.5 px-4 bg-white text-xs font-medium transition-all uppercase placeholder:normal-case" />
-                <button @click="applyCoupon" :disabled="!couponCode || applyingCoupon" type="button" class="bg-brand-900 text-white px-4 py-2.5 rounded-full text-xs font-black hover:bg-brand-800 transition-all disabled:opacity-50 tracking-wide">
+                <input v-model="couponCode" type="text" placeholder="Coupon code" class="flex-1 rounded-full border border-cream-200 focus:border-brand-900 focus:ring-4 focus:ring-brand-100 py-2.5 px-4 bg-white text-xs font-medium transition-all uppercase placeholder:normal-case" />
+                <button @click="applyCoupon" :disabled="!couponCode || applyingCoupon" type="button" class="bg-brand-700 text-white px-4 py-2.5 rounded-full text-xs font-black hover:bg-brand-800 transition-all disabled:opacity-50 tracking-wide">
                   {{ applyingCoupon ? '...' : 'Apply' }}
                 </button>
               </div>
             </div>
 
-            <div class="space-y-3 text-stone-600 font-medium mb-6 border-b border-brand-200 pb-6 text-sm">
+            <div class="space-y-3 text-brand-500 font-medium mb-6 border-b border-brand-200 pb-6 text-sm">
               <div v-if="isNigeria" class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 text-[11px] font-bold text-emerald-800 flex items-center gap-2">
                 <span>🇳🇬</span>
                 <span>Location set to Nigeria — paying in Naira (₦)</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Subtotal</span>
-                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ formatAmount(subtotalConverted) }}</span>
+                <span class="text-brand-900 font-bold">{{ currencySymbol }}{{ formatAmount(subtotalConverted) }}</span>
               </div>
               <div v-if="cart.discountAmount > 0" class="flex justify-between items-center text-emerald-600">
                 <span>Discount</span>
@@ -138,22 +138,22 @@
               </div>
               <div class="flex justify-between items-center">
                 <span>Shipping</span>
-                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ formatAmount(shippingFee) }}</span>
+                <span class="text-brand-900 font-bold">{{ currencySymbol }}{{ formatAmount(shippingFee) }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Tax ({{ taxRate }}%)</span>
-                <span class="text-stone-900 font-bold">{{ currencySymbol }}{{ formatAmount(tax) }}</span>
+                <span class="text-brand-900 font-bold">{{ currencySymbol }}{{ formatAmount(tax) }}</span>
               </div>
             </div>
             
             <div class="flex justify-between items-end">
               <div>
-                <span class="font-bold text-stone-800 text-lg block">Total</span>
+                <span class="font-bold text-brand-800 text-lg block">Total</span>
                 <span v-if="isNigeria" class="text-[10px] font-bold text-emerald-700 uppercase">NGN (Naira)</span>
               </div>
-              <span class="font-black text-3xl text-stone-900 text-right drop-shadow-sm">{{ currencySymbol }}{{ formatAmount(orderTotal) }}</span>
+              <span class="font-black text-3xl text-brand-900 text-right drop-shadow-sm">{{ currencySymbol }}{{ formatAmount(orderTotal) }}</span>
             </div>
-            <div class="mt-8 flex items-center justify-center gap-3 text-stone-400">
+            <div class="mt-8 flex items-center justify-center gap-3 text-brand-400">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
               <span class="text-sm font-bold">Encrypted & secure</span>
             </div>

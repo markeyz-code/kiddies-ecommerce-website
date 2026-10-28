@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       titleTemplate: '%s · JasmarKids',
       meta: [
         { name: 'description', content: 'Thoughtfully designed kids clothing and accessories — soft fabrics, playful details and everyday comfort for babies, toddlers and children.' },
-        { name: 'theme-color', content: '#1A365D' },
+        { name: 'theme-color', content: '#1A3578' },
         { property: 'og:site_name', content: 'JasmarKids' },
         { property: 'og:type', content: 'website' },
         { name: 'twitter:card', content: 'summary_large_image' }
@@ -49,18 +49,18 @@ export default defineNuxtConfig({
           },
           colors: {
             brand: {
-              50: '#F3F7FA', 100: '#E4EDF4', 200: '#C8DBE8', 300: '#9CBED3',
-              400: '#689BB8', 500: '#467F9E', 600: '#356582', 700: '#2C5169',
-              800: '#274557', 900: '#1A365D', 950: '#0F233D'
+              50: '#EFF5FF', 100: '#DBE8FF', 200: '#BCD4FF', 300: '#8FB5FF',
+              400: '#5D8FF5', 500: '#3B74E8', 600: '#2A5CCB', 700: '#224AA8',
+              800: '#1E3F8C', 900: '#1A3578', 950: '#101F4A'
             },
             coral: {
-              50: '#FFF4F1', 100: '#FFE5DE', 200: '#FFC9BB', 300: '#FFA490',
-              400: '#F97B61', 500: '#E85D45', 600: '#D4442E', 700: '#B23422',
-              800: '#8F2A1C', 900: '#742519'
+              50: '#FFF6FA', 100: '#FFEAF3', 200: '#FFD3E5', 300: '#FFB3D3',
+              400: '#FF8FBE', 500: '#F46BA6', 600: '#D94F8A', 700: '#B53A6E',
+              800: '#8E2D56', 900: '#6B2242'
             },
             cream: {
-              50: '#FDFBF7', 100: '#F9F4EC', 200: '#F2E8D9', 300: '#E8D8C3',
-              400: '#D9C3A5'
+              50: '#FFFBFC', 100: '#FFF4F8', 200: '#FBE6EE', 300: '#F5D3E0',
+              400: '#EABBCD'
             }
           }
         }

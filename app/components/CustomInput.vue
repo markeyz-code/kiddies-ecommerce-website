@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label v-if="label" :for="id" class="block text-sm font-bold text-stone-700 mb-1">{{ label }}</label>
+    <label v-if="label" :for="id" class="block text-sm font-bold text-brand-700 mb-1">{{ label }}</label>
     <div class="relative">
       <input
         :id="id"
@@ -10,7 +10,7 @@
         :required="required"
         :placeholder="placeholder"
         :class="[
-          'appearance-none block w-full px-4 py-3 border border-stone-200 placeholder-stone-400 text-stone-900 rounded-full focus:outline-none focus:ring-4 focus:ring-sky-100 focus:border-brand-900 sm:text-sm transition-all duration-300 bg-white',
+          'appearance-none block w-full px-4 py-3 border border-cream-200 placeholder-brand-400 text-brand-900 rounded-full focus:outline-none focus:ring-4 focus:ring-brand-100 focus:border-brand-900 sm:text-sm transition-all duration-300 bg-white',
           error ? 'border-brand-900 focus:ring-rose-100 focus:border-brand-900' : ''
         ]"
       />

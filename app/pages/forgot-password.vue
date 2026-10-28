@@ -1,15 +1,15 @@
 <template>
   <div class="h-screen max-h-screen w-full overflow-hidden bg-cream-50 flex flex-col lg:flex-row">
     <!-- Left: Form Section -->
-    <div class="w-full lg:w-[48%] xl:w-[42%] h-full overflow-y-auto bg-white flex flex-col justify-between px-6 sm:px-12 lg:px-14 xl:px-16 py-8 lg:py-10 hide-scrollbar z-10 shadow-xl border-r border-stone-100">
+    <div class="w-full lg:w-[48%] xl:w-[42%] h-full overflow-y-auto bg-white flex flex-col justify-between px-6 sm:px-12 lg:px-14 xl:px-16 py-8 lg:py-10 hide-scrollbar z-10 shadow-xl border-r border-cream-100">
       
       <!-- Top: Back Button Navigation -->
       <div class="w-full max-w-md mx-auto mb-6">
         <NuxtLink 
           to="/login" 
-          class="inline-flex items-center gap-2.5 text-stone-500 hover:text-brand-900 transition-colors text-xs font-bold tracking-widest uppercase group py-1"
+          class="inline-flex items-center gap-2.5 text-brand-500 hover:text-brand-900 transition-colors text-xs font-bold tracking-widest uppercase group py-1"
         >
-          <span class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-brand-900 group-hover:text-white transition-all shadow-xs">
+          <span class="w-8 h-8 rounded-full bg-cream-100 flex items-center justify-center text-brand-500 group-hover:bg-brand-700 group-hover:text-white transition-all shadow-xs">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -21,29 +21,29 @@
       <!-- Main Form Area -->
       <div class="w-full max-w-md mx-auto my-auto py-4">
         <div class="mb-7">
-          <span class="inline-block text-[10px] font-black uppercase tracking-widest text-sky-800 bg-sky-50 px-2.5 py-1 rounded-md mb-2.5 border border-sky-200/60">
+          <span class="inline-block text-[10px] font-black uppercase tracking-widest text-brand-800 bg-brand-50 px-2.5 py-1 rounded-md mb-2.5 border border-sky-200/60">
             Account Recovery
           </span>
           <h1 class="font-display text-3xl sm:text-4xl font-semibold text-brand-900 tracking-tight">Reset your password</h1>
-          <p class="text-stone-500 font-normal mt-1.5 text-sm">Enter the email associated with your account and we'll send you reset instructions.</p>
+          <p class="text-brand-500 font-normal mt-1.5 text-sm">Enter the email associated with your account and we'll send you reset instructions.</p>
         </div>
         
         <form @submit.prevent="handleForgotPassword" class="space-y-4">
           <div class="space-y-1.5">
-            <label class="text-[11px] font-bold uppercase tracking-wider text-stone-600 block">Email Address</label>
+            <label class="text-[11px] font-bold uppercase tracking-wider text-brand-500 block">Email Address</label>
             <input 
               v-model="email" 
               type="email" 
               required
               placeholder="hello@example.com"
-              class="w-full px-4 py-2.5 rounded-xl bg-stone-50/70 hover:bg-stone-50 focus:bg-white border border-stone-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-stone-800 placeholder:text-stone-400"
+              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
             >
           </div>
           
           <button 
             type="submit" 
             :disabled="loading"
-            class="w-full bg-brand-900 text-white font-bold py-3.5 rounded-xl hover:bg-brand-800 active:scale-[0.99] transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-xs hover:shadow-sm tracking-wide text-sm flex items-center justify-center mt-3 cursor-pointer"
+            class="w-full bg-brand-700 text-white font-bold py-3.5 rounded-xl hover:bg-brand-800 active:scale-[0.99] transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-xs hover:shadow-sm tracking-wide text-sm flex items-center justify-center mt-3 cursor-pointer"
           >
             <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -63,7 +63,7 @@
           </div>
         </div>
 
-        <div class="mt-7 text-center text-xs text-stone-500">
+        <div class="mt-7 text-center text-xs text-brand-500">
           Remember your password? 
           <NuxtLink to="/login" class="font-bold text-brand-900 hover:underline underline-offset-4 ml-1">Back to sign in</NuxtLink>
         </div>
@@ -71,7 +71,7 @@
 
       <!-- Bottom Footnote -->
       <div class="w-full max-w-md mx-auto pt-4 text-center">
-        <p class="text-[11px] text-stone-400">© {{ new Date().getFullYear() }} JasmarKids Inc. All rights reserved.</p>
+        <p class="text-[11px] text-brand-400">© {{ new Date().getFullYear() }} JasmarKids Inc. All rights reserved.</p>
       </div>
     </div>
     

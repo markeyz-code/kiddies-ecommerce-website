@@ -15,7 +15,7 @@
         <input 
           v-model="email" 
           type="email" 
-          :class="{'border-red-500 border-b-2': hasError && !email, 'border-stone-300 border-b': !(hasError && !email)}"
+          :class="{'border-red-500 border-b-2': hasError && !email, 'border-brand-300 border-b': !(hasError && !email)}"
           class="input-base"
         >
         <p v-if="hasError && !email" class="text-red-500 text-[10px] font-bold mt-1 flex items-center">
@@ -30,7 +30,7 @@
         <input 
           v-model="orderNumber" 
           type="text" 
-          :class="{'border-red-500 border-b-2': (hasError && !orderNumber) || notFoundError, 'border-stone-300 border-b': !((hasError && !orderNumber) || notFoundError)}"
+          :class="{'border-red-500 border-b-2': (hasError && !orderNumber) || notFoundError, 'border-brand-300 border-b': !((hasError && !orderNumber) || notFoundError)}"
           class="input-base"
         >
         <p v-if="hasError && !orderNumber" class="text-red-500 text-[10px] font-bold mt-1 flex items-center">
@@ -44,7 +44,7 @@
       </div>
       
       <div class="text-left mt-2">
-        <NuxtLink to="/contact" class="text-xs font-bold text-stone-800 underline hover:text-brand-900">Need Help?</NuxtLink>
+        <NuxtLink to="/contact" class="text-xs font-bold text-brand-800 underline hover:text-brand-900">Need Help?</NuxtLink>
       </div>
 
       <div class="pt-6">
@@ -61,13 +61,13 @@
     </form>
 
     <div class="mt-12 text-center space-y-4">
-      <p class="text-xs font-medium text-stone-600">
+      <p class="text-xs font-medium text-brand-500">
         Have an account?<br/>
-        <NuxtLink to="/login" class="font-bold text-stone-900 underline hover:text-brand-900">Log in</NuxtLink> to see your order history.
+        <NuxtLink to="/login" class="font-bold text-brand-900 underline hover:text-brand-900">Log in</NuxtLink> to see your order history.
       </p>
       
-      <p class="text-xs font-medium text-stone-600">
-        <NuxtLink to="/contact" class="font-bold text-stone-900 underline hover:text-brand-900">Click here</NuxtLink> to track an international order.
+      <p class="text-xs font-medium text-brand-500">
+        <NuxtLink to="/contact" class="font-bold text-brand-900 underline hover:text-brand-900">Click here</NuxtLink> to track an international order.
       </p>
     </div>
     
@@ -82,8 +82,8 @@
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <div>
-          <h3 class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-2">Shipping Address</h3>
-          <p class="text-sm font-medium text-stone-800">
+          <h3 class="text-xs font-bold text-brand-500 uppercase tracking-widest mb-2">Shipping Address</h3>
+          <p class="text-sm font-medium text-brand-800">
             {{ orderResult.customer.firstName }} {{ orderResult.customer.lastName }}<br>
             {{ orderResult.customer.address }}<br>
             {{ orderResult.customer.city }}, {{ orderResult.customer.state || '' }} {{ orderResult.customer.zipCode }}<br>
@@ -91,28 +91,28 @@
           </p>
         </div>
         <div>
-          <h3 class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-2">Order Summary</h3>
-          <p class="text-sm font-medium text-stone-800 flex justify-between mb-1">
+          <h3 class="text-xs font-bold text-brand-500 uppercase tracking-widest mb-2">Order Summary</h3>
+          <p class="text-sm font-medium text-brand-800 flex justify-between mb-1">
             <span>Items:</span>
             <span>{{ orderResult.items.reduce((acc, item) => acc + item.quantity, 0) }}</span>
           </p>
-          <p class="text-sm font-medium text-stone-800 flex justify-between mb-1">
+          <p class="text-sm font-medium text-brand-800 flex justify-between mb-1">
             <span>Total:</span>
             <span>${{ (orderResult.totalAmount || 0).toFixed(2) }}</span>
           </p>
-          <p class="text-sm font-medium text-stone-800 flex justify-between mt-2 pt-2 border-t border-stone-200">
+          <p class="text-sm font-medium text-brand-800 flex justify-between mt-2 pt-2 border-t border-cream-200">
             <span>Payment:</span>
-            <span :class="orderResult.paymentStatus === 'Paid' ? 'text-green-600' : 'text-stone-500'">{{ orderResult.paymentStatus }}</span>
+            <span :class="orderResult.paymentStatus === 'Paid' ? 'text-green-600' : 'text-brand-500'">{{ orderResult.paymentStatus }}</span>
           </p>
         </div>
       </div>
       
-      <h3 class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-4">Items</h3>
+      <h3 class="text-xs font-bold text-brand-500 uppercase tracking-widest mb-4">Items</h3>
       <div class="space-y-4">
-        <div v-for="item in orderResult.items" :key="item.sku" class="flex gap-4 items-center bg-white p-4 rounded-xl border border-stone-100 shadow-sm">
+        <div v-for="item in orderResult.items" :key="item.sku" class="flex gap-4 items-center bg-white p-4 rounded-xl border border-cream-100 shadow-sm">
           <div class="flex-1">
-            <h4 class="font-bold text-stone-800 text-sm">{{ item.name }}</h4>
-            <p class="text-xs text-stone-500 mt-1">Qty: {{ item.quantity }} | SKU: {{ item.sku }}</p>
+            <h4 class="font-bold text-brand-800 text-sm">{{ item.name }}</h4>
+            <p class="text-xs text-brand-500 mt-1">Qty: {{ item.quantity }} | SKU: {{ item.sku }}</p>
           </div>
           <div class="font-black text-brand-900">
             ${{ ((item.price || 0) * item.quantity).toFixed(2) }}
@@ -175,8 +175,8 @@ onMounted(() => {
 const getStatusColor = (status) => {
   switch (status) {
     case 'Pending': return 'bg-yellow-100 text-yellow-800';
-    case 'Processing': return 'bg-blue-100 text-blue-800';
-    case 'Shipped': return 'bg-indigo-100 text-indigo-800';
+    case 'Processing': return 'bg-brand-100 text-brand-800';
+    case 'Shipped': return 'bg-brand-100 text-brand-800';
     case 'Delivered': return 'bg-green-100 text-green-800';
     case 'Cancelled': return 'bg-red-100 text-red-800';
     default: return 'bg-gray-100 text-gray-800';

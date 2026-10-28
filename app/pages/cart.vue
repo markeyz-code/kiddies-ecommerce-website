@@ -26,7 +26,7 @@
         <div class="flex-1">
           <div class="card-surface p-4 md:p-6">
             <div class="space-y-3">
-              <div v-for="item in cart.items" :key="item.id" class="flex gap-4 md:gap-5 py-3 border-b border-stone-100 last:border-0 relative group items-center">
+              <div v-for="item in cart.items" :key="item.id" class="flex gap-4 md:gap-5 py-3 border-b border-cream-100 last:border-0 relative group items-center">
                 <div class="h-20 w-16 flex-shrink-0 overflow-hidden rounded-2xl border border-cream-200 bg-cream-100 md:h-24 md:w-20">
                   <img :src="getItemImage(item)" :alt="item?.product?.name" class="w-full h-full object-cover" />
                 </div>
@@ -50,7 +50,7 @@
                   <div class="flex justify-between items-center mt-3">
                     <div class="h-10 border border-brand-200 rounded-full flex items-center justify-between px-2 bg-brand-50/50 w-28">
                       <button aria-label="Decrease quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-brand-900 transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity - 1)">−</button>
-                      <span class="font-black text-sm text-stone-800">{{ item.quantity }}</span>
+                      <span class="font-black text-sm text-brand-800">{{ item.quantity }}</span>
                       <button aria-label="Increase quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-brand-900 transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity + 1)">+</button>
                     </div>
                     <span class="font-display text-lg font-semibold text-brand-900 md:text-xl">${{ getItemTotal(item).toFixed(2) }}</span>
@@ -100,7 +100,7 @@
               Continue to checkout
             </NuxtLink>
             
-            <div class="mt-5 flex items-center justify-center gap-3 text-stone-400">
+            <div class="mt-5 flex items-center justify-center gap-3 text-brand-400">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
               <span class="text-xs font-bold">Secure Checkout</span>
             </div>

@@ -3,7 +3,7 @@
     <div class="card-surface mx-auto flex max-w-5xl flex-col overflow-hidden md:flex-row">
       
       <!-- Contact Info Sidebar -->
-      <div class="flex flex-col justify-between bg-brand-900 p-6 text-white sm:p-10 md:w-1/3">
+      <div class="flex flex-col justify-between bg-brand-700 p-6 text-white sm:p-10 md:w-1/3">
         <div>
           <h2 class="font-display text-3xl font-semibold mb-2">Get in touch</h2>
           <p class="text-cream-100/70 mb-8 text-sm">We'd love to hear from you. Our friendly team is always here to chat.</p>

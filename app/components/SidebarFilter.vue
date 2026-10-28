@@ -53,10 +53,10 @@
           <div class="border border-gray-800 rounded px-2 py-1 text-xs font-bold inline-block mb-3">REGULAR</div>
           <div class="space-y-2">
             <label class="flex items-center space-x-2 text-sm cursor-pointer" v-for="size in sizes" :key="size">
-              <input type="checkbox" class="rounded border-gray-300 text-blue-900 focus:ring-blue-900 w-4 h-4" />
+              <input type="checkbox" class="rounded border-gray-300 text-brand-900 focus:ring-brand-900 w-4 h-4" />
               <span>{{ size }}</span>
             </label>
-            <button class="text-blue-600 text-xs font-bold hover:underline flex items-center mt-2">
+            <button class="text-brand-600 text-xs font-bold hover:underline flex items-center mt-2">
               Show More <ChevronDown class="w-3 h-3 ml-1" />
             </button>
           </div>
@@ -95,7 +95,7 @@
         <!-- Options content for other filters when open -->
         <div v-show="openFilters[filter.name]" class="mt-4 space-y-2">
           <label class="flex items-center space-x-2 text-sm cursor-pointer" v-for="option in filter.options" :key="option">
-            <input type="checkbox" class="rounded border-gray-300 text-blue-900 focus:ring-blue-900 w-4 h-4" />
+            <input type="checkbox" class="rounded border-gray-300 text-brand-900 focus:ring-brand-900 w-4 h-4" />
             <span>{{ option }}</span>
           </label>
         </div>
@@ -127,7 +127,7 @@ const toggleFilter = (name) => {
 
 const colors = [
   { name: 'Multis', style: 'background: conic-gradient(red 90deg, blue 90deg 180deg, green 180deg 270deg, yellow 270deg 360deg)' },
-  { name: 'Blues', class: 'bg-blue-600' },
+  { name: 'Blues', class: 'bg-brand-600' },
   { name: 'Pinks', class: 'bg-pink-300' },
   { name: 'Whites', class: 'bg-white' },
   { name: 'Creams', class: 'bg-orange-50' },

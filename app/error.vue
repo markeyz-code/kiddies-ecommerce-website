@@ -1,19 +1,19 @@
 <template>
-  <div class="min-h-screen bg-amber-50/30 flex flex-col">
+  <div class="min-h-screen bg-coral-50/30 flex flex-col">
     <Header />
     <main class="flex-grow flex items-center justify-center px-4 py-20">
       <div class="max-w-lg text-center">
         <p class="text-[120px] leading-none font-serif font-black text-brand-900/20">{{ error?.statusCode || 404 }}</p>
-        <h1 class="text-3xl font-serif font-black text-stone-900 mb-3 mt-2">
+        <h1 class="text-3xl font-serif font-black text-brand-900 mb-3 mt-2">
           {{ error?.statusCode === 404 ? 'This page went out of style' : 'Something went wrong' }}
         </h1>
-        <p class="text-stone-500 font-medium mb-8">
+        <p class="text-brand-500 font-medium mb-8">
           {{ error?.statusCode === 404
             ? "The page you're looking for doesn't exist or has moved."
             : (error?.message || 'Please try again in a moment.') }}
         </p>
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
-          <button @click="handleError" class="bg-brand-900 text-white font-bold px-8 py-3.5 rounded-full hover:bg-brand-800 transition-colors">
+          <button @click="handleError" class="bg-brand-700 text-white font-bold px-8 py-3.5 rounded-full hover:bg-brand-800 transition-colors">
             Go Home
           </button>
           <NuxtLink to="/products" class="bg-white border-2 border-brand-900 text-brand-900 font-bold px-8 py-3.5 rounded-full hover:bg-brand-50 transition-colors">

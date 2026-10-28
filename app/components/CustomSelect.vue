@@ -1,7 +1,7 @@
 <template>
   <div class="relative w-full text-left" ref="containerRef">
     <!-- Optional Label -->
-    <label v-if="label" :for="id" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5 ml-0.5">
+    <label v-if="label" :for="id" class="block text-xs font-bold uppercase tracking-wider text-brand-700 mb-1.5 ml-0.5">
       {{ label }} <span v-if="required" class="text-rose-500">*</span>
     </label>
 
@@ -16,18 +16,18 @@
       @keydown.esc.prevent="isOpen = false"
       :class="[
         'w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-2xl border transition-all duration-200 outline-none text-left select-none',
-        isOpen ? 'border-brand-900 ring-2 ring-brand-900/10 bg-white' : 'border-stone-200 bg-white hover:border-stone-300 hover:bg-stone-50/50',
-        disabled ? 'bg-stone-100 text-stone-400 border-stone-200 cursor-not-allowed' : 'cursor-pointer text-stone-800',
+        isOpen ? 'border-brand-900 ring-2 ring-brand-900/10 bg-white' : 'border-cream-200 bg-white hover:border-brand-300 hover:bg-cream-50/50',
+        disabled ? 'bg-cream-100 text-brand-400 border-cream-200 cursor-not-allowed' : 'cursor-pointer text-brand-800',
         error ? 'border-rose-400 ring-1 ring-rose-200' : ''
       ]"
       aria-haspopup="listbox"
       :aria-expanded="isOpen"
     >
-      <span class="truncate block" :class="!selectedLabel ? 'text-stone-400 font-normal' : 'text-stone-800 font-semibold'">
+      <span class="truncate block" :class="!selectedLabel ? 'text-brand-400 font-normal' : 'text-brand-800 font-semibold'">
         {{ selectedLabel || placeholder || 'Select an option' }}
       </span>
 
-      <span class="ml-2 flex items-center pointer-events-none text-stone-400 transition-transform duration-200" :class="isOpen ? 'rotate-180 text-brand-900' : ''">
+      <span class="ml-2 flex items-center pointer-events-none text-brand-400 transition-transform duration-200" :class="isOpen ? 'rotate-180 text-brand-900' : ''">
         <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
@@ -45,13 +45,13 @@
     >
       <div
         v-if="isOpen"
-        class="absolute left-0 right-0 z-50 mt-1.5 bg-white rounded-2xl shadow-2xl border border-stone-200/90 overflow-hidden flex flex-col py-1.5 focus:outline-none"
+        class="absolute left-0 right-0 z-50 mt-1.5 bg-white rounded-2xl shadow-2xl border border-cream-200/90 overflow-hidden flex flex-col py-1.5 focus:outline-none"
         style="max-height: 280px;"
       >
         <!-- Search Input Header -->
-        <div class="px-3 pt-2 pb-2 border-b border-stone-100 sticky top-0 bg-white z-10">
+        <div class="px-3 pt-2 pb-2 border-b border-cream-100 sticky top-0 bg-white z-10">
           <div class="relative flex items-center">
-            <svg class="h-3.5 w-3.5 absolute left-3 text-stone-400 pointer-events-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="h-3.5 w-3.5 absolute left-3 text-brand-400 pointer-events-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
@@ -59,7 +59,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search..."
-              class="w-full pl-8 pr-7 py-1.5 text-xs rounded-xl bg-stone-50 border border-stone-200 focus:border-brand-900 focus:bg-white focus:outline-none transition-all placeholder:text-stone-400 font-medium"
+              class="w-full pl-8 pr-7 py-1.5 text-xs rounded-xl bg-cream-50 border border-cream-200 focus:border-brand-900 focus:bg-white focus:outline-none transition-all placeholder:text-brand-400 font-medium"
               @keydown.esc.prevent="isOpen = false"
               @keydown.enter.prevent="selectFirstMatch"
             />
@@ -67,7 +67,7 @@
               v-if="searchQuery"
               type="button"
               @click="searchQuery = ''"
-              class="absolute right-2 text-stone-400 hover:text-stone-600 p-1"
+              class="absolute right-2 text-brand-400 hover:text-brand-500 p-1"
             >
               <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -77,7 +77,7 @@
         </div>
 
         <!-- Options List -->
-        <div class="overflow-y-auto flex-1 py-1 max-h-56 divide-y divide-stone-50" role="listbox">
+        <div class="overflow-y-auto flex-1 py-1 max-h-56 divide-y divide-cream-50" role="listbox">
           <button
             v-for="(option, index) in filteredOptions"
             :key="option.value"
@@ -87,7 +87,7 @@
               'w-full text-left px-4 py-2.5 text-xs font-medium flex items-center justify-between transition-colors',
               modelValue === option.value
                 ? 'bg-brand-50 text-brand-900 font-bold'
-                : 'text-stone-700 hover:bg-stone-50 hover:text-stone-900'
+                : 'text-brand-700 hover:bg-cream-50 hover:text-brand-900'
             ]"
             role="option"
             :aria-selected="modelValue === option.value"
@@ -101,7 +101,7 @@
           </button>
 
           <!-- Empty State -->
-          <div v-if="filteredOptions.length === 0" class="px-4 py-6 text-center text-xs text-stone-400">
+          <div v-if="filteredOptions.length === 0" class="px-4 py-6 text-center text-xs text-brand-400">
             No matching options found
           </div>
         </div>

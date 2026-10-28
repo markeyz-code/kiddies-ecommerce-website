@@ -562,6 +562,7 @@ const navLinks = [
   { name: 'Baby (0–18m)', href: '/category/baby', target: 'baby', sections: babyMegaMenuSections },
   { name: 'Kids Costumes', href: '/category/costumes', target: 'costumes', sections: specialtyMegaMenuSections('costumes') },
   { name: 'Back to School', href: '/category/back-to-school', target: 'back-to-school', sections: specialtyMegaMenuSections('back-to-school') },
+  { name: 'Accessories', href: '/category/accessories', target: 'accessories', sections: specialtyMegaMenuSections('accessories') },
   { name: 'Pajamas', href: '/category/pajamas', target: 'pajamas', sections: specialtyMegaMenuSections('pajamas') },
   { name: 'Sale', href: '/category/sale', target: 'sale', isSale: true, sections: specialtyMegaMenuSections('sale') },
 ];

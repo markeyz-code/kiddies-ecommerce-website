@@ -33,7 +33,7 @@
              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" :fill="isFavorite ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
           </button>
           
-          <div v-if="product.pack" class="absolute bottom-6 left-6 bg-brand-900 text-white text-sm font-bold w-20 h-20 rounded-full flex flex-col items-center justify-center leading-tight shadow-md border-2 border-white z-10">
+          <div v-if="product.pack" class="absolute bottom-6 left-6 bg-brand-700 text-white text-sm font-bold w-20 h-20 rounded-full flex flex-col items-center justify-center leading-tight shadow-md border-2 border-white z-10">
             <span class="text-3xl">{{ product.pack.split(' ')[0] }}</span>
             <span class="text-xs uppercase">{{ product.pack.split(' ')[1] }}</span>
           </div>
@@ -103,7 +103,7 @@
             <div class="flex flex-wrap gap-2">
               <button v-for="size in product.sizes" :key="size" 
                 class="rounded-full border px-4 py-2.5 text-xs font-semibold transition-all"
-                :class="selectedSize === size ? 'border-brand-900 bg-brand-900 text-white' : 'border-cream-300 bg-white text-brand-700 hover:border-brand-400'"
+                :class="selectedSize === size ? 'border-brand-900 bg-brand-700 text-white' : 'border-cream-300 bg-white text-brand-700 hover:border-brand-400'"
                 @click="selectedSize = size; sizeError = false">
                 {{ size }}
               </button>
@@ -266,7 +266,7 @@
           <template v-else>
           <div v-for="review in reviews" :key="review._id" class="border-b pb-6 last:border-0">
             <div class="flex items-center gap-2 mb-2">
-              <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xs">
+              <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-xs">
                 {{ (review.userId?.firstName || 'A').charAt(0) }}{{ (review.userId?.lastName || 'C').charAt(0) }}
               </div>
               <span class="font-bold text-sm text-gray-900">
@@ -295,7 +295,7 @@
                 <button v-for="star in 5" :key="star" type="button" @click="reviewRating = star" class="text-2xl leading-none" :class="star <= reviewRating ? 'text-coral-400' : 'text-gray-300'">★</button>
               </div>
               <textarea v-model="reviewComment" rows="3" placeholder="Tell us what you think about this product..." class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:outline-none focus:border-brand-900"></textarea>
-              <button type="submit" :disabled="reviewsLoading || !reviewComment.trim()" class="bg-brand-900 text-white px-6 py-2.5 rounded-full text-sm font-bold disabled:opacity-50">
+              <button type="submit" :disabled="reviewsLoading || !reviewComment.trim()" class="bg-brand-700 text-white px-6 py-2.5 rounded-full text-sm font-bold disabled:opacity-50">
                 {{ reviewsLoading ? 'Submitting…' : 'Submit Review' }}
               </button>
             </form>
@@ -310,14 +310,14 @@
       
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <NuxtLink v-for="related in relatedProducts" :key="related._id" :to="`/product/${related._id}`" class="group relative flex flex-col">
-          <div class="relative bg-stone-100 aspect-[3/4] overflow-hidden rounded-xl mb-3">
+          <div class="relative bg-cream-100 aspect-[3/4] overflow-hidden rounded-xl mb-3">
             <img :src="related.imageUrls?.medium || related.imageUrls?.original || '/img/placeholder.jpg'" :alt="related.name" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700 ease-out" />
           </div>
           <div class="flex flex-col flex-1 pb-4">
-            <h3 class="text-xs font-bold text-stone-800 mb-1 line-clamp-1 group-hover:text-brand-900">{{ related.name }}</h3>
-            <p class="text-xs font-bold text-stone-500 mb-3">${{ (related.price || related.basePrice || 0).toFixed(2) }}</p>
+            <h3 class="text-xs font-bold text-brand-800 mb-1 line-clamp-1 group-hover:text-brand-900">{{ related.name }}</h3>
+            <p class="text-xs font-bold text-brand-500 mb-3">${{ (related.price || related.basePrice || 0).toFixed(2) }}</p>
             <div class="mt-auto">
-              <button @click.prevent="cart.addToCart({ id: related._id || related.id, _id: related._id || related.id, name: related.name, price: related.price || related.basePrice || 0, basePrice: related.basePrice || related.price || 0, image: related.imageUrls?.medium || related.imageUrls?.original || '/img/placeholder.jpg', imageUrls: related.imageUrls }, 1)" class="w-full bg-brand-900 text-white py-2 text-xs font-bold uppercase tracking-widest rounded hover:bg-brand-800 transition-colors md:opacity-0 group-hover:opacity-100 shadow-sm">
+              <button @click.prevent="cart.addToCart({ id: related._id || related.id, _id: related._id || related.id, name: related.name, price: related.price || related.basePrice || 0, basePrice: related.basePrice || related.price || 0, image: related.imageUrls?.medium || related.imageUrls?.original || '/img/placeholder.jpg', imageUrls: related.imageUrls }, 1)" class="w-full bg-brand-700 text-white py-2 text-xs font-bold uppercase tracking-widest rounded hover:bg-brand-800 transition-colors md:opacity-0 group-hover:opacity-100 shadow-sm">
                 Add to Bag
               </button>
             </div>

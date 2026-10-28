@@ -25,7 +25,7 @@
           <div v-for="(item, index) in items" :key="index" class="group">
             <NuxtLink :to="item.id ? `/product/${item.id}` : '#'" class="block">
               <!-- Product Image Container -->
-              <div class="bg-stone-200 aspect-square mb-3 flex items-center justify-center overflow-hidden rounded-sm group-hover:bg-stone-300 transition-colors">
+              <div class="bg-cream-200 aspect-square mb-3 flex items-center justify-center overflow-hidden rounded-sm group-hover:bg-brand-300 transition-colors">
                 <img 
                   v-if="item.image && item.image !== '/img/placeholder.jpg'" 
                   :src="item.image" 

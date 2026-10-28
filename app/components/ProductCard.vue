@@ -17,7 +17,7 @@
       </div>
       
       <!-- Pack Badge -->
-      <div v-if="displayProduct.pack" class="absolute bottom-4 left-4 bg-brand-900 text-white text-xs font-bold w-12 h-12 rounded-full flex flex-col items-center justify-center leading-tight shadow-md border-2 border-white">
+      <div v-if="displayProduct.pack" class="absolute bottom-4 left-4 bg-brand-700 text-white text-xs font-bold w-12 h-12 rounded-full flex flex-col items-center justify-center leading-tight shadow-md border-2 border-white">
         <span class="text-sm">{{ displayProduct.pack.split(' ')[0] }}</span>
         <span class="text-[9px] uppercase">{{ displayProduct.pack.split(' ')[1] }}</span>
       </div>
@@ -61,7 +61,7 @@
       <span class="text-[10px] text-brand-400">{{ displayProduct.reviews }}</span>
     </div>
     
-    <button @click.prevent="handleAddToBag" class="w-full rounded-full border border-brand-900/15 bg-white py-2.5 text-[11px] font-bold tracking-widest uppercase text-brand-900 transition-all hover:border-brand-900 hover:bg-brand-900 hover:text-white active:scale-[0.99] mt-auto">
+    <button @click.prevent="handleAddToBag" class="w-full rounded-full border border-brand-900/15 bg-white py-2.5 text-[11px] font-bold tracking-widest uppercase text-brand-900 transition-all hover:border-brand-900 hover:bg-brand-700 hover:text-white active:scale-[0.99] mt-auto">
       Add To Bag
     </button>
   </div>
