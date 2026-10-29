@@ -8,7 +8,7 @@
           <!-- User Greeting -->
           <div>
             <p class="eyebrow mb-1">My account</p>
-            <h2 class="font-display text-2xl font-semibold text-brand-900 mb-1">Hello, {{ user?.firstName }}</h2>
+            <h2 class="font-display text-2xl font-semibold text-ink mb-1">Hello, {{ user?.firstName }}</h2>
             <div class="flex items-center gap-3 text-sm text-brand-500">
               <span class="font-bold text-brand-700">{{ dashboard?.tierInfo?.current || 'Insider' }}</span>
               <span>{{ dashboard?.tierInfo?.points || 0 }} Pts</span>
@@ -18,7 +18,7 @@
               <div class="flex items-center gap-2 text-xs text-brand-500">
                 <div class="w-6 h-6 bg-brand-700 rounded-full flex items-center justify-center text-white text-[8px]">↑</div>
                 <div>
-                  <p class="font-bold text-brand-800">Upgrade to {{ dashboard?.tierInfo?.nextTier }}</p>
+                  <p class="font-bold text-ink">Upgrade to {{ dashboard?.tierInfo?.nextTier }}</p>
                   <p>Spend ${{ dashboard?.tierInfo?.spendToNextTier?.toFixed(2) }} by 08/31/2027</p>
                 </div>
                 <ChevronRightIcon class="h-4 w-4 ml-auto text-brand-400" />
@@ -81,7 +81,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <StarIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-display text-xl font-semibold text-brand-900">Earn Extra Points</h3>
+              <h3 class="font-display text-xl font-semibold text-ink">Earn Extra Points</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline">View all</span>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -92,7 +92,7 @@
                   <StoreIcon v-else-if="action.icon === 'store'" class="h-6 w-6 text-brand-500" />
                   <CakeIcon v-else class="h-6 w-6 text-brand-500" />
                 </div>
-                <p class="font-bold text-sm text-brand-900">Earn {{ action.points }} Points</p>
+                <p class="font-bold text-sm text-ink">Earn {{ action.points }} Points</p>
                 <p class="text-xs text-brand-500 mt-1">{{ action.action }}</p>
               </div>
             </div>
@@ -102,7 +102,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <PackageIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-display text-xl font-semibold text-brand-900">Orders</h3>
+              <h3 class="font-display text-xl font-semibold text-ink">Orders</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline" @click="activeTab = 'orders'">View all</span>
             </div>
             <div v-if="orders.length === 0" class="bg-white border border-cream-200 rounded-xl p-8">
@@ -128,7 +128,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <TagIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-display text-xl font-semibold text-brand-900">Discounts and Offers</h3>
+              <h3 class="font-display text-xl font-semibold text-ink">Discounts and Offers</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline" @click="activeTab = 'discounts'">View all</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -136,11 +136,11 @@
                 <div class="h-2" :class="disc.type === 'savings' ? 'bg-gradient-to-r from-red-500 to-orange-500' : 'bg-gradient-to-r from-brand-500 to-cyan-400'"></div>
                 <div class="p-5">
                   <span class="inline-block text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded text-white mb-2" :class="disc.type === 'savings' ? 'bg-red-500' : 'bg-brand-500'">{{ disc.type }}</span>
-                  <h4 class="font-bold text-sm text-brand-900 mb-1">{{ disc.description }}</h4>
+                  <h4 class="font-bold text-sm text-ink mb-1">{{ disc.description }}</h4>
                   <p class="text-xs text-brand-500">Valid thru {{ new Date(disc.validUntil).toLocaleDateString() }}</p>
                   <div class="flex items-center justify-between mt-4">
                     <span class="text-xs text-coral-600 font-bold cursor-pointer hover:underline">Details</span>
-                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-brand-900 transition-colors hover:bg-brand-700 hover:text-white">APPLY NOW</button>
+                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-ink transition-colors hover:bg-brand-700 hover:text-white">APPLY NOW</button>
                   </div>
                 </div>
               </div>
@@ -151,24 +151,24 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <UserIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-display text-xl font-semibold text-brand-900">Profile Information</h3>
+              <h3 class="font-display text-xl font-semibold text-ink">Profile Information</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline" @click="activeTab = 'profile'">View all</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="bg-white border border-cream-200 rounded-xl p-5">
-                <h5 class="font-bold text-sm text-brand-900 mb-2">{{ user?.firstName }} {{ user?.lastName }}</h5>
+                <h5 class="font-bold text-sm text-ink mb-2">{{ user?.firstName }} {{ user?.lastName }}</h5>
                 <p class="text-xs text-brand-500">{{ user?.phoneNumber || 'No phone' }}</p>
                 <p class="text-xs text-brand-500">{{ user?.email }}</p>
                 <button @click="activeTab = 'profile'" class="text-xs text-coral-600 font-bold mt-3 underline underline-offset-2">Edit</button>
               </div>
               <div class="bg-white border border-cream-200 rounded-xl p-5">
-                <h5 class="font-bold text-sm text-brand-900 mb-2">Mailing Address</h5>
+                <h5 class="font-bold text-sm text-ink mb-2">Mailing Address</h5>
                 <p v-if="user?.addresses?.length" class="text-xs text-brand-500">{{ user.addresses[0].street }}, {{ user.addresses[0].city }}, {{ user.addresses[0].zipCode }}</p>
                 <p v-else class="text-xs text-brand-500">No address saved</p>
                 <button @click="activeTab = 'addresses'" class="text-xs text-coral-600 font-bold mt-3 underline underline-offset-2">Edit</button>
               </div>
               <div class="bg-white border border-cream-200 rounded-xl p-5">
-                <h5 class="font-bold text-sm text-brand-900 mb-2">Password</h5>
+                <h5 class="font-bold text-sm text-ink mb-2">Password</h5>
                 <p class="text-xs text-brand-500">••••••••</p>
                 <NuxtLink to="/forgot-password" class="text-xs text-coral-600 font-bold mt-3 underline underline-offset-2 block">Edit</NuxtLink>
               </div>
@@ -179,7 +179,7 @@
           <section>
             <div class="flex items-center gap-2 mb-4">
               <CreditCardIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-display text-xl font-semibold text-brand-900">Payments & Gift Cards</h3>
+              <h3 class="font-display text-xl font-semibold text-ink">Payments & Gift Cards</h3>
               <span class="text-xs text-coral-600 font-bold ml-2 cursor-pointer hover:underline" @click="activeTab = 'payments'">View all</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -200,7 +200,7 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <PackageIcon class="h-5 w-5 text-brand-700" />
-              <h3 class="font-display text-xl font-semibold text-brand-900">Orders</h3>
+              <h3 class="font-display text-xl font-semibold text-ink">Orders</h3>
             </div>
             <div class="min-w-[150px]">
               <CustomSelect
@@ -257,7 +257,7 @@
         <!-- ============= MY PLACE REWARDS ============= -->
         <div v-else-if="activeTab === 'rewards'" class="space-y-8">
           <div class="text-center">
-            <h2 class="text-3xl font-black italic text-brand-900">Rewards <span class="border border-brand-200 rounded px-2 py-0.5 text-sm not-italic uppercase tracking-widest">Rewards</span></h2>
+            <h2 class="text-3xl font-black italic text-ink">Rewards <span class="border border-brand-200 rounded px-2 py-0.5 text-sm not-italic uppercase tracking-widest">Rewards</span></h2>
             <p class="text-sm text-brand-500 mt-2">Check your points, discover new rewards, and make the most of every purchase.</p>
           </div>
 
@@ -291,7 +291,7 @@
 
           <!-- Your Perks -->
           <div class="text-center">
-            <h3 class="font-display text-xl font-semibold text-brand-900">Your Perks</h3>
+            <h3 class="font-display text-xl font-semibold text-ink">Your Perks</h3>
             <p class="text-sm text-brand-500">Make the most of your tier—here's what you can still enjoy</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -314,7 +314,7 @@
 
           <!-- Boost Your Points -->
           <div class="text-center">
-            <h3 class="font-display text-xl font-semibold text-brand-900">Boost Your Points</h3>
+            <h3 class="font-display text-xl font-semibold text-ink">Boost Your Points</h3>
             <p class="text-sm text-brand-500">More points mean more rewards – don't miss your chance</p>
           </div>
           <div class="flex overflow-x-auto gap-3 pb-2 -mx-4 px-4">
@@ -332,7 +332,7 @@
         <div v-else-if="activeTab === 'discounts'" class="space-y-6">
           <div class="flex items-center gap-2">
             <TagIcon class="h-5 w-5 text-brand-700" />
-            <h3 class="font-display text-xl font-semibold text-brand-900">Discounts and Offers</h3>
+            <h3 class="font-display text-xl font-semibold text-ink">Discounts and Offers</h3>
           </div>
           <p class="text-sm text-brand-500">Available Discounts and offers ({{ dashboard?.discounts?.length || 0 }})</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -340,11 +340,11 @@
               <div class="h-2" :class="disc.type === 'savings' ? 'bg-gradient-to-r from-red-500 to-orange-500' : 'bg-gradient-to-r from-brand-500 to-cyan-400'"></div>
               <div class="p-5">
                 <span class="inline-block text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded text-white mb-2" :class="disc.type === 'savings' ? 'bg-red-500' : 'bg-brand-500'">{{ disc.type }}</span>
-                <h4 class="font-bold text-sm text-brand-900 mb-1">{{ disc.code }} – {{ disc.description }}</h4>
+                <h4 class="font-bold text-sm text-ink mb-1">{{ disc.code }} – {{ disc.description }}</h4>
                 <p class="text-xs text-brand-500">Valid thru {{ new Date(disc.validUntil).toLocaleDateString() }}</p>
                 <div class="flex items-center justify-between mt-4">
                   <span class="text-xs text-coral-600 font-bold cursor-pointer hover:underline">Details</span>
-                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-brand-900 transition-colors hover:bg-brand-700 hover:text-white">APPLY NOW</button>
+                  <button @click="handleApplyDiscount(disc.code)" class="rounded-full border border-brand-900 px-5 py-2.5 text-[11px] font-bold text-ink transition-colors hover:bg-brand-700 hover:text-white">APPLY NOW</button>
                 </div>
               </div>
             </div>
@@ -357,14 +357,14 @@
 
         <!-- ============= PROFILE INFORMATION ============= -->
         <div v-else-if="activeTab === 'profile'" class="space-y-8">
-          <h3 class="font-display text-xl font-semibold text-brand-900">PROFILE INFORMATION</h3>
+          <h3 class="font-display text-xl font-semibold text-ink">PROFILE INFORMATION</h3>
           
           <div class="border-t-2 border-black pt-6 flex flex-col md:flex-row gap-12">
             <!-- Left Side: Complete Your Profile -->
             <div class="w-full md:w-1/2 space-y-6">
               <div class="flex items-center justify-between">
                 <div>
-                  <h4 class="font-bold text-brand-900">Complete Your Profile</h4>
+                  <h4 class="font-bold text-ink">Complete Your Profile</h4>
                   <p class="text-xs text-brand-500">Improve your shopping experience by adding even more info.</p>
                 </div>
                 <div class="relative w-12 h-12">
@@ -403,7 +403,7 @@
             <!-- Right Side: Personal Info -->
             <div class="w-full md:w-1/2 space-y-6">
               <div>
-                <h4 class="font-bold text-brand-900 mb-2">Personal Information</h4>
+                <h4 class="font-bold text-ink mb-2">Personal Information</h4>
                 <div v-if="!isEditingProfile" class="text-sm text-brand-500 space-y-1">
                   <p>{{ user?.firstName }} {{ user?.lastName }}</p>
                   <p>{{ user?.email }}</p>
@@ -420,7 +420,7 @@
               <button v-if="!isEditingProfile" @click="isEditingProfile = true" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">EDIT PERSONAL INFO</button>
               <div v-else class="flex gap-2">
                 <button @click="handleUpdateProfile" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">SAVE CHANGES</button>
-                <button @click="isEditingProfile = false" class="w-full bg-cream-200 text-brand-800 font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
+                <button @click="isEditingProfile = false" class="w-full bg-cream-200 text-ink font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
               </div>
             </div>
           </div>
@@ -428,7 +428,7 @@
           <!-- Bottom Section: Password & Birthday -->
           <div class="border-t border-cream-200 pt-6 flex flex-col md:flex-row gap-12">
             <div class="w-full md:w-1/2 space-y-4">
-              <h4 class="font-bold text-brand-900">Password</h4>
+              <h4 class="font-bold text-ink">Password</h4>
               <div v-if="!showPasswordForm">
                 <p class="font-bold text-xs">Need to change your password?</p>
                 <p class="text-xs text-brand-500 leading-relaxed mb-2">Password must contain at least 8 characters, 1 uppercase letter, 1 number and 1 special character. It cannot be your email address or a recently used password.</p>
@@ -439,13 +439,13 @@
                 <div><label class="text-xs font-bold text-brand-500 block mb-1">New Password</label><input type="password" v-model="passwordForm.newPassword" required class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
                 <div class="flex gap-2">
                   <button type="submit" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">UPDATE</button>
-                  <button type="button" @click="showPasswordForm = false" class="w-full bg-cream-200 text-brand-800 font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
+                  <button type="button" @click="showPasswordForm = false" class="w-full bg-cream-200 text-ink font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
                 </div>
               </form>
             </div>
             
             <div class="w-full md:w-1/2 space-y-4">
-              <h4 class="font-bold text-brand-900">Birthday Savings</h4>
+              <h4 class="font-bold text-ink">Birthday Savings</h4>
               
               <div v-if="user?.birthdays?.length" class="space-y-2 mb-4">
                 <div v-for="(bday, i) in user.birthdays" :key="i" class="flex items-center justify-between border-b pb-2">
@@ -466,7 +466,7 @@
                 <div><label class="text-xs font-bold text-brand-500 block mb-1">Birth Date</label><input type="date" v-model="birthdayForm.birthDate" required class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-brand-200" /></div>
                 <div class="flex gap-2">
                   <button type="submit" class="w-full bg-brand-700 text-white font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-black transition-colors">SAVE</button>
-                  <button type="button" @click="showBirthdayForm = false" class="w-full bg-cream-200 text-brand-800 font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
+                  <button type="button" @click="showBirthdayForm = false" class="w-full bg-cream-200 text-ink font-bold py-3 text-xs tracking-wider rounded-sm hover:bg-gray-300 transition-colors">CANCEL</button>
                 </div>
               </form>
             </div>
@@ -480,7 +480,7 @@
 
         <!-- ============= ADDRESS BOOK ============= -->
         <div v-else-if="activeTab === 'addresses'" class="space-y-6">
-          <h3 class="font-display text-xl font-semibold text-brand-900">Address Book</h3>
+          <h3 class="font-display text-xl font-semibold text-ink">Address Book</h3>
           <div v-if="user?.addresses?.length" class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div v-for="(addr, i) in user.addresses" :key="i" class="bg-white border rounded-xl p-5 relative">
               <span v-if="addr.isDefault" class="absolute top-3 right-3 bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded">Default</span>
@@ -515,7 +515,7 @@
         <!-- ============= PAYMENTS & GIFT CARDS ============= -->
         <div v-else-if="activeTab === 'payments'" class="space-y-10">
           <div>
-            <h3 class="font-display text-lg font-semibold text-brand-900 border-b border-cream-200 pb-2 mb-6">CREDIT & DEBIT CARDS</h3>
+            <h3 class="font-display text-lg font-semibold text-ink border-b border-cream-200 pb-2 mb-6">CREDIT & DEBIT CARDS</h3>
             
             <div v-if="user?.paymentMethods?.length" class="mb-6 space-y-4">
               <div v-for="(pm, i) in user.paymentMethods" :key="i" class="border p-4 rounded-xl flex items-center justify-between">
@@ -533,7 +533,7 @@
             <div v-if="!showPaymentForm" class="flex items-start gap-4">
               <CreditCardIcon class="h-10 w-10 text-brand-500 shrink-0" />
               <div>
-                <p class="font-bold text-sm text-brand-900 mb-1">Add a credit or debit card to check out faster!</p>
+                <p class="font-bold text-sm text-ink mb-1">Add a credit or debit card to check out faster!</p>
                 <p class="text-xs text-brand-500 mb-4">Securely save your credit card, and/or JasmarKids Rewards Card information so you can check out even faster!</p>
                 <button @click="showPaymentForm = true" class="bg-brand-700 text-white text-xs font-bold px-8 py-3 rounded-sm hover:bg-black uppercase tracking-widest transition-colors w-[300px]">ADD A CREDIT OR DEBIT CARD</button>
               </div>
@@ -553,7 +553,7 @@
               />
               <div class="flex gap-2">
                 <button type="submit" class="bg-brand-700 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Card</button>
-                <button type="button" @click="showPaymentForm = false" class="bg-cream-200 text-brand-800 font-bold px-8 py-3 rounded hover:bg-gray-300 transition-colors text-sm">Cancel</button>
+                <button type="button" @click="showPaymentForm = false" class="bg-cream-200 text-ink font-bold px-8 py-3 rounded hover:bg-gray-300 transition-colors text-sm">Cancel</button>
               </div>
             </form>
           </div>
@@ -561,15 +561,15 @@
 
         <!-- ============= MY PREFERENCES ============= -->
         <div v-else-if="activeTab === 'preferences'" class="space-y-6">
-          <h3 class="font-display text-xl font-semibold text-brand-900">My Preferences</h3>
+          <h3 class="font-display text-xl font-semibold text-ink">My Preferences</h3>
           <div class="bg-white border rounded-xl p-6 space-y-5 max-w-xl">
             <label class="flex items-center justify-between">
               <span class="text-sm font-medium text-brand-700">Email Offers & Promotions</span>
-              <input type="checkbox" v-model="prefsForm.emailOffers" class="rounded text-brand-900 focus:ring-brand-900" />
+              <input type="checkbox" v-model="prefsForm.emailOffers" class="rounded text-ink focus:ring-brand-900" />
             </label>
             <label class="flex items-center justify-between">
               <span class="text-sm font-medium text-brand-700">SMS Text Alerts (Get 30% OFF!)</span>
-              <input type="checkbox" v-model="prefsForm.smsAlerts" class="rounded text-brand-900 focus:ring-brand-900" />
+              <input type="checkbox" v-model="prefsForm.smsAlerts" class="rounded text-ink focus:ring-brand-900" />
             </label>
             <button @click="handleUpdatePreferences" class="bg-brand-700 text-white font-bold px-8 py-3 rounded hover:bg-black transition-colors text-sm">Save Preferences</button>
           </div>
@@ -578,9 +578,9 @@
         <!-- ============= WISHLISTS ============= -->
         <div v-else-if="activeTab === 'wishlists'" class="space-y-6">
           <div>
-            <h3 class="font-display text-xl font-semibold text-brand-900 inline-block mr-2">Wishlists</h3>
+            <h3 class="font-display text-xl font-semibold text-ink inline-block mr-2">Wishlists</h3>
             <span class="text-xs text-brand-500 font-bold">1/5 Lists</span>
-            <p class="text-xs text-brand-900 font-bold mt-1">Create, edit, and share up to 5 wishlists.</p>
+            <p class="text-xs text-ink font-bold mt-1">Create, edit, and share up to 5 wishlists.</p>
           </div>
           
           <div class="flex items-center justify-between py-4 border-b">
@@ -605,7 +605,7 @@
           </div>
 
           <div v-if="!user?.wishlist?.length" class="text-center py-16">
-            <p class="text-sm font-bold text-brand-900">Your wishlist is empty</p>
+            <p class="text-sm font-bold text-ink">Your wishlist is empty</p>
             <NuxtLink to="/products" class="inline-block bg-brand-700 text-white text-xs font-bold px-12 py-3 mt-4 rounded-sm hover:bg-black tracking-widest uppercase transition-colors">Start Shopping</NuxtLink>
           </div>
           <div v-else class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
@@ -616,19 +616,19 @@
         <!-- ============= BUY IT AGAIN ============= -->
         <div v-else-if="activeTab === 'buy-again'" class="space-y-6">
           <div class="border-b pb-4">
-            <h3 class="font-display text-xl font-semibold text-brand-900">BUY IT AGAIN</h3>
-            <p class="text-xs text-brand-900 font-bold mt-1">Save time & shop your previously-purchased styles.</p>
+            <h3 class="font-display text-xl font-semibold text-ink">BUY IT AGAIN</h3>
+            <p class="text-xs text-ink font-bold mt-1">Save time & shop your previously-purchased styles.</p>
           </div>
           
           <div v-if="orders.length === 0" class="text-center py-16">
-            <p class="text-sm font-bold text-brand-900">Once you've made an order, you'll be able to shop previously-purchased styles.</p>
+            <p class="text-sm font-bold text-ink">Once you've made an order, you'll be able to shop previously-purchased styles.</p>
           </div>
           <div v-else class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div v-for="item in pastItems" :key="item.name" class="bg-white border rounded-xl p-4 text-center hover:shadow-md transition-shadow">
               <div class="w-full aspect-square bg-cream-100 rounded-lg mb-3 flex items-center justify-center">
                 <ShoppingBagIcon class="h-8 w-8 text-gray-300" />
               </div>
-              <p class="font-bold text-xs text-brand-900 truncate">{{ item.name }}</p>
+              <p class="font-bold text-xs text-ink truncate">{{ item.name }}</p>
               <p class="font-bold text-sm mt-1">${{ item.price?.toFixed(2) }}</p>
               <button @click="handleAddToCart(item)" class="mt-2 bg-brand-700 text-white text-xs font-bold px-4 py-2 rounded hover:bg-black w-full">Add to Cart</button>
             </div>
@@ -637,16 +637,16 @@
 
         <!-- ============= RATE & REVIEW ============= -->
         <div v-else-if="activeTab === 'reviews'" class="space-y-6">
-          <h3 class="font-display text-xl font-semibold text-brand-900 border-b border-cream-200 pb-4">Rate & Review</h3>
+          <h3 class="font-display text-xl font-semibold text-ink border-b border-cream-200 pb-4">Rate & Review</h3>
           <div class="text-center py-16">
-            <p class="text-sm font-bold text-brand-900 mb-6">Add a review with details and ratings on items you've purchased when they start to appear.</p>
+            <p class="text-sm font-bold text-ink mb-6">Add a review with details and ratings on items you've purchased when they start to appear.</p>
             <NuxtLink to="/products" class="inline-block bg-brand-700 text-white text-xs font-bold px-12 py-3 rounded-sm hover:bg-black tracking-widest uppercase transition-colors">SHOP NOW</NuxtLink>
           </div>
         </div>
 
         <!-- ============= GENERIC PLACEHOLDER TABS ============= -->
         <div v-else class="space-y-6">
-          <h3 class="font-display text-xl font-semibold text-brand-900 border-b border-cream-200 pb-4">{{ activeTab.replace(/-/g, ' ') }}</h3>
+          <h3 class="font-display text-xl font-semibold text-ink border-b border-cream-200 pb-4">{{ activeTab.replace(/-/g, ' ') }}</h3>
           <div class="bg-white border rounded-xl p-12 text-center">
             <SparklesIcon class="h-12 w-12 mx-auto text-gray-300 mb-4" />
             <p class="text-brand-500 font-medium">Coming soon! This feature is under development.</p>

@@ -1,11 +1,11 @@
 <template>
   <div class="container-site py-12 sm:py-16">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-4xl font-serif font-bold text-brand-900 mb-8 text-center">Frequently Asked Questions</h1>
+      <h1 class="text-4xl font-serif font-bold text-ink mb-8 text-center">Frequently Asked Questions</h1>
       
       <div class="space-y-6">
         <div v-for="(faq, index) in faqs" :key="index" class="card-surface p-6">
-          <h3 class="text-lg font-medium text-brand-900 mb-2">{{ faq.question }}</h3>
+          <h3 class="text-lg font-medium text-ink mb-2">{{ faq.question }}</h3>
           <p class="text-brand-500">{{ faq.answer }}</p>
         </div>
       </div>

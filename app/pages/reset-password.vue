@@ -7,7 +7,7 @@
       <div class="w-full max-w-md mx-auto mb-6">
         <NuxtLink 
           to="/login" 
-          class="inline-flex items-center gap-2.5 text-brand-500 hover:text-brand-900 transition-colors text-xs font-bold tracking-widest uppercase group py-1"
+          class="inline-flex items-center gap-2.5 text-brand-500 hover:text-ink transition-colors text-xs font-bold tracking-widest uppercase group py-1"
         >
           <span class="w-8 h-8 rounded-full bg-cream-100 flex items-center justify-center text-brand-500 group-hover:bg-brand-700 group-hover:text-white transition-all shadow-xs">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +24,7 @@
           <span class="inline-block text-[10px] font-black uppercase tracking-widest text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md mb-2.5 border border-emerald-200/60">
             Security Update
           </span>
-          <h1 class="font-display text-3xl sm:text-4xl font-semibold text-brand-900 tracking-tight">Set a new password</h1>
+          <h1 class="font-display text-3xl sm:text-4xl font-semibold text-ink tracking-tight">Set a new password</h1>
           <p class="text-brand-500 font-normal mt-1.5 text-sm">Create a strong password with at least 8 characters to secure your account.</p>
         </div>
         
@@ -37,7 +37,7 @@
                 :type="showPassword ? 'text' : 'password'"
                 required
                 placeholder="••••••••"
-                class="w-full px-4 py-2.5 pr-11 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
+                class="w-full px-4 py-2.5 pr-11 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-ink placeholder:text-brand-400"
               >
               <button 
                 type="button" 
@@ -63,7 +63,7 @@
               :type="showPassword ? 'text' : 'password'"
               required
               placeholder="••••••••"
-              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
+              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-ink placeholder:text-brand-400"
             >
           </div>
           
@@ -82,7 +82,7 @@
 
         <div class="mt-7 text-center text-xs text-brand-500">
           Remembered your old password? 
-          <NuxtLink to="/login" class="font-bold text-brand-900 hover:underline underline-offset-4 ml-1">Back to sign in</NuxtLink>
+          <NuxtLink to="/login" class="font-bold text-ink hover:underline underline-offset-4 ml-1">Back to sign in</NuxtLink>
         </div>
       </div>
 

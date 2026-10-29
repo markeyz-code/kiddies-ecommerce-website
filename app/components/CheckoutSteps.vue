@@ -19,7 +19,7 @@
         </span>
         <span
           class="text-[10px] font-bold uppercase tracking-[0.06em] sm:text-[11px] sm:tracking-[0.12em]"
-          :class="step >= item.number ? 'text-brand-900' : 'text-brand-300'"
+          :class="step >= item.number ? 'text-ink' : 'text-brand-300'"
         >
           {{ item.label }}
         </span>

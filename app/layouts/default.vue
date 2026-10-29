@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden bg-cream-50 font-sans text-brand-900 transition-colors duration-300">
+  <div class="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden bg-cream-50 font-sans text-ink transition-colors duration-300">
     <Header />
 
     <!-- Main Content -->
@@ -8,10 +8,13 @@
     </main>
 
     <!-- Premium Footer -->
-    <footer class="bg-brand-700 text-cream-100/80 pt-12 pb-24 md:py-16 mt-auto">
+    <footer class="bg-ink text-cream-100/80 pt-12 pb-24 md:py-16 mt-auto">
       <div class="max-w-[1400px] mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
         <div class="col-span-2 md:col-span-1">
-          <span class="text-2xl md:text-3xl font-display font-semibold text-white mb-4 md:mb-6 block tracking-tight">{{ storeSettings.storeName || 'JasmarKids' }}</span>
+          <div class="mb-4 md:mb-6">
+            <span class="block font-display text-2xl font-semibold tracking-tight text-coral-400 md:text-3xl">{{ storeSettings.storeName || 'JasmarKids' }}</span>
+            <span class="mt-1 block text-[9px] font-bold uppercase tracking-[0.22em] text-brand-300">by Tayisi · Kids Clothing</span>
+          </div>
           <p class="text-sm font-light leading-relaxed text-cream-100/70 pr-0 md:pr-4">Curated elegance for little ones. Modern, vibrant children's fashion made for African kids. Online boutique with nationwide delivery across Nigeria.</p>
           <div class="mt-5 space-y-1.5 text-sm font-light text-cream-100/70">
             <a :href="`mailto:${storeSettings.storeEmail || 'hello@jasmarkids.com'}`" class="block hover:text-white transition-colors">✉️ {{ storeSettings.storeEmail || 'hello@jasmarkids.com' }}</a>
@@ -53,7 +56,7 @@
           <p class="text-sm font-light text-gray-300 mb-6">Join our community for exclusive offers and playful updates!</p>
           <form class="flex w-full" @submit.prevent="subscribe">
             <input v-model="newsletterEmail" type="email" required placeholder="Email address" class="px-4 py-3 w-full bg-white/10 text-white placeholder-cream-100/50 rounded-l-xl border border-white/20 focus:outline-none focus:border-white focus:bg-white/20 font-light transition-colors" />
-            <button type="submit" :disabled="subscribing" class="bg-cream-50 text-brand-900 font-bold px-6 py-3 rounded-r-xl hover:bg-white transition-colors disabled:opacity-60">
+            <button type="submit" :disabled="subscribing" class="bg-cream-50 text-ink font-bold px-6 py-3 rounded-r-xl hover:bg-white transition-colors disabled:opacity-60">
               {{ subscribing ? '…' : subscribed ? 'Subscribed ✓' : 'Subscribe' }}
             </button>
           </form>

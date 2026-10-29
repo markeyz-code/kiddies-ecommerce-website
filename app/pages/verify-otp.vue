@@ -3,15 +3,15 @@
     <!-- Left: Form Section -->
     <div class="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-12 lg:px-24 xl:px-32 relative z-10 bg-white shadow-2xl py-12 lg:py-0 overflow-y-auto">
       <div class="absolute top-8 left-8 sm:left-12 lg:left-24">
-        <NuxtLink to="/login" class="text-brand-900 hover:opacity-75 transition-opacity flex items-center font-bold text-sm tracking-widest uppercase">
+        <NuxtLink to="/login" class="text-ink hover:opacity-75 transition-opacity flex items-center font-bold text-sm tracking-widest uppercase">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
           Back to Login
         </NuxtLink>
       </div>
       
       <div class="w-full max-w-md mx-auto mt-16 lg:mt-0">
-        <h1 class="mb-2 font-display text-4xl font-semibold text-brand-900">Verify your email</h1>
-        <p class="text-brand-500 font-medium mb-10 text-sm">We've sent a 6-digit code to <span class="font-bold text-brand-800">{{ email }}</span>. Please enter it below.</p>
+        <h1 class="mb-2 font-display text-4xl font-semibold text-ink">Verify your email</h1>
+        <p class="text-brand-500 font-medium mb-10 text-sm">We've sent a 6-digit code to <span class="font-bold text-ink">{{ email }}</span>. Please enter it below.</p>
 
         <div v-if="demoOtp" class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
           Local/demo mode: your verification code is <span class="font-black tracking-widest">{{ demoOtp }}</span> (pre-filled below).
@@ -26,7 +26,7 @@
               required
               maxlength="6"
               placeholder="123456"
-              class="w-full px-5 py-3.5 rounded-2xl bg-cream-100/50 border-2 border-cream-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-brand-800 placeholder:text-brand-400 text-center tracking-[0.5em] text-2xl"
+              class="w-full px-5 py-3.5 rounded-2xl bg-cream-100/50 border-2 border-cream-200 focus:border-brand-900 focus:bg-white focus:ring-0 outline-none transition-all font-medium text-ink placeholder:text-brand-400 text-center tracking-[0.5em] text-2xl"
             >
           </div>
           
@@ -42,7 +42,7 @@
 
         <div class="mt-8 text-center text-sm font-medium text-brand-500">
           Didn't receive the code? 
-          <button @click="handleResend" :disabled="loading" class="font-black text-brand-900 hover:underline underline-offset-2 ml-1 disabled:opacity-50">
+          <button @click="handleResend" :disabled="loading" class="font-black text-ink hover:underline underline-offset-2 ml-1 disabled:opacity-50">
             Resend it
           </button>
         </div>

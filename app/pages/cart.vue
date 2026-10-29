@@ -6,7 +6,7 @@
           <p class="eyebrow mb-2">Step 1 of 3</p>
           <div class="flex items-center gap-3">
             <h1 class="section-title">Your bag</h1>
-            <span v-if="cart.totalItems > 0" class="rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">
+            <span v-if="cart.totalItems > 0" class="rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-ink">
               {{ cart.totalItems }} item{{ cart.totalItems > 1 ? 's' : '' }}
             </span>
           </div>
@@ -16,7 +16,7 @@
 
       <div v-if="cart.items.length === 0" class="flex flex-col items-center justify-center rounded-3xl border border-cream-200 bg-white py-16 text-center sm:py-20">
         <span class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-cream-100 text-4xl">🛍️</span>
-        <h2 class="font-display text-2xl font-semibold text-brand-900 mb-2">Your bag is empty</h2>
+        <h2 class="font-display text-2xl font-semibold text-ink mb-2">Your bag is empty</h2>
         <p class="mb-6 max-w-sm text-sm font-medium text-brand-500">Discover soft, playful pieces made for everyday adventures.</p>
         <NuxtLink to="/products" class="btn-primary">Start shopping</NuxtLink>
       </div>
@@ -34,7 +34,7 @@
                 <div class="flex-1 flex flex-col justify-between">
                   <div class="flex justify-between items-start">
                     <div>
-                      <NuxtLink :to="`/product/${item?.product?._id || item?.product?.id}`" class="mb-1 block text-base font-semibold text-brand-900 transition-colors line-clamp-1 hover:text-coral-600 md:text-lg">
+                      <NuxtLink :to="`/product/${item?.product?._id || item?.product?.id}`" class="mb-1 block text-base font-semibold text-ink transition-colors line-clamp-1 hover:text-coral-600 md:text-lg">
                         {{ item?.product?.name || 'Unknown Product' }}
                       </NuxtLink>
                       <p v-if="item?.options?.size" class="text-xs font-semibold text-gray-600 mb-1">Size: {{ item.options.size }}</p>
@@ -49,11 +49,11 @@
                   
                   <div class="flex justify-between items-center mt-3">
                     <div class="h-10 border border-brand-200 rounded-full flex items-center justify-between px-2 bg-brand-50/50 w-28">
-                      <button aria-label="Decrease quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-brand-900 transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity - 1)">−</button>
-                      <span class="font-black text-sm text-brand-800">{{ item.quantity }}</span>
-                      <button aria-label="Increase quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-brand-900 transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity + 1)">+</button>
+                      <button aria-label="Decrease quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-ink transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity - 1)">−</button>
+                      <span class="font-black text-sm text-ink">{{ item.quantity }}</span>
+                      <button aria-label="Increase quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-ink transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity + 1)">+</button>
                     </div>
-                    <span class="font-display text-lg font-semibold text-brand-900 md:text-xl">${{ getItemTotal(item).toFixed(2) }}</span>
+                    <span class="font-display text-lg font-semibold text-ink md:text-xl">${{ getItemTotal(item).toFixed(2) }}</span>
                   </div>
                 </div>
               </div>
@@ -64,7 +64,7 @@
         <!-- Order Summary -->
         <div class="w-full lg:w-72 flex-shrink-0">
           <div class="card-surface sticky top-24 p-5">
-            <h2 class="mb-4 font-display text-xl font-semibold text-brand-900">Order summary</h2>
+            <h2 class="mb-4 font-display text-xl font-semibold text-ink">Order summary</h2>
             
             <div class="mb-5 rounded-2xl border border-cream-200 bg-cream-50 p-3.5">
               <p v-if="remainingForFreeShipping > 0" class="text-xs font-semibold text-brand-600">
@@ -79,21 +79,21 @@
             <div class="mb-6 space-y-3 border-b border-cream-200 pb-6 text-sm font-medium text-brand-500">
               <div class="flex justify-between items-center">
                  <span>Subtotal</span>
-                <span class="text-base font-bold text-brand-900">${{ (cart.subtotal || 0).toFixed(2) }}</span>
+                <span class="text-base font-bold text-ink">${{ (cart.subtotal || 0).toFixed(2) }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Shipping</span>
-                <span class="font-bold text-brand-900">{{ estimatedShipping === 0 ? 'Free' : `$${estimatedShipping.toFixed(2)}` }}</span>
+                <span class="font-bold text-ink">{{ estimatedShipping === 0 ? 'Free' : `$${estimatedShipping.toFixed(2)}` }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Tax</span>
-                <span class="font-bold text-brand-900">${{ estimatedTax.toFixed(2) }}</span>
+                <span class="font-bold text-ink">${{ estimatedTax.toFixed(2) }}</span>
               </div>
             </div>
             
             <div class="flex justify-between items-end mb-5">
-              <span class="font-bold text-brand-900 text-sm">Estimated total</span>
-              <span class="text-right font-display text-2xl font-semibold text-brand-900">${{ estimatedTotal.toFixed(2) }}</span>
+              <span class="font-bold text-ink text-sm">Estimated total</span>
+              <span class="text-right font-display text-2xl font-semibold text-ink">${{ estimatedTotal.toFixed(2) }}</span>
             </div>
             
             <NuxtLink to="/checkout" class="btn-primary w-full">

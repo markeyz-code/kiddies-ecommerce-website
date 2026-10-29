@@ -43,13 +43,13 @@
     
     <!-- Price -->
     <div class="flex items-center space-x-2 text-xs mb-1">
-      <span class="font-bold text-brand-900 text-sm">${{ displayProduct.price.toFixed(2) }}</span>
+      <span class="font-bold text-ink text-sm">${{ displayProduct.price.toFixed(2) }}</span>
       <span v-if="displayProduct.originalPrice > displayProduct.price" class="text-gray-500 line-through">${{ displayProduct.originalPrice.toFixed(2) }}</span>
       <span v-if="displayProduct.discount" class="text-red-600 font-bold">{{ displayProduct.discount }}</span>
     </div>
     
     <!-- Title -->
-    <NuxtLink :to="`/product/${displayProduct.id}`" class="text-sm font-semibold text-brand-900 mb-1 hover:text-coral-500 transition-colors line-clamp-2 leading-snug min-h-[2.4rem]">{{ displayProduct.name }}</NuxtLink>
+    <NuxtLink :to="`/product/${displayProduct.id}`" class="text-sm font-semibold text-ink mb-1 hover:text-coral-500 transition-colors line-clamp-2 leading-snug min-h-[2.4rem]">{{ displayProduct.name }}</NuxtLink>
     
     <!-- Rating -->
     <div v-if="displayProduct.rating" class="flex items-center space-x-1 mb-3">
@@ -61,7 +61,7 @@
       <span class="text-[10px] text-brand-400">{{ displayProduct.reviews }}</span>
     </div>
     
-    <button @click.prevent="handleAddToBag" class="w-full rounded-full border border-brand-900/15 bg-white py-2.5 text-[11px] font-bold tracking-widest uppercase text-brand-900 transition-all hover:border-brand-900 hover:bg-brand-700 hover:text-white active:scale-[0.99] mt-auto">
+    <button @click.prevent="handleAddToBag" class="w-full rounded-full border border-brand-900/15 bg-white py-2.5 text-[11px] font-bold tracking-widest uppercase text-ink transition-all hover:border-brand-900 hover:bg-brand-700 hover:text-white active:scale-[0.99] mt-auto">
       Add To Bag
     </button>
   </div>

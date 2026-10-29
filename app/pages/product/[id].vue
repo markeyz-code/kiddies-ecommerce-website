@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen bg-cream-50 font-sans text-brand-900 pb-20">
+  <div class="min-h-screen bg-cream-50 font-sans text-ink pb-20">
 
     <!-- Breadcrumbs -->
     <div class="container-site flex items-center gap-2 py-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-400">
-      <NuxtLink to="/" class="text-brand-500 hover:text-brand-900">Home</NuxtLink>
+      <NuxtLink to="/" class="text-brand-500 hover:text-ink">Home</NuxtLink>
       <span>&gt;</span>
-      <NuxtLink to="/products" class="text-brand-500 hover:text-brand-900">Products</NuxtLink>
+      <NuxtLink to="/products" class="text-brand-500 hover:text-ink">Products</NuxtLink>
       <span>&gt;</span>
       <span class="truncate max-w-[200px]">{{ product?.name || 'Product' }}</span>
     </div>
@@ -66,14 +66,14 @@
         <div :class="{ 'opacity-0': isZooming }">
           <p class="eyebrow mb-3">JasmarKids · <NuxtLink to="/products" class="pointer-events-auto underline underline-offset-4">Shop all</NuxtLink></p>
           
-          <h1 class="font-display text-2xl font-semibold leading-tight text-brand-900 mb-4 sm:text-3xl">{{ product.name }}</h1>
+          <h1 class="font-display text-2xl font-semibold leading-tight text-ink mb-4 sm:text-3xl">{{ product.name }}</h1>
           
           <div class="flex items-center space-x-4 mb-6">
             <div class="flex items-center text-coral-400">
               <svg v-for="i in 5" :key="i" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" :fill="i <= Math.round(product.rating) ? 'currentColor' : 'none'" :stroke="i <= Math.round(product.rating) ? 'none' : 'currentColor'">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
-              <span @click.prevent="showReviews = true" class="text-xs text-gray-800 ml-1 underline cursor-pointer hover:text-brand-900">
+              <span @click.prevent="showReviews = true" class="text-xs text-gray-800 ml-1 underline cursor-pointer hover:text-ink">
                 {{ reviews.length || product.reviews || 0 }} {{ (reviews.length || product.reviews) === 1 ? 'review' : 'reviews' }}
               </span>
             </div>
@@ -81,7 +81,7 @@
 
           <div class="mb-6">
             <div class="flex items-end space-x-3 mb-1">
-              <span class="font-display text-3xl font-semibold text-brand-900">${{ product.price.toFixed(2) }}</span>
+              <span class="font-display text-3xl font-semibold text-ink">${{ product.price.toFixed(2) }}</span>
               <div v-if="product.originalPrice > product.price" class="flex flex-col text-xs font-bold leading-tight">
                 <span class="text-gray-500 line-through">${{ product.originalPrice.toFixed(2) }}</span>
                 <span class="text-red-600">{{ product.discount }}</span>
@@ -95,8 +95,8 @@
           <!-- Size Selector -->
           <div class="mb-8">
             <div class="flex justify-between items-center mb-3">
-              <span class="text-xs font-bold uppercase tracking-widest">Size: <span v-if="selectedSize" class="text-brand-900">{{ selectedSize }}</span></span>
-              <a href="#" @click.prevent="showSizeGuide = true" class="text-xs text-brand-900 font-bold underline flex items-center hover:text-brand-800">
+              <span class="text-xs font-bold uppercase tracking-widest">Size: <span v-if="selectedSize" class="text-ink">{{ selectedSize }}</span></span>
+              <a href="#" @click.prevent="showSizeGuide = true" class="text-xs text-ink font-bold underline flex items-center hover:text-ink">
                 Size Guide
               </a>
             </div>
@@ -142,7 +142,7 @@
           <!-- Product information -->
           <div class="divide-y divide-cream-200 rounded-2xl border border-cream-200 bg-white">
             <details class="group p-4" open>
-              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-brand-900">
+              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-ink">
                 Product details
                 <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
               </summary>
@@ -154,7 +154,7 @@
               </ul>
             </details>
             <details class="group p-4">
-              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-brand-900">
+              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-ink">
                 Shipping &amp; returns
                 <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
               </summary>
@@ -164,7 +164,7 @@
               </div>
             </details>
             <details class="group p-4">
-              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-brand-900">
+              <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-ink">
                 Care &amp; sizing
                 <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
               </summary>
@@ -187,7 +187,7 @@
         <button @click="showSizeGuide = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
-        <h3 class="mb-6 font-display text-2xl font-semibold text-brand-900">Size guide</h3>
+        <h3 class="mb-6 font-display text-2xl font-semibold text-ink">Size guide</h3>
         
         <div class="overflow-x-auto rounded-2xl border border-cream-200">
           <table class="w-full text-left text-sm text-brand-500">
@@ -201,31 +201,31 @@
             </thead>
             <tbody>
               <tr class="border-b border-cream-100 bg-white hover:bg-cream-50">
-                <td class="px-6 py-4 font-bold text-brand-900">XS (4)</td>
+                <td class="px-6 py-4 font-bold text-ink">XS (4)</td>
                 <td class="px-6 py-4">3-4 yrs</td>
                 <td class="px-6 py-4">39-42</td>
                 <td class="px-6 py-4">33-39</td>
               </tr>
               <tr class="border-b border-cream-100 bg-white hover:bg-cream-50">
-                <td class="px-6 py-4 font-bold text-brand-900">S (5-6)</td>
+                <td class="px-6 py-4 font-bold text-ink">S (5-6)</td>
                 <td class="px-6 py-4">5-6 yrs</td>
                 <td class="px-6 py-4">43-48</td>
                 <td class="px-6 py-4">40-50</td>
               </tr>
               <tr class="border-b border-cream-100 bg-white hover:bg-cream-50">
-                <td class="px-6 py-4 font-bold text-brand-900">M (7-8)</td>
+                <td class="px-6 py-4 font-bold text-ink">M (7-8)</td>
                 <td class="px-6 py-4">7-8 yrs</td>
                 <td class="px-6 py-4">49-54</td>
                 <td class="px-6 py-4">51-65</td>
               </tr>
               <tr class="border-b border-cream-100 bg-white hover:bg-cream-50">
-                <td class="px-6 py-4 font-bold text-brand-900">L (10-12)</td>
+                <td class="px-6 py-4 font-bold text-ink">L (10-12)</td>
                 <td class="px-6 py-4">9-10 yrs</td>
                 <td class="px-6 py-4">55-60</td>
                 <td class="px-6 py-4">66-87</td>
               </tr>
               <tr class="bg-white hover:bg-cream-50">
-                <td class="px-6 py-4 font-bold text-brand-900">XL (14-16)</td>
+                <td class="px-6 py-4 font-bold text-ink">XL (14-16)</td>
                 <td class="px-6 py-4">11-12 yrs</td>
                 <td class="px-6 py-4">61-63</td>
                 <td class="px-6 py-4">88-115</td>
@@ -246,7 +246,7 @@
         </button>
         
         <div class="mb-6 border-b pb-4">
-          <h3 class="font-display text-2xl font-semibold text-brand-900">Customer reviews</h3>
+          <h3 class="font-display text-2xl font-semibold text-ink">Customer reviews</h3>
           <div class="flex items-center gap-3 mt-2">
             <div class="flex items-center text-coral-400">
               <svg v-for="i in 5" :key="i" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -287,7 +287,7 @@
           <div class="border-t pt-6">
             <h4 class="font-bold text-sm text-gray-800 mb-3">Write a review</h4>
             <div v-if="!user" class="text-sm text-gray-500">
-              Please <NuxtLink to="/login" class="font-bold text-brand-900 underline">sign in</NuxtLink> to leave a review.
+              Please <NuxtLink to="/login" class="font-bold text-ink underline">sign in</NuxtLink> to leave a review.
             </div>
             <form v-else @submit.prevent="handleSubmitReview" class="space-y-3">
               <div class="flex items-center gap-2">
@@ -314,7 +314,7 @@
             <img :src="related.imageUrls?.medium || related.imageUrls?.original || '/img/placeholder.jpg'" :alt="related.name" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700 ease-out" />
           </div>
           <div class="flex flex-col flex-1 pb-4">
-            <h3 class="text-xs font-bold text-brand-800 mb-1 line-clamp-1 group-hover:text-brand-900">{{ related.name }}</h3>
+            <h3 class="text-xs font-bold text-ink mb-1 line-clamp-1 group-hover:text-ink">{{ related.name }}</h3>
             <p class="text-xs font-bold text-brand-500 mb-3">${{ (related.price || related.basePrice || 0).toFixed(2) }}</p>
             <div class="mt-auto">
               <button @click.prevent="cart.addToCart({ id: related._id || related.id, _id: related._id || related.id, name: related.name, price: related.price || related.basePrice || 0, basePrice: related.basePrice || related.price || 0, image: related.imageUrls?.medium || related.imageUrls?.original || '/img/placeholder.jpg', imageUrls: related.imageUrls }, 1)" class="w-full bg-brand-700 text-white py-2 text-xs font-bold uppercase tracking-widest rounded hover:bg-brand-800 transition-colors md:opacity-0 group-hover:opacity-100 shadow-sm">

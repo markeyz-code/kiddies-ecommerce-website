@@ -1,9 +1,9 @@
 <template>
-  <div class="min-h-screen bg-cream-50 font-sans text-brand-900 pb-20">
+  <div class="min-h-screen bg-cream-50 font-sans text-ink pb-20">
 
     <!-- Breadcrumbs -->
     <div class="container-site flex items-center gap-2 py-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-400">
-      <NuxtLink to="/" class="text-brand-500 transition-colors hover:text-brand-900">Home</NuxtLink>
+      <NuxtLink to="/" class="text-brand-500 transition-colors hover:text-ink">Home</NuxtLink>
       <span>&gt;</span>
       <span>Shop All</span>
       <span v-if="route.query.search">&gt; Search: "{{ route.query.search }}"</span>
@@ -22,7 +22,7 @@
         <div class="flex items-center gap-3">
           <button
             @click="showMobileFilters = !showMobileFilters"
-            class="md:hidden inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-2.5 text-xs font-bold text-brand-800"
+            class="md:hidden inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-2.5 text-xs font-bold text-ink"
             :aria-expanded="showMobileFilters"
           >
             <SlidersHorizontal class="w-4 h-4" />
@@ -66,11 +66,11 @@
           :key="sub.id"
           @click="selectSubsection(sub.id)"
           class="flex-shrink-0 px-3 py-1 rounded-full text-[11px] font-bold transition-all cursor-pointer"
-          :class="selectedSubsection === sub.id ? 'bg-coral-500 text-white shadow-xs' : 'bg-white text-brand-600 hover:text-brand-900 border border-cream-200'"
+          :class="selectedSubsection === sub.id ? 'bg-coral-500 text-white shadow-xs' : 'bg-white text-brand-600 hover:text-ink border border-cream-200'"
         >
           {{ sub.label }}
         </button>
-        <button v-if="selectedSubsection" @click="selectedSubsection = null; reloadProducts()" class="text-[10px] text-brand-500 hover:text-brand-900 underline font-bold ml-1 shrink-0 cursor-pointer">
+        <button v-if="selectedSubsection" @click="selectedSubsection = null; reloadProducts()" class="text-[10px] text-brand-500 hover:text-ink underline font-bold ml-1 shrink-0 cursor-pointer">
           Clear
         </button>
       </div>

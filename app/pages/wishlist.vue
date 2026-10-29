@@ -15,14 +15,14 @@
       <div v-if="loading" class="text-center py-24 text-brand-500 font-bold animate-pulse">Loading your wishlist…</div>
 
       <div v-else-if="!user" class="rounded-3xl border border-dashed border-cream-300 bg-white py-16 text-center">
-        <p class="text-lg font-bold text-brand-800 mb-2">Sign in to see your wishlist</p>
+        <p class="text-lg font-bold text-ink mb-2">Sign in to see your wishlist</p>
         <p class="text-sm text-brand-500 mb-6">Save your favourite outfits and find them here later.</p>
         <NuxtLink to="/login?redirect=/wishlist" class="btn-primary">Sign In</NuxtLink>
       </div>
 
       <div v-else-if="products.length === 0" class="rounded-3xl border border-dashed border-cream-300 bg-white py-16 text-center">
         <span class="text-6xl block mb-4">💔</span>
-        <p class="text-lg font-bold text-brand-800 mb-2">Your wishlist is empty</p>
+        <p class="text-lg font-bold text-ink mb-2">Your wishlist is empty</p>
         <p class="text-sm text-brand-500 mb-6">Tap the heart on a product to save it for later.</p>
         <NuxtLink to="/products" class="btn-primary">Browse Products</NuxtLink>
       </div>

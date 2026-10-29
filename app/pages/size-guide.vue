@@ -3,7 +3,7 @@
     <div class="container-site py-10 sm:py-14">
       <div class="mx-auto max-w-4xl">
         <nav class="mb-6 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-400">
-          <NuxtLink to="/" class="hover:text-brand-900">Home</NuxtLink>
+          <NuxtLink to="/" class="hover:text-ink">Home</NuxtLink>
           <span>/</span>
           <span class="text-brand-700">Size guide</span>
         </nav>
@@ -38,7 +38,7 @@
               </thead>
               <tbody class="divide-y divide-cream-100">
                 <tr v-for="row in currentGroup.rows" :key="row.size" class="text-brand-700">
-                  <td class="px-4 py-3 font-bold text-brand-900">{{ row.size }}</td>
+                  <td class="px-4 py-3 font-bold text-ink">{{ row.size }}</td>
                   <td class="px-4 py-3">{{ row.age }}</td>
                   <td class="px-4 py-3">{{ row.height }}</td>
                   <td class="px-4 py-3">{{ row.chest }}</td>
@@ -51,15 +51,15 @@
 
         <div class="mt-6 grid gap-4 sm:grid-cols-3">
           <div class="rounded-2xl border border-cream-200 bg-white p-5">
-            <h2 class="font-display text-lg font-semibold text-brand-900">How to measure</h2>
+            <h2 class="font-display text-lg font-semibold text-ink">How to measure</h2>
             <p class="mt-2 text-sm leading-relaxed text-brand-500">Use a soft tape measure against the body, not over clothes. Keep it snug but not tight.</p>
           </div>
           <div class="rounded-2xl border border-cream-200 bg-white p-5">
-            <h2 class="font-display text-lg font-semibold text-brand-900">Between sizes?</h2>
+            <h2 class="font-display text-lg font-semibold text-ink">Between sizes?</h2>
             <p class="mt-2 text-sm leading-relaxed text-brand-500">Size up for extra room to grow and layer. Our styles are designed with movement in mind.</p>
           </div>
           <div class="rounded-2xl border border-cream-200 bg-white p-5">
-            <h2 class="font-display text-lg font-semibold text-brand-900">Need help?</h2>
+            <h2 class="font-display text-lg font-semibold text-ink">Need help?</h2>
             <p class="mt-2 text-sm leading-relaxed text-brand-500">Our team can help with fit questions. <NuxtLink to="/contact" class="font-bold text-coral-600 underline underline-offset-4">Contact us</NuxtLink>.</p>
           </div>
         </div>

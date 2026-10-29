@@ -8,7 +8,7 @@
           ✨
         </div>
 
-        <h1 class="mb-3 font-display text-3xl font-semibold leading-tight text-brand-900 sm:text-4xl">
+        <h1 class="mb-3 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
           {{ order?.paymentStatus === 'Paid' ? 'Order confirmed' : 'Order received' }}
         </h1>
         <p class="mx-auto mb-6 max-w-lg text-sm font-medium leading-relaxed text-brand-500 md:text-base">
@@ -21,7 +21,7 @@
           <div class="flex justify-between items-center">
             <div>
               <p class="text-xs font-bold text-brand-500 mb-1 uppercase tracking-widest">Order Number</p>
-              <p class="text-xl font-black text-brand-800 tracking-wide">{{ orderNumber || 'PENDING' }}</p>
+              <p class="text-xl font-black text-ink tracking-wide">{{ orderNumber || 'PENDING' }}</p>
             </div>
             <span v-if="order" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider" :class="statusClass(order.status)">
               {{ order.status }}
@@ -35,7 +35,7 @@
             </div>
             <div class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Payment method</span>
-              <span class="font-bold text-brand-800 capitalize">{{ paymentLabel(order.paymentMethod) }}</span>
+              <span class="font-bold text-ink capitalize">{{ paymentLabel(order.paymentMethod) }}</span>
             </div>
             <div v-if="order.discountAmount > 0" class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Discount {{ order.couponCode ? `(${order.couponCode})` : '' }}</span>
@@ -43,19 +43,19 @@
             </div>
             <div class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Shipping</span>
-              <span class="font-bold text-brand-800">{{ (order.shippingFee || 0) === 0 ? 'Free' : currencySymbol + (order.shippingFee || 0).toFixed(2) }}</span>
+              <span class="font-bold text-ink">{{ (order.shippingFee || 0) === 0 ? 'Free' : currencySymbol + (order.shippingFee || 0).toFixed(2) }}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Tax</span>
-              <span class="font-bold text-brand-800">{{ currencySymbol }}{{ (order.tax || 0).toFixed(2) }}</span>
+              <span class="font-bold text-ink">{{ currencySymbol }}{{ (order.tax || 0).toFixed(2) }}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Total</span>
-              <span class="font-black text-brand-900">{{ currencySymbol }}{{ (order.totalAmount || 0).toFixed(2) }}</span>
+              <span class="font-black text-ink">{{ currencySymbol }}{{ (order.totalAmount || 0).toFixed(2) }}</span>
             </div>
             <div v-if="order.customer" class="flex justify-between items-start">
               <span class="text-brand-500 font-medium">Shipping to</span>
-              <span class="font-medium text-brand-800 text-right">
+              <span class="font-medium text-ink text-right">
                 {{ order.customer?.address }}<br />
                 {{ order.customer?.city }}, {{ order.customer?.state }} {{ order.customer?.zipCode }}
               </span>
@@ -66,7 +66,7 @@
             <p class="text-xs font-bold text-brand-500 uppercase tracking-widest">Items</p>
             <div v-for="item in order.items" :key="item._id || item.sku" class="flex justify-between items-center text-sm">
               <span class="text-brand-700 font-medium pr-3 line-clamp-2">{{ item.name }} <span class="text-brand-400">× {{ item.quantity }}</span></span>
-              <span class="font-bold text-brand-800">{{ currencySymbol }}{{ ((item.price || 0) * item.quantity).toFixed(2) }}</span>
+              <span class="font-bold text-ink">{{ currencySymbol }}{{ ((item.price || 0) * item.quantity).toFixed(2) }}</span>
             </div>
           </div>
         </div>

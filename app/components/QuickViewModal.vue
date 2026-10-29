@@ -9,7 +9,7 @@
         <div class="bg-white w-full max-w-4xl max-h-[92vh] overflow-y-auto relative z-10 shadow-2xl flex flex-col md:flex-row rounded-3xl border border-cream-200/90 overflow-hidden animate-in fade-in zoom-in-95 duration-200 hide-scrollbar">
           <!-- Close Button -->
           <button 
-            class="absolute top-4 right-4 text-brand-500 hover:text-brand-900 z-30 bg-white/90 hover:bg-cream-100 rounded-full h-9 w-9 flex items-center justify-center shadow-sm border border-cream-200/80 transition-all cursor-pointer" 
+            class="absolute top-4 right-4 text-brand-500 hover:text-ink z-30 bg-white/90 hover:bg-cream-100 rounded-full h-9 w-9 flex items-center justify-center shadow-sm border border-cream-200/80 transition-all cursor-pointer" 
             @click="close"
             aria-label="Close modal"
           >
@@ -60,7 +60,7 @@
               </div>
 
               <!-- Product Title -->
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-display font-semibold text-brand-900 tracking-tight leading-snug">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-display font-semibold text-ink tracking-tight leading-snug">
                 {{ normalizedProduct.name }}
               </h2>
               
@@ -71,7 +71,7 @@
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 </div>
-                <span class="text-xs font-bold text-brand-800">
+                <span class="text-xs font-bold text-ink">
                   {{ (normalizedProduct.rating || 4.9).toFixed(1) }}
                 </span>
                 <span class="text-xs text-brand-400 font-normal">
@@ -81,7 +81,7 @@
 
               <!-- Price Header -->
               <div class="flex items-baseline gap-3 my-4">
-                <span class="font-display text-3xl font-bold text-brand-900 tracking-tight">
+                <span class="font-display text-3xl font-bold text-ink tracking-tight">
                   ${{ normalizedProduct.price.toFixed(2) }}
                 </span>
                 <span v-if="normalizedProduct.originalPrice > normalizedProduct.price" class="text-brand-400 text-sm line-through font-medium">
@@ -93,7 +93,7 @@
               <div class="mb-5">
                 <div class="flex justify-between items-center mb-2.5">
                   <span class="text-xs font-bold uppercase tracking-wider text-brand-700">Select Size</span>
-                  <button type="button" class="inline-flex items-center text-xs font-semibold text-brand-700 hover:text-brand-900 underline underline-offset-2 transition-colors">
+                  <button type="button" class="inline-flex items-center text-xs font-semibold text-brand-700 hover:text-ink underline underline-offset-2 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
                     </svg>
@@ -144,19 +144,19 @@
                   <button 
                     type="button" 
                     aria-label="Decrease quantity" 
-                    class="h-full px-3 text-brand-500 hover:bg-cream-200 hover:text-brand-900 transition-colors font-bold cursor-pointer" 
+                    class="h-full px-3 text-brand-500 hover:bg-cream-200 hover:text-ink transition-colors font-bold cursor-pointer" 
                     @click="quantity > 1 ? quantity-- : null"
                   >−</button>
                   <input 
                     type="text" 
-                    class="h-full w-full bg-transparent text-center text-sm font-black text-brand-800 outline-none" 
+                    class="h-full w-full bg-transparent text-center text-sm font-black text-ink outline-none" 
                     :value="quantity" 
                     readonly
                   />
                   <button 
                     type="button" 
                     aria-label="Increase quantity" 
-                    class="h-full px-3 text-brand-500 hover:bg-cream-200 hover:text-brand-900 transition-colors font-bold cursor-pointer" 
+                    class="h-full px-3 text-brand-500 hover:bg-cream-200 hover:text-ink transition-colors font-bold cursor-pointer" 
                     @click="quantity++"
                   >+</button>
                 </div>
@@ -179,7 +179,7 @@
                 <NuxtLink 
                   :to="`/product/${normalizedProduct.id}`" 
                   @click="close" 
-                  class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-500 hover:text-brand-900 transition-colors group"
+                  class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-500 hover:text-ink transition-colors group"
                 >
                   <span>View full product details</span>
                   <span class="transform group-hover:translate-x-1 transition-transform">→</span>

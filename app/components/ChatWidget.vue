@@ -72,7 +72,7 @@
       <!-- Chat Messages -->
       <div v-else class="flex-1 overflow-y-auto p-4 space-y-4 bg-cream-50 flex flex-col relative" @click="showEmojiPicker = false">
         <div v-if="messages.length === 0" class="flex flex-col items-center justify-center h-full text-brand-500 text-sm space-y-2 mb-4">
-          <div class="bg-coral-100 text-brand-900 p-3 rounded-lg text-center max-w-[90%] shadow-sm">
+          <div class="bg-coral-100 text-ink p-3 rounded-lg text-center max-w-[90%] shadow-sm">
             <p class="font-bold mb-1">Hi {{ customerName }}! 👋</p>
             <p>You can begin chatting now. One of our support agents will be with you shortly.</p>
           </div>
@@ -80,7 +80,7 @@
         <div 
           v-for="(msg, index) in messages" 
           :key="index"
-          :class="['max-w-[80%] rounded-2xl px-4 py-2 text-sm', msg.sender === 'customer' ? 'bg-brand-700 text-white self-end rounded-br-sm' : 'bg-white text-brand-800 border border-cream-200 self-start rounded-bl-sm']"
+          :class="['max-w-[80%] rounded-2xl px-4 py-2 text-sm', msg.sender === 'customer' ? 'bg-brand-700 text-white self-end rounded-br-sm' : 'bg-white text-ink border border-cream-200 self-start rounded-bl-sm']"
         >
           <template v-if="msg.type === 'image'">
             <img :src="msg.message" class="max-w-full rounded-lg" alt="Uploaded Image" />

@@ -16,7 +16,7 @@
               <HeartIcon class="w-8 h-8 text-coral-500 fill-coral-500" />
             </div>
             
-            <h2 class="text-2xl font-display font-semibold text-brand-900 mb-2">Save your favourites</h2>
+            <h2 class="text-2xl font-display font-semibold text-ink mb-2">Save your favourites</h2>
             <p class="text-brand-500 text-xs font-medium mb-8 leading-relaxed">
               Sign in to save items to your wishlist and keep track of all your favorite styles in one place.
             </p>
@@ -38,7 +38,7 @@
             </div>
             
             <p class="mt-8 text-xs text-brand-400">
-              New here? <NuxtLink to="/register" @click="$emit('update:modelValue', false)" class="text-brand-900 font-bold hover:underline">Create an account</NuxtLink>
+              New here? <NuxtLink to="/register" @click="$emit('update:modelValue', false)" class="text-ink font-bold hover:underline">Create an account</NuxtLink>
             </p>
           </div>
         </div>

@@ -17,17 +17,17 @@
       :class="[
         'w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-2xl border transition-all duration-200 outline-none text-left select-none',
         isOpen ? 'border-brand-900 ring-2 ring-brand-900/10 bg-white' : 'border-cream-200 bg-white hover:border-brand-300 hover:bg-cream-50/50',
-        disabled ? 'bg-cream-100 text-brand-400 border-cream-200 cursor-not-allowed' : 'cursor-pointer text-brand-800',
+        disabled ? 'bg-cream-100 text-brand-400 border-cream-200 cursor-not-allowed' : 'cursor-pointer text-ink',
         error ? 'border-rose-400 ring-1 ring-rose-200' : ''
       ]"
       aria-haspopup="listbox"
       :aria-expanded="isOpen"
     >
-      <span class="truncate block" :class="!selectedLabel ? 'text-brand-400 font-normal' : 'text-brand-800 font-semibold'">
+      <span class="truncate block" :class="!selectedLabel ? 'text-brand-400 font-normal' : 'text-ink font-semibold'">
         {{ selectedLabel || placeholder || 'Select an option' }}
       </span>
 
-      <span class="ml-2 flex items-center pointer-events-none text-brand-400 transition-transform duration-200" :class="isOpen ? 'rotate-180 text-brand-900' : ''">
+      <span class="ml-2 flex items-center pointer-events-none text-brand-400 transition-transform duration-200" :class="isOpen ? 'rotate-180 text-ink' : ''">
         <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
@@ -86,14 +86,14 @@
             :class="[
               'w-full text-left px-4 py-2.5 text-xs font-medium flex items-center justify-between transition-colors',
               modelValue === option.value
-                ? 'bg-brand-50 text-brand-900 font-bold'
-                : 'text-brand-700 hover:bg-cream-50 hover:text-brand-900'
+                ? 'bg-brand-50 text-ink font-bold'
+                : 'text-brand-700 hover:bg-cream-50 hover:text-ink'
             ]"
             role="option"
             :aria-selected="modelValue === option.value"
           >
             <span class="truncate pr-2">{{ option.label }}</span>
-            <span v-if="modelValue === option.value" class="text-brand-900 flex-shrink-0">
+            <span v-if="modelValue === option.value" class="text-ink flex-shrink-0">
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
               </svg>

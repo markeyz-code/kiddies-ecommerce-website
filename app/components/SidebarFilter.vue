@@ -18,7 +18,7 @@
 
     <div class="bg-brand-50 p-3.5 rounded-lg mb-6 flex items-start space-x-3 border border-brand-100">
       <div class="text-lg">🚚</div>
-      <div class="text-xs text-brand-800">
+      <div class="text-xs text-ink">
         <span class="font-bold">Nationwide Delivery</span> across Nigeria.<br/>
         <a href="https://instagram.com/jasmarkids" target="_blank" rel="noopener noreferrer" class="underline font-bold text-coral-600 hover:text-coral-700 mt-1 inline-block">DM on Instagram @jasmarkids</a>
       </div>
@@ -53,7 +53,7 @@
           <div class="border border-gray-800 rounded px-2 py-1 text-xs font-bold inline-block mb-3">REGULAR</div>
           <div class="space-y-2">
             <label class="flex items-center space-x-2 text-sm cursor-pointer" v-for="size in sizes" :key="size">
-              <input type="checkbox" class="rounded border-gray-300 text-brand-900 focus:ring-brand-900 w-4 h-4" />
+              <input type="checkbox" class="rounded border-gray-300 text-ink focus:ring-brand-900 w-4 h-4" />
               <span>{{ size }}</span>
             </label>
             <button class="text-brand-600 text-xs font-bold hover:underline flex items-center mt-2">
@@ -95,7 +95,7 @@
         <!-- Options content for other filters when open -->
         <div v-show="openFilters[filter.name]" class="mt-4 space-y-2">
           <label class="flex items-center space-x-2 text-sm cursor-pointer" v-for="option in filter.options" :key="option">
-            <input type="checkbox" class="rounded border-gray-300 text-brand-900 focus:ring-brand-900 w-4 h-4" />
+            <input type="checkbox" class="rounded border-gray-300 text-ink focus:ring-brand-900 w-4 h-4" />
             <span>{{ option }}</span>
           </label>
         </div>

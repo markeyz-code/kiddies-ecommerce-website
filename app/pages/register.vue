@@ -7,7 +7,7 @@
       <div class="w-full max-w-md mx-auto mb-6">
         <NuxtLink 
           to="/" 
-          class="inline-flex items-center gap-2.5 text-brand-500 hover:text-brand-900 transition-colors text-xs font-bold tracking-widest uppercase group py-1"
+          class="inline-flex items-center gap-2.5 text-brand-500 hover:text-ink transition-colors text-xs font-bold tracking-widest uppercase group py-1"
         >
           <span class="w-8 h-8 rounded-full bg-cream-100 flex items-center justify-center text-brand-500 group-hover:bg-brand-700 group-hover:text-white transition-all shadow-xs">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +24,7 @@
           <span class="inline-block text-[10px] font-black uppercase tracking-widest text-amber-800 bg-coral-50 px-2.5 py-1 rounded-md mb-2.5 border border-coral-200/60">
             VIP Membership
           </span>
-          <h1 class="font-display text-3xl sm:text-4xl font-semibold text-brand-900 tracking-tight">Create your account</h1>
+          <h1 class="font-display text-3xl sm:text-4xl font-semibold text-ink tracking-tight">Create your account</h1>
           <p class="text-brand-500 font-normal mt-1.5 text-sm">Join the club for faster checkout, order tracking, and exclusive kidswear styles.</p>
         </div>
         
@@ -38,7 +38,7 @@
                 type="text" 
                 required
                 placeholder="Jane"
-                class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
+                class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-ink placeholder:text-brand-400"
               >
             </div>
             <div class="space-y-1.5">
@@ -48,7 +48,7 @@
                 type="text" 
                 required
                 placeholder="Doe"
-                class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
+                class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-ink placeholder:text-brand-400"
               >
             </div>
           </div>
@@ -61,7 +61,7 @@
               type="email" 
               required
               placeholder="hello@example.com"
-              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
+              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-ink placeholder:text-brand-400"
             >
           </div>
           
@@ -74,7 +74,7 @@
                 :type="showPassword ? 'text' : 'password'"
                 required
                 placeholder="••••••••"
-                class="w-full px-4 py-2.5 pr-11 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
+                class="w-full px-4 py-2.5 pr-11 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-ink placeholder:text-brand-400"
               >
               <button 
                 type="button" 
@@ -106,7 +106,7 @@
                 type="tel" 
                 required
                 placeholder="(555) 000-0000"
-                class="w-full px-3.5 py-2.5 bg-transparent outline-none font-medium text-sm text-brand-800 placeholder:text-brand-400"
+                class="w-full px-3.5 py-2.5 bg-transparent outline-none font-medium text-sm text-ink placeholder:text-brand-400"
               >
             </div>
           </div>
@@ -119,7 +119,7 @@
               type="text" 
               required
               placeholder="10001"
-              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-brand-800 placeholder:text-brand-400"
+              class="w-full px-4 py-2.5 rounded-xl bg-cream-50/70 hover:bg-cream-50 focus:bg-white border border-cream-200 focus:border-brand-900 focus:ring-2 focus:ring-brand-900/10 outline-none transition-all font-medium text-sm text-ink placeholder:text-brand-400"
             >
           </div>
 
@@ -130,10 +130,10 @@
               v-model="registerData.terms" 
               type="checkbox" 
               required 
-              class="mt-1 w-4 h-4 rounded border-brand-300 text-brand-900 focus:ring-brand-900/20 cursor-pointer"
+              class="mt-1 w-4 h-4 rounded border-brand-300 text-ink focus:ring-brand-900/20 cursor-pointer"
             >
             <label for="terms" class="text-[11px] leading-relaxed text-brand-500 font-normal cursor-pointer select-none">
-              I agree to the JasmarKids Rewards <NuxtLink to="/terms" class="text-brand-900 font-semibold underline underline-offset-2">Terms &amp; Conditions</NuxtLink>, <NuxtLink to="/privacy-policy" class="text-brand-900 font-semibold underline underline-offset-2">Privacy Policy</NuxtLink> and <NuxtLink to="/terms" class="text-brand-900 font-semibold underline underline-offset-2">Notice of Financial Incentive</NuxtLink>.
+              I agree to the JasmarKids Rewards <NuxtLink to="/terms" class="text-ink font-semibold underline underline-offset-2">Terms &amp; Conditions</NuxtLink>, <NuxtLink to="/privacy-policy" class="text-ink font-semibold underline underline-offset-2">Privacy Policy</NuxtLink> and <NuxtLink to="/terms" class="text-ink font-semibold underline underline-offset-2">Notice of Financial Incentive</NuxtLink>.
             </label>
           </div>
 
@@ -143,7 +143,7 @@
               id="remember" 
               v-model="registerData.rememberMe" 
               type="checkbox" 
-              class="w-4 h-4 rounded border-brand-300 text-brand-900 focus:ring-brand-900/20 cursor-pointer"
+              class="w-4 h-4 rounded border-brand-300 text-ink focus:ring-brand-900/20 cursor-pointer"
             >
             <label for="remember" class="text-xs font-semibold text-brand-700 cursor-pointer select-none">
               Remember me <span class="font-normal text-brand-400 text-[11px]">(Not recommended on shared devices)</span>
@@ -192,7 +192,7 @@
         <!-- Footer Link -->
         <div class="mt-6 text-center text-xs text-brand-500">
           Already have an account? 
-          <NuxtLink to="/login" class="font-bold text-brand-900 hover:underline underline-offset-4 ml-1">Sign In</NuxtLink>
+          <NuxtLink to="/login" class="font-bold text-ink hover:underline underline-offset-4 ml-1">Sign In</NuxtLink>
         </div>
       </div>
 

@@ -1,15 +1,15 @@
 <template>
   <header class="w-full font-sans relative z-40 bg-white/95 backdrop-blur border-b border-cream-200">
     <!-- Top thin dark blue banner -->
-    <div v-if="isBannerVisible" class="bg-brand-700 text-cream-50 text-[10px] sm:text-[11px] text-center py-2 relative px-10 sm:px-4 transition-all duration-300">
-      <span class="font-semibold uppercase tracking-wider">{{ storeSettings.announcement || 'Extra 40% Off* Sale With Code EXTRA40' }} <NuxtLink to="/products" class="underline font-bold ml-1 text-coral-200 hover:text-white">Shop Now</NuxtLink></span>
-      <button @click="isBannerVisible = false" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white hover:opacity-75">
+    <div v-if="isBannerVisible" class="bg-brand-200 text-ink text-[10px] sm:text-[11px] text-center py-2 relative px-10 sm:px-4 transition-all duration-300">
+      <span class="font-semibold uppercase tracking-wider">{{ storeSettings.announcement || 'Extra 40% Off* Sale With Code EXTRA40' }} <NuxtLink to="/products" class="underline font-bold ml-1 text-coral-600 hover:text-coral-700">Shop Now</NuxtLink></span>
+      <button @click="isBannerVisible = false" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-ink/60 hover:text-ink">
         <XIcon class="h-3 w-3 sm:h-4 sm:w-4" />
       </button>
     </div>
 
     <!-- Main Navigation Bar -->
-    <div class="text-brand-900 flex items-center justify-between px-4 sm:px-8 py-3.5">
+    <div class="text-ink flex items-center justify-between px-4 sm:px-8 py-3.5">
       <!-- Mobile Hamburger -->
       <button class="lg:hidden p-2 text-brand-700 hover:bg-brand-50 rounded-full transition-colors" @click="isMobileMenuOpen = true">
         <MenuIcon class="h-6 w-6" />
@@ -17,19 +17,20 @@
 
       <!-- Brand -->
       <div class="flex items-center space-x-2 sm:space-x-3 z-10 min-w-0">
-        <NuxtLink to="/" class="text-brand-900 font-display text-xl sm:text-[26px] font-semibold tracking-tight hover:text-brand-700 transition-colors whitespace-nowrap">
-          {{ storeSettings.storeName || 'JasmarKids' }}<span class="text-coral-500">.</span>
-        </NuxtLink>
-        <div class="hidden xl:block h-7 w-px bg-cream-300"></div>
-        <NuxtLink to="/" class="hidden xl:block text-brand-400 text-[9px] font-bold tracking-[0.24em] leading-tight hover:text-brand-700 transition-colors uppercase">
-          Premium<br/>Kids Fashion
+        <NuxtLink to="/" class="flex flex-col leading-none shrink-0 group">
+          <span class="font-display text-xl sm:text-[26px] font-semibold tracking-tight text-coral-500 transition-colors group-hover:text-coral-600 whitespace-nowrap">
+            {{ storeSettings.storeName || 'JasmarKids' }}<span class="text-brand-500">.</span>
+          </span>
+          <span class="mt-1 text-[8px] font-bold uppercase tracking-[0.2em] text-brand-700">
+            by Tayisi <span class="text-brand-400">·</span> Kids Clothing
+          </span>
         </NuxtLink>
       </div>
 
       <!-- Search Bar -->
       <div class="hidden lg:block flex-1 max-w-xl mx-8">
         <div class="relative group">
-          <input type="text" v-model="searchQuery" @keyup.enter="handleSearch" placeholder="What are you looking for?" class="w-full rounded-full bg-cream-100 border border-cream-200 py-2.5 pl-10 pr-4 text-brand-900 placeholder-brand-300 focus:outline-none focus:ring-4 focus:ring-brand-100 focus:border-brand-300 text-sm font-medium transition-all">
+          <input type="text" v-model="searchQuery" @keyup.enter="handleSearch" placeholder="What are you looking for?" class="w-full rounded-full bg-cream-100 border border-cream-200 py-2.5 pl-10 pr-4 text-ink placeholder-brand-300 focus:outline-none focus:ring-4 focus:ring-brand-100 focus:border-brand-300 text-sm font-medium transition-all">
           <button @click="handleSearch" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-400 group-hover:text-brand-700 transition-colors">
             <SearchIcon class="h-5 w-5" />
           </button>
@@ -88,7 +89,7 @@
           v-model="searchQuery"
           type="search"
           placeholder="Search outfits, sizes, styles..."
-          class="w-full rounded-full bg-cream-100 border border-cream-200 py-3 pl-11 pr-4 text-brand-900 placeholder-brand-300 focus:outline-none focus:ring-4 focus:ring-brand-100 text-sm font-medium"
+          class="w-full rounded-full bg-cream-100 border border-cream-200 py-3 pl-11 pr-4 text-ink placeholder-brand-300 focus:outline-none focus:ring-4 focus:ring-brand-100 text-sm font-medium"
         />
         <button type="submit" aria-label="Search" class="absolute left-4 top-1/2 -translate-y-1/2 text-brand-400">
           <SearchIcon class="h-5 w-5" />
@@ -100,7 +101,7 @@
     <!-- Sub Navigation Links (Desktop) -->
     <div class="hidden lg:block bg-white relative z-30 w-full overflow-hidden" @mouseleave="activeMegaMenu = null">
       <div class="w-full overflow-x-auto hide-scrollbar">
-        <ul class="flex justify-center items-center gap-6 xl:gap-10 px-4 py-3.5 text-[11px] font-bold text-brand-700 tracking-[0.12em] uppercase relative border-t border-cream-200 whitespace-nowrap min-w-max mx-auto">
+        <ul class="flex justify-center items-center gap-6 xl:gap-10 px-4 py-3.5 text-[11px] font-bold text-ink tracking-[0.12em] uppercase relative border-t border-cream-200 whitespace-nowrap min-w-max mx-auto">
           <li v-for="link in navLinks" :key="link.name" @mouseenter="activeMegaMenu = link.name">
             <NuxtLink :to="link.href" class="hover:text-coral-500 transition-all cursor-pointer py-2" :class="{'text-coral-500 hover:text-coral-600': link.isSale}">{{ link.name }}</NuxtLink>
           </li>
@@ -114,10 +115,10 @@
           <!-- Menu Columns -->
           <div class="flex-1 grid grid-cols-3 gap-8">
             <div v-for="(section, sectionName) in activeMegaMenuData.sections" :key="sectionName">
-              <h4 class="font-bold text-xs uppercase tracking-wider mb-4 border-b pb-2 text-brand-900">{{ sectionName }}</h4>
+              <h4 class="font-bold text-xs uppercase tracking-wider mb-4 border-b pb-2 text-ink">{{ sectionName }}</h4>
               <ul class="space-y-3">
                 <li v-for="item in section" :key="item.name">
-                  <NuxtLink :to="item.href" class="text-xs text-brand-500 hover:text-brand-900 hover:underline font-medium">{{ item.name }}</NuxtLink>
+                  <NuxtLink :to="item.href" class="text-xs text-brand-500 hover:text-ink hover:underline font-medium">{{ item.name }}</NuxtLink>
                 </li>
               </ul>
             </div>
@@ -157,16 +158,19 @@
         
         <!-- Drawer Panel -->
         <div 
-          class="relative z-10 w-full max-w-xs sm:max-w-sm h-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)] my-auto bg-gradient-to-br from-brand-950 via-brand-900 to-brand-950 text-white rounded-3xl shadow-2xl border border-white/10 flex flex-col overflow-hidden animate-in fade-in slide-in-from-left-4 duration-300"
+          class="relative z-10 w-full max-w-xs sm:max-w-sm h-full max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-2.5rem)] my-auto bg-white text-ink rounded-3xl shadow-2xl border border-cream-200 flex flex-col overflow-hidden animate-in fade-in slide-in-from-left-4 duration-300"
         >
-          <div class="p-5 flex justify-between items-center border-b border-white/10">
-            <span class="font-display text-2xl font-semibold tracking-tight text-white">
-              {{ storeSettings.storeName || 'JasmarKids' }}<span class="text-coral-500">.</span>
+          <div class="p-5 flex justify-between items-center border-b border-cream-200">
+            <span class="flex flex-col leading-none">
+              <span class="font-display text-2xl font-semibold tracking-tight text-coral-500">
+                {{ storeSettings.storeName || 'JasmarKids' }}<span class="text-brand-500">.</span>
+              </span>
+              <span class="mt-1 text-[8px] font-bold uppercase tracking-[0.2em] text-brand-700">by Tayisi · Kids Clothing</span>
             </span>
             <button 
               @click="isMobileMenuOpen = false" 
               aria-label="Close menu"
-              class="h-9 w-9 bg-white/10 rounded-full hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+              class="h-9 w-9 bg-cream-100 rounded-full hover:bg-cream-200 text-ink flex items-center justify-center transition-colors"
             >
               <XIcon class="h-5 w-5" />
             </button>
@@ -178,25 +182,25 @@
                 <NuxtLink 
                   :to="link.href" 
                   @click="isMobileMenuOpen = false" 
-                  class="flex items-center justify-between py-3.5 px-3 rounded-2xl text-sm font-bold uppercase tracking-wider text-white/90 hover:bg-white/10 transition-colors" 
+                  class="flex items-center justify-between py-3.5 px-3 rounded-2xl text-sm font-bold uppercase tracking-wider text-ink/80 hover:bg-brand-100 transition-colors" 
                   :class="{'text-coral-400': link.isSale}"
                 >
                   <span>{{ link.name }}</span>
-                  <span class="text-white/40 text-xs">→</span>
+                  <span class="text-brand-500 text-xs">→</span>
                 </NuxtLink>
               </li>
             </ul>
 
-            <div class="mt-5 border-t border-white/10 pt-4">
-              <p class="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">More from JasmarKids</p>
-              <NuxtLink to="/about" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10">
-                Our Story <span class="text-xs text-white/30">→</span>
+            <div class="mt-5 border-t border-cream-200 pt-4">
+              <p class="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-500">More from JasmarKids</p>
+              <NuxtLink to="/about" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-ink/75 transition-colors hover:bg-brand-100">
+                Our Story <span class="text-xs text-ink/30">→</span>
               </NuxtLink>
-              <NuxtLink to="/size-guide" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10">
-                Size Guide <span class="text-xs text-white/30">→</span>
+              <NuxtLink to="/size-guide" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-ink/75 transition-colors hover:bg-brand-100">
+                Size Guide <span class="text-xs text-ink/30">→</span>
               </NuxtLink>
-              <NuxtLink to="/track" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-white/80 transition-colors hover:bg-white/10">
-                Track an Order <span class="text-xs text-white/30">→</span>
+              <NuxtLink to="/track" @click="isMobileMenuOpen = false" class="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-ink/75 transition-colors hover:bg-brand-100">
+                Track an Order <span class="text-xs text-ink/30">→</span>
               </NuxtLink>
             </div>
           </div>
@@ -222,7 +226,7 @@
           <div class="px-6 py-4 flex justify-between items-center border-b border-cream-200 bg-cream-50/50">
             <div>
               <p class="text-[11px] font-bold uppercase tracking-widest text-brand-400">Account</p>
-              <h3 class="font-display text-lg font-semibold text-brand-900">
+              <h3 class="font-display text-lg font-semibold text-ink">
                 {{ user ? `Hello, ${user.firstName || 'there'}!` : 'Welcome to JasmarKids' }}
               </h3>
             </div>
@@ -238,7 +242,7 @@
           <div class="p-6 flex-1 overflow-y-auto custom-scrollbar space-y-6">
             <!-- Auth or User Banner -->
             <div v-if="!user" class="text-center p-5 rounded-2xl bg-cream-100/70 border border-cream-200">
-              <h4 class="font-display text-xl font-semibold text-brand-900 mb-1">Join the family</h4>
+              <h4 class="font-display text-xl font-semibold text-ink mb-1">Join the family</h4>
               <p class="text-xs text-brand-500 mb-4 font-medium">Earn points, track your orders &amp; unlock member perks.</p>
               <div class="flex flex-col sm:flex-row gap-2.5 justify-center">
                 <NuxtLink 
@@ -259,7 +263,7 @@
             </div>
             <div v-else class="p-4 rounded-2xl bg-cream-100/70 border border-cream-200 flex items-center justify-between">
               <div class="min-w-0 pr-3">
-                <p class="font-bold text-sm text-brand-900 truncate">{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="font-bold text-sm text-ink truncate">{{ user.firstName }} {{ user.lastName }}</p>
                 <p class="text-xs text-brand-500 truncate">{{ user.email }}</p>
               </div>
               <button 
@@ -274,16 +278,16 @@
             <div class="p-4 rounded-2xl border border-cream-200 bg-gradient-to-br from-cream-50 to-brand-50/40 space-y-3">
               <div class="flex items-center gap-2">
                 <span class="flex h-7 w-7 items-center justify-center rounded-full bg-coral-500 text-white text-xs font-bold">★</span>
-                <p class="text-xs font-bold uppercase tracking-wider text-brand-900">JasmarKids Rewards</p>
+                <p class="text-xs font-bold uppercase tracking-wider text-ink">JasmarKids Rewards</p>
               </div>
               <div class="grid grid-cols-2 gap-2 text-left">
                 <div class="p-2.5 rounded-xl bg-white/80 border border-cream-200/60">
                   <p class="text-[10px] font-bold uppercase text-brand-400">Earn points</p>
-                  <p class="text-xs font-semibold text-brand-800">100 pts = $5 off</p>
+                  <p class="text-xs font-semibold text-ink">100 pts = $5 off</p>
                 </div>
                 <div class="p-2.5 rounded-xl bg-white/80 border border-cream-200/60">
                   <p class="text-[10px] font-bold uppercase text-brand-400">VIP perks</p>
-                  <p class="text-xs font-semibold text-brand-800">Early access</p>
+                  <p class="text-xs font-semibold text-ink">Early access</p>
                 </div>
               </div>
             </div>
@@ -295,7 +299,7 @@
                 :key="item.name" 
                 :to="item.href" 
                 @click="isUserDrawerOpen = false" 
-                class="flex items-center justify-between p-3 rounded-2xl text-sm font-semibold text-brand-800 hover:bg-cream-100 hover:text-brand-950 transition-colors"
+                class="flex items-center justify-between p-3 rounded-2xl text-sm font-semibold text-ink hover:bg-cream-100 hover:text-brand-950 transition-colors"
               >
                 <div class="flex items-center gap-3">
                   <div class="h-8 w-8 rounded-full bg-cream-100 flex items-center justify-center text-brand-600">
@@ -328,7 +332,7 @@
             <XIcon class="h-4 w-4" />
           </button>
           
-          <h2 class="text-2xl font-display font-semibold text-brand-900 text-center mb-1">Ship to</h2>
+          <h2 class="text-2xl font-display font-semibold text-ink text-center mb-1">Ship to</h2>
           <p class="text-center text-xs font-medium text-brand-500 mb-6">Change your delivery destination &amp; preferences</p>
 
           <div class="space-y-4">

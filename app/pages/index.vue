@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-cream-50 font-sans text-brand-900 w-full max-w-full overflow-x-hidden">
+  <div class="min-h-screen bg-cream-50 font-sans text-ink w-full max-w-full overflow-x-hidden">
 
     <!-- Hero carousel (Multi-slide with text, image, automatic timer and high-contrast overlay) -->
     <section 
@@ -53,7 +53,7 @@
               <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 mt-7 sm:mt-9 font-sans text-xs sm:text-sm font-bold tracking-widest uppercase pointer-events-auto">
                 <NuxtLink 
                   :to="slide.primaryCtaLink || '/category/boy'" 
-                  class="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-900 shadow-md transition hover:-translate-y-0.5 hover:bg-cream-100 hover:shadow-lg active:scale-95"
+                  class="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-ink shadow-md transition hover:-translate-y-0.5 hover:bg-cream-100 hover:shadow-lg active:scale-95"
                 >
                   {{ slide.primaryCtaText || 'Shop Boys' }}
                 </NuxtLink>
@@ -123,7 +123,7 @@
             <p class="eyebrow text-coral-200 mb-3">Limited offer</p>
             <h2 class="font-display text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl">{{ promo.title }}</h2>
             <p v-if="promo.subtitle" class="mt-3 max-w-md text-sm font-medium text-white/85 sm:text-base">{{ promo.subtitle }}</p>
-            <span class="mt-6 inline-flex rounded-full bg-white px-7 py-3 text-xs font-bold uppercase tracking-widest text-brand-900">
+            <span class="mt-6 inline-flex rounded-full bg-white px-7 py-3 text-xs font-bold uppercase tracking-widest text-ink">
               {{ promo.ctaText || 'Shop now' }}
             </span>
           </div>
@@ -212,7 +212,7 @@
             <p class="eyebrow text-coral-200 mb-3">Everyday essentials</p>
             <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 leading-[1.05]">Play, learn &amp; grow</h2>
             <p class="mb-6 max-w-xs text-sm font-medium text-white/80">Cotton tees, durable shorts, stylish bottoms and easy everyday favourites they can run and jump in.</p>
-            <NuxtLink to="/products" class="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-xs font-bold uppercase tracking-widest text-brand-900 transition hover:bg-cream-100">
+            <NuxtLink to="/products" class="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-xs font-bold uppercase tracking-widest text-ink transition hover:bg-cream-100">
               Shop now <span aria-hidden="true">→</span>
             </NuxtLink>
           </div>
@@ -262,19 +262,19 @@
         </div>
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10" v-if="storefrontSettings?.brandStory">
           <div>
-            <h3 class="font-display text-xl font-semibold text-brand-900 mb-3">{{ storefrontSettings.brandStory.section1Title }}</h3>
+            <h3 class="font-display text-xl font-semibold text-ink mb-3">{{ storefrontSettings.brandStory.section1Title }}</h3>
             <p class="text-sm leading-relaxed text-brand-600">
               {{ storefrontSettings.brandStory.section1Text }}
             </p>
           </div>
           <div>
-            <h3 class="font-display text-xl font-semibold text-brand-900 mb-3">{{ storefrontSettings.brandStory.section2Title }}</h3>
+            <h3 class="font-display text-xl font-semibold text-ink mb-3">{{ storefrontSettings.brandStory.section2Title }}</h3>
             <p class="text-sm leading-relaxed text-brand-600">
               {{ storefrontSettings.brandStory.section2Text }}
             </p>
           </div>
           <div>
-            <h3 class="font-display text-xl font-semibold text-brand-900 mb-3">{{ storefrontSettings.brandStory.section3Title }}</h3>
+            <h3 class="font-display text-xl font-semibold text-ink mb-3">{{ storefrontSettings.brandStory.section3Title }}</h3>
             <p class="text-sm leading-relaxed text-brand-600">
               {{ storefrontSettings.brandStory.section3Text }}
             </p>
@@ -282,19 +282,19 @@
         </div>
         <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10" v-else>
           <div>
-            <h3 class="font-display text-xl font-semibold text-brand-900 mb-3">Kids Clothes</h3>
+            <h3 class="font-display text-xl font-semibold text-ink mb-3">Kids Clothes</h3>
             <p class="text-sm leading-relaxed text-brand-600">
               Hold onto childhood with kids clothes from JasmarKids, where every style is made to celebrate the magic of being a kid.
             </p>
           </div>
           <div>
-            <h3 class="font-display text-xl font-semibold text-brand-900 mb-3">Girls & Boys Clothes</h3>
+            <h3 class="font-display text-xl font-semibold text-ink mb-3">Girls & Boys Clothes</h3>
             <p class="text-sm leading-relaxed text-brand-600">
               Discover the sweetest girls clothes and coolest boys clothes made for every adventure, celebration and memory-making moment.
             </p>
           </div>
           <div>
-            <h3 class="font-display text-xl font-semibold text-brand-900 mb-3">Baby Clothes</h3>
+            <h3 class="font-display text-xl font-semibold text-ink mb-3">Baby Clothes</h3>
             <p class="text-sm leading-relaxed text-brand-600">
               Celebrate their earliest moments with baby clothes from JasmarKids, designed with soft fabrics, thoughtful details and the sweetest prints for your littlest one.
             </p>

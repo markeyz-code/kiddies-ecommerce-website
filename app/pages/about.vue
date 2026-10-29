@@ -33,7 +33,7 @@
             <p>Today, JasmarKids dresses babies, toddlers and kids across Nigeria for ordinary days and big little moments — with nationwide delivery and a growing community of families who believe childhood should be full of color, comfort and joy. We are still a small team, still obsessed with the details, and still convinced that comfort and joy belong together.</p>
           </div>
           <blockquote class="mt-6 rounded-2xl border-l-4 border-coral-300 bg-white p-5">
-            <p class="font-display text-lg font-medium leading-relaxed text-brand-900">“We don't design for the photo. We design for the fourth wear, the unexpected nap and the very important puddle.”</p>
+            <p class="font-display text-lg font-medium leading-relaxed text-ink">“We don't design for the photo. We design for the fourth wear, the unexpected nap and the very important puddle.”</p>
             <footer class="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-coral-600">The JasmarKids team</footer>
           </blockquote>
           <NuxtLink to="/products" class="btn-primary mt-8">Shop the collection</NuxtLink>
@@ -51,7 +51,7 @@
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <div v-for="(value, index) in values" :key="value.title" class="rounded-2xl border border-cream-200 bg-cream-50 p-6">
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white">{{ String(index + 1).padStart(2, '0') }}</span>
-            <h3 class="mt-4 font-display text-lg font-semibold text-brand-900">{{ value.title }}</h3>
+            <h3 class="mt-4 font-display text-lg font-semibold text-ink">{{ value.title }}</h3>
             <p class="mt-2 text-sm leading-relaxed text-brand-500">{{ value.body }}</p>
           </div>
         </div>
@@ -65,7 +65,7 @@
         <h2 class="font-display text-3xl font-semibold sm:text-4xl">Find their next favourite outfit</h2>
         <p class="mx-auto mt-3 max-w-xl text-sm font-medium text-white/75 sm:text-base">Free shipping over $30, easy 30-day returns and friendly support whenever you need it.</p>
         <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <NuxtLink to="/products" class="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-900 transition hover:bg-cream-100">Shop all products</NuxtLink>
+          <NuxtLink to="/products" class="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-ink transition hover:bg-cream-100">Shop all products</NuxtLink>
           <NuxtLink to="/size-guide" class="rounded-full border border-white/60 px-8 py-3.5 text-sm font-bold text-white transition hover:bg-white/10">Size guide</NuxtLink>
         </div>
       </div>

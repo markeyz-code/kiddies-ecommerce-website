@@ -22,12 +22,12 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'JasmarKids | Premium Kids Fashion',
-      titleTemplate: '%s · JasmarKids',
+      title: 'JasmarKids by Tayisi | Kids Clothing',
+      titleTemplate: '%s · JasmarKids by Tayisi',
       meta: [
         { name: 'description', content: 'Thoughtfully designed kids clothing and accessories — soft fabrics, playful details and everyday comfort for babies, toddlers and children.' },
         { name: 'theme-color', content: '#1A3578' },
-        { property: 'og:site_name', content: 'JasmarKids' },
+        { property: 'og:site_name', content: 'JasmarKids by Tayisi' },
         { property: 'og:type', content: 'website' },
         { name: 'twitter:card', content: 'summary_large_image' }
       ],
@@ -49,18 +49,21 @@ export default defineNuxtConfig({
           },
           colors: {
             brand: {
-              50: '#EFF5FF', 100: '#DBE8FF', 200: '#BCD4FF', 300: '#8FB5FF',
-              400: '#5D8FF5', 500: '#3B74E8', 600: '#2A5CCB', 700: '#224AA8',
-              800: '#1E3F8C', 900: '#1A3578', 950: '#101F4A'
+              50: '#F2FBFF', 100: '#E1F6FE', 200: '#C4EDFC', 300: '#9ADFF9',
+              400: '#67CDF4', 500: '#38B8EC', 600: '#1D9ED3', 700: '#157FAC',
+              800: '#166A8C', 900: '#15536B', 950: '#0C3445'
             },
             coral: {
-              50: '#FFF6FA', 100: '#FFEAF3', 200: '#FFD3E5', 300: '#FFB3D3',
-              400: '#FF8FBE', 500: '#F46BA6', 600: '#D94F8A', 700: '#B53A6E',
-              800: '#8E2D56', 900: '#6B2242'
+              50: '#FFF5FA', 100: '#FFE7F2', 200: '#FFCEE5', 300: '#FFA9D2',
+              400: '#FF7DBA', 500: '#F45FA8', 600: '#D9458C', 700: '#B33370',
+              800: '#8C2A58', 900: '#6B2342'
             },
             cream: {
-              50: '#FFFBFC', 100: '#FFF4F8', 200: '#FBE6EE', 300: '#F5D3E0',
+              50: '#FFFBFD', 100: '#FFF5F9', 200: '#FBE7EF', 300: '#F5D5E1',
               400: '#EABBCD'
+            },
+            ink: {
+              DEFAULT: '#263243', 500: '#5C6878', 700: '#334155'
             }
           }
         }
