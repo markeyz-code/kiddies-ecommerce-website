@@ -3,8 +3,8 @@ import { settingsApi } from '@/api_factory/modules/settings';
 
 const DEFAULTS = {
   storeName: 'JasmarKids',
-  storeEmail: 'hello@jasmarkids.com',
-  phone: '+234 800 JASMARKIDS',
+  storeEmail: 'Jasmar.tayisi@gmail.com',
+  phone: '0807 913 1425',
   address: '',
   currency: 'NGN',
   shippingFee: 2500,

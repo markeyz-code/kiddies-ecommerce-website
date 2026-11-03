@@ -211,7 +211,7 @@
                 Depending on your state of residence, you may have certain rights regarding your personal information. If you are a California, Colorado, Connecticut, Delaware, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Utah or Virginia resident, you may have certain rights regarding your personal information, as described below.
               </p>
               <ul class="list-disc ml-6 space-y-2 text-sm mt-2">
-                <li>You may request access to, or correction or deletion of, your personal information by <NuxtLink to="/contact" class="text-brand-700 underline">contacting us</NuxtLink>, or calling us at 1-877-752-2387.</li>
+                <li>You may request access to, or correction or deletion of, your personal information by <NuxtLink to="/contact" class="text-brand-700 underline">contacting us</NuxtLink>, or calling us at 0807 913 1425.</li>
                 <li>You may opt out of the processing of your personal information for purposes of targeted advertising, certain profiling or the sale of your personal information.</li>
                 <li>You may also opt out by using the Global Privacy Control signal. For more information, please visit <a href="https://globalprivacycontrol.org/" class="text-brand-700 underline" target="_blank">https://globalprivacycontrol.org/</a>.</li>
               </ul>
@@ -261,7 +261,7 @@
             <section id="contact-info">
               <h2 class="text-xl font-black text-ink uppercase tracking-wide border-b-2 border-brand-900 pb-2 mb-4 mt-10">Contact Information</h2>
               <p>
-                If you have any questions regarding this Privacy Policy, please contact our Privacy Officer via phone at <strong>1-877-752-2387</strong> or <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink>.
+                If you have any questions regarding this Privacy Policy, please contact our Privacy Officer via phone at <strong>0807 913 1425</strong> or <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink>.
               </p>
             </section>
 
@@ -322,7 +322,7 @@
                 <li><strong>Shine the Light Request:</strong> You may have the right to request a list of certain categories of personal information we have disclosed to third parties for their direct marketing purposes.</li>
               </ul>
               <p class="mt-4">
-                To submit a request, <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink> or call us at <strong>1-877-752-2387</strong>.
+                To submit a request, <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink> or call us at <strong>0807 913 1425</strong>.
               </p>
             </section>
 
@@ -387,7 +387,7 @@
 
               <h3 class="text-base font-bold text-ink mt-6 mb-2">How to Submit a Request</h3>
               <p>
-                To request access to, correction of or deletion of your personal data, please <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink>, or call us at <strong>1-877-752-2387</strong>.
+                To request access to, correction of or deletion of your personal data, please <NuxtLink to="/contact" class="text-brand-700 underline font-medium">send us an email</NuxtLink>, or call us at <strong>0807 913 1425</strong>.
               </p>
 
               <h3 class="text-base font-bold text-ink mt-6 mb-2">How to Submit an Appeal</h3>
@@ -404,8 +404,8 @@
                 <NuxtLink to="/contact" class="inline-flex items-center justify-center bg-white text-[#0a2540] font-bold text-sm px-6 py-3 rounded-full hover:bg-gray-100 transition-colors">
                   Customer Service
                 </NuxtLink>
-                <a href="tel:1-877-752-2387" class="inline-flex items-center justify-center border border-white/30 text-white font-bold text-sm px-6 py-3 rounded-full hover:bg-white/10 transition-colors">
-                  1-877-752-2387
+                <a href="tel:+2348079131425" class="inline-flex items-center justify-center border border-white/30 text-white font-bold text-sm px-6 py-3 rounded-full hover:bg-white/10 transition-colors">
+                  0807 913 1425
                 </a>
                 <NuxtLink to="/contact" class="inline-flex items-center justify-center border border-white/30 text-white font-bold text-sm px-6 py-3 rounded-full hover:bg-white/10 transition-colors">
                   Email Us

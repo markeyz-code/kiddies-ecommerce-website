@@ -17,8 +17,8 @@
           </div>
           <p class="text-sm font-light leading-relaxed text-cream-100/70 pr-0 md:pr-4">Curated elegance for little ones. Modern, vibrant children's fashion made for African kids. Online boutique with nationwide delivery across Nigeria.</p>
           <div class="mt-5 space-y-1.5 text-sm font-light text-cream-100/70">
-            <a :href="`mailto:${storeSettings.storeEmail || 'hello@jasmarkids.com'}`" class="block hover:text-white transition-colors">✉️ {{ storeSettings.storeEmail || 'hello@jasmarkids.com' }}</a>
-            <a v-if="storeSettings.phone" :href="`tel:${storeSettings.phone}`" class="block hover:text-white transition-colors">📞 {{ storeSettings.phone }}</a>
+            <a :href="`mailto:${storeSettings.storeEmail || 'Jasmar.tayisi@gmail.com'}`" class="block hover:text-white transition-colors">✉️ {{ storeSettings.storeEmail || 'Jasmar.tayisi@gmail.com' }}</a>
+            <a v-if="storeSettings.phone"  :href="`tel:${phoneHref}`" class="block hover:text-white transition-colors">📞 {{ storeSettings.phone }}</a>
             <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-coral-200 hover:text-white font-medium transition-colors">
               📸 @jasmarkids on Instagram
             </a>
@@ -119,6 +119,12 @@ import { useStoreSettings } from '~/composables/core/useStoreSettings';
 
 const { isAuthModalOpen } = useAuth();
 const { settings: storeSettings, fetchStoreSettings } = useStoreSettings();
+
+const phoneHref = computed(() => {
+  const digits = String(storeSettings.value?.phone || '').replace(/\D/g, '');
+  if (!digits) return '';
+  return digits.startsWith('0') ? `+234${digits.slice(1)}` : digits;
+});
 
 onMounted(() => {
   fetchStoreSettings();

@@ -3,7 +3,7 @@
     <div class="card-surface mx-auto flex max-w-5xl flex-col overflow-hidden md:flex-row">
       
       <!-- Contact Info Sidebar -->
-      <div class="flex flex-col justify-between bg-brand-700 p-6 text-white sm:p-10 md:w-1/3">
+      <div class="flex flex-col justify-between bg-ink p-6 text-white sm:p-10 md:w-1/3">
         <div>
           <h2 class="font-display text-3xl font-semibold mb-2">Get in touch</h2>
           <p class="text-cream-100/70 mb-8 text-sm">We'd love to hear from you. Our friendly team is always here to chat.</p>
@@ -14,7 +14,7 @@
               <div>
                 <p class="font-medium">Chat to us</p>
                 <p class="text-cream-100/70 text-sm">Our friendly team is here to help.</p>
-                <p class="text-coral-200 mt-1 font-medium">{{ storeSettings.storeEmail }}</p>
+                <a :href="`mailto:${storeSettings.storeEmail}`" class="text-coral-200 mt-1 font-medium hover:underline block">{{ storeSettings.storeEmail }}</a>
               </div>
             </div>
             
@@ -36,7 +36,7 @@
               <div>
                 <p class="font-medium">Phone</p>
                 <p class="text-cream-100/70 text-sm">Mon-Fri from 8am to 5pm.</p>
-                <p class="text-coral-200 mt-1 font-medium">{{ storeSettings.phone }}</p>
+                <a :href="`tel:${phoneHref}`" class="text-coral-200 mt-1 font-medium hover:underline block">{{ storeSettings.phone }}</a>
               </div>
             </div>
           </div>
@@ -78,12 +78,19 @@
 </template>
 
 <script setup>
+
 import { ref } from 'vue';
 import { useContact } from '@/composables/modules/contact/useContact';
 import { useStoreSettings } from '~/composables/core/useStoreSettings';
 
 const { submitContact, loading } = useContact();
 const { settings: storeSettings, fetchStoreSettings } = useStoreSettings();
+
+const phoneHref = computed(() => {
+  const digits = String(storeSettings.value?.phone || '').replace(/\D/g, '');
+  if (!digits) return '';
+  return digits.startsWith('0') ? `+234${digits.slice(1)}` : digits;
+});
 
 onMounted(() => { fetchStoreSettings(); });
 const firstName = ref('');
