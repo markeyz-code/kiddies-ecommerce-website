@@ -53,7 +53,7 @@
                       <span class="font-black text-sm text-ink">{{ item.quantity }}</span>
                       <button aria-label="Increase quantity" class="flex h-8 w-8 items-center justify-center rounded-full font-bold text-ink transition-all hover:bg-white" @click="cart.updateQuantity(item.id, item.quantity + 1)">+</button>
                     </div>
-                    <span class="font-display text-lg font-semibold text-ink md:text-xl">${{ getItemTotal(item).toFixed(2) }}</span>
+                    <span class="font-display text-lg font-semibold text-ink md:text-xl">{{ $money(getItemTotal(item).toFixed(2)) }}</span>
                   </div>
                 </div>
               </div>
@@ -68,7 +68,7 @@
             
             <div class="mb-5 rounded-2xl border border-cream-200 bg-cream-50 p-3.5">
               <p v-if="remainingForFreeShipping > 0" class="text-xs font-semibold text-brand-600">
-                You're <span class="font-bold text-coral-600">${{ remainingForFreeShipping.toFixed(2) }}</span> away from free shipping
+                You're <span class="font-bold text-coral-600">{{ $money(remainingForFreeShipping.toFixed(2)) }}</span> away from free shipping
               </p>
               <p v-else class="text-xs font-bold text-emerald-700">You've unlocked free shipping ✓</p>
               <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-cream-200">
@@ -79,7 +79,7 @@
             <div class="mb-6 space-y-3 border-b border-cream-200 pb-6 text-sm font-medium text-brand-500">
               <div class="flex justify-between items-center">
                  <span>Subtotal</span>
-                <span class="text-base font-bold text-ink">${{ (cart.subtotal || 0).toFixed(2) }}</span>
+                <span class="text-base font-bold text-ink">{{ $money((cart.subtotal || 0).toFixed(2)) }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Shipping</span>
@@ -87,13 +87,13 @@
               </div>
               <div class="flex justify-between items-center">
                 <span>Tax</span>
-                <span class="font-bold text-ink">${{ estimatedTax.toFixed(2) }}</span>
+                <span class="font-bold text-ink">{{ $money(estimatedTax.toFixed(2)) }}</span>
               </div>
             </div>
             
             <div class="flex justify-between items-end mb-5">
               <span class="font-bold text-ink text-sm">Estimated total</span>
-              <span class="text-right font-display text-2xl font-semibold text-ink">${{ estimatedTotal.toFixed(2) }}</span>
+              <span class="text-right font-display text-2xl font-semibold text-ink">{{ $money(estimatedTotal.toFixed(2)) }}</span>
             </div>
             
             <NuxtLink to="/checkout" class="btn-primary w-full">

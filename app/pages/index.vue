@@ -181,57 +181,6 @@
       </div>
     </section>
 
-    <!-- Kids Costumes & Dress-Up Section -->
-    <section class="container-site py-14 sm:py-20" v-if="costumeItems.length">
-      <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p class="eyebrow mb-2">Playtime &amp; Party</p>
-          <h2 class="section-title">Kids costumes &amp; dress-up</h2>
-          <p class="section-subtitle mt-2 max-w-xl">Superheroes, fairy tale magic and playful character costumes made for imaginative fun.</p>
-        </div>
-        <NuxtLink to="/category/costumes" class="btn-ghost self-start sm:self-auto">Shop costumes <span aria-hidden="true">→</span></NuxtLink>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        <ProductCard 
-          v-for="item in costumeItems" 
-          :key="item._id || item.id" 
-          :product="item"
-          @quick-view="openQuickView"
-        />
-      </div>
-    </section>
-
-    <!-- THE EVERYDAY & SCHOOL EDIT -->
-    <section class="container-site py-14 sm:py-20">
-      <div class="flex flex-col lg:flex-row gap-6">
-        <!-- Left Hero Section -->
-        <div class="lg:w-[36%] relative group overflow-hidden rounded-3xl flex flex-col justify-end p-7 sm:p-9 min-h-[420px]">
-          <img src="/img/kiddies_clothes_flatlay.jpg" alt="Everyday Kids Clothing" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/45 to-brand-950/10"></div>
-          <div class="relative z-10 text-white">
-            <p class="eyebrow text-coral-200 mb-3">Everyday essentials</p>
-            <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 leading-[1.05]">Play, learn &amp; grow</h2>
-            <p class="mb-6 max-w-xs text-sm font-medium text-white/80">Cotton tees, durable shorts, stylish bottoms and easy everyday favourites they can run and jump in.</p>
-            <NuxtLink to="/products" class="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-xs font-bold uppercase tracking-widest text-ink transition hover:bg-cream-100">
-              Shop now <span aria-hidden="true">→</span>
-            </NuxtLink>
-          </div>
-        </div>
-        
-        <!-- Right Product Grid -->
-        <div class="lg:w-[64%]">
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <ProductCard 
-              v-for="item in backToSchoolItems" 
-              :key="item._id || item.id" 
-              :product="item"
-              @quick-view="openQuickView"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Our Most-Loved Picks -->
     <section class="container-site py-14 sm:py-20" v-if="mostLovedItems.length">
       <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -315,7 +264,7 @@
 <script setup>
 useSeoMeta({
   title: 'Premium Kids Clothing & Accessories',
-  description: 'Shop thoughtful, comfortable kids clothing at JasmarKids — playful outfits for babies, toddlers and children, with free shipping over $30 and easy 30-day returns.',
+  description: 'Shop thoughtful, comfortable kids clothing at JasmarKids — playful outfits for babies, toddlers and children, with free shipping over ₦45,000 and easy 30-day returns.',
   ogTitle: 'JasmarKids | Premium Kids Fashion',
   ogDescription: 'Soft, playful and made to last. Discover the latest JasmarKids collection.',
   ogImage: '/img/hero_fall_1_1789165261484.jpg'
@@ -363,16 +312,6 @@ const defaultHeroSlides = [
     primaryCtaLink: '/category/boy',
     secondaryCtaText: 'Shop Girls (6–16)',
     secondaryCtaLink: '/category/girl'
-  },
-  {
-    eyebrow: 'Playtime Magic · Party & Dress-Up',
-    title: 'PLAYFUL<br/>KIDS COSTUMES',
-    subtitle: 'Superhero capes, fairytale sets and dress-up fun made for limitless imagination.',
-    imageUrl: '/img/category_costumes_african.jpg',
-    primaryCtaText: 'Shop Kids Costumes',
-    primaryCtaLink: '/category/costumes',
-    secondaryCtaText: 'Shop Toddlers (2–5)',
-    secondaryCtaLink: '/category/toddler-girl'
   },
   {
     eyebrow: 'Soft Cotton · Everyday Essentials',
@@ -473,22 +412,10 @@ const closeQuickView = () => {
   setTimeout(() => { selectedProduct.value = null; }, 300);
 };
 
-const costumeItems = computed(() => {
-  const all = products.value || [];
-  const items = all.filter(p => (p.tags && (p.tags.includes('costume') || p.tags.includes('costumes') || p.tags.includes('kids-costumes'))) || p.productType === 'costumes' || (p.name && /costume|superhero|fairy/i.test(p.name)));
-  return items.length ? items.slice(0, 8) : all.slice(0, 8);
-});
-
-const backToSchoolItems = computed(() => {
-  const all = products.value || [];
-  const items = all.filter(p => p.tags && p.tags.includes('back-to-school'));
-  return items.length ? items.slice(0, 6) : all.slice(0, 6);
-});
-
 const mostLovedItems = computed(() => {
   const all = products.value || [];
   const items = all.filter(p => p.tags && p.tags.includes('most-loved'));
-  return items.length ? items.slice(0, 8) : all.slice(0, 8);
+  return items.length ? items.slice(0, 4) : all.slice(0, 4);
 });
 </script>
 

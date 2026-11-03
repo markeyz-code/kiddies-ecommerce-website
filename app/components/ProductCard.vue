@@ -43,8 +43,8 @@
     
     <!-- Price -->
     <div class="flex items-center space-x-2 text-xs mb-1">
-      <span class="font-bold text-ink text-sm">${{ displayProduct.price.toFixed(2) }}</span>
-      <span v-if="displayProduct.originalPrice > displayProduct.price" class="text-gray-500 line-through">${{ displayProduct.originalPrice.toFixed(2) }}</span>
+      <span class="font-bold text-ink text-sm">{{ $money(displayProduct.price.toFixed(2)) }}</span>
+      <span v-if="displayProduct.originalPrice > displayProduct.price" class="text-gray-500 line-through">{{ $money(displayProduct.originalPrice.toFixed(2)) }}</span>
       <span v-if="displayProduct.discount" class="text-red-600 font-bold">{{ displayProduct.discount }}</span>
     </div>
     

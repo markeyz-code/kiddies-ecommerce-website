@@ -39,19 +39,19 @@
             </div>
             <div v-if="order.discountAmount > 0" class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Discount {{ order.couponCode ? `(${order.couponCode})` : '' }}</span>
-              <span class="font-bold text-emerald-600">-{{ currencySymbol }}{{ (order.discountAmount || 0).toFixed(2) }}</span>
+              <span class="font-bold text-emerald-600">-{{ $money(order.discountAmount || 0) }}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Shipping</span>
-              <span class="font-bold text-ink">{{ (order.shippingFee || 0) === 0 ? 'Free' : currencySymbol + (order.shippingFee || 0).toFixed(2) }}</span>
+              <span class="font-bold text-ink">{{ (order.shippingFee || 0) === 0 ? 'Free' : $money(order.shippingFee || 0) }}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Tax</span>
-              <span class="font-bold text-ink">{{ currencySymbol }}{{ (order.tax || 0).toFixed(2) }}</span>
+              <span class="font-bold text-ink">{{ $money(order.tax || 0) }}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-brand-500 font-medium">Total</span>
-              <span class="font-black text-ink">{{ currencySymbol }}{{ (order.totalAmount || 0).toFixed(2) }}</span>
+              <span class="font-black text-ink">{{ $money(order.totalAmount || 0) }}</span>
             </div>
             <div v-if="order.customer" class="flex justify-between items-start">
               <span class="text-brand-500 font-medium">Shipping to</span>
@@ -66,7 +66,7 @@
             <p class="text-xs font-bold text-brand-500 uppercase tracking-widest">Items</p>
             <div v-for="item in order.items" :key="item._id || item.sku" class="flex justify-between items-center text-sm">
               <span class="text-brand-700 font-medium pr-3 line-clamp-2">{{ item.name }} <span class="text-brand-400">× {{ item.quantity }}</span></span>
-              <span class="font-bold text-ink">{{ currencySymbol }}{{ ((item.price || 0) * item.quantity).toFixed(2) }}</span>
+              <span class="font-bold text-ink">{{ $money((item.price || 0) * item.quantity) }}</span>
             </div>
           </div>
         </div>
@@ -102,11 +102,6 @@ const cart = useCart();
 const orderNumber = computed(() => String(route.query.orderNumber || ''));
 const order = ref(null);
 const verifyError = ref('');
-
-const currencySymbol = computed(() => {
-  const symbols = { USD: '$', NGN: '₦', EUR: '€', GBP: '£', CAD: 'C$' };
-  return symbols[order.value?.currency] || '$';
-});
 
 const statusClass = (status) => {
   switch (status) {

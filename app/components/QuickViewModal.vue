@@ -82,10 +82,10 @@
               <!-- Price Header -->
               <div class="flex items-baseline gap-3 my-4">
                 <span class="font-display text-3xl font-bold text-ink tracking-tight">
-                  ${{ normalizedProduct.price.toFixed(2) }}
+                  {{ $money(normalizedProduct.price.toFixed(2)) }}
                 </span>
                 <span v-if="normalizedProduct.originalPrice > normalizedProduct.price" class="text-brand-400 text-sm line-through font-medium">
-                  ${{ normalizedProduct.originalPrice.toFixed(2) }}
+                  {{ $money(normalizedProduct.originalPrice.toFixed(2)) }}
                 </span>
               </div>
 
@@ -127,7 +127,7 @@
               <div class="grid grid-cols-2 gap-2 text-[11px] text-brand-500 bg-cream-50/70 p-3 rounded-2xl border border-cream-200/80 mb-4">
                 <div class="flex items-center gap-1.5">
                   <span class="text-sm">🚚</span>
-                  <span>Free shipping on $30+</span>
+                  <span>Free shipping on ₦45,000+</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                   <span class="text-sm">🌿</span>

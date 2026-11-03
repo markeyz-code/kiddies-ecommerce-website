@@ -98,7 +98,7 @@
           </p>
           <p class="text-sm font-medium text-ink flex justify-between mb-1">
             <span>Total:</span>
-            <span>${{ (orderResult.totalAmount || 0).toFixed(2) }}</span>
+            <span>{{ $money((orderResult.totalAmount || 0).toFixed(2)) }}</span>
           </p>
           <p class="text-sm font-medium text-ink flex justify-between mt-2 pt-2 border-t border-cream-200">
             <span>Payment:</span>
@@ -115,7 +115,7 @@
             <p class="text-xs text-brand-500 mt-1">Qty: {{ item.quantity }} | SKU: {{ item.sku }}</p>
           </div>
           <div class="font-black text-ink">
-            ${{ ((item.price || 0) * item.quantity).toFixed(2) }}
+            {{ $money(((item.price || 0) * item.quantity).toFixed(2)) }}
           </div>
         </div>
       </div>

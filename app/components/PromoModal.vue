@@ -72,7 +72,7 @@
               Decline Offer
             </button>
             <p class="text-[10px] text-brand-500 leading-tight">
-              *Not to exceed $30. New subscribers only. Exclusions apply. See 
+              *Not to exceed ₦45,000. New subscribers only. Exclusions apply. See 
               <NuxtLink to="/privacy-policy" class="underline">Privacy Policy</NuxtLink>, including 
               <NuxtLink to="/terms" class="underline">Notice of Financial Incentive</NuxtLink>
             </p>

@@ -43,10 +43,10 @@
                 
                 <div v-if="item.price" class="flex items-center gap-2">
                   <span v-if="item.originalPrice" class="text-xs text-gray-400 line-through">
-                    ${{ item.originalPrice.toFixed(2) }}
+                    {{ $money(item.originalPrice.toFixed(2)) }}
                   </span>
                   <span class="text-sm font-bold text-gray-800">
-                    ${{ item.price.toFixed(2) }}
+                    {{ $money(item.price.toFixed(2)) }}
                   </span>
                 </div>
               </div>

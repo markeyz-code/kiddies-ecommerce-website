@@ -63,28 +63,6 @@
         </div>
       </div>
 
-      <!-- Price -->
-      <div class="border-b py-4">
-        <div class="flex justify-between items-center cursor-pointer mb-4" @click="toggleFilter('Price')">
-          <h4 class="font-bold text-sm">Price</h4>
-          <ChevronUp v-if="openFilters['Price']" class="w-4 h-4 text-gray-500" />
-          <ChevronDown v-else class="w-4 h-4 text-gray-500" />
-        </div>
-        <div v-show="openFilters['Price']" class="relative pt-6 pb-2 px-2">
-          <div class="h-1 bg-black w-full absolute top-8 left-0"></div>
-          <div class="absolute top-6 left-0 w-4 h-4 bg-white border-2 border-black rounded-full cursor-pointer -ml-2">
-             <div class="absolute -top-6 -left-3 bg-black text-white text-[10px] px-1 rounded font-bold whitespace-nowrap">$9.18</div>
-          </div>
-          <div class="absolute top-6 right-0 w-4 h-4 bg-white border-2 border-black rounded-full cursor-pointer -mr-2">
-             <div class="absolute -top-6 -right-3 bg-black text-white text-[10px] px-1 rounded font-bold whitespace-nowrap">$41.97</div>
-          </div>
-          <div class="flex justify-between text-xs mt-4">
-            <span>9.18</span>
-            <span>41.97</span>
-          </div>
-        </div>
-      </div>
-
       <!-- Other filters collapsible -->
       <div class="border-b py-4" v-for="filter in additionalFilters" :key="filter.name">
         <div class="flex justify-between items-center cursor-pointer" @click="toggleFilter(filter.name)">

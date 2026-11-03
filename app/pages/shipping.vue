@@ -7,9 +7,9 @@
       <p>We strive to get your premium JasmarKids apparel to you as quickly as possible. Orders are processed within 1-2 business days.</p>
       
       <ul class="list-disc list-inside space-y-2 text-brand-500">
-        <li><strong>Standard Shipping:</strong> 3-5 business days ($5.99, free on orders over $30)</li>
-        <li><strong>Expedited Shipping:</strong> 2 business days ($12.99)</li>
-        <li><strong>Overnight Shipping:</strong> 1 business day ($24.99)</li>
+        <li><strong>Standard Delivery:</strong> 3–5 business days across Nigeria — ₦9,000.</li>
+        <li><strong>Free Delivery:</strong> On orders over ₦45,000.</li>
+        <li>Delivery timelines may vary slightly by location.</li>
       </ul>
 
       <h3 class="text-2xl text-ink font-serif mt-12 mb-4">Return Policy</h3>

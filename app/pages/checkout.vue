@@ -179,10 +179,11 @@ const { checkout, loading } = useOrders();
 const { user, fetchProfile } = useAuth();
 
 const storeSettings = ref<any>({
-  currency: 'USD',
-  shippingFee: 5.95,
-  freeShippingThreshold: 30,
-  taxRate: 8
+  currency: 'NGN',
+  shippingFee: 9000,
+  freeShippingThreshold: 45000,
+  taxRate: 7.5,
+  ngnRate: 1500
 });
 
 const isNigeria = computed(() => {
@@ -192,22 +193,24 @@ const isNigeria = computed(() => {
 
 const currentCurrency = computed(() => {
   if (isNigeria.value) return 'NGN';
-  return storeSettings.value.currency || 'USD';
+  return String(storeSettings.value.currency || 'NGN').toUpperCase();
 });
 
-const NGN_RATE = 1500;
+const storeCurrency = computed(() => String(storeSettings.value.currency || 'NGN').toUpperCase());
+const NGN_RATE = computed(() => Number(storeSettings.value.ngnRate || 1500));
 const rateMultiplier = computed(() => {
-  return currentCurrency.value === 'NGN' ? NGN_RATE : 1;
+  // Only convert when the store itself is priced in another currency.
+  return currentCurrency.value === 'NGN' && storeCurrency.value !== 'NGN' ? NGN_RATE.value : 1;
 });
 
 const currencySymbol = computed(() => {
   if (currentCurrency.value === 'NGN') return '₦';
   const symbols: Record<string, string> = { USD: '$', NGN: '₦', EUR: '€', GBP: '£', CAD: 'C$' };
-  return symbols[currentCurrency.value] || '$';
+  return symbols[currentCurrency.value] || '₦';
 });
 
 const formatAmount = (val: number) => {
-  return Number(val || 0).toLocaleString('en-US', {
+  return Number(val || 0).toLocaleString('en-NG', {
     minimumFractionDigits: isNigeria.value ? 0 : 2,
     maximumFractionDigits: 2
   });

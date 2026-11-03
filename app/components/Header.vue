@@ -283,7 +283,7 @@
               <div class="grid grid-cols-2 gap-2 text-left">
                 <div class="p-2.5 rounded-xl bg-white/80 border border-cream-200/60">
                   <p class="text-[10px] font-bold uppercase text-brand-400">Earn points</p>
-                  <p class="text-xs font-semibold text-ink">100 pts = $5 off</p>
+                  <p class="text-xs font-semibold text-ink">100 pts = ₦7,500 off</p>
                 </div>
                 <div class="p-2.5 rounded-xl bg-white/80 border border-cream-200/60">
                   <p class="text-[10px] font-bold uppercase text-brand-400">VIP perks</p>
@@ -350,14 +350,6 @@
               label="Language"
               :options="languageOptions"
               placeholder="Select Language"
-            />
-
-            <CustomSelect
-              id="ship-currency"
-              v-model="activeCurrency"
-              label="Currency"
-              :options="currencyOptions"
-              placeholder="Select Currency"
             />
 
             <button 
@@ -627,7 +619,7 @@ const currentLanguages = {
   ar: 'العربية (Arabic)'
 };
 
-const activeCurrency = ref('usd');
+const activeCurrency = ref('ngn');
 const currentCurrencies = {
   usd: { code: 'USD', name: 'US Dollar', symbol: '$' },
   eur: { code: 'EUR', name: 'Euro', symbol: '€' },

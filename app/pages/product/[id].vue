@@ -81,9 +81,9 @@
 
           <div class="mb-6">
             <div class="flex items-end space-x-3 mb-1">
-              <span class="font-display text-3xl font-semibold text-ink">${{ product.price.toFixed(2) }}</span>
+              <span class="font-display text-3xl font-semibold text-ink">{{ $money(product.price.toFixed(2)) }}</span>
               <div v-if="product.originalPrice > product.price" class="flex flex-col text-xs font-bold leading-tight">
-                <span class="text-gray-500 line-through">${{ product.originalPrice.toFixed(2) }}</span>
+                <span class="text-gray-500 line-through">{{ $money(product.originalPrice.toFixed(2)) }}</span>
                 <span class="text-red-600">{{ product.discount }}</span>
               </div>
             </div>
@@ -127,7 +127,7 @@
           <div class="grid grid-cols-3 gap-2 rounded-2xl border border-cream-200 bg-white p-4 mb-6 text-[10px] font-bold text-brand-600">
             <div class="flex items-center text-center max-w-[80px]">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
-              <span>Free Shipping<br/><span class="font-normal text-[8px]">on orders $30+</span></span>
+              <span>Free Shipping<br/><span class="font-normal text-[8px]">on orders ₦45,000+</span></span>
             </div>
             <div class="flex items-center text-center max-w-[90px]">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
@@ -159,7 +159,7 @@
                 <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
               </summary>
               <div class="mt-3 space-y-2 text-sm leading-relaxed text-brand-500">
-                <p>Free standard shipping on orders over ${{ storeSettings.freeShippingThreshold || 30 }}. Orders are dispatched within 1–2 business days.</p>
+                <p>Free standard shipping on orders over {{ $money(storeSettings.freeShippingThreshold || 45000) }}. Orders are dispatched within 1–2 business days.</p>
                 <p>Not quite right? Return unworn items with tags within 30 days for a refund or exchange.</p>
               </div>
             </details>
@@ -315,7 +315,7 @@
           </div>
           <div class="flex flex-col flex-1 pb-4">
             <h3 class="text-xs font-bold text-ink mb-1 line-clamp-1 group-hover:text-ink">{{ related.name }}</h3>
-            <p class="text-xs font-bold text-brand-500 mb-3">${{ (related.price || related.basePrice || 0).toFixed(2) }}</p>
+            <p class="text-xs font-bold text-brand-500 mb-3">{{ $money((related.price || related.basePrice || 0).toFixed(2)) }}</p>
             <div class="mt-auto">
               <button @click.prevent="cart.addToCart({ id: related._id || related.id, _id: related._id || related.id, name: related.name, price: related.price || related.basePrice || 0, basePrice: related.basePrice || related.price || 0, image: related.imageUrls?.medium || related.imageUrls?.original || '/img/placeholder.jpg', imageUrls: related.imageUrls }, 1)" class="w-full bg-brand-700 text-white py-2 text-xs font-bold uppercase tracking-widest rounded hover:bg-brand-800 transition-colors md:opacity-0 group-hover:opacity-100 shadow-sm">
                 Add to Bag

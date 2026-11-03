@@ -19,7 +19,7 @@
                 <div class="w-6 h-6 bg-brand-700 rounded-full flex items-center justify-center text-white text-[8px]">↑</div>
                 <div>
                   <p class="font-bold text-ink">Upgrade to {{ dashboard?.tierInfo?.nextTier }}</p>
-                  <p>Spend ${{ dashboard?.tierInfo?.spendToNextTier?.toFixed(2) }} by 08/31/2027</p>
+                  <p>Spend {{ $money((dashboard?.tierInfo?.spendToNextTier || 0) * 1500) }} by 08/31/2027</p>
                 </div>
                 <ChevronRightIcon class="h-4 w-4 ml-auto text-brand-400" />
               </div>
@@ -115,7 +115,7 @@
                   <p class="font-bold text-sm">{{ order.orderNumber }}</p>
                   <p class="text-xs text-brand-500">{{ new Date(order.createdAt).toLocaleDateString() }}</p>
                 </div>
-                <p class="font-bold">${{ order.totalAmount?.toFixed(2) }}</p>
+                <p class="font-bold">{{ $money(order.totalAmount?.toFixed(2)) }}</p>
                 <div class="flex items-center gap-2">
                   <span class="text-xs font-bold px-3 py-1 rounded-full" :class="order.status === 'Delivered' ? 'bg-green-100 text-green-800' : order.status === 'Shipped' ? 'bg-brand-100 text-brand-700' : order.status === 'Cancelled' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-800'">{{ order.status }}</span>
                   <span class="text-xs font-bold px-3 py-1 rounded-full" :class="order.paymentStatus === 'Paid' ? 'bg-emerald-100 text-emerald-700' : 'bg-cream-100 text-brand-500'">{{ order.paymentStatus }}</span>
@@ -221,7 +221,7 @@
                   <p class="text-xs text-brand-500">Order placed</p>
                   <p class="font-bold text-sm">{{ new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
                 </div>
-                <div><p class="text-xs text-brand-500">Total</p><p class="font-bold">${{ order.totalAmount?.toFixed(2) }}</p></div>
+                <div><p class="text-xs text-brand-500">Total</p><p class="font-bold">{{ $money(order.totalAmount?.toFixed(2)) }}</p></div>
                 <div><p class="text-xs text-brand-500">Order #</p><p class="font-bold text-sm">{{ order.orderNumber }}</p></div>
                 <div class="flex items-center gap-2">
                   <span class="text-xs font-bold px-3 py-1 rounded-full" :class="order.status === 'Delivered' ? 'bg-green-100 text-green-800' : order.status === 'Shipped' ? 'bg-brand-100 text-brand-700' : order.status === 'Cancelled' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-800'">{{ order.status }}</span>
@@ -242,7 +242,7 @@
                   <div>
                     <p class="font-medium text-sm">{{ item.name }}</p>
                     <p class="text-xs text-brand-500">Qty: {{ item.quantity }}</p>
-                    <p class="font-bold text-sm">${{ (item.price * item.quantity).toFixed(2) }}</p>
+                    <p class="font-bold text-sm">{{ $money((item.price * item.quantity).toFixed(2)) }}</p>
                   </div>
                 </div>
               </div>
@@ -267,7 +267,7 @@
               <p class="text-sm text-brand-500">Points Balance</p>
             </div>
             <div class="text-right">
-              <p class="font-bold text-sm text-brand-700">100 Points = $5</p>
+              <p class="font-bold text-sm text-brand-700">100 Points = ₦7,500</p>
               <p class="text-xs text-brand-500">Redeem at checkout</p>
             </div>
           </div>
@@ -278,14 +278,14 @@
               <span class="border border-gray-900 rounded-full px-4 py-1 text-xs font-bold uppercase">{{ dashboard?.tierInfo?.current }}</span>
               <span class="text-xs text-brand-500">VALID TILL 08/31/2027</span>
             </div>
-            <p class="text-xs text-brand-500 mb-4">Spend ${{ dashboard?.tierInfo?.spendToNextTier?.toFixed(2) || '175.00' }} by 08/31/2027 to reach {{ dashboard?.tierInfo?.nextTier || 'Stylist' }} and unlock more benefits.</p>
+            <p class="text-xs text-brand-500 mb-4">Spend {{ $money((dashboard?.tierInfo?.spendToNextTier || 175) * 1500) }} by 08/31/2027 to reach {{ dashboard?.tierInfo?.nextTier || 'Stylist' }} and unlock more benefits.</p>
             <div class="relative h-2 bg-cream-200 rounded-full overflow-hidden">
               <div class="absolute left-0 top-0 h-full bg-brand-700 rounded-full transition-all" :style="{ width: tierProgressPercent + '%' }"></div>
             </div>
             <div class="flex justify-between text-[10px] text-brand-500 mt-2 uppercase tracking-wider font-bold">
-              <span>Insider $0</span>
-              <span>Stylist ${{ dashboard?.tierInfo?.thresholds?.stylist || 175 }}</span>
-              <span>Icon ${{ dashboard?.tierInfo?.thresholds?.icon || 500 }}</span>
+              <span>Insider ₦0</span>
+              <span>Stylist {{ $money((dashboard?.tierInfo?.thresholds?.stylist || 175) * 1500) }}</span>
+              <span>Icon {{ $money((dashboard?.tierInfo?.thresholds?.icon || 500) * 1500) }}</span>
             </div>
           </div>
 
@@ -629,7 +629,7 @@
                 <ShoppingBagIcon class="h-8 w-8 text-gray-300" />
               </div>
               <p class="font-bold text-xs text-ink truncate">{{ item.name }}</p>
-              <p class="font-bold text-sm mt-1">${{ item.price?.toFixed(2) }}</p>
+              <p class="font-bold text-sm mt-1">{{ $money(item.price?.toFixed(2)) }}</p>
               <button @click="handleAddToCart(item)" class="mt-2 bg-brand-700 text-white text-xs font-bold px-4 py-2 rounded hover:bg-black w-full">Add to Cart</button>
             </div>
           </div>
