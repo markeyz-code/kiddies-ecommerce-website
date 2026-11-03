@@ -10,10 +10,10 @@ const DEFAULTS = {
   shippingFee: 2500,
   freeShippingThreshold: 50000,
   taxRate: 7.5,
-  instagram: 'https://instagram.com/jasmarkids',
+  instagram: 'https://www.instagram.com/jasmar_kids/',
   facebook: 'https://facebook.com/jasmarkids',
   twitter: 'https://twitter.com/jasmarkids',
-  announcement: 'Nationwide Delivery Across Nigeria · DM @jasmarkids on Instagram'
+  announcement: 'Nationwide Delivery Across Nigeria · DM @jasmar_kids on Instagram'
 };
 
 export const useStoreSettings = () => {

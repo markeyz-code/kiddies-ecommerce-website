@@ -49,7 +49,7 @@
         
         <div class="flex items-center space-x-1 sm:space-x-2">
           <!-- Instagram Link (Online Store) -->
-          <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="hidden sm:flex bg-brand-50 text-brand-700 hover:text-pink-600 rounded-full p-2.5 hover:bg-pink-50 transition-colors" title="Instagram @jasmarkids">
+          <a :href="storeSettings.instagram || 'https://www.instagram.com/jasmar_kids/'" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="hidden sm:flex bg-brand-50 text-brand-700 hover:text-pink-600 rounded-full p-2.5 hover:bg-pink-50 transition-colors" title="Instagram @jasmar_kids">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>

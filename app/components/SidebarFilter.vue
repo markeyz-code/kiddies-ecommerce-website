@@ -20,7 +20,7 @@
       <div class="text-lg">🚚</div>
       <div class="text-xs text-ink">
         <span class="font-bold">Nationwide Delivery</span> across Nigeria.<br/>
-        <a href="https://instagram.com/jasmarkids" target="_blank" rel="noopener noreferrer" class="underline font-bold text-coral-600 hover:text-coral-700 mt-1 inline-block">DM on Instagram @jasmarkids</a>
+        <a href="https://www.instagram.com/jasmar_kids/" target="_blank" rel="noopener noreferrer" class="underline font-bold text-coral-600 hover:text-coral-700 mt-1 inline-block">DM on Instagram @jasmar_kids</a>
       </div>
     </div>
 

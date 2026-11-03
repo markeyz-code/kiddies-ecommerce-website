@@ -103,6 +103,9 @@
           </div>
           <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-brand-600">JasmarKids · by Tayisi</p>
           <p class="mt-6 font-display text-2xl font-semibold text-coral-500 sm:text-3xl">Inspired by little hearts, styled for little stars.</p>
+          <a href="https://www.instagram.com/jasmar_kids/" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 rounded-full border border-brand-300 bg-brand-50 px-5 py-2.5 text-xs font-bold text-brand-800 transition-colors hover:bg-brand-100">
+            Follow @jasmar_kids on Instagram
+          </a>
         </div>
       </div>
     </section>

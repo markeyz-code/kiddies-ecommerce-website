@@ -27,7 +27,7 @@
               <div>
                 <p class="font-medium">Instagram</p>
                 <p class="text-cream-100/70 text-sm">Follow &amp; DM us for orders &amp; styling.</p>
-                <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener" class="text-coral-200 mt-1 font-semibold hover:underline block">@jasmarkids</a>
+                <a :href="storeSettings.instagram || 'https://www.instagram.com/jasmar_kids/'" target="_blank" rel="noopener" class="text-coral-200 mt-1 font-semibold hover:underline block">@jasmar_kids</a>
               </div>
             </div>
             

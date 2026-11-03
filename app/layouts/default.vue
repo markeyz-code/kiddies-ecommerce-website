@@ -19,12 +19,12 @@
           <div class="mt-5 space-y-1.5 text-sm font-light text-cream-100/70">
             <a :href="`mailto:${storeSettings.storeEmail || 'Jasmar.tayisi@gmail.com'}`" class="block hover:text-white transition-colors">✉️ {{ storeSettings.storeEmail || 'Jasmar.tayisi@gmail.com' }}</a>
             <a v-if="storeSettings.phone"  :href="`tel:${phoneHref}`" class="block hover:text-white transition-colors">📞 {{ storeSettings.phone }}</a>
-            <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-coral-200 hover:text-white font-medium transition-colors">
-              📸 @jasmarkids on Instagram
+            <a :href="storeSettings.instagram || 'https://www.instagram.com/jasmar_kids/'" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-coral-200 hover:text-white font-medium transition-colors">
+              📸 @jasmar_kids on Instagram
             </a>
           </div>
           <div class="flex items-center gap-4 mt-4 text-xs font-bold uppercase tracking-wider">
-            <a :href="storeSettings.instagram || 'https://instagram.com/jasmarkids'" target="_blank" rel="noopener" class="text-coral-300 hover:text-white">Instagram</a>
+            <a :href="storeSettings.instagram || 'https://www.instagram.com/jasmar_kids/'" target="_blank" rel="noopener" class="text-coral-300 hover:text-white">Instagram</a>
             <NuxtLink to="/contact" class="text-cream-100/70 hover:text-white">Contact</NuxtLink>
             <NuxtLink to="/faq" class="text-cream-100/70 hover:text-white">Help</NuxtLink>
           </div>
