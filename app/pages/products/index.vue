@@ -158,12 +158,12 @@
               <div class="px-1 pb-2">
                 <div class="flex items-center justify-between gap-2 mb-3 text-xs font-bold text-gray-600">
                   <div class="flex flex-col w-[45%]">
-                    <label class="text-[9px] text-gray-400">Min ($)</label>
+                    <label class="text-[9px] text-gray-400">Min (₦)</label>
                     <input type="number" v-model.number="minPrice" @change="reloadProducts" min="0" class="w-full px-2 py-1 rounded-sm border border-gray-300 focus:border-black focus:ring-0" />
                   </div>
                   <span class="mt-4">-</span>
                   <div class="flex flex-col w-[45%]">
-                     <label class="text-[9px] text-gray-400">Max ($)</label>
+                     <label class="text-[9px] text-gray-400">Max (₦)</label>
                      <input type="number" v-model.number="maxPrice" @change="reloadProducts" min="0" class="w-full px-2 py-1 rounded-sm border border-gray-300 focus:border-black focus:ring-0" />
                   </div>
                 </div>
@@ -353,7 +353,7 @@ const selectedAgeGroups = ref([]);
 const selectedSustainability = ref([]);
 const minRating = ref(null);
 const minPrice = ref(0);
-const maxPrice = ref(1000);
+const maxPrice = ref(100000);
 const showMobileFilters = ref(false);
 const visibleCount = ref(24);
 const visibleProducts = computed(() => (products.value || []).slice(0, visibleCount.value));
@@ -501,7 +501,7 @@ const filtersActiveCount = computed(() => {
     selectedSubsection.value ? 1 : 0,
     minRating.value ? 1 : 0,
     minPrice.value > 0 ? 1 : 0,
-    maxPrice.value < 1000 ? 1 : 0
+    maxPrice.value < 100000 ? 1 : 0
   ].reduce((a, b) => a + b, 0);
 });
 
@@ -601,7 +601,7 @@ const reloadProducts = () => {
   
   // Ranges / Numerics
   if (minPrice.value > 0) params.minPrice = minPrice.value;
-  if (maxPrice.value < 1000) params.maxPrice = maxPrice.value;
+  if (maxPrice.value < 100000) params.maxPrice = maxPrice.value;
   if (minRating.value) params.minRating = minRating.value;
 
   if (selectedSubsection.value) {
@@ -627,7 +627,7 @@ const clearAllFilters = () => {
   selectedSubsection.value = null;
   minRating.value = null;
   minPrice.value = 0;
-  maxPrice.value = 1000;
+  maxPrice.value = 100000;
   reloadProducts();
 };
 
