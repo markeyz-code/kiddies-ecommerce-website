@@ -26,7 +26,7 @@
           <p class="eyebrow mb-2">The inspiration</p>
           <h2 class="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">Two little girls, one beautiful dream.</h2>
           <p class="mt-4 text-sm leading-relaxed text-brand-700 sm:text-base">Amaris and Jasmine are the heart of JasmarKids. Their joy in choosing outfits, dressing up and being themselves is the reason this brand exists.</p>
-          <p class="mt-3 text-xs italic leading-relaxed text-brand-500">A soft illustrated treatment of a family portrait.</p>
+          <p class="mt-3 text-xs italic leading-relaxed text-brand-500">A portrait of Amaris &amp; Jasmine.</p>
         </div>
       </div>
     </section>
