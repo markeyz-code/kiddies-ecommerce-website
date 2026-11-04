@@ -14,6 +14,23 @@
       </div>
     </section>
 
+
+    <!-- The two little inspirations -->
+    <section class="container-site py-10 sm:py-14">
+      <div class="mx-auto grid max-w-4xl items-center gap-8 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
+        <figure class="overflow-hidden rounded-3xl border border-cream-200 bg-white p-2 shadow-sm">
+          <img src="/img/amaris-jasmine-story.jpg" alt="Amaris and Jasmine, the two little girls who inspired JasmarKids" class="w-full rounded-2xl object-cover" loading="lazy" />
+          <figcaption class="px-3 pb-2 pt-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-brand-600">Amaris &amp; Jasmine · The inspiration</figcaption>
+        </figure>
+        <div>
+          <p class="eyebrow mb-2">The inspiration</p>
+          <h2 class="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">Two little girls, one beautiful dream.</h2>
+          <p class="mt-4 text-sm leading-relaxed text-brand-700 sm:text-base">Amaris and Jasmine are the heart of JasmarKids. Their joy in choosing outfits, dressing up and being themselves is the reason this brand exists.</p>
+          <p class="mt-3 text-xs italic leading-relaxed text-brand-500">A soft illustrated treatment of a family portrait.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- The story -->
     <section class="container-site py-12 sm:py-16">
       <div class="mx-auto max-w-3xl">
