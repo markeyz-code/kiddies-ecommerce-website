@@ -19,7 +19,7 @@
     <section class="container-site py-10 sm:py-14">
       <div class="mx-auto grid max-w-4xl items-center gap-8 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
         <figure class="overflow-hidden rounded-3xl border border-cream-200 bg-white p-2 shadow-sm">
-          <img src="/img/amaris-jasmine-story.jpg" alt="Amaris and Jasmine, the two little girls who inspired JasmarKids" class="w-full rounded-2xl object-cover" loading="lazy" />
+          <img :src="portrait" alt="Amaris and Jasmine, the two little girls who inspired JasmarKids" class="w-full rounded-2xl object-cover" width="800" height="1232" loading="eager" fetchpriority="high" />
           <figcaption class="px-3 pb-2 pt-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-brand-600">Amaris &amp; Jasmine · The inspiration</figcaption>
         </figure>
         <div>
@@ -72,6 +72,8 @@
 </template>
 
 <script setup>
+import portrait from '~/assets/images/amaris-jasmine-story.jpg';
+
 useSeoMeta({
   title: 'Our Story',
   description: 'The JasmarKids story — inspired by Amaris and Jasmine, created with love by their mother, and made for little ones who deserve to feel special.'
