@@ -65,10 +65,6 @@
                     <input v-model="paymentMethod" value="paystack" type="radio" class="w-5 h-5 text-ink border-brand-300 focus:ring-brand-300 focus:ring-2" />
                     <span class="ml-3 font-bold text-ink text-sm">Pay with card or bank transfer (Paystack)</span>
                   </label>
-                  <label class="flex cursor-pointer items-center rounded-2xl border border-cream-200 bg-white p-4 transition-all duration-200 hover:border-brand-300" :class="paymentMethod === 'stripe' ? 'border-[#635BFF] bg-[#635BFF]/5' : 'border-cream-200 hover:border-[#635BFF]'">
-                    <input v-model="paymentMethod" value="stripe" type="radio" class="w-5 h-5 text-[#635BFF] border-brand-300 focus:ring-[#635BFF] focus:ring-2" />
-                    <span class="ml-3 font-bold text-ink text-sm">Pay with Stripe</span>
-                  </label>
                   <label class="flex cursor-pointer items-center rounded-2xl border border-cream-200 bg-white p-4 transition-all duration-200 hover:border-brand-300" :class="paymentMethod === 'cash_on_delivery' ? 'border-emerald-400 bg-emerald-50' : 'border-cream-200 hover:border-emerald-300'">
                     <input v-model="paymentMethod" value="cash_on_delivery" type="radio" class="w-5 h-5 text-emerald-500 border-brand-300 focus:ring-brand-300 focus:ring-2" />
                     <span class="ml-3 font-bold text-ink text-sm">Cash on delivery</span>

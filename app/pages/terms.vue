@@ -12,11 +12,11 @@
         </section>
         <section>
           <h2 class="font-display text-xl font-semibold text-ink mb-3">2. Orders and payment</h2>
-          <p class="text-sm leading-relaxed">All orders are subject to acceptance and stock availability. Payment is taken at checkout via our payment partners, Paystack or Stripe. Cash-on-delivery orders are payable when your parcel arrives.</p>
+          <p class="text-sm leading-relaxed">All orders are subject to acceptance and stock availability. Payment is taken at checkout via Paystack. Cash-on-delivery orders are payable when your parcel arrives.</p>
         </section>
         <section>
-          <h2 class="font-display text-xl font-semibold text-ink mb-3">3. Shipping and returns</h2>
-          <p class="text-sm leading-relaxed">Delivery times are estimates and may vary. You may return unworn items in their original packaging within 30 days of delivery. See our <NuxtLink to="/shipping" class="text-ink font-bold underline">Shipping &amp; Returns</NuxtLink> page for details.</p>
+          <h2 class="font-display text-xl font-semibold text-ink mb-3">3. Shipping and exchanges</h2>
+          <p class="text-sm leading-relaxed">Delivery times are estimates and may vary. We do not offer refunds. Unworn items with original tags may be exchanged within 7 days of delivery, subject to stock availability. See our <NuxtLink to="/shipping" class="text-ink font-bold underline">Shipping &amp; Exchanges</NuxtLink> page for details.</p>
         </section>
         <section>
           <h2 class="font-display text-xl font-semibold text-ink mb-3">4. Accounts</h2>

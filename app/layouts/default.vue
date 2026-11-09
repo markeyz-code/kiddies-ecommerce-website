@@ -45,7 +45,7 @@
           <h4 class="text-white font-display text-base font-semibold mb-4 md:mb-6">Support</h4>
           <ul class="space-y-3 md:space-y-4 text-sm font-light">
             <li><NuxtLink to="/faq" class="hover:text-white hover:underline underline-offset-4 transition-all">FAQ</NuxtLink></li>
-            <li><NuxtLink to="/shipping" class="hover:text-white hover:underline underline-offset-4 transition-all">Shipping & Returns</NuxtLink></li>
+            <li><NuxtLink to="/shipping" class="hover:text-white hover:underline underline-offset-4 transition-all">Shipping &amp; Exchanges</NuxtLink></li>
             <li><NuxtLink to="/contact" class="hover:text-white hover:underline underline-offset-4 transition-all">Contact Us</NuxtLink></li>
             <li><NuxtLink to="/about" class="hover:text-white hover:underline underline-offset-4 transition-all">Our Story</NuxtLink></li>
           </ul>
@@ -67,11 +67,11 @@
       <div class="max-w-[1400px] mx-auto px-4 md:px-8 mt-10 md:mt-14 pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-wider text-cream-100/60">
         <span>Secure checkout</span>
         <span class="hidden sm:inline">•</span>
-        <span>Paystack &amp; Stripe</span>
+        <span>Paystack</span>
         <span class="hidden sm:inline">•</span>
-        <span>30-day returns</span>
+        <span>7-day exchanges</span>
         <span class="hidden sm:inline">•</span>
-        <span>Worldwide shipping</span>
+        <span>Nationwide delivery</span>
       </div>
       <div class="max-w-[1400px] mx-auto px-4 md:px-8 mt-6 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs font-light text-cream-100/50">
         <p>&copy; {{ new Date().getFullYear() }} {{ storeSettings.storeName || 'JasmarKids' }}. Made with care for little ones.</p>

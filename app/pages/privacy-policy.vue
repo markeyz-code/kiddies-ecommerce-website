@@ -21,7 +21,7 @@
             <NuxtLink to="/faq" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Help Center Home</NuxtLink>
             <NuxtLink to="/faq" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Shopping Tools & Tips</NuxtLink>
             <NuxtLink to="/shipping" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Ordering & Shipping</NuxtLink>
-            <NuxtLink to="/track" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Tracking & Returns</NuxtLink>
+            <NuxtLink to="/track" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Tracking &amp; Exchanges</NuxtLink>
             <NuxtLink to="/faq" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">Promotions & Payments</NuxtLink>
             <NuxtLink to="/faq" class="block px-3 py-2 text-sm font-medium text-brand-700 hover:bg-cream-100 rounded transition-colors">JasmarKids Rewards</NuxtLink>
             <div class="pt-2 mt-2 border-t">
@@ -124,7 +124,7 @@
               <p>JasmarKids may use the information we collect from and about you for any of the following purposes:</p>
               <ul class="list-disc ml-6 space-y-2 text-sm">
                 <li>To respond to your inquiries, provide you with the Services, provide you with notices about your account, and to contact and communicate with you when necessary or as otherwise permitted by this Privacy Policy.</li>
-                <li>To validate, confirm, verify, deliver, and track your order (including to process payment transactions, arrange for shipping, handle returns and refunds, and contact you about your orders, including by telephone).</li>
+                <li>To validate, confirm, verify, deliver, and track your order (including to process payment transactions, arrange for shipping, handle exchanges, and contact you about your orders, including by telephone).</li>
                 <li>To enhance your online shopping experience, including as a way to recognize you and welcome you to the Site or App.</li>
                 <li>To contact you with information, newsletters, or promotional materials from JasmarKids or on behalf of our affiliates and partners.</li>
                 <li>To provide you with personalized or customized content, targeted offers, and advertising on the Site or App, via email, through push notifications, on your shopping receipt, or across other websites, mobile applications, social media or online services.</li>

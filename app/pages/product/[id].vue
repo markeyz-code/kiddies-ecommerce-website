@@ -131,7 +131,7 @@
             </div>
             <div class="flex items-center text-center max-w-[90px]">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
-              <span>Easy Returns<br/><span class="font-normal text-[8px]">30-day policy</span></span>
+              <span>Easy Exchanges<br/><span class="font-normal text-[8px]">7-day policy</span></span>
             </div>
             <div class="flex items-center text-center max-w-[80px]">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
@@ -155,12 +155,12 @@
             </details>
             <details class="group p-4">
               <summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-ink">
-                Shipping &amp; returns
+                Shipping &amp; exchanges
                 <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
               </summary>
               <div class="mt-3 space-y-2 text-sm leading-relaxed text-brand-500">
                 <p>Free standard shipping on orders over {{ $money(storeSettings.freeShippingThreshold || 45000) }}. Orders are dispatched within 1–2 business days.</p>
-                <p>Not quite right? Return unworn items with tags within 30 days for a refund or exchange.</p>
+                <p>Not quite right? Exchanges are available within 7 days for unworn items with tags attached. We do not offer refunds.</p>
               </div>
             </details>
             <details class="group p-4">

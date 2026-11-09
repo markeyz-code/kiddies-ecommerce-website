@@ -13,7 +13,10 @@ const DEFAULTS = {
   instagram: 'https://www.instagram.com/jasmar_kids/',
   facebook: 'https://facebook.com/jasmarkids',
   twitter: 'https://twitter.com/jasmarkids',
-  announcement: 'Nationwide Delivery Across Nigeria · DM @jasmar_kids on Instagram'
+  announcementEnabled: false,
+  announcement: '',
+  announcementLink: '',
+  announcementLinkText: 'Shop now'
 };
 
 export const useStoreSettings = () => {

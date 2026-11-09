@@ -16,20 +16,32 @@
 <script setup>
 const faqs = [
   {
-    question: "What sizes do your clothes run in?",
-    answer: "Our sizes range from newborn (0-3 months) up to toddler sizes (5T). Each product page includes a detailed sizing chart to help you find the perfect fit."
+    question: "What sizes do you offer?",
+    answer: "Our pieces run from newborn sizes up to 14–16 years. Each product page includes a size guide, and our full size guide is available in the footer."
   },
   {
-    question: "Are your materials organic?",
-    answer: "Yes! We prioritize sustainability and comfort. The vast majority of our baby clothes are made from 100% certified organic cotton, perfect for sensitive skin."
+    question: "What fabrics do you use?",
+    answer: "We choose soft, breathable fabrics for everyday comfort. Fabric details are listed on each product page so you can choose what works best for your little one."
   },
   {
-    question: "How long does shipping usually take?",
-    answer: "Standard shipping takes 3-5 business days within the continental US. Expedited shipping options (1-2 days) are available at checkout."
+    question: "How long does delivery take?",
+    answer: "Orders are processed within 1–2 business days and delivered across Nigeria in approximately 3–5 business days. Delivery timelines can vary by location."
   },
   {
-    question: "Do you offer gift wrapping?",
-    answer: "Absolutely. During checkout, you can select our premium gift wrapping option, which includes a beautiful JasmarKids signature box and a personalized handwritten note."
+    question: "How much is delivery?",
+    answer: "Standard delivery is ₦9,000 nationwide. Delivery is free on orders over ₦45,000."
+  },
+  {
+    question: "Do you offer refunds or exchanges?",
+    answer: "We do not offer refunds. If an item does not fit, you may request an exchange within 7 days of delivery. Items must be unworn, unwashed and have their original tags attached. Exchanges are subject to stock availability."
+  },
+  {
+    question: "How do I track my order?",
+    answer: "Use the Track Order page with your order number and the email address used at checkout, or sign in to your account to view your order history."
+  },
+  {
+    question: "How can I contact JasmarKids?",
+    answer: "You can reach us through the Contact page, by email at Jasmar.tayisi@gmail.com, or by phone on 0807 913 1425."
   }
-]
+];
 </script>

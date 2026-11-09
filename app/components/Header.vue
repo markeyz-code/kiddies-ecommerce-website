@@ -1,8 +1,11 @@
 <template>
   <header class="w-full font-sans relative z-40 bg-white/95 backdrop-blur border-b border-cream-200">
     <!-- Top thin dark blue banner -->
-    <div v-if="isBannerVisible" class="bg-brand-200 text-ink text-[10px] sm:text-[11px] text-center py-2 relative px-10 sm:px-4 transition-all duration-300">
-      <span class="font-semibold uppercase tracking-wider">{{ storeSettings.announcement || 'Extra 40% Off* Sale With Code EXTRA40' }} <NuxtLink to="/products" class="underline font-bold ml-1 text-coral-600 hover:text-coral-700">Shop Now</NuxtLink></span>
+    <div v-if="isBannerVisible && storeSettings.announcementEnabled && storeSettings.announcement" class="bg-brand-200 text-ink text-[10px] sm:text-[11px] text-center py-2 relative px-10 sm:px-4 transition-all duration-300">
+      <span class="font-semibold uppercase tracking-wider">
+        {{ storeSettings.announcement }}
+        <NuxtLink v-if="storeSettings.announcementLink" :to="storeSettings.announcementLink" class="underline font-bold ml-1 text-coral-600 hover:text-coral-700">{{ storeSettings.announcementLinkText || 'Shop now' }}</NuxtLink>
+      </span>
       <button @click="isBannerVisible = false" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-ink/60 hover:text-ink">
         <XIcon class="h-3 w-3 sm:h-4 sm:w-4" />
       </button>

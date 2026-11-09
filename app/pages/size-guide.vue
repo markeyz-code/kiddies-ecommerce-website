@@ -66,7 +66,7 @@
 
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <NuxtLink to="/products" class="btn-primary">Shop with confidence</NuxtLink>
-          <NuxtLink to="/shipping" class="btn-secondary">Shipping &amp; returns</NuxtLink>
+          <NuxtLink to="/shipping" class="btn-secondary">Shipping &amp; exchanges</NuxtLink>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@
 
     <!-- Hero carousel (Multi-slide with text, image, automatic timer and high-contrast overlay) -->
     <section 
+      v-if="activeHeroSlides.length"
       class="w-full relative overflow-hidden select-none"
       @mouseenter="pauseHero" 
       @mouseleave="resumeHero"
@@ -264,7 +265,7 @@
 <script setup>
 useSeoMeta({
   title: 'Premium Kids Clothing & Accessories',
-  description: 'Shop thoughtful, comfortable kids clothing at JasmarKids — playful outfits for babies, toddlers and children, with free shipping over ₦45,000 and easy 30-day returns.',
+  description: 'Shop thoughtful, comfortable kids clothing at JasmarKids — playful outfits for babies, toddlers and children, with free shipping over ₦45,000 and easy 7-day exchanges.',
   ogTitle: 'JasmarKids | Premium Kids Fashion',
   ogDescription: 'Soft, playful and made to last. Discover the latest JasmarKids collection.',
   ogImage: '/img/hero_fall_1_1789165261484.jpg'
@@ -302,39 +303,6 @@ const activeBanners = computed(() => {
   return promotions.value.filter(p => ['banner', 'hero'].includes(p.type) && p.isActive !== false);
 });
 
-const defaultHeroSlides = [
-  {
-    eyebrow: 'African Kids Fashion · Pure Joy',
-    title: 'VIBRANT LOOKS<br/>FOR LITTLE ONES',
-    subtitle: 'Stylish, durable and playful outfits designed for the way African kids actually live and play.',
-    imageUrl: '/img/hero_african_kids.jpg',
-    primaryCtaText: 'Shop Boys (6–16)',
-    primaryCtaLink: '/category/boy',
-    secondaryCtaText: 'Shop Girls (6–16)',
-    secondaryCtaLink: '/category/girl'
-  },
-  {
-    eyebrow: 'Soft Cotton · Everyday Essentials',
-    title: 'BABY (0–18M)<br/>& TODDLER (2–5Y)',
-    subtitle: 'Gentle on skin, built for play. Thoughtful pieces that keep up with every milestone.',
-    imageUrl: '/img/category_baby_african.jpg',
-    primaryCtaText: 'Shop Baby (0–18m)',
-    primaryCtaLink: '/category/baby',
-    secondaryCtaText: 'Shop Toddlers (2–5)',
-    secondaryCtaLink: '/category/toddler-boy'
-  },
-  {
-    eyebrow: 'Wardrobe Staples · Mix & Match',
-    title: 'EVERYDAY<br/>COLLECTIONS',
-    subtitle: 'Dresses, graphic tees, denim shorts, comfy bottoms, socks and shoes.',
-    imageUrl: '/img/kiddies_clothes_flatlay.jpg',
-    primaryCtaText: 'Shop All Outfits',
-    primaryCtaLink: '/products',
-    secondaryCtaText: 'Explore Sale',
-    secondaryCtaLink: '/category/sale'
-  }
-];
-
 const heroItems = computed(() => {
   if (storefrontSettings.value?.heroCarousel?.length > 0) {
     return storefrontSettings.value.heroCarousel.map((item) => ({
@@ -352,7 +320,7 @@ const heroItems = computed(() => {
 });
 
 const activeHeroSlides = computed(() => {
-  return heroItems.value.length > 0 ? heroItems.value : defaultHeroSlides;
+  return heroItems.value;
 });
 
 const currentHeroIndex = ref(0);
