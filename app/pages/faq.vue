@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     question: "How much is delivery?",
-    answer: "Standard delivery is ₦9,000 nationwide. Delivery is free on orders over ₦45,000."
+    answer: "Standard delivery is ₦9,000 nationwide. Delivery is free on orders over ₦90,000."
   },
   {
     question: "Do you offer refunds or exchanges?",

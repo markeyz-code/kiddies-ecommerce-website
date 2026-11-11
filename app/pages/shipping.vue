@@ -8,7 +8,7 @@
       
       <ul class="list-disc list-inside space-y-2 text-brand-500">
         <li><strong>Standard Delivery:</strong> 3–5 business days across Nigeria — ₦9,000.</li>
-        <li><strong>Free Delivery:</strong> On orders over ₦45,000.</li>
+        <li><strong>Free Delivery:</strong> On orders over ₦90,000.</li>
         <li>Delivery timelines may vary slightly by location.</li>
       </ul>
 

@@ -265,7 +265,7 @@
 <script setup>
 useSeoMeta({
   title: 'Premium Kids Clothing & Accessories',
-  description: 'Shop thoughtful, comfortable kids clothing at JasmarKids — playful outfits for babies, toddlers and children, with free shipping over ₦45,000 and easy 7-day exchanges.',
+  description: 'Shop thoughtful, comfortable kids clothing at JasmarKids — playful outfits for babies, toddlers and children, with free shipping over ₦90,000 and easy 7-day exchanges.',
   ogTitle: 'JasmarKids | Premium Kids Fashion',
   ogDescription: 'Soft, playful and made to last. Discover the latest JasmarKids collection.',
   ogImage: '/img/hero_fall_1_1789165261484.jpg'

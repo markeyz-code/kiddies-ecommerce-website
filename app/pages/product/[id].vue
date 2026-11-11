@@ -127,7 +127,7 @@
           <div class="grid grid-cols-3 gap-2 rounded-2xl border border-cream-200 bg-white p-4 mb-6 text-[10px] font-bold text-brand-600">
             <div class="flex items-center text-center max-w-[80px]">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
-              <span>Free Shipping<br/><span class="font-normal text-[8px]">on orders ₦45,000+</span></span>
+              <span>Free Shipping<br/><span class="font-normal text-[8px]">on orders ₦90,000+</span></span>
             </div>
             <div class="flex items-center text-center max-w-[90px]">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
@@ -159,7 +159,7 @@
                 <svg class="h-4 w-4 text-brand-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
               </summary>
               <div class="mt-3 space-y-2 text-sm leading-relaxed text-brand-500">
-                <p>Free standard shipping on orders over {{ $money(storeSettings.freeShippingThreshold || 45000) }}. Orders are dispatched within 1–2 business days.</p>
+                <p>Free standard shipping on orders over {{ $money(storeSettings.freeShippingThreshold || 90000) }}. Orders are dispatched within 1–2 business days.</p>
                 <p>Not quite right? Exchanges are available within 7 days for unworn items with tags attached. We do not offer refunds.</p>
               </div>
             </details>
@@ -602,7 +602,7 @@ useHead(() => {
     brand: { '@type': 'Brand', name: 'JasmarKids' },
     offers: {
       '@type': 'Offer',
-      priceCurrency: storeSettings.value.currency || 'USD',
+      priceCurrency: storeSettings.value.currency || 'NGN',
       price: Number(p.basePrice || 0).toFixed(2),
       availability: 'https://schema.org/InStock'
     }

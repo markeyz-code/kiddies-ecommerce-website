@@ -83,7 +83,7 @@
               </div>
               <div class="flex justify-between items-center">
                 <span>Shipping</span>
-                <span class="font-bold text-ink">{{ estimatedShipping === 0 ? 'Free' : `$${estimatedShipping.toFixed(2)}` }}</span>
+                <span class="font-bold text-ink">{{ estimatedShipping === 0 ? 'Free' : $money(estimatedShipping) }}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span>Tax</span>

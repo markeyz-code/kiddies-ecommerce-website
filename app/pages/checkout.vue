@@ -177,7 +177,7 @@ const { user, fetchProfile } = useAuth();
 const storeSettings = ref<any>({
   currency: 'NGN',
   shippingFee: 9000,
-  freeShippingThreshold: 45000,
+  freeShippingThreshold: 90000,
   taxRate: 7.5,
   ngnRate: 1500
 });

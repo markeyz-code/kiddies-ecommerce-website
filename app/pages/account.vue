@@ -968,8 +968,8 @@ const printInvoice = (order) => {
     <tr>
       <td>${item.name}${item.size ? ` (${item.size})` : ''}</td>
       <td style="text-align:center">${item.quantity}</td>
-      <td style="text-align:right">$${(item.price || 0).toFixed(2)}</td>
-      <td style="text-align:right">$${((item.price || 0) * item.quantity).toFixed(2)}</td>
+      <td style="text-align:right">₦${(item.price || 0).toLocaleString('en-NG')}</td>
+      <td style="text-align:right">₦${((item.price || 0) * item.quantity).toLocaleString('en-NG')}</td>
     </tr>`).join('');
   win.document.write(`
     <!doctype html><html><head><title>Invoice ${order.orderNumber}</title>
@@ -992,11 +992,11 @@ const printInvoice = (order) => {
     <p><span class="badge">${order.status}</span> <span class="badge">${order.paymentStatus}</span></p>
     <table><thead><tr><th>Item</th><th style="text-align:center">Qty</th><th style="text-align:right">Price</th><th style="text-align:right">Total</th></tr></thead><tbody>${rows}</tbody></table>
     <div class="totals">
-      <div><span>Subtotal</span><span>$${(order.subtotal || 0).toFixed(2)}</span></div>
-      <div><span>Shipping</span><span>$${(order.shippingFee || 0).toFixed(2)}</span></div>
-      <div><span>Tax</span><span>$${(order.tax || 0).toFixed(2)}</span></div>
-      ${order.discountAmount ? `<div><span>Discount</span><span>-$${(order.discountAmount || 0).toFixed(2)}</span></div>` : ''}
-      <div class="total"><span>Total</span><span>$${(order.totalAmount || 0).toFixed(2)}</span></div>
+      <div><span>Subtotal</span><span>₦${(order.subtotal || 0).toLocaleString('en-NG')}</span></div>
+      <div><span>Shipping</span><span>₦${(order.shippingFee || 0).toLocaleString('en-NG')}</span></div>
+      <div><span>Tax</span><span>₦${(order.tax || 0).toLocaleString('en-NG')}</span></div>
+      ${order.discountAmount ? `<div><span>Discount</span><span>-₦${(order.discountAmount || 0).toLocaleString('en-NG')}</span></div>` : ''}
+      <div class="total"><span>Total</span><span>₦${(order.totalAmount || 0).toLocaleString('en-NG')}</span></div>
     </div>
     <p class="muted" style="margin-top:40px">Thank you for shopping with JasmarKids.</p>
     <button onclick="window.print()" style="margin-top:24px;background:#1a365d;color:#fff;border:none;border-radius:999px;padding:12px 24px;font-weight:bold;cursor:pointer">Print invoice</button>

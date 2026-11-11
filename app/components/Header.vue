@@ -182,15 +182,42 @@
           <div class="flex-1 overflow-y-auto px-5 py-4 custom-scrollbar">
             <ul class="space-y-1">
               <li v-for="link in navLinks" :key="link.name">
-                <NuxtLink 
-                  :to="link.href" 
-                  @click="isMobileMenuOpen = false" 
-                  class="flex items-center justify-between py-3.5 px-3 rounded-2xl text-sm font-bold uppercase tracking-wider text-ink/80 hover:bg-brand-100 transition-colors" 
-                  :class="{'text-coral-400': link.isSale}"
-                >
-                  <span>{{ link.name }}</span>
-                  <span class="text-brand-500 text-xs">→</span>
-                </NuxtLink>
+                <div class="flex items-center gap-1">
+                  <NuxtLink 
+                    :to="link.href" 
+                    @click="isMobileMenuOpen = false" 
+                    class="flex min-w-0 flex-1 items-center justify-between py-3 px-3 rounded-2xl text-sm font-bold uppercase tracking-wider text-ink/80 hover:bg-brand-100 transition-colors" 
+                    :class="{'text-coral-400': link.isSale}"
+                  >
+                    <span>{{ link.name }}</span>
+                  </NuxtLink>
+                  <button
+                    v-if="link.sections"
+                    type="button"
+                    @click="mobileOpenSection = mobileOpenSection === link.name ? null : link.name"
+                    :aria-expanded="mobileOpenSection === link.name"
+                    :aria-label="`Show ${link.name} items`"
+                    class="h-10 w-10 shrink-0 rounded-xl text-brand-700 hover:bg-brand-100 flex items-center justify-center transition-colors"
+                  >
+                    <svg class="h-4 w-4 transition-transform" :class="mobileOpenSection === link.name ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                  </button>
+                </div>
+
+                <div v-if="link.sections && mobileOpenSection === link.name" class="mb-2 ml-3 border-l border-cream-200 pl-3">
+                  <div v-for="(section, sectionName) in link.sections" :key="sectionName" class="pt-2">
+                    <p class="px-2 pb-1 text-[9px] font-bold uppercase tracking-[0.18em] text-brand-500">{{ sectionName }}</p>
+                    <NuxtLink
+                      v-for="item in section"
+                      :key="item.name"
+                      :to="item.href"
+                      @click="isMobileMenuOpen = false"
+                      class="flex items-center justify-between rounded-lg px-2 py-1.5 text-xs font-medium text-ink/75 hover:bg-brand-50"
+                    >
+                      {{ item.name }}
+                      <span class="text-ink/20">→</span>
+                    </NuxtLink>
+                  </div>
+                </div>
               </li>
             </ul>
 
@@ -396,6 +423,7 @@ const isSearchOpen = ref(false);
 const isCountryModalOpen = ref(false);
 const isBannerVisible = ref(true);
 const isMobileMenuOpen = ref(false);
+const mobileOpenSection = ref(null);
 const isShipToModalOpen = ref(false);
 const isUserDrawerOpen = ref(false);
 const isMobileSearchOpen = ref(false);
@@ -452,7 +480,7 @@ const girlMegaMenuSections = {
     { name: 'Shorts', href: '/products?gender=girl&productType=shorts' },
     { name: 'Bottoms & Skirts', href: '/products?gender=girl&productType=bottoms' },
     { name: 'Socks & Tights', href: '/products?gender=girl&productType=socks' },
-    { name: 'Shoes & Sandals', href: '/products?gender=girl&productType=shoes' },
+    { name: 'Shoes & Sandals', href: '/products?productType=shoes' },
   ],
   'Collections & Edits': [
     { name: 'Kids Costumes', href: '/category/costumes' },
@@ -477,7 +505,7 @@ const boyMegaMenuSections = {
     { name: 'Bottoms & Joggers', href: '/products?gender=boy&productType=bottoms' },
     { name: 'Jeans & Denim', href: '/products?category=jeans&gender=boy' },
     { name: 'Socks & Underwear', href: '/products?gender=boy&productType=socks' },
-    { name: 'Shoes & Sneakers', href: '/products?gender=boy&productType=shoes' },
+    { name: 'Shoes & Sneakers', href: '/products?productType=shoes' },
   ],
   'Collections & Edits': [
     { name: 'Kids Costumes', href: '/category/costumes' },
@@ -505,7 +533,7 @@ const toddlerMegaMenuSections = {
   'Toddler Essentials': [
     { name: 'Playtime Sets', href: '/products?category=sets&ageGroup=toddler' },
     { name: 'Kids Costumes', href: '/category/costumes' },
-    { name: 'Shoes & Slip-ons', href: '/products?productType=shoes&ageGroup=toddler' },
+    { name: 'Shoes & Slip-ons', href: '/products?productType=shoes' },
     { name: 'Socks', href: '/products?productType=socks&ageGroup=toddler' },
     { name: 'Pajamas', href: '/products?category=pajamas&ageGroup=toddler' },
   ],
@@ -526,7 +554,7 @@ const babyMegaMenuSections = {
     { name: 'Baby Sets', href: '/products?category=sets&ageGroup=baby' },
   ],
   'Baby Essentials': [
-    { name: 'Shoes & Booties', href: '/products?productType=shoes&ageGroup=baby' },
+    { name: 'Shoes & Booties', href: '/products?productType=shoes' },
     { name: 'Socks & Tights', href: '/products?productType=socks&ageGroup=baby' },
     { name: 'Bibs & Blankets', href: '/products?category=accessories&ageGroup=baby' },
     { name: 'Baby Shower Gifts', href: '/products?category=gifts&ageGroup=baby' },
@@ -622,22 +650,6 @@ const currentLanguages = {
   ar: 'العربية (Arabic)'
 };
 
-const activeCurrency = ref('ngn');
-const currentCurrencies = {
-  usd: { code: 'USD', name: 'US Dollar', symbol: '$' },
-  eur: { code: 'EUR', name: 'Euro', symbol: '€' },
-  gbp: { code: 'GBP', name: 'British Pound', symbol: '£' },
-  cad: { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$' },
-  aud: { code: 'AUD', name: 'Australian Dollar', symbol: 'A$' },
-  jpy: { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
-  cny: { code: 'CNY', name: 'Chinese Yuan', symbol: '¥' },
-  inr: { code: 'INR', name: 'Indian Rupee', symbol: '₹' },
-  brl: { code: 'BRL', name: 'Brazilian Real', symbol: 'R$' },
-  mxn: { code: 'MXN', name: 'Mexican Peso', symbol: '$' },
-  zar: { code: 'ZAR', name: 'South African Rand', symbol: 'R' },
-  ngn: { code: 'NGN', name: 'Nigerian Naira', symbol: '₦' }
-};
-
 const localeOptions = computed(() => Object.entries(currentLocales).map(([key, loc]) => ({
   value: key,
   label: `${loc.flag} ${loc.name}`
@@ -646,11 +658,6 @@ const localeOptions = computed(() => Object.entries(currentLocales).map(([key, l
 const languageOptions = computed(() => Object.entries(currentLanguages).map(([key, lang]) => ({
   value: key,
   label: lang
-})));
-
-const currencyOptions = computed(() => Object.entries(currentCurrencies).map(([key, curr]) => ({
-  value: key,
-  label: `${curr.name} (${curr.symbol})`
 })));
 
 const distanceOptions = [
